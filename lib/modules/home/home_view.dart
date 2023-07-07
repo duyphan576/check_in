@@ -1,10 +1,12 @@
 import 'package:check_in/models/student/students.dart';
+import 'package:check_in/modules/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'widgets/student_data.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key, required this.students});
+  const HomeView({super.key, required this.students, required this.token});
   final Students students;
+  final String token;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class HomeView extends StatelessWidget {
                 },
               ),
               ListTile(
-                title: const Text("Class"),
+                title: const Text("Classroom"),
                 onTap: () {
                   // Update the state of the app.
                   // ...
@@ -64,10 +66,16 @@ class HomeView extends StatelessWidget {
                 },
               ),
               ListTile(
-                title: const Text("Infomation"),
+                title: const Text("Profile"),
                 onTap: () {
-                  // Update the state of the app.
-                  // ...
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProfileView(
+                                students: students,
+                                token: token,
+                              )),
+                      (route) => false);
                 },
               ),
               ListTile(
@@ -229,7 +237,7 @@ class HomeView extends StatelessWidget {
                                   size: 30,
                                 ),
                                 Text(
-                                  "Infomation",
+                                  "Profile",
                                   style: TextStyle(
                                     fontSize: 20,
                                   ),

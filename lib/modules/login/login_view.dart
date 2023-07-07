@@ -135,6 +135,7 @@ class LoginView extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => HomeView(
                                   students: students,
+                                  token: token,
                                 )),
                         (route) => false);
                   }
