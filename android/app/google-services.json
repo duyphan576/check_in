@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "590519900133",
+    "project_id": "check-in-d72d2",
+    "storage_bucket": "check-in-d72d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590519900133:android:7754a5de12884eda33c10c",
+        "android_client_info": {
+          "package_name": "com.example.check_in"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "590519900133-1o835q8lj5rg73hmrdlf2ssnig3cisq9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHHQDs4ODAFc7S_aOP8OU2WEF8-iME8m4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "590519900133-1o835q8lj5rg73hmrdlf2ssnig3cisq9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
