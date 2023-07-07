@@ -21,8 +21,23 @@ class StudentCode extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text('Code ', style: Theme.of(context).textTheme.titleMedium),
+        Text('Code: ', style: Theme.of(context).textTheme.titleMedium),
         Text(code.toString(), style: Theme.of(context).textTheme.titleMedium),
+      ],
+    );
+  }
+}
+
+class StudentBirthdate extends StatelessWidget {
+  const StudentBirthdate({Key? key, required this.studentBirthdate})
+      : super(key: key);
+  final String studentBirthdate;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text('Birthdate: ', style: Theme.of(context).textTheme.titleMedium),
+        Text(studentBirthdate, style: Theme.of(context).textTheme.titleMedium),
       ],
     );
   }

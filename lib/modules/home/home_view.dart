@@ -36,14 +36,42 @@ class HomeView extends StatelessWidget {
                     ]),
               ),
               ListTile(
-                title: const Text("Test"),
+                title: const Text("Check in"),
                 onTap: () {
                   // Update the state of the app.
                   // ...
                 },
               ),
               ListTile(
-                title: const Text("Test"),
+                title: const Text("Class"),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                title: const Text("Grade"),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                title: const Text("Document"),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                title: const Text("Infomation"),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                title: const Text("Logout"),
                 onTap: () {
                   // Update the state of the app.
                   // ...
@@ -74,6 +102,8 @@ class HomeView extends StatelessWidget {
                               studentName: students.fullname.toString(),
                             ),
                             StudentCode(code: students.code!),
+                            StudentBirthdate(
+                                studentBirthdate: students.birthdate!),
                           ],
                         ),
                         StudentPicture(
@@ -93,35 +123,67 @@ class HomeView extends StatelessWidget {
                         child: Container(
                           height: MediaQuery.of(context).size.width * 0.3,
                           width: MediaQuery.of(context).size.width * 0.3,
-                          decoration: BoxDecoration(),
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [Icon(Icons.abc), Text("test")]),
+                              children: [
+                                Icon(
+                                  Icons.check,
+                                  size: 30,
+                                ),
+                                Text(
+                                  "Check in",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ]),
                         ),
                       ),
                       InkWell(
                         onTap: () {},
                         child: Container(
-                          height: MediaQuery.of(context).size.width / 3,
-                          width: MediaQuery.of(context).size.width / 3,
+                          height: MediaQuery.of(context).size.width * 0.3,
+                          width: MediaQuery.of(context).size.width * 0.3,
                           decoration: BoxDecoration(),
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [Icon(Icons.abc), Text("test")]),
+                              children: [
+                                Icon(
+                                  Icons.class_,
+                                  size: 30,
+                                ),
+                                Text(
+                                  "Class",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ]),
                         ),
                       ),
                       InkWell(
                         onTap: () {},
                         child: Container(
-                          height: MediaQuery.of(context).size.width / 3,
-                          width: MediaQuery.of(context).size.width / 3,
+                          height: MediaQuery.of(context).size.width * 0.3,
+                          width: MediaQuery.of(context).size.width * 0.3,
                           decoration: BoxDecoration(),
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [Icon(Icons.abc), Text("test")]),
+                              children: [
+                                Icon(
+                                  Icons.grade,
+                                  size: 30,
+                                ),
+                                Text(
+                                  "Grade",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ]),
                         ),
                       ),
                     ],
@@ -138,31 +200,64 @@ class HomeView extends StatelessWidget {
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [Icon(Icons.abc), Text("test")]),
+                              children: [
+                                Icon(
+                                  Icons.storage,
+                                  size: 30,
+                                ),
+                                Text(
+                                  "Document",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ]),
                         ),
                       ),
                       InkWell(
                         onTap: () {},
                         child: Container(
-                          height: MediaQuery.of(context).size.width / 3,
-                          width: MediaQuery.of(context).size.width / 3,
+                          height: MediaQuery.of(context).size.width * 0.3,
+                          width: MediaQuery.of(context).size.width * 0.3,
                           decoration: BoxDecoration(),
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [Icon(Icons.abc), Text("test")]),
+                              children: [
+                                Icon(
+                                  Icons.person,
+                                  size: 30,
+                                ),
+                                Text(
+                                  "Infomation",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ]),
                         ),
                       ),
                       InkWell(
                         onTap: () {},
                         child: Container(
-                          height: MediaQuery.of(context).size.width / 3,
-                          width: MediaQuery.of(context).size.width / 3,
+                          height: MediaQuery.of(context).size.width * 0.3,
+                          width: MediaQuery.of(context).size.width * 0.3,
                           decoration: BoxDecoration(),
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [Icon(Icons.abc), Text("test")]),
+                              children: [
+                                Icon(
+                                  Icons.logout,
+                                  size: 30,
+                                ),
+                                Text(
+                                  "Logout",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ]),
                         ),
                       ),
                     ],
