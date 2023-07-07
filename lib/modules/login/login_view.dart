@@ -130,7 +130,6 @@ class LoginView extends StatelessWidget {
                   print(students.code);
 
                   if (students.code != null) {
-                    print(respone.body);
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(

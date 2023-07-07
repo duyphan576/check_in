@@ -14,6 +14,20 @@ class StudentName extends StatelessWidget {
   }
 }
 
+class StudentCode extends StatelessWidget {
+  const StudentCode({Key? key, required this.code}) : super(key: key);
+  final int code;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text('Code ', style: Theme.of(context).textTheme.titleMedium),
+        Text(code.toString(), style: Theme.of(context).textTheme.titleMedium),
+      ],
+    );
+  }
+}
+
 class StudentPicture extends StatelessWidget {
   const StudentPicture(
       {Key? key, required this.picAddress, required this.onPress})
