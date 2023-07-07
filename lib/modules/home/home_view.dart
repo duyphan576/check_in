@@ -23,10 +23,14 @@ class HomeView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        backgroundImage:
-                            AssetImage('assets/images/student_profile.jpeg'),
+                      Container(
+                        height: MediaQuery.of(context).size.width / 4,
+                        width: MediaQuery.of(context).size.width / 4,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          backgroundImage:
+                              AssetImage('assets/images/student_profile.jpeg'),
+                        ),
                       ),
                       Text(students.fullname.toString()),
                     ]),

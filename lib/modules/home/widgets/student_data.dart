@@ -36,11 +36,15 @@ class StudentPicture extends StatelessWidget {
   final VoidCallback onPress;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPress,
-      child: CircleAvatar(
-        backgroundColor: Colors.white,
-        backgroundImage: AssetImage(picAddress),
+    return Container(
+      height: MediaQuery.of(context).size.width / 4,
+      width: MediaQuery.of(context).size.width / 4,
+      child: GestureDetector(
+        onTap: onPress,
+        child: CircleAvatar(
+          backgroundColor: Colors.white,
+          backgroundImage: AssetImage(picAddress),
+        ),
       ),
     );
   }
