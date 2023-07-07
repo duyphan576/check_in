@@ -14,38 +14,6 @@ class StudentName extends StatelessWidget {
   }
 }
 
-class StudentClass extends StatelessWidget {
-  const StudentClass({Key? key, required this.studentClass}) : super(key: key);
-  final String studentClass;
-  @override
-  Widget build(BuildContext context) {
-    return Text(studentClass, style: Theme.of(context).textTheme.titleSmall);
-  }
-}
-
-class StudentYear extends StatelessWidget {
-  const StudentYear({Key? key, required this.studentYear}) : super(key: key);
-
-  final String studentYear;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Center(
-        child: Text(
-          studentYear,
-          style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                color: Colors.black,
-              ),
-        ),
-      ),
-    );
-  }
-}
-
 class StudentPicture extends StatelessWidget {
   const StudentPicture(
       {Key? key, required this.picAddress, required this.onPress})
@@ -59,47 +27,6 @@ class StudentPicture extends StatelessWidget {
       child: CircleAvatar(
         backgroundColor: Colors.white,
         backgroundImage: AssetImage(picAddress),
-      ),
-    );
-  }
-}
-
-class StudentDataCard extends StatelessWidget {
-  const StudentDataCard(
-      {Key? key,
-      required this.title,
-      required this.value,
-      required this.onPress})
-      : super(key: key);
-  final String title;
-  final String value;
-  final VoidCallback onPress;
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPress,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Colors.black,
-                  ),
-            ),
-            Text(
-              value,
-              style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: Colors.blue,
-                  ),
-            ),
-          ],
-        ),
       ),
     );
   }

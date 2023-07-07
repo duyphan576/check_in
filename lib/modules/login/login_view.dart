@@ -134,7 +134,9 @@ class LoginView extends StatelessWidget {
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const HomeView()),
+                            builder: (context) => HomeView(
+                                  students: students,
+                                )),
                         (route) => false);
                   }
                 },

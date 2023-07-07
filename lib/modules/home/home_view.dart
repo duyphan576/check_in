@@ -1,8 +1,10 @@
+import 'package:check_in/models/student/students.dart';
 import 'package:flutter/material.dart';
 import 'widgets/student_data.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  const HomeView({required this.students});
+  final Students students;
 
   @override
   Widget build(BuildContext context) {
@@ -21,41 +23,18 @@ class HomeView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         StudentName(
-                          studentName: 'Aisha',
+                          studentName: students.fullname.toString(),
                         ),
-                        StudentClass(
-                            studentClass: 'Class X-II A | Roll no: 12'),
-                        StudentYear(studentYear: '2020-2021'),
                       ],
                     ),
                     StudentPicture(
                         picAddress: 'assets/images/student_profile.jpeg',
-                        onPress: () {
-                          // go to profile detail screen here
-                          // Navigator.pushNamed(
-                          //     context, MyProfileScreen.routeName);
-                        }),
+                        onPress: () {}),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    StudentDataCard(
-                      onPress: () {
-                        //go to attendance screen
-                      },
-                      title: 'Attendance',
-                      value: '90.02%',
-                    ),
-                    StudentDataCard(
-                      onPress: () {
-                        //go to fee due screen
-                        // Navigator.pushNamed(context, FeeScreen.routeName);
-                      },
-                      title: 'Fees Due',
-                      value: '600\$',
-                    ),
-                  ],
+                  children: [],
                 )
               ],
             ),
