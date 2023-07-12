@@ -52,8 +52,7 @@ class ProfileView extends StatelessWidget {
                     CircleAvatar(
                       radius: 50,
                       backgroundColor: Colors.white,
-                      backgroundImage:
-                          AssetImage('assets/images/student_profile.jpeg'),
+                      backgroundImage: AssetImage('assets/images/OIG.jpg'),
                     ),
                     SizedBox(
                       width: 18,
@@ -63,10 +62,10 @@ class ProfileView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Aisha Mirza',
+                          students.fullname.toString(),
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
-                        Text('Class X-II A | Roll no: 12',
+                        Text(students.code.toString(),
                             style: Theme.of(context).textTheme.titleSmall),
                       ],
                     )
@@ -80,23 +79,20 @@ class ProfileView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ProfileDetailRow(
-                      title: 'Registration Number', value: '2020-ASDF-2021'),
-                  ProfileDetailRow(title: 'Academic Year', value: '2020-2021'),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ProfileDetailRow(title: 'Admission Class', value: 'X-II'),
-                  ProfileDetailRow(title: 'Admission Number', value: '000126'),
+                      title: 'Family Mid Name',
+                      value: students.famMidName.toString()),
+                  ProfileDetailRow(
+                      title: 'Name', value: students.name.toString()),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ProfileDetailRow(
-                      title: 'Date of Admission', value: '1 Aug, 2020'),
-                  ProfileDetailRow(title: 'Date of Birth', value: '3 May 1998'),
+                      title: 'Gender', value: students.gender.toString()),
+                  ProfileDetailRow(
+                      title: 'Date of Birth',
+                      value: students.birthdate.toString()),
                 ],
               ),
               SizedBox(
@@ -104,19 +100,11 @@ class ProfileView extends StatelessWidget {
               ),
               ProfileDetailColumn(
                 title: 'Email',
-                value: 'aisha12@gmail.com',
-              ),
-              ProfileDetailColumn(
-                title: 'Father Name',
-                value: 'John Mirza',
-              ),
-              ProfileDetailColumn(
-                title: 'Mother Name',
-                value: 'Angelica Mirza',
+                value: students.email.toString(),
               ),
               ProfileDetailColumn(
                 title: 'Phone Number',
-                value: '+923066666666',
+                value: students.phone.toString(),
               ),
             ],
           ),

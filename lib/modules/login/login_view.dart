@@ -132,14 +132,7 @@ class LoginView extends StatelessWidget {
                   print(students.code);
 
                   if (students.code != null) {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomeView(
-                                  students: students,
-                                  token: token,
-                                )),
-                        (route) => false);
+                    Get.to(HomeView(students: students, token: token));
                   }
                 },
                 child: Container(

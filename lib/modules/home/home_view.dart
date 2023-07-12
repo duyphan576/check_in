@@ -109,7 +109,7 @@ class HomeView extends StatelessWidget {
                           ],
                         ),
                         StudentPicture(
-                            picAddress: 'assets/images/student_profile.jpeg',
+                            picAddress: 'assets/images/OIG.jpg',
                             onPress: () {}),
                       ],
                     ),
@@ -217,7 +217,9 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(ProfileView(students: students, token: token));
+                        },
                         child: Container(
                           height: MediaQuery.of(context).size.width * 0.3,
                           width: MediaQuery.of(context).size.width * 0.3,
