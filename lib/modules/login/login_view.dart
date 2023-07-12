@@ -113,7 +113,6 @@ class LoginView extends StatelessWidget {
                   String url = '${Api.baseUrl}${Api.loginApi.login}';
                   final respone = await _connect.post(url,
                       {"code": "${code.text}", "password": "${password.text}"});
-                  final String jsonString = jsonEncode(respone.body);
                   data.write("token", "${respone.body["access_token"]}");
                   url = '${Api.baseUrl}${Api.loginApi.me}';
                   var token = data.read("token");

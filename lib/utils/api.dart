@@ -5,10 +5,10 @@ class Api {
 }
 
 class _StudentApi {
-  final String students = "students/";
+  final String students = "student/";
 }
 
 class _LoginApi {
-  final String login = "login/student/";
-  final String me = "me/";
+  final String login = "student/login/";
+  final String me = "student/me/";
 }
