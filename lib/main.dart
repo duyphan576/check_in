@@ -1,7 +1,8 @@
-import 'package:check_in/modules/home/home_view.dart';
-import 'package:check_in/modules/login/login_view.dart';
+import 'package:check_in/modules/splash/splash_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'settings/firebase_options.dart';
 
 Future<void> main() async {
@@ -18,14 +19,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Home Page'),
-    );
+    return Sizer(builder: (context, orientation, device) {
+      return GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Student Checkin App',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const MyHomePage(title: 'Login Page'),
+      );
+    });
   }
 }
 
@@ -36,6 +39,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LoginView();
+    return SplashView();
   }
 }

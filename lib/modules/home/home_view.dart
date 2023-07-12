@@ -72,8 +72,8 @@ class HomeView extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => ProfileView(
-                                students: students,
-                                token: token,
+                              // students: students,
+                              // token: token,
                               )),
                       (route) => false);
                 },
