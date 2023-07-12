@@ -1,6 +1,7 @@
 import 'package:check_in/models/student/students.dart';
 import 'package:check_in/modules/profile/profile_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'widgets/student_data.dart';
 
 class HomeView extends StatelessWidget {
@@ -68,14 +69,7 @@ class HomeView extends StatelessWidget {
               ListTile(
                 title: const Text("Profile"),
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProfileView(
-                              // students: students,
-                              // token: token,
-                              )),
-                      (route) => false);
+                  Get.to(ProfileView(students: students, token: token));
                 },
               ),
               ListTile(

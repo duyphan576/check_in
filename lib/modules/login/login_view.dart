@@ -10,6 +10,7 @@ class LoginView extends StatelessWidget {
   final TextEditingController code = TextEditingController();
   final TextEditingController password = TextEditingController();
   GetStorage data = GetStorage();
+  RxBool circular = false.obs;
 
   LoginView({super.key});
 
@@ -23,6 +24,7 @@ class LoginView extends StatelessWidget {
           body: Center(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Image(
                 image: AssetImage('assets/images/OIG.jpg'),
@@ -110,6 +112,7 @@ class LoginView extends StatelessWidget {
               ),
               InkWell(
                 onTap: () async {
+                  circular.value = true;
                   String url = '${Api.baseUrl}${Api.loginApi.login}';
                   final respone = await _connect.post(url,
                       {"code": "${code.text}", "password": "${password.text}"});
@@ -146,17 +149,23 @@ class LoginView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       // gradient: gradientButtonColors(),
                       color: Colors.blue),
-                  child: const Center(
-                    child: Text(
-                      "Login",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
+                  child: Center(
+                    child: Obx(
+                      () => circular.value
+                          ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : Text(
+                              "Login",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           )),
         ),

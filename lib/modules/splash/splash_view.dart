@@ -24,24 +24,30 @@ class SplashView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('Student',
-                      style: Theme.of(context).textTheme.headlineSmall),
-                  Text('Check In',
-                      style: Theme.of(context).textTheme.headlineSmall),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Student',
+                          style: Theme.of(context).textTheme.headlineSmall),
+                      Text('Check In',
+                          style: Theme.of(context).textTheme.headlineSmall),
+                    ],
+                  ),
+                  Image.asset(
+                    'assets/images/OIG.jpg',
+                    //25% of height & 50% of width
+                    height: 25.h,
+                    width: 50.w,
+                  ),
                 ],
               ),
-              Image.asset(
-                'assets/images/OIG.jpg',
-                //25% of height & 50% of width
-                height: 25.h,
-                width: 50.w,
-              ),
+              const CircularProgressIndicator(),
             ],
           ),
         ),
