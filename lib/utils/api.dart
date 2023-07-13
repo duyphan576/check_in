@@ -6,4 +6,5 @@ class Api {
 class _StudentApi {
   final String login = "student/login/";
   final String me = "student/me/";
+  final String classrooms = "student/classrooms/";
 }
