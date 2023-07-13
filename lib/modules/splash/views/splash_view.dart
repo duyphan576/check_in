@@ -1,9 +1,10 @@
-import 'package:check_in/modules/login/login_view.dart';
+import 'package:check_in/modules/splash/controllers/splash_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sizer/sizer.dart';
 
-class SplashView extends StatelessWidget {
+import '../../../constants/index.dart';
+
+/*class SplashView extends StatelessWidget {
   const SplashView({super.key});
 
   void initState() {
@@ -50,6 +51,39 @@ class SplashView extends StatelessWidget {
               const CircularProgressIndicator(),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}*/
+
+class SplashView extends GetView<SplashController> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Get.isDarkMode ? Color(0xff262932) : Colors.white,
+      body: GetBuilder<SplashController>(
+        builder: (controller) => Stack(
+          children: [
+            Align(
+                alignment: Alignment.center,
+                child: Image.asset(
+                  AppImages.icLogo,
+                  fit: BoxFit.cover,
+                  width: GetPlatform.isAndroid
+                      ? MediaQuery.of(context).size.width / 2
+                      : MediaQuery.of(context).size.width / 2.1,
+                )),
+            // Align(
+            //   alignment: Alignment.bottomCenter,
+            //   child: Padding(
+            //       padding: const EdgeInsets.symmetric(vertical: 20),
+            //       child: SizedBox(
+            //           height: 21,
+            //           width: 107,
+            //           child: SvgPicture.asset(AppImages.icLogo))),
+            // ),
+          ],
         ),
       ),
     );
