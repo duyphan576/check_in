@@ -78,7 +78,8 @@ class LoginView extends GetView<LoginController> {
                         InkWell(
                           onTap: () async {
                             controller.isLoading.value = true;
-                            String url = '${Api.baseUrl}${Api.loginApi.login}';
+                            String url =
+                                '${Api.baseUrl}${Api.studentApi.login}';
                             final response = await _connect.post(url, {
                               "code": "${controller.codeController.text}",
                               "password":
@@ -86,7 +87,7 @@ class LoginView extends GetView<LoginController> {
                             });
                             controller.data.write(
                                 "token", "${response.body["access_token"]}");
-                            url = '${Api.baseUrl}${Api.loginApi.me}';
+                            url = '${Api.baseUrl}${Api.studentApi.me}';
                             var token = controller.data.read("token");
                             final user = await _connect.get(
                               url,
