@@ -49,7 +49,9 @@ class HomeView extends StatelessWidget {
               ListTile(
                 title: const Text("Classroom"),
                 onTap: () {
-                  Get.to(ClassroomView());
+                  Get.to(ClassroomView(
+                    token: token,
+                  ));
                 },
               ),
               ListTile(
@@ -144,7 +146,9 @@ class HomeView extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(ClassroomView());
+                          Get.to(ClassroomView(
+                            token: token,
+                          ));
                         },
                         child: Container(
                           height: MediaQuery.of(context).size.width * 0.3,

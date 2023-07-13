@@ -113,11 +113,11 @@ class LoginView extends StatelessWidget {
               InkWell(
                 onTap: () async {
                   circular.value = true;
-                  String url = '${Api.baseUrl}${Api.loginApi.login}';
+                  String url = '${Api.baseUrl}${Api.studentApi.login}';
                   final respone = await _connect.post(url,
                       {"code": "${code.text}", "password": "${password.text}"});
                   data.write("token", "${respone.body["access_token"]}");
-                  url = '${Api.baseUrl}${Api.loginApi.me}';
+                  url = '${Api.baseUrl}${Api.studentApi.me}';
                   var token = data.read("token");
                   final user = await _connect.get(
                     url,
