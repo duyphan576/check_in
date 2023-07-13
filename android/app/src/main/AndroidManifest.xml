@@ -1,9 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.check_in">
    <application
-        android:label="check_in"
-        android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:label="SGU Connect"
+        android:icon="@mipmap/icon_notification">
         <activity
             android:name=".MainActivity"
             android:exported="true"
