@@ -1,4 +1,5 @@
 import 'package:check_in/models/student/students.dart';
+import 'package:check_in/modules/classroom/classroom_view.dart';
 import 'package:check_in/modules/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -48,8 +49,7 @@ class HomeView extends StatelessWidget {
               ListTile(
                 title: const Text("Classroom"),
                 onTap: () {
-                  // Update the state of the app.
-                  // ...
+                  Get.to(ClassroomView());
                 },
               ),
               ListTile(
@@ -143,7 +143,9 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(ClassroomView());
+                        },
                         child: Container(
                           height: MediaQuery.of(context).size.width * 0.3,
                           width: MediaQuery.of(context).size.width * 0.3,
@@ -157,7 +159,7 @@ class HomeView extends StatelessWidget {
                                   size: 30,
                                 ),
                                 Text(
-                                  "Class",
+                                  "Classroom",
                                   style: TextStyle(
                                     fontSize: 20,
                                   ),

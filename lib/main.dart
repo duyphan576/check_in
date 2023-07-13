@@ -1,3 +1,4 @@
+import 'package:check_in/modules/classroom/classroom_view.dart';
 import 'package:check_in/modules/splash/splash_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
