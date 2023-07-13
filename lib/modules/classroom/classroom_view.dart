@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:check_in/models/classroom/classroom.dart';
 import 'package:check_in/utils/api.dart';
 import 'package:flutter/material.dart';
@@ -34,26 +32,36 @@ class ClassroomView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<Classroom>>(
-      stream: getStreamOfData(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          final List<Classroom>? classrooms = snapshot.data;
-          return ListView.builder(
-            itemCount: classrooms?.length ?? 0,
-            itemBuilder: (context, index) {
-              final Classroom classroom = classrooms![index];
-              return Text(
-                classroom.term.termName + " " + classroom.lecturer.fullname,
-              );
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: StreamBuilder<List<Classroom>>(
+            stream: getStreamOfData(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                final List<Classroom>? classrooms = snapshot.data;
+                return ListView.builder(
+                  itemCount: classrooms?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    final Classroom classroom = classrooms![index];
+                    return Text(
+                      classroom.term.termName +
+                          " " +
+                          classroom.lecturer.fullname,
+                    );
+                  },
+                );
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else {
+                return CircularProgressIndicator();
+              }
             },
-          );
-        } else if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
-        } else {
-          return CircularProgressIndicator();
-        }
-      },
+          ),
+        ),
+      ),
     );
   }
 }
