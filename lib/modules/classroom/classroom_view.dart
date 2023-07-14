@@ -21,7 +21,7 @@ class ClassroomView extends StatelessWidget {
     // Parse the JSON data into Dart objects
     final List<dynamic> classroomList =
         classroomsJson.body['data']['classrooms'];
-
+    print(classroomsJson.body);
     // Convert the JSON objects to Classroom objects
     final List<Classroom> classrooms =
         classroomList.map((json) => Classroom.fromJson(json)).toList();
@@ -52,6 +52,11 @@ class ClassroomView extends StatelessWidget {
                         margin: EdgeInsets.all(8.0),
                         padding: EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Colors.blue, Colors.green],
+                            // begin: Alignment.topLeft,
+                            end: Alignment.bottomCenter,
+                          ),
                           border: Border.all(
                             color: Colors.grey,
                             width: 1.0,
