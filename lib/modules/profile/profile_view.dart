@@ -10,31 +10,10 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // appBar: AppBar(
-        //   title: Text('My Profile'),
-        //   actions: [
-        //     InkWell(
-        //       onTap: () {
-        //         //send report to school management, in case if you want some changes to your profile
-        //       },
-        //       child: Container(
-        //         padding: EdgeInsets.only(right: 5),
-        //         child: Row(
-        //           children: [
-        //             Icon(Icons.report_gmailerrorred_outlined),
-        //             SizedBox(
-        //               height: 10,
-        //             ),
-        //             Text(
-        //               'Report',
-        //               style: Theme.of(context).textTheme.titleSmall,
-        //             ),
-        //           ],
-        //         ),
-        //       ),
-        //     ),
-        //   ],
-        // ),
+        appBar: AppBar(
+          title: Text('My Profile'),
+          actions: [],
+        ),
         body: Container(
           color: Colors.white,
           child: Column(
@@ -43,7 +22,7 @@ class ProfileView extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.15,
                 decoration: BoxDecoration(
-                  color: Colors.amber,
+                  color: Colors.white,
                   borderRadius: BorderRadius.zero,
                 ),
                 child: Row(
