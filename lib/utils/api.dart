@@ -11,5 +11,5 @@ class _StudentApi {
 }
 
 class _GradeApi {
-  final String gradeStudent = "student/marks/";
+  final String gradestu = "student/mark/";
 }

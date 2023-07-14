@@ -59,8 +59,7 @@ class HomeView extends StatelessWidget {
               ListTile(
                 title: const Text("Grade"),
                 onTap: () {
-                  // Update the state of the app.
-                  // ...
+                  Get.to(StudentGradeView(students: students, token: token));
                 },
               ),
               ListTile(
@@ -68,7 +67,6 @@ class HomeView extends StatelessWidget {
                 onTap: () {
                   // Update the state of the app.
                   // ...
-                  Get.to(StudentGradeView(students: students, token: token));
                 },
               ),
               ListTile(

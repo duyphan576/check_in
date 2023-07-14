@@ -1,13 +1,14 @@
 class GradeStudent {
-  int? termID;
-  String? termName;
-  double? mark;
+  final int termId;
+  final String termName;
+  final int mark;
 
-  GradeStudent({this.termID, this.termName, this.mark});
+  GradeStudent(
+      {required this.termId, required this.termName, required this.mark});
 
   factory GradeStudent.fromJson(Map<String, dynamic> json) {
     return GradeStudent(
-      termID: json["termID"],
+      termId: json["termId"],
       termName: json["termName"],
       mark: json["mark"],
     );
