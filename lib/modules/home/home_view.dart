@@ -1,16 +1,35 @@
+import 'package:check_in/core/cache_manager.dart';
 import 'package:check_in/models/student/students.dart';
 import 'package:check_in/modules/classroom/classroom_view.dart';
-import 'package:check_in/modules/grade/grade_student_view.dart';
-import 'package:check_in/modules/profile/profile_view.dart';
+import 'package:check_in/modules/profile/views/profile_view.dart';
+import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'widgets/student_data.dart';
 import 'package:check_in/models/grade/grade.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({super.key, required this.students, required this.token});
-  final Students students;
-  final String token;
+class HomeView extends StatefulWidget {
+  // const HomeView({super.key, required this.students, required this.token});
+  // final Students students;
+  // final String token;
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> with CacheManager {
+  var token;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    onInit();
+  }
+
+  onInit() async {
+    token = await cacheGet(CacheManagerKey.TOKEN);
+    print(token);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +57,7 @@ class HomeView extends StatelessWidget {
                               AssetImage('assets/images/student_profile.jpeg'),
                         ),
                       ),
-                      Text(students.fullname.toString()),
+                      // Text(widget.students.fullname.toString()),
                     ]),
               ),
               ListTile(
@@ -51,9 +70,9 @@ class HomeView extends StatelessWidget {
               ListTile(
                 title: const Text("Classroom"),
                 onTap: () {
-                  Get.to(ClassroomView(
-                    token: token,
-                  ));
+                  // Get.to(ClassroomView(
+                  // token: widget.token,
+                  // ));
                 },
               ),
               ListTile(
@@ -72,15 +91,13 @@ class HomeView extends StatelessWidget {
               ListTile(
                 title: const Text("Profile"),
                 onTap: () {
-                  Get.to(ProfileView(students: students, token: token));
+                  //   Get.to(ProfileView(
+                  //       students: widget.students, token: widget.token));
                 },
               ),
               ListTile(
                 title: const Text("Logout"),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
+                onTap: () {},
               ),
             ],
           ),
@@ -103,12 +120,12 @@ class HomeView extends StatelessWidget {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            StudentName(
-                              studentName: students.fullname.toString(),
-                            ),
-                            StudentCode(code: students.code!),
-                            StudentBirthdate(
-                                studentBirthdate: students.birthdate!),
+                            // StudentName(
+                            //   studentName: widget.students.fullname.toString(),
+                            // ),
+                            // StudentCode(code: widget.students.code!),
+                            // StudentBirthdate(
+                            //     studentBirthdate: widget.students.birthdate!),
                           ],
                         ),
                         StudentPicture(
@@ -147,9 +164,9 @@ class HomeView extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(ClassroomView(
-                            token: token,
-                          ));
+                          // Get.to(ClassroomView(
+                          //   token: widget.token,
+                          // ));
                         },
                         child: Container(
                           height: MediaQuery.of(context).size.width * 0.3,
@@ -228,7 +245,8 @@ class HomeView extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(ProfileView(students: students, token: token));
+                          // Get.to(ProfileView(
+                          //     students: widget.students, token: widget.token));
                         },
                         child: Container(
                           height: MediaQuery.of(context).size.width * 0.3,

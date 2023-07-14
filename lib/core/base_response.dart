@@ -31,7 +31,7 @@ class BaseResponse extends Equatable {
     return BaseResponse(
         statusCode: map['statusCode'],
         statusText: map['statusText'],
-        status: map['error'],
+        status: map['success'],
         data: map['data'],
         message: map['message'],
         lang: map['lang']);

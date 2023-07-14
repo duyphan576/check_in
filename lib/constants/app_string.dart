@@ -129,4 +129,10 @@ abstract class LoginString {
   static const String IS_LOGIN = "Đang đăng nhập";
   static const String HINT_CODE = "Student ID";
   static const String HINT_PASSWORD = "Password";
+  static const String REMEMBER_TEXT = "Ghi nhớ tài khoản";
+  static const String FORGOT_PASSWOER = "Forgot Password";
+  static const String FACE_ID = "Face Id";
+  static const String FINGER_PRINT = "Finger Print";
+  static const String FINGER_DESCRIPTION =
+      "Vui lòng quét vân tay hoặc khuôn mặt để đăng nhập";
 }

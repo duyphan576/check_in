@@ -1,4 +1,5 @@
 import 'package:check_in/constants/index.dart';
+import 'package:check_in/core/cache_manager.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/global_widgets/index.dart';
 import 'package:check_in/models/student/students.dart';
@@ -8,7 +9,7 @@ import 'package:check_in/utils/api.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginView extends GetView<LoginController> {
+class LoginView extends GetView<LoginController> with CacheManager {
   LoginView({super.key});
 
   @override
@@ -49,35 +50,16 @@ class LoginView extends GetView<LoginController> {
                           hintText: LoginString.HINT_PASSWORD,
                           passwordController: controller.passwordController,
                         ),
-                        const SizedBox(
-                          height: 18,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width - 100,
-                          height: 20,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              InkWell(
-                                onTap: () {},
-                                child: Text(
-                                  "Forget Password",
-                                  style: TextStyle(
-                                    color: Colors.blueGrey.shade800,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 18,
+                        GlobalStyles.sizedBoxHeight,
+                        Obx(
+                          () => controller.isNewUser.value
+                              ? RememberPass()
+                              : _BiometricLogin(),
                         ),
                         InkWell(
                           onTap: () async {
-                            await login(controller, _connect, context);
+                            // await login(controller, _connect, context);
+                            controller.onLogin();
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width - 100,
@@ -112,34 +94,6 @@ class LoginView extends GetView<LoginController> {
         ),
       );
     });
-  }
-
-  Future<void> login(LoginController controller, GetConnect _connect,
-      BuildContext context) async {
-    controller.isLoading.value = true;
-    String url = '${Api.baseUrl}${Api.studentApi.login}';
-    final response = await _connect.post(url, {
-      "code": "${controller.codeController.text}",
-      "password": "${controller.passwordController.text}"
-    });
-
-    if (response.body["success"] == 1) {
-      controller.data
-          .write("token", "${response.body["data"]["access_token"]}");
-      var token = controller.data.read("token");
-
-      controller.data.write("userData", response.body["data"]["user"]);
-      Students students = Students.fromJson(controller.data.read("userData"));
-
-      if (students.code != null) {
-        Get.to(HomeView(students: students, token: token));
-      }
-    } else {
-      controller.isLoading.value = false;
-      final snackbar =
-          SnackBar(content: Text(response.body["message"].toString()));
-      ScaffoldMessenger.of(context).showSnackBar(snackbar);
-    }
   }
 }
 
@@ -196,6 +150,189 @@ class _PasswordEditText extends GetView<LoginController> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class RememberPass extends GetView<LoginController> {
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() => Container(
+          width: double.infinity,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      controller.onTapIcon.value = !controller.onTapIcon.value;
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: AnimatedCrossFade(
+                        duration: Duration(milliseconds: 300),
+                        firstChild: Icon(Icons.check_box),
+                        secondChild: Icon(Icons.check_circle),
+                        crossFadeState: controller.onTapIcon.value
+                            ? CrossFadeState.showFirst
+                            : CrossFadeState.showSecond,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    LoginString.REMEMBER_TEXT,
+                    style: TextStyle(
+                        color: AppColors.main,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                    textScaleFactor: 1.0,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  // onTap: () => Get.toNamed(Routes.FORGOT_PASSWORD_EMAIL),
+                  child: Text(
+                    LoginString.FORGOT_PASSWOER,
+                    style: TextStyle(
+                      color: AppColors.main,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic,
+                    ),
+                    textScaleFactor: 1.0,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ));
+  }
+}
+
+class _BiometricLogin extends GetView<LoginController> {
+  const _BiometricLogin({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 3),
+      child: Obx(
+        () => controller.bioType.value == 1
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => controller.biometricLogin(),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            AppImages.icFaceId,
+                            width: 25,
+                            height: 25,
+                          ),
+                          Flexible(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: Text(
+                                LoginString.FACE_ID,
+                                // textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: AppColors.main,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                                textScaleFactor: 1.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        // onTap: () => Get.toNamed(Routes.FORGOT_PASSWORD_EMAIL),
+                        child: Text(
+                          LoginString.FORGOT_PASSWOER,
+                          style: TextStyle(
+                            color: AppColors.main,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.italic,
+                          ),
+                          textAlign: TextAlign.end,
+                          textScaleFactor: 1.0,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => controller.biometricLogin(),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            AppImages.icFingerPrint,
+                            width: 25,
+                            height: 25,
+                          ),
+                          Flexible(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: Text(
+                                LoginString.FINGER_PRINT,
+                                style: TextStyle(
+                                    color: AppColors.main,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                                textScaleFactor: 1.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        // onTap: () => Get.toNamed(Routes.FORGOT_PASSWORD_EMAIL),
+                        child: Text(
+                          LoginString.FORGOT_PASSWOER,
+                          style: TextStyle(
+                            color: AppColors.main,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.italic,
+                          ),
+                          textScaleFactor: 1.0,
+                          textAlign: TextAlign.end,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+      ),
     );
   }
 }

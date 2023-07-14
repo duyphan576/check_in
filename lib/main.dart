@@ -4,8 +4,10 @@ import 'package:check_in/services/global_service.dart';
 import 'package:check_in/utils/dismiss_keyboard.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -13,6 +15,11 @@ import 'package:get_storage/get_storage.dart';
 import 'settings/firebase_options.dart';
 
 Future<void> main() async {
+  if (kReleaseMode) {
+    await dotenv.load(fileName: '.env.prod');
+  } else {
+    await dotenv.load(fileName: '.env.dev');
+  }
   //Khai báo các thuộc tính bắt buộc khi ứng dụng có sử dụng Firebase
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseApp app = await Firebase.initializeApp(
