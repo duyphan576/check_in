@@ -13,8 +13,8 @@ class AppImages {
   static final String icSeenAll =
       'assets/images/icons/ic_seen_all_notification.png';
 
-  static final String icFingerPrint = 'assets/images/icons/ic_fingerprint.png';
-  static final String icFaceId = 'assets/images/icons/ic_face_id.png';
+  static final String icFingerPrint = 'assets/icons/ic_fingerprint.png';
+  static final String icFaceId = 'assets/icons/ic_face_id.png';
   static final String icChevronDown = 'assets/images/icons/icChevronDown.svg';
   static final String icAttachment = 'assets/images/icons/ic_attachment.svg';
 

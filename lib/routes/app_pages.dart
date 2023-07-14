@@ -1,5 +1,6 @@
 import 'package:check_in/modules/login/bindings/login_binding.dart';
 import 'package:check_in/modules/login/views/login_view.dart';
+import 'package:check_in/modules/profile/views/profile_view.dart';
 import 'package:check_in/modules/splash/bindings/splash_binding.dart';
 import 'package:check_in/modules/splash/views/splash_view.dart';
 import 'package:get/get.dart';
@@ -20,5 +21,10 @@ class AppPages {
       page: () => LoginView(),
       binding: LoginBinding(),
     ),
+    // GetPage(
+    //   name: _Paths.LOGIN,
+    //   page: () => ProfileView(students: students, token: token),
+    //   binding: LoginBinding(),
+    // ),
   ];
 }
