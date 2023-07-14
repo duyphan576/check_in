@@ -44,4 +44,7 @@ class GlobalStyles {
   static final SizedBox sizedBoxHeight_100 = SizedBox(
     height: 100,
   );
+  static final SizedBox sizedBoxHeight_150 = SizedBox(
+    height: 150,
+  );
 }

@@ -5,6 +5,7 @@ import 'package:check_in/global_widgets/index.dart';
 import 'package:check_in/modules/login/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginView extends GetView<LoginController> with CacheManager {
   LoginView({super.key});
@@ -12,80 +13,112 @@ class LoginView extends GetView<LoginController> with CacheManager {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<LoginController>(builder: (controller) {
-      return SafeArea(
-        child: Scaffold(
-          extendBodyBehindAppBar: true,
-          resizeToAvoidBottomInset: true,
-          body: LayoutBuilder(
-            builder: (context, constraints) {
-              return SingleChildScrollView(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                  child: Padding(
-                    padding: GlobalStyles.paddingPageLeftRight_45,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        GlobalStyles.sizedBoxHeight_75,
-                        Center(
-                          child: Image.asset(
-                            AppImages.icLogo,
-                            fit: BoxFit.cover,
-                            width: GetPlatform.isAndroid
-                                ? MediaQuery.of(context).size.width / 2
-                                : MediaQuery.of(context).size.width / 2.1,
-                          ),
-                        ),
-                        GlobalStyles.sizedBoxHeight_30,
-                        _CodeEditText(
-                            hintText: LoginString.HINT_CODE,
-                            userNameController: controller.codeController),
-                        GlobalStyles.sizedBoxHeight,
-                        _PasswordEditText(
-                          hintText: LoginString.HINT_PASSWORD,
-                          passwordController: controller.passwordController,
-                        ),
-                        GlobalStyles.sizedBoxHeight,
-                        Obx(
-                          () => controller.isNewUser.value
-                              ? RememberPass()
-                              : _BiometricLogin(),
-                        ),
-                        InkWell(
-                          onTap: () async {
-                            // await login(controller, _connect, context);
-                            controller.onLogin();
-                          },
-                          child: Container(
-                            width: MediaQuery.of(context).size.width - 100,
-                            height: 60,
+      return Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            opacity: 0.9,
+            image: AssetImage(
+              AppImages.bg,
+            ),
+          ),
+        ),
+        child: SafeArea(
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            extendBodyBehindAppBar: true,
+            resizeToAvoidBottomInset: true,
+            body: LayoutBuilder(
+              builder: (context, constraints) {
+                return SingleChildScrollView(
+                  child: ConstrainedBox(
+                    constraints:
+                        BoxConstraints(minHeight: constraints.maxHeight),
+                    child: Padding(
+                      padding: GlobalStyles.paddingPageLeftRight_45,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          GlobalStyles.sizedBoxHeight_150,
+                          Container(
+                            padding: EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.blue),
-                            child: Center(
-                              child: Obx(
-                                () => controller.isLoading.value
-                                    ? const CircularProgressIndicator(
-                                        color: Colors.white,
-                                      )
-                                    : Text(
-                                        "Login",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                        ),
-                                      ),
+                                color: AppColors.lightWhite,
+                                borderRadius: BorderRadius.circular(16)),
+                            child: Column(children: [
+                              GlobalStyles.sizedBoxHeight,
+                              Center(
+                                child: Image.asset(
+                                  AppImages.icLogo,
+                                  fit: BoxFit.cover,
+                                  width: GetPlatform.isAndroid
+                                      ? MediaQuery.of(context).size.width / 3
+                                      : MediaQuery.of(context).size.width / 3.1,
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-                      ],
+                              GlobalStyles.sizedBoxHeight_75,
+                              _CodeEditText(
+                                  hintText: LoginString.HINT_CODE,
+                                  userNameController:
+                                      controller.codeController),
+                              GlobalStyles.sizedBoxHeight,
+                              _PasswordEditText(
+                                hintText: LoginString.HINT_PASSWORD,
+                                passwordController:
+                                    controller.passwordController,
+                              ),
+                              GlobalStyles.sizedBoxHeight,
+                              Obx(
+                                () => Container(
+                                  padding: EdgeInsets.all(10.0),
+                                  decoration: BoxDecoration(
+                                      // color: AppColors.lightWhite,
+                                      borderRadius: BorderRadius.circular(8)),
+                                  child: controller.isNewUser.value
+                                      ? RememberPass()
+                                      : _BiometricLogin(),
+                                ),
+                              ),
+                              GlobalStyles.sizedBoxHeight,
+                              InkWell(
+                                onTap: () async {
+                                  // await login(controller, _connect, context);
+                                  controller.onLogin();
+                                },
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width - 100,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.blue),
+                                  child: Center(
+                                    child: Obx(
+                                      () => controller.isLoading.value
+                                          ? const CircularProgressIndicator(
+                                              color: Colors.white,
+                                            )
+                                          : Text(
+                                              "Login",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              GlobalStyles.sizedBoxHeight,
+                            ]),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       );
@@ -243,7 +276,7 @@ class _BiometricLogin extends GetView<LoginController> {
                                 LoginString.FACE_ID,
                                 // textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: AppColors.main,
+                                    color: AppColors.black,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold),
                                 textScaleFactor: 1.0,
@@ -262,7 +295,7 @@ class _BiometricLogin extends GetView<LoginController> {
                         child: Text(
                           LoginString.FORGOT_PASSWOER,
                           style: TextStyle(
-                            color: AppColors.main,
+                            color: Colors.black,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic,
