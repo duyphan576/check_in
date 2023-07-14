@@ -1,9 +1,11 @@
 import 'package:check_in/models/student/students.dart';
 import 'package:check_in/modules/classroom/classroom_view.dart';
+import 'package:check_in/modules/grade/grade_student_view.dart';
 import 'package:check_in/modules/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'widgets/student_data.dart';
+import 'package:check_in/models/grade/grade.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key, required this.students, required this.token});
@@ -66,6 +68,7 @@ class HomeView extends StatelessWidget {
                 onTap: () {
                   // Update the state of the app.
                   // ...
+                  Get.to(StudentGradeView(students: students, token: token));
                 },
               ),
               ListTile(
@@ -172,7 +175,10 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(StudentGradeView(
+                              students: students, token: token));
+                        },
                         child: Container(
                           height: MediaQuery.of(context).size.width * 0.3,
                           width: MediaQuery.of(context).size.width * 0.3,

@@ -25,61 +25,44 @@ class StudentGradeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _connect = GetConnect();
+    Stream<List<GradeStudent>> getStreamOfData() async* {
+      final _connect = GetConnect();
+      String url = '${Api.baseUrl}${Api.gradeApi.gradeStudent}';
+      final gradesJson = await _connect.get(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token'
+        },
+      );
+      print(gradesJson.body["marks"]);
+      final List<dynamic> gradesList = gradesJson.body['marks'];
+
+      // Convert the JSON objects to Classroom objects
+      final List<GradeStudent> grades =
+          gradesList.map((json) => GradeStudent.fromJson(json)).toList();
+
+      // Yield the classrooms list to the stream
+      yield grades;
+    }
 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () async {
-            String url = '${Api.baseUrl}${Api.gradeApi.gradeStudent}';
-            final response = await _connect.get(
-              url,
-              headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': 'Bearer $token'
-              },
-            );
-            Stream<List<GradeStudent>> getStreamOfData() async* {
-              final _connect = GetConnect();
-              String url = '${Api.baseUrl}${Api.gradeApi.gradeStudent}';
-              final gradesJson = await _connect.get(
-                url,
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Accept': 'application/json',
-                  'Authorization': 'Bearer $token'
-                },
-              );
-              // Parse the JSON data into Dart objects
-              print(gradesJson.body["marks"]);
-              final List<dynamic> gradesList = gradesJson.body['marks'];
-
-              // Convert the JSON objects to Classroom objects
-              final List<GradeStudent> grades = gradesList
-                  .map((json) => GradeStudent.fromJson(json))
-                  .toList();
-
-              // Yield the classrooms list to the stream
-              yield grades;
-            }
-          },
+          onPressed: () async {},
           icon: Icon(Icons.arrow_back_ios_new),
         ),
         title: Column(
           children: [
             Text(students.fullname.toString()),
             Text(
-              "${students.id} | ${students.birthdate}",
+              "${students.code} | ${students.birthdate}",
               style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
             ),
           ],
         ),
         centerTitle: true,
-        actions: [
-          CircleAvatar(
-            radius: 30,
-          ),
-        ],
         elevation: 0,
       ),
       body: ListView.builder(
@@ -99,35 +82,45 @@ class ContainerListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+      padding: EdgeInsets.only(top: 10, bottom: 10),
       decoration: BoxDecoration(
-        border: Border.all(
-          style: BorderStyle.solid,
-          color: Colors.grey.shade300,
-        ),
-        borderRadius: BorderRadius.circular(10),
-      ),
+          border: Border.all(
+            style: BorderStyle.solid,
+            color: Colors.grey.shade300,
+          ),
+          borderRadius: BorderRadius.circular(10),
+          gradient: LinearGradient(
+              colors: [Colors.lightBlue.shade600, Colors.lightBlue.shade300],
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight)),
       child: ListTile(
-        leading: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Module ID: 1', style: TextStyle(fontSize: 15)),
-          ],
-        ),
         title: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               "Module Name: xxxxxx",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
             ),
             Divider(
               color: Colors.black,
             ),
             Text(
               "Marks: 10",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
             ),
+          ],
+        ),
+        subtitle: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              "Id : 1",
+              style: TextStyle(color: Colors.white),
+            )
           ],
         ),
       ),
