@@ -14,7 +14,6 @@ class LoginView extends GetView<LoginController> with CacheManager {
 
   @override
   Widget build(BuildContext context) {
-    final _connect = GetConnect();
     return GetBuilder<LoginController>(builder: (controller) {
       return SafeArea(
         child: Scaffold(

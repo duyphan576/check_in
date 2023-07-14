@@ -3,6 +3,7 @@ import 'package:check_in/core/index.dart';
 import 'package:check_in/modules/home/home_view.dart';
 import 'package:check_in/modules/login/models/login_model.dart';
 import 'package:check_in/modules/login/repository/login_repository.dart';
+import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
 import 'package:check_in/utils/validator.dart';
@@ -117,7 +118,7 @@ class LoginController extends GetxController with CacheManager {
           cacheSave(CacheManagerKey.TOKEN, response?.data["access_token"]);
           cacheSave(CacheManagerKey.CUSTOMER_INFO, response?.data["user"]);
           authenticationService.write("pin", password);
-          Get.to(HomeView());
+          Get.toNamed(Routes.HOME);
         } else {
           isLoading.value = false;
           final snackbar = GetSnackBar(message: response?.message.toString());

@@ -136,3 +136,12 @@ abstract class LoginString {
   static const String FINGER_DESCRIPTION =
       "Vui lòng quét vân tay hoặc khuôn mặt để đăng nhập";
 }
+
+abstract class HomeString {
+  static const String CHECK_IN = "Check In";
+  static const String CLASSROOM = "Classroom";
+  static const String GRADE = "Grade";
+  static const String DOCUMENT = "Document";
+  static const String PROFILE = "Profile";
+  static const String LOGOUT = "Logout";
+}
