@@ -85,19 +85,12 @@ class LoginView extends GetView<LoginController> {
                               "password":
                                   "${controller.passwordController.text}"
                             });
-                            controller.data.write(
-                                "token", "${response.body["access_token"]}");
-                            url = '${Api.baseUrl}${Api.studentApi.me}';
+                            controller.data.write("token",
+                                "${response.body["data"]["access_token"]}");
                             var token = controller.data.read("token");
-                            final user = await _connect.get(
-                              url,
-                              headers: {
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json',
-                                'Authorization': 'Bearer $token'
-                              },
-                            );
-                            controller.data.write("userData", user.body);
+
+                            controller.data.write(
+                                "userData", response.body["data"]["user"]);
                             Students students = Students.fromJson(
                                 controller.data.read("userData"));
                             print(students.code);
@@ -112,7 +105,6 @@ class LoginView extends GetView<LoginController> {
                             height: 60,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                // gradient: gradientButtonColors(),
                                 color: Colors.blue),
                             child: Center(
                               child: Obx(
