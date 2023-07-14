@@ -85,19 +85,29 @@ class LoginView extends GetView<LoginController> {
                               "password":
                                   "${controller.passwordController.text}"
                             });
-                            controller.data.write("token",
-                                "${response.body["data"]["access_token"]}");
-                            var token = controller.data.read("token");
 
-                            controller.data.write(
-                                "userData", response.body["data"]["user"]);
-                            Students students = Students.fromJson(
-                                controller.data.read("userData"));
-                            print(students.code);
+                            if (response.body["success"] == 1) {
+                              controller.data.write("token",
+                                  "${response.body["data"]["access_token"]}");
+                              var token = controller.data.read("token");
 
-                            if (students.code != null) {
-                              Get.to(
-                                  HomeView(students: students, token: token));
+                              controller.data.write(
+                                  "userData", response.body["data"]["user"]);
+                              Students students = Students.fromJson(
+                                  controller.data.read("userData"));
+                              print(students.code);
+
+                              if (students.code != null) {
+                                Get.to(
+                                    HomeView(students: students, token: token));
+                              }
+                            } else {
+                              controller.isLoading.value = false;
+                              final snackbar = SnackBar(
+                                  content: Text(
+                                      response.body["message"].toString()));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackbar);
                             }
                           },
                           child: Container(
