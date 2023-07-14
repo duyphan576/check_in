@@ -1,6 +1,6 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/core/index.dart';
-import 'package:check_in/modules/home/home_view.dart';
+import 'package:check_in/modules/home/views/home_view.dart';
 import 'package:check_in/modules/login/models/login_model.dart';
 import 'package:check_in/modules/login/repository/login_repository.dart';
 import 'package:check_in/routes/app_pages.dart';

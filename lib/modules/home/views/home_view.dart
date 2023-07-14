@@ -3,7 +3,7 @@ import 'package:check_in/modules/home/controllers/home_controller.dart';
 import 'package:check_in/modules/home/widgets/left_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'widgets/student_data.dart';
+import '../widgets/student_data.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({super.key});

@@ -2,10 +2,7 @@ import 'package:check_in/constants/index.dart';
 import 'package:check_in/core/cache_manager.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/global_widgets/index.dart';
-import 'package:check_in/models/student/students.dart';
-import 'package:check_in/modules/home/home_view.dart';
 import 'package:check_in/modules/login/controllers/login_controller.dart';
-import 'package:check_in/utils/api.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
