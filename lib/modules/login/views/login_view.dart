@@ -77,38 +77,7 @@ class LoginView extends GetView<LoginController> {
                         ),
                         InkWell(
                           onTap: () async {
-                            controller.isLoading.value = true;
-                            String url =
-                                '${Api.baseUrl}${Api.studentApi.login}';
-                            final response = await _connect.post(url, {
-                              "code": "${controller.codeController.text}",
-                              "password":
-                                  "${controller.passwordController.text}"
-                            });
-
-                            if (response.body["success"] == 1) {
-                              controller.data.write("token",
-                                  "${response.body["data"]["access_token"]}");
-                              var token = controller.data.read("token");
-
-                              controller.data.write(
-                                  "userData", response.body["data"]["user"]);
-                              Students students = Students.fromJson(
-                                  controller.data.read("userData"));
-                              print(students.code);
-
-                              if (students.code != null) {
-                                Get.to(
-                                    HomeView(students: students, token: token));
-                              }
-                            } else {
-                              controller.isLoading.value = false;
-                              final snackbar = SnackBar(
-                                  content: Text(
-                                      response.body["message"].toString()));
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackbar);
-                            }
+                            await login(controller, _connect, context);
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width - 100,
@@ -143,6 +112,34 @@ class LoginView extends GetView<LoginController> {
         ),
       );
     });
+  }
+
+  Future<void> login(LoginController controller, GetConnect _connect,
+      BuildContext context) async {
+    controller.isLoading.value = true;
+    String url = '${Api.baseUrl}${Api.studentApi.login}';
+    final response = await _connect.post(url, {
+      "code": "${controller.codeController.text}",
+      "password": "${controller.passwordController.text}"
+    });
+
+    if (response.body["success"] == 1) {
+      controller.data
+          .write("token", "${response.body["data"]["access_token"]}");
+      var token = controller.data.read("token");
+
+      controller.data.write("userData", response.body["data"]["user"]);
+      Students students = Students.fromJson(controller.data.read("userData"));
+
+      if (students.code != null) {
+        Get.to(HomeView(students: students, token: token));
+      }
+    } else {
+      controller.isLoading.value = false;
+      final snackbar =
+          SnackBar(content: Text(response.body["message"].toString()));
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+    }
   }
 }
 
