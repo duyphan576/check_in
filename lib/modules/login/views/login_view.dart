@@ -5,7 +5,6 @@ import 'package:check_in/global_widgets/index.dart';
 import 'package:check_in/modules/login/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginView extends GetView<LoginController> with CacheManager {
   LoginView({super.key});
@@ -39,12 +38,20 @@ class LoginView extends GetView<LoginController> with CacheManager {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          GlobalStyles.sizedBoxHeight_150,
+                          GlobalStyles.sizedBoxHeight_125,
                           Container(
                             padding: EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
-                                color: AppColors.lightWhite,
-                                borderRadius: BorderRadius.circular(16)),
+                              color: AppColors.lightWhite.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppColors.white,
+                                  blurRadius: 4,
+                                  offset: Offset(0, 1), // Shadow position
+                                ),
+                              ],
+                            ),
                             child: Column(children: [
                               GlobalStyles.sizedBoxHeight,
                               Center(
@@ -90,20 +97,31 @@ class LoginView extends GetView<LoginController> with CacheManager {
                                       MediaQuery.of(context).size.width - 100,
                                   height: 60,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.blue),
+                                    borderRadius: BorderRadius.circular(20),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color(0xFF41D8D7),
+                                        Color(0xFF21A3C6),
+                                        Color(0xFF285DA2),
+                                        Color(0xFF332F61),
+                                        Color(0xFF452E51),
+                                      ],
+                                    ),
+                                  ),
                                   child: Center(
                                     child: Obx(
                                       () => controller.isLoading.value
-                                          ? const CircularProgressIndicator(
-                                              color: Colors.white,
+                                          ? CircularProgressIndicator(
+                                              color: AppColors.lightWhite,
                                             )
                                           : Text(
                                               "Login",
                                               style: TextStyle(
-                                                color: Colors.white,
+                                                color: AppColors.lightWhite,
                                                 fontSize: 20,
+                                                fontWeight: FontWeight.bold,
                                               ),
+                                              textScaleFactor: 1.0,
                                             ),
                                     ),
                                   ),
@@ -198,42 +216,34 @@ class RememberPass extends GetView<LoginController> {
                     onTap: () {
                       controller.onTapIcon.value = !controller.onTapIcon.value;
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: AnimatedCrossFade(
-                        duration: Duration(milliseconds: 300),
-                        firstChild: Icon(Icons.check_box),
-                        secondChild: Icon(Icons.check_circle),
-                        crossFadeState: controller.onTapIcon.value
-                            ? CrossFadeState.showFirst
-                            : CrossFadeState.showSecond,
-                      ),
+                    child: AnimatedCrossFade(
+                      duration: Duration(milliseconds: 300),
+                      firstChild: Icon(Icons.check_box_outline_blank),
+                      secondChild: Icon(Icons.check_box),
+                      crossFadeState: controller.onTapIcon.value
+                          ? CrossFadeState.showFirst
+                          : CrossFadeState.showSecond,
                     ),
                   ),
                   Text(
                     LoginString.REMEMBER_TEXT,
                     style: TextStyle(
-                        color: AppColors.main,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
+                      color: AppColors.main,
+                      fontWeight: FontWeight.bold,
+                    ),
                     textScaleFactor: 1.0,
                   ),
                 ],
-              ),
-              SizedBox(
-                height: 10,
               ),
               Material(
                 color: Colors.transparent,
                 child: InkWell(
                   // onTap: () => Get.toNamed(Routes.FORGOT_PASSWORD_EMAIL),
                   child: Text(
-                    LoginString.FORGOT_PASSWOER,
+                    LoginString.FORGOT_PASSWORD,
                     style: TextStyle(
                       color: AppColors.main,
-                      fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
                     ),
                     textScaleFactor: 1.0,
                   ),
@@ -277,7 +287,7 @@ class _BiometricLogin extends GetView<LoginController> {
                                 // textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: AppColors.black,
-                                    fontSize: 16,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.bold),
                                 textScaleFactor: 1.0,
                               ),
@@ -293,12 +303,11 @@ class _BiometricLogin extends GetView<LoginController> {
                       child: InkWell(
                         // onTap: () => Get.toNamed(Routes.FORGOT_PASSWORD_EMAIL),
                         child: Text(
-                          LoginString.FORGOT_PASSWOER,
+                          LoginString.FORGOT_PASSWORD,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.italic,
                           ),
                           textAlign: TextAlign.end,
                           textScaleFactor: 1.0,
@@ -308,59 +317,64 @@ class _BiometricLogin extends GetView<LoginController> {
                   )
                 ],
               )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => controller.biometricLogin(),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            AppImages.icFingerPrint,
-                            width: 25,
-                            height: 25,
-                          ),
-                          Flexible(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
-                              child: Text(
-                                LoginString.FINGER_PRINT,
-                                style: TextStyle(
-                                    color: AppColors.main,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
-                                textScaleFactor: 1.0,
+            : controller.bioType.value == 2
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () => controller.biometricLogin(),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              // Image.asset(
+                              //   AppImages.icFingerPrint,
+                              //   width: 25,
+                              //   height: 25,
+                              // ),
+                              Icon(
+                                Icons.fingerprint,
+                                size: 25,
                               ),
-                            ),
+                              Flexible(
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 8),
+                                  child: Text(
+                                    LoginString.FINGER_PRINT,
+                                    style: TextStyle(
+                                        color: AppColors.main,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                    textScaleFactor: 1.0,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        // onTap: () => Get.toNamed(Routes.FORGOT_PASSWORD_EMAIL),
-                        child: Text(
-                          LoginString.FORGOT_PASSWOER,
-                          style: TextStyle(
-                            color: AppColors.main,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.italic,
-                          ),
-                          textScaleFactor: 1.0,
-                          textAlign: TextAlign.end,
                         ),
                       ),
-                    ),
+                      Expanded(
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            // onTap: () => Get.toNamed(Routes.FORGOT_PASSWORD_EMAIL),
+                            child: Text(
+                              LoginString.FORGOT_PASSWORD,
+                              style: TextStyle(
+                                color: AppColors.main,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textScaleFactor: 1.0,
+                              textAlign: TextAlign.end,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
                   )
-                ],
-              ),
+                : SizedBox(),
       ),
     );
   }

@@ -8,6 +8,6 @@ class HomeRepository {
 
   final HomeProvider homeProvider;
 
-  Future<BaseResponse?> home(HomeModel homeModel, url) =>
-      homeProvider.home(homeModel, url);
+  Future<BaseResponse?> home(HomeModel homeModel, url, token) =>
+      homeProvider.home(homeModel, url, token);
 }

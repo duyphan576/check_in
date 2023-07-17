@@ -1,3 +1,4 @@
+import 'package:check_in/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class StudentName extends StatelessWidget {
@@ -7,8 +8,26 @@ class StudentName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text('Hi ', style: Theme.of(context).textTheme.titleMedium),
-        Text(studentName, style: Theme.of(context).textTheme.titleMedium),
+        Text.rich(
+          TextSpan(
+            text: 'Name: ',
+            style: TextStyle(
+              color: AppColors.lightBlack,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+            children: [
+              TextSpan(
+                text: studentName,
+                style: TextStyle(
+                  color: AppColors.lightBlack,
+                  fontSize: 24,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -21,8 +40,26 @@ class StudentCode extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text('Code: ', style: Theme.of(context).textTheme.titleMedium),
-        Text(code, style: Theme.of(context).textTheme.titleMedium),
+        Text.rich(
+          TextSpan(
+            text: 'Code: ',
+            style: TextStyle(
+              color: AppColors.lightBlack,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+            children: [
+              TextSpan(
+                text: code,
+                style: TextStyle(
+                  color: AppColors.lightBlack,
+                  fontSize: 24,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -36,26 +73,40 @@ class StudentBirthdate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text('Birthdate: ', style: Theme.of(context).textTheme.titleMedium),
-        Text(studentBirthdate, style: Theme.of(context).textTheme.titleMedium),
+        Text.rich(
+          TextSpan(
+            text: 'Birthdate: ',
+            style: TextStyle(
+              color: AppColors.lightBlack,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+            children: [
+              TextSpan(
+                text: studentBirthdate,
+                style: TextStyle(
+                  color: AppColors.lightBlack,
+                  fontSize: 24,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
 }
 
 class StudentPicture extends StatelessWidget {
-  const StudentPicture(
-      {Key? key, required this.picAddress, required this.onPress})
-      : super(key: key);
+  const StudentPicture({Key? key, required this.picAddress}) : super(key: key);
   final String picAddress;
-  final VoidCallback onPress;
   @override
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.width / 4,
       width: MediaQuery.of(context).size.width / 4,
       child: GestureDetector(
-        onTap: onPress,
         child: CircleAvatar(
           backgroundColor: Colors.white,
           backgroundImage: AssetImage(picAddress),

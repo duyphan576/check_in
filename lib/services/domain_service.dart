@@ -59,6 +59,7 @@ abstract class PlusProvider {
 }
 
 abstract class UrlProvider {
-  static const String STUDENT = "student/";
   static const String HANDLES_LOGIN = "student/login/";
+  static const String HANDLES_HOME = "student/classrooms/";
+  static const String HANDLES_LOGOUT = "student/logout/";
 }

@@ -23,7 +23,7 @@ class SplashProvider extends GetConnect {
       return BaseResponse(
           statusCode: response.statusCode,
           statusText: response.statusMessage,
-          status: response.data['error'],
+          status: response.data['success'],
           data: response.data['data'] ?? {},
           message:
               response.data['message'] != null ? response.data['message'] : "");
@@ -40,7 +40,7 @@ class SplashProvider extends GetConnect {
       return BaseResponse(
           statusCode: response.statusCode,
           statusText: response.statusMessage,
-          status: response.data['error'],
+          status: response.data['success'],
           data: response.data['data'] ?? {},
           message: response.data != null && response.data['message'] != null
               ? response.data['message'].toString()
@@ -61,7 +61,7 @@ class SplashProvider extends GetConnect {
       return BaseResponse(
           statusCode: response.statusCode,
           statusText: response.statusMessage,
-          status: response.data['error'],
+          status: response.data['success'],
           data: response.data['data'] ?? {},
           message:
               response.data['message'] != null ? response.data['message'] : "");

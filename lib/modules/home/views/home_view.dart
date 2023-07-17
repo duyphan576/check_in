@@ -1,6 +1,11 @@
+import 'package:check_in/constants/app_images.dart';
 import 'package:check_in/constants/app_string.dart';
+import 'package:check_in/constants/index.dart';
+import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/modules/home/controllers/home_controller.dart';
+import 'package:check_in/modules/home/widgets/inkwell_custom.dart';
 import 'package:check_in/modules/home/widgets/left_drawer.dart';
+import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../widgets/student_data.dart';
@@ -13,244 +18,152 @@ class HomeView extends GetView<HomeController> {
       builder: (controller) {
         return Obx(
           () => controller.isLoading.value
-              ? Center(child: CircularProgressIndicator())
-              : SafeArea(
-                  child: Scaffold(
-                    appBar: AppBar(),
-                    drawer: LeftDrawer(),
-                    body: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: MediaQuery.of(context).size.height / 3,
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        AppImages.bg,
+                      ),
+                    ),
+                  ),
+                  child: SafeArea(
+                    child: Scaffold(
+                      backgroundColor: Colors.transparent,
+                      // extendBodyBehindAppBar: true,
+                      resizeToAvoidBottomInset: true,
+                      appBar: AppBar(
+                        backgroundColor: Colors.transparent,
+                        elevation: 0,
+                        iconTheme: IconThemeData(
+                          color: AppColors.lightBlack,
+                        ),
+                      ),
+                      drawer: LeftDrawer(),
+                      body: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.25,
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        AppColors.lightWhite.withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(16),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: AppColors.lightWhite
+                                            .withOpacity(0.5),
+                                      )
+                                    ],
+                                    // gradient: LinearGradient(
+                                    //   colors: [
+                                    //     Color(0xFF41D8D7),
+                                    //     Color(0xFF21A3C6),
+                                    //     Color(0xFF285DA2),
+                                    //     Color(0xFF332F61),
+                                    //     Color(0xFF452E51),
+                                    //   ],
+                                    //   begin: Alignment.bottomLeft,
+                                    //   end: Alignment.topRight,
+                                    // ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          StudentName(
+                                            studentName:
+                                                controller.userData["fullname"],
+                                          ),
+                                          GlobalStyles.sizedBoxHeight,
+                                          StudentCode(
+                                            code: controller.userData!["code"]
+                                                .toString(),
+                                          ),
+                                          GlobalStyles.sizedBoxHeight,
+                                          StudentBirthdate(
+                                            studentBirthdate: controller
+                                                .userData["birthdate"],
+                                          ),
+                                        ],
+                                      ),
+                                      StudentPicture(
+                                        picAddress:
+                                            'assets/images/student_profile.jpeg',
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                child: Row(
+                                GlobalStyles.sizedBoxHeight_30,
+                                Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        StudentName(
-                                          studentName:
-                                              controller.userData["fullname"],
-                                        ),
-                                        StudentCode(
-                                            code: controller.userData!["code"]
-                                                    .toString() ??
-                                                ""),
-                                        StudentBirthdate(
-                                            studentBirthdate: controller
-                                                .userData["birthdate"]!),
-                                      ],
+                                    InkWellCustom(
+                                      function: () {},
+                                      text: HomeString.CHECK_IN,
+                                      icon: Icons.check,
                                     ),
-                                    StudentPicture(
-                                        picAddress: 'assets/images/OIG.jpg',
-                                        onPress: () {}),
+                                    InkWellCustom(
+                                      function: () {},
+                                      text: HomeString.CLASSROOM,
+                                      icon: Icons.class_,
+                                    ),
                                   ],
                                 ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  InkWell(
-                                    onTap: () {},
-                                    child: Container(
-                                      height:
-                                          MediaQuery.of(context).size.width *
-                                              0.3,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.check,
-                                              size: 30,
-                                            ),
-                                            Text(
-                                              HomeString.CHECK_IN,
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ]),
+                                GlobalStyles.sizedBoxHeight_30,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    InkWellCustom(
+                                      function: () {},
+                                      text: HomeString.GRADE,
+                                      icon: Icons.grade,
                                     ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      // Get.to(ClassroomView(
-                                      //   token: token,
-                                      // ));
-                                    },
-                                    child: Container(
-                                      height:
-                                          MediaQuery.of(context).size.width *
-                                              0.3,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      decoration: BoxDecoration(),
-                                      child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.class_,
-                                              size: 30,
-                                            ),
-                                            Text(
-                                              HomeString.CLASSROOM,
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ]),
+                                    InkWellCustom(
+                                      function: () {},
+                                      text: HomeString.DOCUMENT,
+                                      icon: Icons.storage,
                                     ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {},
-                                    child: Container(
-                                      height:
-                                          MediaQuery.of(context).size.width *
-                                              0.3,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      decoration: BoxDecoration(),
-                                      child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.grade,
-                                              size: 30,
-                                            ),
-                                            Text(
-                                              HomeString.GRADE,
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ]),
+                                  ],
+                                ),
+                                GlobalStyles.sizedBoxHeight_30,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    InkWellCustom(
+                                      function: () {
+                                        Get.toNamed(Routes.PROFILE);
+                                      },
+                                      text: HomeString.PROFILE,
+                                      icon: Icons.person,
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  InkWell(
-                                    onTap: () {},
-                                    child: Container(
-                                      height:
-                                          MediaQuery.of(context).size.width *
-                                              0.3,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      decoration: BoxDecoration(),
-                                      child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.storage,
-                                              size: 30,
-                                            ),
-                                            Text(
-                                              HomeString.DOCUMENT,
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ]),
+                                    InkWellCustom(
+                                      function: () {
+                                        controller.logout();
+                                      },
+                                      text: HomeString.LOGOUT,
+                                      icon: Icons.logout,
                                     ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      // Get.to(ProfileView(
-                                      //     students: students, token: token));
-                                    },
-                                    child: Container(
-                                      height:
-                                          MediaQuery.of(context).size.width *
-                                              0.3,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      decoration: BoxDecoration(),
-                                      child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.person,
-                                              size: 30,
-                                            ),
-                                            Text(
-                                              HomeString.PROFILE,
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ]),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      controller.logout();
-                                    },
-                                    child: Container(
-                                      height:
-                                          MediaQuery.of(context).size.width *
-                                              0.3,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      decoration: BoxDecoration(),
-                                      child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.logout,
-                                              size: 30,
-                                            ),
-                                            Text(
-                                              HomeString.LOGOUT,
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ]),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
