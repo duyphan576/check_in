@@ -18,7 +18,6 @@ class ProfileView extends GetView<ProfileController> {
           : Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  opacity: 0.9,
                   image: AssetImage(
                     AppImages.bg,
                   ),
@@ -40,7 +39,7 @@ class ProfileView extends GetView<ProfileController> {
                     builder: (context, constraints) {
                       return SingleChildScrollView(
                         child: Padding(
-                          padding: GlobalStyles.paddingAll,
+                          padding: GlobalStyles.paddingPageLeftRight_25,
                           child: Column(
                             children: [
                               Container(
@@ -48,18 +47,32 @@ class ProfileView extends GetView<ProfileController> {
                                 height:
                                     MediaQuery.of(context).size.height * 0.20,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
+                                  color: AppColors.lightWhite.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(8),
                                   boxShadow: [
                                     BoxShadow(
                                       color:
-                                          AppColors.lightWhite.withOpacity(0.8),
+                                          AppColors.lightWhite.withOpacity(0.5),
                                     )
                                   ],
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFF41D8D7),
+                                      Color(0xFF21A3C6),
+                                      Color(0xFF285DA2),
+                                      Color(0xFF332F61),
+                                      Color(0xFF452E51),
+                                    ],
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topRight,
+                                  ),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(25.0),
+                                  padding: GlobalStyles.paddingPageLeftRight_25,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       CircleAvatar(
                                         radius: 50,
@@ -74,13 +87,12 @@ class ProfileView extends GetView<ProfileController> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          GlobalStyles.sizedBoxHeight,
-                                          GlobalStyles.sizedBoxHeight,
+                                          GlobalStyles.sizedBoxHeight_25,
                                           Text(
                                             controller.userData["fullname"],
                                             style: TextStyle(
                                               fontSize: 24,
-                                              color: AppColors.lightBlack,
+                                              color: AppColors.lightWhite,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
@@ -88,17 +100,18 @@ class ProfileView extends GetView<ProfileController> {
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                0.5,
+                                                0.45,
                                             child: Divider(
                                               thickness: 1.0,
+                                              color: AppColors.lightWhite,
                                             ),
                                           ),
                                           Text(
                                             controller.userData["code"]
                                                 .toString(),
                                             style: TextStyle(
-                                              fontSize: 18,
-                                              color: AppColors.lightBlack,
+                                              fontSize: 16,
+                                              color: AppColors.lightWhite,
                                             ),
                                           ),
                                         ],
@@ -109,16 +122,27 @@ class ProfileView extends GetView<ProfileController> {
                               ),
                               GlobalStyles.sizedBoxHeight,
                               Container(
-                                padding: EdgeInsets.all(10.0),
+                                padding: GlobalStyles.paddingAll,
                                 decoration: BoxDecoration(
-                                  color: AppColors.lightWhite.withOpacity(0.5),
-                                  borderRadius: BorderRadius.circular(16),
+                                  color: AppColors.lightWhite.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(8),
                                   boxShadow: [
                                     BoxShadow(
                                       color:
-                                          AppColors.lightWhite.withOpacity(0.8),
+                                          AppColors.lightWhite.withOpacity(0.5),
                                     )
                                   ],
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFF41D8D7),
+                                      Color(0xFF21A3C6),
+                                      Color(0xFF285DA2),
+                                      Color(0xFF332F61),
+                                      Color(0xFF452E51),
+                                    ],
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topRight,
+                                  ),
                                 ),
                                 child: ConstrainedBox(
                                   constraints: BoxConstraints(
@@ -162,7 +186,7 @@ class ProfileView extends GetView<ProfileController> {
                                       ),
                                       GlobalStyles.sizedBoxHeight,
                                       Padding(
-                                        padding: GlobalStyles.paddingAll18,
+                                        padding: GlobalStyles.paddingAll,
                                         child: Column(
                                           children: [
                                             ProfileDetailColumn(
@@ -216,30 +240,27 @@ class ProfileDetailRow extends StatelessWidget {
                 title,
                 style: TextStyle(
                   fontSize: 16,
-                  color: AppColors.lightBlack,
+                  color: AppColors.lightWhite,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              GlobalStyles.sizedBoxHeight,
+              GlobalStyles.sizedBoxHeight_10,
               Text(
                 value,
                 style: TextStyle(
-                  fontSize: 18,
-                  color: AppColors.lightBlack,
+                  fontSize: 14,
+                  color: AppColors.lightWhite,
                   fontStyle: FontStyle.italic,
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.3,
+                width: MediaQuery.of(context).size.width * 0.35,
                 child: Divider(
                   thickness: 1.0,
+                  color: AppColors.lightWhite,
                 ),
               ),
             ],
-          ),
-          Icon(
-            Icons.lock_outline,
-            size: 24,
           ),
         ],
       ),
@@ -267,30 +288,27 @@ class ProfileDetailColumn extends StatelessWidget {
                 title,
                 style: TextStyle(
                   fontSize: 16,
-                  color: AppColors.lightBlack,
+                  color: AppColors.lightWhite,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              GlobalStyles.sizedBoxHeight,
+              GlobalStyles.sizedBoxHeight_10,
               Text(
                 value,
                 style: TextStyle(
-                  fontSize: 18,
-                  color: AppColors.lightBlack,
+                  fontSize: 14,
+                  color: AppColors.lightWhite,
                   fontStyle: FontStyle.italic,
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.73,
+                width: MediaQuery.of(context).size.width * 0.75,
                 child: Divider(
                   thickness: 1.0,
+                  color: AppColors.lightWhite,
                 ),
               )
             ],
-          ),
-          Icon(
-            Icons.lock_outline,
-            size: 24,
           ),
         ],
       ),

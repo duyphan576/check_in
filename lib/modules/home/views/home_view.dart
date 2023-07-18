@@ -1,14 +1,12 @@
-import 'package:check_in/constants/app_images.dart';
-import 'package:check_in/constants/app_string.dart';
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
+import 'package:check_in/global_widgets/inkwell_custom.dart';
+import 'package:check_in/global_widgets/left_drawer.dart';
+import 'package:check_in/global_widgets/student_data.dart';
 import 'package:check_in/modules/home/controllers/home_controller.dart';
-import 'package:check_in/modules/home/widgets/inkwell_custom.dart';
-import 'package:check_in/modules/home/widgets/left_drawer.dart';
 import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../widgets/student_data.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({super.key});
@@ -47,118 +45,126 @@ class HomeView extends GetView<HomeController> {
                           children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.25,
-                                  width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        AppColors.lightWhite.withOpacity(0.5),
-                                    borderRadius: BorderRadius.circular(16),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: AppColors.lightWhite
-                                            .withOpacity(0.5),
-                                      )
-                                    ],
-                                    // gradient: LinearGradient(
-                                    //   colors: [
-                                    //     Color(0xFF41D8D7),
-                                    //     Color(0xFF21A3C6),
-                                    //     Color(0xFF285DA2),
-                                    //     Color(0xFF332F61),
-                                    //     Color(0xFF452E51),
-                                    //   ],
-                                    //   begin: Alignment.bottomLeft,
-                                    //   end: Alignment.topRight,
-                                    // ),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Column(
+                                Padding(
+                                  padding: GlobalStyles.paddingPageLeftRight_25,
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.25,
+                                    width: MediaQuery.of(context).size.width,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          AppColors.lightWhite.withOpacity(0.7),
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: AppColors.lightWhite
+                                              .withOpacity(0.5),
+                                        )
+                                      ],
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Color(0xFF41D8D7),
+                                          Color(0xFF21A3C6),
+                                          Color(0xFF285DA2),
+                                          Color(0xFF332F61),
+                                          Color(0xFF452E51),
+                                        ],
+                                        begin: Alignment.bottomLeft,
+                                        end: Alignment.topRight,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding:
+                                          GlobalStyles.paddingPageLeftRight_25,
+                                      child: Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
-                                          StudentName(
-                                            studentName:
-                                                controller.userData["fullname"],
+                                          StudentPicture(
+                                            picAddress:
+                                                'assets/images/student_profile.jpeg',
                                           ),
-                                          GlobalStyles.sizedBoxHeight,
-                                          StudentCode(
-                                            code: controller.userData!["code"]
-                                                .toString(),
-                                          ),
-                                          GlobalStyles.sizedBoxHeight,
-                                          StudentBirthdate(
-                                            studentBirthdate: controller
-                                                .userData["birthdate"],
+                                          GlobalStyles.sizedBoxWidth,
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              GlobalStyles.sizedBoxHeight_25,
+                                              StudentName(
+                                                studentName: controller
+                                                    .userData["fullname"],
+                                              ),
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.45,
+                                                child: Divider(
+                                                  thickness: 1.0,
+                                                  color: AppColors.lightWhite,
+                                                ),
+                                              ),
+                                              StudentCode(
+                                                code: controller
+                                                    .userData!["code"]
+                                                    .toString(),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
-                                      StudentPicture(
-                                        picAddress:
-                                            'assets/images/student_profile.jpeg',
+                                    ),
+                                  ),
+                                ),
+                                GlobalStyles.sizedBoxHeight,
+                                Padding(
+                                  padding: GlobalStyles.paddingPageLeftRight_25,
+                                  child: Column(
+                                    children: [
+                                      InkWellCustom(
+                                        function: () {},
+                                        text: HomeString.CHECK_IN,
+                                        icon: Icons.check,
+                                        subText: '',
+                                      ),
+                                      GlobalStyles.sizedBoxHeight,
+                                      InkWellCustom(
+                                        function: () {},
+                                        text: HomeString.CLASSROOM,
+                                        icon: Icons.class_,
+                                        subText: '',
+                                      ),
+                                      GlobalStyles.sizedBoxHeight,
+                                      InkWellCustom(
+                                        function: () {},
+                                        text: HomeString.GRADE,
+                                        icon: Icons.grade,
+                                        subText: '',
+                                      ),
+                                      GlobalStyles.sizedBoxHeight,
+                                      InkWellCustom(
+                                        function: () {},
+                                        text: HomeString.DOCUMENT,
+                                        icon: Icons.storage,
+                                        subText: '',
+                                      ),
+                                      GlobalStyles.sizedBoxHeight,
+                                      InkWellCustom(
+                                        function: () {
+                                          Get.toNamed(Routes.PROFILE);
+                                        },
+                                        text: HomeString.PROFILE,
+                                        icon: Icons.person,
+                                        subText: '',
                                       ),
                                     ],
                                   ),
-                                ),
-                                GlobalStyles.sizedBoxHeight_30,
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    InkWellCustom(
-                                      function: () {},
-                                      text: HomeString.CHECK_IN,
-                                      icon: Icons.check,
-                                    ),
-                                    InkWellCustom(
-                                      function: () {},
-                                      text: HomeString.CLASSROOM,
-                                      icon: Icons.class_,
-                                    ),
-                                  ],
-                                ),
-                                GlobalStyles.sizedBoxHeight_30,
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    InkWellCustom(
-                                      function: () {},
-                                      text: HomeString.GRADE,
-                                      icon: Icons.grade,
-                                    ),
-                                    InkWellCustom(
-                                      function: () {},
-                                      text: HomeString.DOCUMENT,
-                                      icon: Icons.storage,
-                                    ),
-                                  ],
-                                ),
-                                GlobalStyles.sizedBoxHeight_30,
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    InkWellCustom(
-                                      function: () {
-                                        Get.toNamed(Routes.PROFILE);
-                                      },
-                                      text: HomeString.PROFILE,
-                                      icon: Icons.person,
-                                    ),
-                                    InkWellCustom(
-                                      function: () {
-                                        controller.logout();
-                                      },
-                                      text: HomeString.LOGOUT,
-                                      icon: Icons.logout,
-                                    ),
-                                  ],
                                 ),
                               ],
                             ),

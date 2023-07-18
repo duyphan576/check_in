@@ -54,7 +54,7 @@ class TextFieldLogin extends StatelessWidget {
             borderRadius: BorderRadius.circular(8)),
       ),
       style: TextStyle(
-          color: Colors.black, fontSize: 18, fontWeight: FontWeight.w700),
+          color: Colors.black, fontSize: 14, fontWeight: FontWeight.w700),
       controller: controller,
       // validator: validator,
       inputFormatters: [

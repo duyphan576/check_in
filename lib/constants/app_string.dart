@@ -126,15 +126,15 @@ abstract class Message {
 }
 
 abstract class LoginString {
-  static const String IS_LOGIN = "Đang đăng nhập";
   static const String HINT_CODE = "Student ID";
   static const String HINT_PASSWORD = "Password";
-  static const String REMEMBER_TEXT = "Ghi nhớ tài khoản";
+  static const String REMEMBER_TEXT = "Remember";
   static const String FORGOT_PASSWORD = "Forgot Password";
   static const String FACE_ID = "Face Id";
   static const String FINGER_PRINT = "Finger Print";
+  static const String LOGIN = "Login";
   static const String FINGER_DESCRIPTION =
-      "Vui lòng quét vân tay hoặc khuôn mặt để đăng nhập";
+      "Scan your fingerprint or face to log in";
 }
 
 abstract class HomeString {

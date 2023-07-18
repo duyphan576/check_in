@@ -25,7 +25,7 @@ class SplashView extends GetView<SplashController> {
                     : MediaQuery.of(context).size.width / 3.1,
               ),
             ),
-            GlobalStyles.sizedBoxHeight_30,
+            GlobalStyles.sizedBoxHeight_25,
             CircularProgressIndicator(
               color: AppColors.main,
             ),

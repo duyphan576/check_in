@@ -15,7 +15,7 @@ class LoginView extends GetView<LoginController> with CacheManager {
       return Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            opacity: 0.9,
+            opacity: 0.97,
             image: AssetImage(
               AppImages.bg,
             ),
@@ -40,95 +40,99 @@ class LoginView extends GetView<LoginController> with CacheManager {
                         children: [
                           GlobalStyles.sizedBoxHeight_125,
                           Container(
-                            padding: EdgeInsets.all(10.0),
+                            // padding: GlobalStyles.paddingAll,
                             decoration: BoxDecoration(
-                              color: AppColors.lightWhite.withOpacity(0.5),
-                              borderRadius: BorderRadius.circular(16),
+                              color: AppColors.lightWhite.withOpacity(0.9),
+                              borderRadius: BorderRadius.circular(8),
                               boxShadow: [
                                 BoxShadow(
-                                  color: AppColors.white,
+                                  color: AppColors.lightWhite,
                                   blurRadius: 4,
-                                  offset: Offset(0, 1), // Shadow position
+                                  offset: Offset(0, 0), // Shadow position
                                 ),
                               ],
                             ),
-                            child: Column(children: [
-                              GlobalStyles.sizedBoxHeight,
-                              Center(
-                                child: Image.asset(
-                                  AppImages.icLogo,
-                                  fit: BoxFit.cover,
-                                  width: GetPlatform.isAndroid
-                                      ? MediaQuery.of(context).size.width / 3
-                                      : MediaQuery.of(context).size.width / 3.1,
-                                ),
-                              ),
-                              GlobalStyles.sizedBoxHeight_75,
-                              _CodeEditText(
-                                  hintText: LoginString.HINT_CODE,
-                                  userNameController:
-                                      controller.codeController),
-                              GlobalStyles.sizedBoxHeight,
-                              _PasswordEditText(
-                                hintText: LoginString.HINT_PASSWORD,
-                                passwordController:
-                                    controller.passwordController,
-                              ),
-                              GlobalStyles.sizedBoxHeight,
-                              Obx(
-                                () => Container(
-                                  padding: EdgeInsets.all(10.0),
-                                  decoration: BoxDecoration(
-                                      // color: AppColors.lightWhite,
-                                      borderRadius: BorderRadius.circular(8)),
-                                  child: controller.isNewUser.value
-                                      ? RememberPass()
-                                      : _BiometricLogin(),
-                                ),
-                              ),
-                              GlobalStyles.sizedBoxHeight,
-                              InkWell(
-                                onTap: () async {
-                                  // await login(controller, _connect, context);
-                                  controller.onLogin();
-                                },
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width - 100,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Color(0xFF41D8D7),
-                                        Color(0xFF21A3C6),
-                                        Color(0xFF285DA2),
-                                        Color(0xFF332F61),
-                                        Color(0xFF452E51),
-                                      ],
-                                    ),
+                            child: Padding(
+                              padding: GlobalStyles.paddingAll,
+                              child: Column(children: [
+                                GlobalStyles.sizedBoxHeight,
+                                Center(
+                                  child: Image.asset(
+                                    AppImages.icLogo,
+                                    fit: BoxFit.cover,
+                                    width: GetPlatform.isAndroid
+                                        ? MediaQuery.of(context).size.width / 3
+                                        : MediaQuery.of(context).size.width /
+                                            3.1,
                                   ),
-                                  child: Center(
-                                    child: Obx(
-                                      () => controller.isLoading.value
-                                          ? CircularProgressIndicator(
-                                              color: AppColors.lightWhite,
-                                            )
-                                          : Text(
-                                              "Login",
-                                              style: TextStyle(
+                                ),
+                                GlobalStyles.sizedBoxHeight_25,
+                                _CodeEditText(
+                                    hintText: LoginString.HINT_CODE,
+                                    userNameController:
+                                        controller.codeController),
+                                GlobalStyles.sizedBoxHeight,
+                                _PasswordEditText(
+                                  hintText: LoginString.HINT_PASSWORD,
+                                  passwordController:
+                                      controller.passwordController,
+                                ),
+                                GlobalStyles.sizedBoxHeight,
+                                Obx(
+                                  () => Container(
+                                    padding: GlobalStyles.paddingPageLeftRight,
+                                    decoration: BoxDecoration(
+                                        // color: AppColors.lightWhite,
+                                        borderRadius: BorderRadius.circular(8)),
+                                    child: controller.isNewUser.value
+                                        ? RememberPass()
+                                        : _BiometricLogin(),
+                                  ),
+                                ),
+                                GlobalStyles.sizedBoxHeight,
+                                InkWell(
+                                  onTap: () async {
+                                    // await login(controller, _connect, context);
+                                    controller.onLogin();
+                                  },
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width - 100,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Color(0xFF41D8D7),
+                                          Color(0xFF21A3C6),
+                                          Color(0xFF285DA2),
+                                          Color(0xFF332F61),
+                                          Color(0xFF452E51),
+                                        ],
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Obx(
+                                        () => controller.isLoading.value
+                                            ? CircularProgressIndicator(
                                                 color: AppColors.lightWhite,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold,
+                                              )
+                                            : Text(
+                                                LoginString.LOGIN,
+                                                style: TextStyle(
+                                                  color: AppColors.lightWhite,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                                textScaleFactor: 1.0,
                                               ),
-                                              textScaleFactor: 1.0,
-                                            ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              GlobalStyles.sizedBoxHeight,
-                            ]),
+                                GlobalStyles.sizedBoxHeight,
+                              ]),
+                            ),
                           )
                         ],
                       ),
@@ -327,11 +331,6 @@ class _BiometricLogin extends GetView<LoginController> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              // Image.asset(
-                              //   AppImages.icFingerPrint,
-                              //   width: 25,
-                              //   height: 25,
-                              // ),
                               Icon(
                                 Icons.fingerprint,
                                 size: 25,
