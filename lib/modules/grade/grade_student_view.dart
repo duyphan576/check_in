@@ -35,56 +35,58 @@ class StudentGradeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () async {
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.arrow_back_ios_new),
-          ),
-          title: Column(
-            children: [
-              Text(students.fullname.toString()),
-              Text(
-                "${students.code} | ${students.birthdate}",
-                style: TextStyle(color: Colors.grey.shade300, fontSize: 14),
-              ),
-            ],
-          ),
-          centerTitle: true,
-          elevation: 0,
-        ),
-        body: StreamBuilder<List<GradeStudent>>(
-          stream: getStreamOfData(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final List<GradeStudent>? grades = snapshot.data;
-              return ListView.builder(
-                itemCount: grades?.length ?? 0,
-                itemBuilder: (context, index) {
-                  final GradeStudent grade = grades![index];
-                  return ContainerListTile(x: grade);
-                },
-              );
-            } else if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
-            } else {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                ],
-              );
-            }
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () async {
+            Get.back();
           },
-        ));
+          icon: Icon(Icons.arrow_back_ios_new),
+        ),
+        title: Column(
+          children: [
+            Text(students.fullname.toString()),
+            Text(
+              "${students.code} | ${students.birthdate}",
+              style: TextStyle(color: Colors.grey.shade300, fontSize: 14),
+            ),
+          ],
+        ),
+        centerTitle: true,
+        elevation: 0,
+      ),
+      body: StreamBuilder<List<GradeStudent>>(
+        stream: getStreamOfData(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final List<GradeStudent>? grades = snapshot.data;
+            return ListView.builder(
+              itemCount: grades?.length ?? 0,
+              itemBuilder: (context, index) {
+                final GradeStudent grade = grades![index];
+                return ContainerListTile(gradeStudent: grade);
+              },
+            );
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+              ],
+            );
+          }
+        },
+      ),
+    );
   }
 }
 
 class ContainerListTile extends StatelessWidget {
-  const ContainerListTile({Key? key, required this.x}) : super(key: key);
-  final GradeStudent x;
+  const ContainerListTile({Key? key, required this.gradeStudent})
+      : super(key: key);
+  final GradeStudent gradeStudent;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -106,7 +108,7 @@ class ContainerListTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Term Name : ${x.termName.toString()}",
+              "Term Name : ${gradeStudent.termName.toString()}",
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 color: Colors.white,
@@ -116,7 +118,7 @@ class ContainerListTile extends StatelessWidget {
               height: 10,
             ),
             Text(
-              "Mark : ${x.mark.toString()}",
+              "Mark : ${gradeStudent.mark.toString()}",
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 color: Colors.white,
@@ -132,7 +134,7 @@ class ContainerListTile extends StatelessWidget {
               height: 5,
             ),
             Text(
-              "Id : ${x.termId.toString()}",
+              "Id : ${gradeStudent.termId.toString()}",
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.normal),
             )
