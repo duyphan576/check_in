@@ -7,6 +7,7 @@ import 'package:check_in/modules/home/controllers/home_controller.dart';
 import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({super.key});
@@ -147,7 +148,9 @@ class HomeView extends GetView<HomeController> {
                                       ),
                                       GlobalStyles.sizedBoxHeight,
                                       InkWellCustom(
-                                        function: () {},
+                                        function: () {
+                                          Get.toNamed(Routes.GRADE);
+                                        },
                                         text: HomeString.GRADE,
                                         icon: Icons.grade,
                                         subText: '',

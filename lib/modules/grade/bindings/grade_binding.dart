@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../repository/grade_repository.dart';
 
-class ProfileBinding extends Bindings {
+class GradeBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => GradeProvider(http: HttpProvider(httpClient: Dio())));

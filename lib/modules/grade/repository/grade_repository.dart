@@ -6,4 +6,6 @@ class GradeRepository {
   GradeRepository({required this.gradeProvider});
 
   final GradeProvider gradeProvider;
+  Future<BaseResponse?> grade(GradeModel gradeModel, url, token) =>
+      gradeProvider.grade(gradeModel, url, token);
 }
