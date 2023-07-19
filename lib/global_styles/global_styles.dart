@@ -34,14 +34,22 @@ class GlobalStyles {
   static final SizedBox sizedBoxWidth = SizedBox(
     width: 15,
   );
-  static final SizedBox sizedBoxHeight_30 = SizedBox(
-    height: 30,
+  static final SizedBox sizedBoxHeight_25 = SizedBox(
+    height: 25,
   );
-
+  static final SizedBox sizedBoxHeight_50 = SizedBox(
+    height: 50,
+  );
   static final SizedBox sizedBoxHeight_75 = SizedBox(
     height: 75,
   );
   static final SizedBox sizedBoxHeight_100 = SizedBox(
     height: 100,
+  );
+  static final SizedBox sizedBoxHeight_125 = SizedBox(
+    height: 125,
+  );
+  static final SizedBox sizedBoxHeight_150 = SizedBox(
+    height: 150,
   );
 }

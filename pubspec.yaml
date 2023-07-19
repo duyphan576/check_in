@@ -60,7 +60,7 @@ dependencies:
 flutter_icons:
   android: "icon_notification"
   ios: true
-  image_path: "assets/images/logo/icon_app.jpg"
+  image_path: "assets/images/OIG.png"
 
 
 dependency_overrides:
@@ -90,6 +90,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/background/
     - assets/icons/
     - .env.dev
     - .env.prod

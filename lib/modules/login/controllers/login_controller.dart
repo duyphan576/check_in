@@ -1,8 +1,8 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/core/index.dart';
-import 'package:check_in/modules/home/home_view.dart';
 import 'package:check_in/modules/login/models/login_model.dart';
 import 'package:check_in/modules/login/repository/login_repository.dart';
+import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
 import 'package:check_in/utils/validator.dart';
@@ -26,19 +26,19 @@ class LoginController extends GetxController with CacheManager {
   var userData;
   RxBool isNewUser = true.obs;
   RxBool onTapIcon = true.obs;
-  RxInt bioType = 1.obs;
+  RxInt bioType = 0.obs;
 
   final LocalAuthentication auth = LocalAuthentication();
 
   LoginController({required this.loginRepository});
+
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     initData();
   }
 
-  initData() async {
+  Future<void> initData() async {
     userData = await cacheGet(CacheManagerKey.CUSTOMER_INFO);
     if (userData != null) {
       codeController.text = userData["code"];
@@ -48,14 +48,13 @@ class LoginController extends GetxController with CacheManager {
     List<BiometricType> availableBiometrics =
         await auth.getAvailableBiometrics();
 
-    if (availableBiometrics.contains(BiometricType.face)) {
+    if (availableBiometrics.contains(BiometricType.face) ||
+        availableBiometrics.contains(BiometricType.strong)) {
       // Face ID.
-      final result = await authenticationService.read('pin');
-      if (result.isNotEmpty && userData != null) {
-        biometricLogin();
-      }
       bioType.value = 1;
-    } else if (availableBiometrics.contains(BiometricType.fingerprint)) {
+    }
+    if (availableBiometrics.contains(BiometricType.fingerprint) ||
+        availableBiometrics.contains(BiometricType.weak)) {
       // Touch ID.
       bioType.value = 2;
     }
@@ -73,7 +72,10 @@ class LoginController extends GetxController with CacheManager {
       final isAuthenticated = await auth.authenticate(
           localizedReason: LoginString.FINGER_DESCRIPTION,
           options: AuthenticationOptions(
-              useErrorDialogs: true, biometricOnly: true, stickyAuth: true));
+            useErrorDialogs: true,
+            biometricOnly: true,
+            stickyAuth: true,
+          ));
       if (isAuthenticated) {
         final result = await authenticationService.read('pin');
         if (result.isNotEmpty) {
@@ -99,7 +101,6 @@ class LoginController extends GetxController with CacheManager {
 
     if (this.errorMessage.value == "") {
       isLoading.value = true;
-      Alert.showLoadingIndicator(message: LoginString.IS_LOGIN);
       String code = codeController.text;
       String password = passwordController.text;
       final response = await loginRepository.login(
@@ -117,7 +118,7 @@ class LoginController extends GetxController with CacheManager {
           cacheSave(CacheManagerKey.TOKEN, response?.data["access_token"]);
           cacheSave(CacheManagerKey.CUSTOMER_INFO, response?.data["user"]);
           authenticationService.write("pin", password);
-          Get.to(HomeView());
+          Get.toNamed(Routes.HOME);
         } else {
           isLoading.value = false;
           final snackbar = GetSnackBar(message: response?.message.toString());

@@ -44,23 +44,6 @@ class SplashController extends GetxController with CacheManager {
     } else {
       Get.offNamed(Routes.LOGIN);
     }
-
-    // final response = await splashRepository
-    //     .getConfig(SplashModel(act: DomainProvider.CONFIG, lang: 'vn'));
-    //
-    // if (response?.statusCode == HttpStatus.ok) {
-    //   await cacheSave(CacheManagerKey.CONFIG, response?.data);
-    //   if (isNotification) {
-    //     Get.offAllNamed(Routes.HOME, arguments: result);
-    //   } else {
-    //     Get.offNamed(Routes.INIT);
-    //   }
-    // } else {
-    //   Alert.showSuccess(
-    //       title: FlutterI18n.translate(Get.context!, "COMMON.error"),
-    //       message: FlutterI18n.translate(Get.context!, "COMMON.massageError"),
-    //       buttonText: FlutterI18n.translate(Get.context!, "COMMON.ok"));
-    // }
   }
 
   @override
