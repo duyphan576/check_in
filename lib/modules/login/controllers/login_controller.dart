@@ -115,8 +115,10 @@ class LoginController extends GetxController with CacheManager {
         isLoading.value = false;
 
         if (response?.status == 1) {
+          print(response?.data["access_token"]);
           cacheSave(CacheManagerKey.TOKEN, response?.data["access_token"]);
           cacheSave(CacheManagerKey.CUSTOMER_INFO, response?.data["user"]);
+          print(cacheGet(CacheManagerKey.TOKEN) + " token");
           authenticationService.write("pin", password);
           Get.toNamed(Routes.HOME);
         } else {

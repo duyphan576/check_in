@@ -1,17 +1,17 @@
-import 'package:check_in/modules/home/models/home_model.dart';
+import 'package:check_in/core/base_response.dart';
+import 'package:check_in/modules/classroom/models/classroom_model.dart';
 import 'package:check_in/services/http_provider.dart';
 import 'package:get/get.dart';
 
-import '../../../core/base_response.dart';
-
-class HomeProvider extends GetConnect {
-  HomeProvider({required this.http});
+class ClassroomProvider extends GetConnect {
+  ClassroomProvider({required this.http});
 
   final HttpProvider http;
 
-  Future<BaseResponse?> home(HomeModel homeModel, url, token) async {
+  Future<BaseResponse?> classroom(
+      ClassroomModel classroomModel, url, token) async {
     // Map<String, dynamic> submit = Map<String, dynamic>();
-    // submit.addAll(homeModel.toMap());
+    // submit.addAll(classroomModel.toMap());
 
     return await http.doGetWithToken(url, token).then((response) {
       return BaseResponse(
