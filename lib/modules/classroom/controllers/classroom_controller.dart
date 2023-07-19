@@ -33,7 +33,6 @@ class ClassroomController extends GetxController with CacheManager {
   Stream<List<Classroom>> getStreamOfData() async* {
     final response = await classroomRepository.classroom(ClassroomModel(),
         UrlProvider.HANDLES_CLASSROOM, cacheGet(CacheManagerKey.TOKEN));
-    print(response?.data);
     // Parse the JSON data into Dart objects
     final List<dynamic> classroomList = response?.data['classrooms'];
     // Convert the JSON objects to Classroom objects
