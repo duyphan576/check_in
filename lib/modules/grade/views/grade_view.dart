@@ -1,10 +1,7 @@
-import 'package:check_in/modules/classroom/controllers/classroom_controller.dart';
 import 'package:check_in/modules/grade/controllers/grade_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:check_in/utils/api.dart';
 import 'package:check_in/models/grade/grade.dart';
 import 'package:get/get.dart';
-
 import '../../../constants/app_colors.dart';
 import '../../../constants/app_images.dart';
 import '../../../global_styles/global_styles.dart';
@@ -40,6 +37,61 @@ class GradeView extends GetView<GradeController> {
                         iconTheme: IconThemeData(
                           color: AppColors.lightBlack,
                         ),
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color:
+                                        AppColors.lightBlack.withOpacity(0.7),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color(0xFF41D8D7),
+                                        Color(0xFF21A3C6),
+                                        Color(0xFF285DA2),
+                                        Color(0xFF332F61),
+                                        Color(0xFF452E51),
+                                      ],
+                                      begin: Alignment.bottomLeft,
+                                      end: Alignment.topRight,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: AppColors.black,
+                                        blurRadius: 2,
+                                        blurStyle: BlurStyle.outer,
+                                        offset: Offset(0, 0),
+                                      )
+                                    ]),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.transparent,
+                                  radius: 25,
+                                  child: Text(
+                                      "${controller.userData['name'].toString().substring(0, 1)}",
+                                      style: TextStyle(color: Colors.white)),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "${controller.userData['fullname']}",
+                                  style: TextStyle(color: Colors.black87),
+                                ),
+                                Text("${controller.userData['code']}",
+                                    style: TextStyle(color: Colors.black45))
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                       body: SingleChildScrollView(
                         child: Container(
@@ -54,38 +106,52 @@ class GradeView extends GetView<GradeController> {
                                   itemCount: grades?.length ?? 0,
                                   itemBuilder: (context, index) {
                                     final Grade grade = grades![index];
-                                    return Container(
-                                      padding:
-                                          GlobalStyles.paddingPageLeftRight_25,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.lightWhite
-                                            .withOpacity(0.7),
-                                        borderRadius: BorderRadius.circular(8),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: AppColors.black,
-                                            blurRadius: 4,
-                                            blurStyle: BlurStyle.outer,
-                                            offset:
-                                                Offset(0, 0), // Shadow position
-                                          ),
-                                        ],
-                                        gradient: LinearGradient(
-                                          colors: [
-                                            Color(0xFF41D8D7),
-                                            Color(0xFF21A3C6),
-                                            Color(0xFF285DA2),
-                                            Color(0xFF332F61),
-                                            Color(0xFF452E51),
+                                    return Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Container(
+                                        padding: GlobalStyles
+                                            .paddingPageLeftRight_25,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.lightWhite
+                                              .withOpacity(0.7),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: AppColors.black,
+                                              blurRadius: 2,
+                                              blurStyle: BlurStyle.outer,
+                                              offset: Offset(
+                                                  0, 0), // Shadow position
+                                            ),
                                           ],
-                                          begin: Alignment.bottomLeft,
-                                          end: Alignment.topRight,
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              Color(0xFF41D8D7),
+                                              Color(0xFF21A3C6),
+                                              Color(0xFF285DA2),
+                                              Color(0xFF332F61),
+                                              Color(0xFF452E51),
+                                            ],
+                                            begin: Alignment.bottomLeft,
+                                            end: Alignment.topRight,
+                                          ),
                                         ),
-                                      ),
-                                      child: ListTile(
-                                        title: Text(grade.termName.toString()),
-                                        subtitle: Text(grade.termId.toString()),
-                                        trailing: Text('Mark : ${grade.mark}'),
+                                        child: ListTile(
+                                          title: Text(
+                                            grade.termName.toString(),
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                          subtitle: Text(
+                                              ' Id :${grade.termId.toString()}',
+                                              style: TextStyle(
+                                                  color: Colors.white)),
+                                          trailing: Text(
+                                              'Grade : ${grade.grade.toString()}',
+                                              style: TextStyle(
+                                                  color: Colors.white)),
+                                        ),
                                       ),
                                     );
                                   },
@@ -103,6 +169,28 @@ class GradeView extends GetView<GradeController> {
                               }
                             },
                           ),
+                        ),
+                      ),
+                      bottomNavigationBar: BottomAppBar(
+                        color: Colors.white.withOpacity(0.7),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Container(
+                              height: 30,
+                              // alignment: Alignment.centerLeft,
+                              child: Row(
+                                children: [
+                                  Text("Điểm trung bình :"),
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(controller.avgGrade.toString()),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              )),
                         ),
                       ),
                     ),

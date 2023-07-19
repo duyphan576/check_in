@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:check_in/core/index.dart';
 import 'package:check_in/modules/grade/models/grade_models.dart';
 import 'package:check_in/services/authenticationService.dart';
@@ -10,13 +12,15 @@ class GradeController extends GetxController with CacheManager {
   final GradeRepository gradeRepository;
   final AuthenticationService authenticationService = AuthenticationService();
   var userData;
+  // var userAvgGrade;
   RxBool isLoading = true.obs;
-
+  var avgGrade;
   GradeController({required this.gradeRepository});
 
   @override
   void onInit() async {
     initData();
+    avgGrade = getAvgGrade();
     super.onInit();
   }
 
@@ -27,10 +31,16 @@ class GradeController extends GetxController with CacheManager {
     }
   }
 
+  getAvgGrade() async {
+    final respone = await gradeRepository.grade(GradeModel(),
+        UrlProvider.HANDLES_GRADE, cacheGet(CacheManagerKey.TOKEN));
+    avgGrade = respone?.data['avgGrade'];
+  }
+
   Stream<List<Grade>> getStreamOfData() async* {
     final respone = await gradeRepository.grade(GradeModel(),
         UrlProvider.HANDLES_GRADE, cacheGet(CacheManagerKey.TOKEN));
-    final List<dynamic> gradeList = respone?.data['marks'];
+    final List<dynamic> gradeList = respone?.data['grades'];
     // Convert the JSON objects to Classroom objects
     final List<Grade> grades =
         gradeList.map((json) => Grade.fromJson(json)).toList();
