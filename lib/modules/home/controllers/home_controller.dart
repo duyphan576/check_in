@@ -39,6 +39,7 @@ class HomeController extends GetxController with CacheManager {
     if (response?.statusCode == HttpStatus.ok) {
       if (response?.status == 1) {
         authenticationService.clearStorage();
+        cacheRemove(CacheManagerKey.CUSTOMER_INFO);
         Get.offAndToNamed(Routes.LOGIN);
         print("logout");
       }

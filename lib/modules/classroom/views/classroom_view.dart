@@ -48,45 +48,76 @@ class ClassroomView extends GetView<ClassroomController> {
                                 final List<Classroom>? classrooms =
                                     snapshot.data;
                                 return ListView.builder(
+                                  padding: GlobalStyles.paddingPageLeftRight_25,
                                   itemCount: classrooms?.length ?? 0,
                                   itemBuilder: (context, index) {
                                     final Classroom classroom =
                                         classrooms![index];
-                                    return Container(
-                                      padding:
-                                          GlobalStyles.paddingPageLeftRight_25,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.lightWhite
-                                            .withOpacity(0.7),
-                                        borderRadius: BorderRadius.circular(8),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: AppColors.black,
-                                            blurRadius: 4,
-                                            blurStyle: BlurStyle.outer,
-                                            offset:
-                                                Offset(0, 0), // Shadow position
+                                    return Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          padding: GlobalStyles
+                                              .paddingPageLeftRight_25,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.lightWhite
+                                                .withOpacity(0.7),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: AppColors.black,
+                                                blurRadius: 4,
+                                                blurStyle: BlurStyle.outer,
+                                                offset: Offset(
+                                                    0, 0), // Shadow position
+                                              ),
+                                            ],
+                                            gradient: LinearGradient(
+                                              colors: [
+                                                Color(0xFF41D8D7),
+                                                Color(0xFF21A3C6),
+                                                Color(0xFF285DA2),
+                                                Color(0xFF332F61),
+                                                Color(0xFF452E51),
+                                              ],
+                                              begin: Alignment.bottomLeft,
+                                              end: Alignment.topRight,
+                                            ),
                                           ),
-                                        ],
-                                        gradient: LinearGradient(
-                                          colors: [
-                                            Color(0xFF41D8D7),
-                                            Color(0xFF21A3C6),
-                                            Color(0xFF285DA2),
-                                            Color(0xFF332F61),
-                                            Color(0xFF452E51),
-                                          ],
-                                          begin: Alignment.bottomLeft,
-                                          end: Alignment.topRight,
+                                          child: InkWell(
+                                            onTap: () {},
+                                            child: ListTile(
+                                              title: Text(
+                                                classroom.term.termName,
+                                                style: TextStyle(
+                                                  color: AppColors.lightWhite,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              subtitle: Text(
+                                                classroom.lecturer.fullname,
+                                                style: TextStyle(
+                                                  color: AppColors.lightWhite,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                              trailing: Text(
+                                                'Credit: ${classroom.term.credit}',
+                                                style: TextStyle(
+                                                  color: AppColors.lightWhite,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                      child: ListTile(
-                                        title: Text(classroom.term.termName),
-                                        subtitle:
-                                            Text(classroom.lecturer.fullname),
-                                        trailing: Text(
-                                            'Credit: ${classroom.term.credit}'),
-                                      ),
+                                        GlobalStyles.sizedBoxHeight,
+                                      ],
                                     );
                                   },
                                 );
@@ -97,7 +128,9 @@ class ClassroomView extends GetView<ClassroomController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    CircularProgressIndicator(),
+                                    CircularProgressIndicator(
+                                      color: AppColors.main,
+                                    ),
                                   ],
                                 );
                               }
