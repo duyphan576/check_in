@@ -2,6 +2,7 @@ import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/models/classroom/classroom.dart';
 import 'package:check_in/modules/classroom/controllers/classroom_controller.dart';
+import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -89,7 +90,10 @@ class ClassroomView extends GetView<ClassroomController> {
                                             ),
                                           ),
                                           child: InkWell(
-                                            onTap: () {},
+                                            onTap: () {
+                                              controller.getClassInfo(
+                                                  classroom.id.toString());
+                                            },
                                             child: ListTile(
                                               title: Text(
                                                 classroom.term.termName,

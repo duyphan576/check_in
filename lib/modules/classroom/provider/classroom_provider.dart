@@ -10,10 +10,10 @@ class ClassroomProvider extends GetConnect {
 
   Future<BaseResponse?> classroom(
       ClassroomModel classroomModel, url, token) async {
-    // Map<String, dynamic> submit = Map<String, dynamic>();
-    // submit.addAll(classroomModel.toMap());
+    Map<String, dynamic> submit = Map<String, dynamic>();
+    submit.addAll(classroomModel.toMap());
 
-    return await http.doGetWithToken(url, token).then((response) {
+    return await http.doGetWithToken(url, token, submit).then((response) {
       return BaseResponse(
           statusCode: response.statusCode,
           statusText: response.statusMessage,
