@@ -1,10 +1,6 @@
-import 'dart:convert';
-
 import 'package:check_in/core/index.dart';
-import 'package:check_in/routes/app_pages.dart';
+import 'package:check_in/modules/profile/repository/profile_repository.dart';
 import 'package:get/get.dart';
-
-import '../repository/profile_repository.dart';
 
 class ProfileController extends GetxController with CacheManager {
   final ProfileRepository profileRepository;

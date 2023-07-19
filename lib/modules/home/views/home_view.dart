@@ -59,9 +59,12 @@ class HomeView extends GetView<HomeController> {
                                       borderRadius: BorderRadius.circular(8),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: AppColors.lightWhite
-                                              .withOpacity(0.5),
-                                        )
+                                          color: AppColors.black,
+                                          blurRadius: 4,
+                                          blurStyle: BlurStyle.outer,
+                                          offset:
+                                              Offset(0, 0), // Shadow position
+                                        ),
                                       ],
                                       gradient: LinearGradient(
                                         colors: [
@@ -135,7 +138,9 @@ class HomeView extends GetView<HomeController> {
                                       ),
                                       GlobalStyles.sizedBoxHeight,
                                       InkWellCustom(
-                                        function: () {},
+                                        function: () {
+                                          Get.toNamed(Routes.CLASSROOM);
+                                        },
                                         text: HomeString.CLASSROOM,
                                         icon: Icons.class_,
                                         subText: '',

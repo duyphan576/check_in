@@ -15,7 +15,7 @@ class LoginView extends GetView<LoginController> with CacheManager {
       return Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            opacity: 0.97,
+            // opacity: 0.97,
             image: AssetImage(
               AppImages.bg,
             ),
@@ -46,8 +46,9 @@ class LoginView extends GetView<LoginController> with CacheManager {
                               borderRadius: BorderRadius.circular(8),
                               boxShadow: [
                                 BoxShadow(
-                                  color: AppColors.lightWhite,
+                                  color: AppColors.black,
                                   blurRadius: 4,
+                                  blurStyle: BlurStyle.outer,
                                   offset: Offset(0, 0), // Shadow position
                                 ),
                               ],
@@ -101,6 +102,15 @@ class LoginView extends GetView<LoginController> with CacheManager {
                                     height: 60,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: AppColors.black,
+                                          blurRadius: 4,
+                                          blurStyle: BlurStyle.outer,
+                                          offset:
+                                              Offset(0, 0), // Shadow position
+                                        ),
+                                      ],
                                       gradient: LinearGradient(
                                         colors: [
                                           Color(0xFF41D8D7),

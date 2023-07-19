@@ -53,7 +53,7 @@ class LeftDrawer extends GetView<HomeController> {
                     Text(
                       controller.userData["fullname"],
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: AppColors.lightWhite,
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),
