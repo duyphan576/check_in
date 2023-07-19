@@ -1,36 +1,14 @@
+import 'package:check_in/modules/grade/controllers/grade_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:check_in/utils/api.dart';
 import 'package:check_in/models/student/students.dart';
 import 'package:check_in/models/grade/grade.dart';
 import 'package:get/get.dart';
 
-class StudentGradeView extends StatelessWidget {
-  StudentGradeView({Key? key, required this.students, required this.token})
-      : super(key: key);
+class GradeView extends GetView<GradeController> {
+  GradeView({super.key});
   final Students students;
   final String token;
-
-  Stream<List<GradeStudent>> getStreamOfData() async* {
-    final _connect = GetConnect();
-    String url = '${Api.baseUrl}${Api.gradeApi.gradestu}';
-    final gradesJson = await _connect.get(
-      url,
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $token'
-      },
-    );
-    final List<dynamic> gradesList = gradesJson.body['marks'];
-    print(gradesJson.body);
-
-    // Convert the JSON objects to Classroom objects
-    final List<GradeStudent> grades =
-        gradesList.map((json) => GradeStudent.fromJson(json)).toList();
-
-    // Yield the classrooms list to the stream
-    yield grades;
-  }
 
   @override
   Widget build(BuildContext context) {
