@@ -34,17 +34,49 @@ class StudentCode extends StatelessWidget {
 }
 
 class StudentPicture extends StatelessWidget {
-  const StudentPicture({Key? key, required this.picAddress}) : super(key: key);
-  final String picAddress;
+  const StudentPicture({Key? key, required this.name}) : super(key: key);
+  final String name;
   @override
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.width / 4,
       width: MediaQuery.of(context).size.width / 4,
       child: GestureDetector(
-        child: CircleAvatar(
-          backgroundColor: Colors.white,
-          backgroundImage: AssetImage(picAddress),
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppColors.lightWhite.withOpacity(0.7),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.black,
+                blurRadius: 4,
+                blurStyle: BlurStyle.outer,
+                offset: Offset(0, 0), // Shadow position
+              ),
+            ],
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF41D8D7),
+                Color(0xFF21A3C6),
+                Color(0xFF285DA2),
+                Color(0xFF332F61),
+                Color(0xFF452E51),
+              ],
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
+            ),
+            shape: BoxShape.circle,
+          ),
+          child: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            child: Text(
+              name.substring(0, 1),
+              style: TextStyle(
+                color: AppColors.lightWhite,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
         ),
       ),
     );

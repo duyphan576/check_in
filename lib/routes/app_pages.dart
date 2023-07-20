@@ -2,6 +2,8 @@ import 'package:check_in/modules/classroom/bindings/classroom_binding.dart';
 import 'package:check_in/modules/classroom/views/classroom_view.dart';
 import 'package:check_in/modules/grade/bindings/grade_binding.dart';
 import 'package:check_in/modules/grade/views/grade_view.dart';
+import 'package:check_in/modules/gradelist/bindings/gradelist_binding.dart';
+import 'package:check_in/modules/gradelist/views/gradelist_view.dart';
 import 'package:check_in/modules/home/bindings/home_binding.dart';
 import 'package:check_in/modules/home/views/home_view.dart';
 import 'package:check_in/modules/login/bindings/login_binding.dart';
@@ -47,6 +49,11 @@ class AppPages {
       name: _Paths.GRADE,
       page: () => GradeView(),
       binding: GradeBinding(),
+    ),
+    GetPage(
+      name: _Paths.GRADELIST,
+      page: () => GradelistView(),
+      binding: GradelistBinding(),
     ),
   ];
 }

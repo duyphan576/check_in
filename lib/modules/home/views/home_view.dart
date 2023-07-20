@@ -52,7 +52,7 @@ class HomeView extends GetView<HomeController> {
                                   padding: GlobalStyles.paddingPageLeftRight_25,
                                   child: Container(
                                     height: MediaQuery.of(context).size.height *
-                                        0.25,
+                                        0.15,
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
                                       color:
@@ -89,8 +89,7 @@ class HomeView extends GetView<HomeController> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           StudentPicture(
-                                            picAddress:
-                                                'assets/images/student_profile.jpeg',
+                                            name: controller.userData["name"],
                                           ),
                                           GlobalStyles.sizedBoxWidth,
                                           Column(

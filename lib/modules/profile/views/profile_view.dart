@@ -46,7 +46,7 @@ class ProfileView extends GetView<ProfileController> {
                                   Container(
                                     width: MediaQuery.of(context).size.width,
                                     height: MediaQuery.of(context).size.height *
-                                        0.20,
+                                        0.15,
                                     decoration: BoxDecoration(
                                       color:
                                           AppColors.lightWhite.withOpacity(0.7),
@@ -81,11 +81,60 @@ class ProfileView extends GetView<ProfileController> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          CircleAvatar(
-                                            radius: 50,
-                                            backgroundColor: Colors.white,
-                                            backgroundImage: AssetImage(
-                                                'assets/images/student_profile.jpeg'),
+                                          Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                4,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                4,
+                                            child: GestureDetector(
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.lightWhite
+                                                      .withOpacity(0.7),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: AppColors.black,
+                                                      blurRadius: 4,
+                                                      blurStyle:
+                                                          BlurStyle.outer,
+                                                      offset: Offset(0,
+                                                          0), // Shadow position
+                                                    ),
+                                                  ],
+                                                  gradient: LinearGradient(
+                                                    colors: [
+                                                      Color(0xFF41D8D7),
+                                                      Color(0xFF21A3C6),
+                                                      Color(0xFF285DA2),
+                                                      Color(0xFF332F61),
+                                                      Color(0xFF452E51),
+                                                    ],
+                                                    begin: Alignment.bottomLeft,
+                                                    end: Alignment.topRight,
+                                                  ),
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: CircleAvatar(
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  child: Text(
+                                                    controller.userData["name"]
+                                                        .substring(0, 1),
+                                                    style: TextStyle(
+                                                      color:
+                                                          AppColors.lightWhite,
+                                                      fontSize: 24,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                           GlobalStyles.sizedBoxWidth,
                                           Column(
@@ -158,8 +207,10 @@ class ProfileView extends GetView<ProfileController> {
                                     child: ConstrainedBox(
                                       constraints: BoxConstraints(
                                           minHeight:
-                                              constraints.maxHeight * 0.5),
+                                              constraints.maxHeight * 0.4),
                                       child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           GlobalStyles.sizedBoxHeight,
                                           Row(

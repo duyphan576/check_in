@@ -18,4 +18,4 @@ mixin CacheManager {
   }
 }
 
-enum CacheManagerKey { CUSTOMER_INFO, TOKEN, CONFIG, AVGGRADE }
+enum CacheManagerKey { CUSTOMER_INFO, TOKEN, CONFIG, CLASS_DATA }

@@ -10,10 +10,10 @@ class HomeProvider extends GetConnect {
   final HttpProvider http;
 
   Future<BaseResponse?> home(HomeModel homeModel, url, token) async {
-    // Map<String, dynamic> submit = Map<String, dynamic>();
-    // submit.addAll(homeModel.toMap());
+    Map<String, dynamic> submit = Map<String, dynamic>();
+    submit.addAll(homeModel.toMap());
 
-    return await http.doGetWithToken(url, token).then((response) {
+    return await http.doGetWithToken(url, token, submit).then((response) {
       return BaseResponse(
           statusCode: response.statusCode,
           statusText: response.statusMessage,

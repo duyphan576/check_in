@@ -2,6 +2,7 @@ import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/models/classroom/classroom.dart';
 import 'package:check_in/modules/classroom/controllers/classroom_controller.dart';
+import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,18 +42,16 @@ class ClassroomView extends GetView<ClassroomController> {
                         child: Container(
                           height: MediaQuery.of(context).size.height,
                           width: MediaQuery.of(context).size.width,
-                          child: StreamBuilder<List<Classroom>>(
-                            stream: controller.getStreamOfData(),
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                final List<Classroom>? classrooms =
-                                    snapshot.data;
-                                return ListView.builder(
+                          child: controller.classrooms.isEmpty
+                              ? Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : ListView.builder(
                                   padding: GlobalStyles.paddingPageLeftRight_25,
-                                  itemCount: classrooms?.length ?? 0,
+                                  itemCount: controller.classrooms.length,
                                   itemBuilder: (context, index) {
                                     final Classroom classroom =
-                                        classrooms![index];
+                                        controller.classrooms[index];
                                     return Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -89,7 +88,10 @@ class ClassroomView extends GetView<ClassroomController> {
                                             ),
                                           ),
                                           child: InkWell(
-                                            onTap: () {},
+                                            onTap: () {
+                                              controller.getClassInfo(
+                                                  classroom.id.toString());
+                                            },
                                             child: ListTile(
                                               title: Text(
                                                 classroom.term.termName,
@@ -120,22 +122,7 @@ class ClassroomView extends GetView<ClassroomController> {
                                       ],
                                     );
                                   },
-                                );
-                              } else if (snapshot.hasError) {
-                                return Text('Error: ${snapshot.error}');
-                              } else {
-                                return Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    CircularProgressIndicator(
-                                      color: AppColors.main,
-                                    ),
-                                  ],
-                                );
-                              }
-                            },
-                          ),
+                                ),
                         ),
                       ),
                     ),

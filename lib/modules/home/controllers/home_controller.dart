@@ -35,7 +35,6 @@ class HomeController extends GetxController with CacheManager {
       UrlProvider.HANDLES_LOGOUT,
       cacheGet(CacheManagerKey.TOKEN),
     );
-    print(response?.message);
     if (response?.statusCode == HttpStatus.ok) {
       if (response?.status == 1) {
         authenticationService.clearStorage();
