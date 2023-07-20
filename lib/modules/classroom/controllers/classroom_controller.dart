@@ -21,6 +21,7 @@ class ClassroomController extends GetxController with CacheManager {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    getStreamOfData();
     initData();
   }
 
@@ -37,6 +38,7 @@ class ClassroomController extends GetxController with CacheManager {
       UrlProvider.HANDLES_CLASSROOM,
       cacheGet(CacheManagerKey.TOKEN),
     );
+    print(response?.data);
     if (response?.statusCode == HttpStatus.ok) {
       if (response?.status == 1) {
         // Parse the JSON data into Dart objects
