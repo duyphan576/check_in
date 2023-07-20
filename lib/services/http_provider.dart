@@ -17,12 +17,23 @@ class HttpProvider with CacheManager {
     );
   }
 
-  Future<Response> doGetWithToken(String url, dynamic token, dynamic data) {
+  Future<Response> doPostWithToken(String url, dynamic token, dynamic data) {
+    var endpoint = dotenv.env['BASEURL'].toString() + url;
+    httpClient.options.headers['Authorization'] = 'Bearer $token';
+    Map<String, dynamic> requestBody = {
+      "classroomId": data,
+    };
+    return httpClient.post(
+      endpoint,
+      data: requestBody,
+    );
+  }
+
+  Future<Response> doGetWithToken(String url, dynamic token) {
     var endpoint = dotenv.env['BASEURL'].toString() + url;
     httpClient.options.headers['Authorization'] = 'Bearer $token';
     return httpClient.get(
       endpoint,
-      data: data,
     );
   }
 

@@ -8,12 +8,23 @@ class ClassroomProvider extends GetConnect {
 
   final HttpProvider http;
 
-  Future<BaseResponse?> classroom(
+  Future<BaseResponse?> getClassroom(
       ClassroomModel classroomModel, url, token) async {
-    Map<String, dynamic> submit = Map<String, dynamic>();
-    submit.addAll(classroomModel.toMap());
+    return await http.doGetWithToken(url, token).then((response) {
+      return BaseResponse(
+          statusCode: response.statusCode,
+          statusText: response.statusMessage,
+          status: response.data['success'],
+          data: response.data['data'] ?? {},
+          message:
+              response.data['message'] != null ? response.data['message'] : "");
+    }).catchError((onError) {
+      return BaseResponse(statusText: onError.toString(), statusCode: 400);
+    });
+  }
 
-    return await http.doGetWithToken(url, token, submit).then((response) {
+  Future<BaseResponse?> postGradeList(String classroomId, url, token) async {
+    return await http.doPostWithToken(url, token, classroomId).then((response) {
       return BaseResponse(
           statusCode: response.statusCode,
           statusText: response.statusMessage,

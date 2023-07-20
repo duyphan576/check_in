@@ -13,7 +13,7 @@ class HomeProvider extends GetConnect {
     Map<String, dynamic> submit = Map<String, dynamic>();
     submit.addAll(homeModel.toMap());
 
-    return await http.doGetWithToken(url, token, submit).then((response) {
+    return await http.doGetWithToken(url, token).then((response) {
       return BaseResponse(
           statusCode: response.statusCode,
           statusText: response.statusMessage,

@@ -90,7 +90,8 @@ class ClassroomView extends GetView<ClassroomController> {
                                           child: InkWell(
                                             onTap: () {
                                               controller.getClassInfo(
-                                                  classroom.id.toString());
+                                                classroom.id.toString(),
+                                              );
                                             },
                                             child: ListTile(
                                               title: Text(
