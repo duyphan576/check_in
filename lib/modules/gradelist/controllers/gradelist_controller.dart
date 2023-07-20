@@ -24,23 +24,14 @@ class GradelistController extends GetxController with CacheManager {
 
   initData() async {
     classData = await cacheGet(CacheManagerKey.CLASS_DATA);
-    print(classData);
     if (classData != null) {
       isLoading.value = false;
+      printGradeDetails();
     }
   }
 
-  Gradelist parseJsonToGradelist(String jsonData) {
-    // Step 1: Parse the JSON data
-    Map<String, dynamic> parsedData = jsonDecode(jsonData);
-
-    // Step 2: Create an instance of Gradelist using the factory constructor
-    Gradelist gradelist = Gradelist.fromJson(parsedData);
-
-    return gradelist;
-  }
-
-  void printGradeDetails(Gradelist gradelist) {
+  void printGradeDetails() {
+    Gradelist gradelist = Gradelist.fromJson(classData);
     String grade = gradelist.grade;
     int classroomId = gradelist.classroom.id;
     String lecturerCode = gradelist.classroom.lecturer.code;

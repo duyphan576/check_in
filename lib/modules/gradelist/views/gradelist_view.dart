@@ -42,8 +42,7 @@ class GradelistView extends GetView<GradelistController> {
                           child: Column(
                             children: [
                               Text(
-                                controller.classData["classroom"]["id"]
-                                    .toString(),
+                                controller.classData.toString(),
                                 style: TextStyle(color: AppColors.black),
                               ),
                             ],
