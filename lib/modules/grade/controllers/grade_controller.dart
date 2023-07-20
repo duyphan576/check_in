@@ -12,12 +12,14 @@ class GradeController extends GetxController with CacheManager {
   var userData;
   RxBool isLoading = true.obs;
   var avgGrade;
+  RxList<Grade> grades = <Grade>[].obs;
   GradeController({required this.gradeRepository});
 
   @override
   void onInit() async {
     initData();
     avgGrade = getAvgGrade();
+    getGradesData();
     super.onInit();
   }
 
@@ -32,17 +34,22 @@ class GradeController extends GetxController with CacheManager {
     final respone = await gradeRepository.grade(GradeModel(),
         UrlProvider.HANDLES_GRADE, cacheGet(CacheManagerKey.TOKEN));
     avgGrade = respone?.data['avgGrade'];
+    update();
   }
 
-  Stream<List<Grade>> getStreamOfData() async* {
-    final respone = await gradeRepository.grade(GradeModel(),
-        UrlProvider.HANDLES_GRADE, cacheGet(CacheManagerKey.TOKEN));
-    final List<dynamic> gradeList = respone?.data['grades'];
-    // Convert the JSON objects to Classroom objects
-    final List<Grade> grades =
+  Future<void> getGradesData() async {
+    final response = await gradeRepository.grade(
+      GradeModel(),
+      UrlProvider.HANDLES_GRADE,
+      cacheGet(CacheManagerKey.TOKEN),
+    );
+
+    List<dynamic> gradeList = response?.data['grades'];
+    List<Grade> gradesData =
         gradeList.map((json) => Grade.fromJson(json)).toList();
 
-    // Yield the classrooms list to the stream
-    yield grades;
+    // Sử dụng assignAll() hoặc addAll() để cập nhật RxList mà không thay đổi kiểu dữ liệu
+    grades.assignAll(gradesData);
+    update();
   }
 }
