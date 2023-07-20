@@ -97,58 +97,65 @@ class GradeView extends GetView<GradeController> {
                         child: Container(
                           height: MediaQuery.of(context).size.height,
                           width: MediaQuery.of(context).size.width,
-                          child: Obx(() => ListView.builder(
-                                itemCount: controller.grades.length,
-                                itemBuilder: (context, index) {
-                                  final Grade grade = controller.grades[index];
-                                  return Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Container(
-                                      padding:
-                                          GlobalStyles.paddingPageLeftRight_25,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.lightWhite
-                                            .withOpacity(0.7),
-                                        borderRadius: BorderRadius.circular(8),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: AppColors.black,
-                                            blurRadius: 2,
-                                            blurStyle: BlurStyle.outer,
-                                            offset:
-                                                Offset(0, 0), // Shadow position
-                                          ),
-                                        ],
-                                        gradient: LinearGradient(
-                                          colors: [
-                                            Color(0xFF41D8D7),
-                                            Color(0xFF21A3C6),
-                                            Color(0xFF285DA2),
-                                            Color(0xFF332F61),
-                                            Color(0xFF452E51),
+                          child: controller.grades.isEmpty
+                              ? Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : ListView.builder(
+                                  itemCount: controller.grades.length,
+                                  itemBuilder: (context, index) {
+                                    final Grade grade =
+                                        controller.grades[index];
+                                    return Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Container(
+                                        padding: GlobalStyles
+                                            .paddingPageLeftRight_25,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.lightWhite
+                                              .withOpacity(0.7),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: AppColors.black,
+                                              blurRadius: 2,
+                                              blurStyle: BlurStyle.outer,
+                                              offset: Offset(
+                                                  0, 0), // Shadow position
+                                            ),
                                           ],
-                                          begin: Alignment.bottomLeft,
-                                          end: Alignment.topRight,
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              Color(0xFF41D8D7),
+                                              Color(0xFF21A3C6),
+                                              Color(0xFF285DA2),
+                                              Color(0xFF332F61),
+                                              Color(0xFF452E51),
+                                            ],
+                                            begin: Alignment.bottomLeft,
+                                            end: Alignment.topRight,
+                                          ),
+                                        ),
+                                        child: ListTile(
+                                          title: Text(
+                                            grade.termName.toString(),
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                          subtitle: Text(
+                                              ' Id :${grade.termId.toString()}',
+                                              style: TextStyle(
+                                                  color: Colors.white)),
+                                          trailing: Text(
+                                              'Grade : ${grade.grade.toString()}',
+                                              style: TextStyle(
+                                                  color: Colors.white)),
                                         ),
                                       ),
-                                      child: ListTile(
-                                        title: Text(
-                                          grade.termName.toString(),
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        subtitle: Text(
-                                            ' Id :${grade.termId.toString()}',
-                                            style:
-                                                TextStyle(color: Colors.white)),
-                                        trailing: Text(
-                                            'Grade : ${grade.grade.toString()}',
-                                            style:
-                                                TextStyle(color: Colors.white)),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              )),
+                                    );
+                                  },
+                                ),
                         ),
                       ),
                       bottomNavigationBar: BottomAppBar(
@@ -165,7 +172,10 @@ class GradeView extends GetView<GradeController> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        Text(controller.avgGrade.toString()),
+                                        controller.avgGrade is! double
+                                            ? CircularProgressIndicator()
+                                            : Text(
+                                                controller.avgGrade.toString()),
                                       ],
                                     ),
                                   )
