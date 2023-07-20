@@ -12,7 +12,7 @@ class ClassroomController extends GetxController with CacheManager {
   final ClassroomRepository classroomRepository;
   final AuthenticationService authenticationService = AuthenticationService();
   var userData;
-  RxList<Classroom> classrooms = <Classroom>[].obs;
+  final RxList<Classroom> classrooms = RxList<Classroom>();
   RxBool isLoading = true.obs;
 
   ClassroomController({required this.classroomRepository});
@@ -21,7 +21,7 @@ class ClassroomController extends GetxController with CacheManager {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getStreamOfData();
+    fetchData();
     initData();
   }
 
@@ -38,7 +38,6 @@ class ClassroomController extends GetxController with CacheManager {
       UrlProvider.HANDLES_CLASSROOM,
       cacheGet(CacheManagerKey.TOKEN),
     );
-    print(response?.data);
     if (response?.statusCode == HttpStatus.ok) {
       if (response?.status == 1) {
         // Parse the JSON data into Dart objects
@@ -46,12 +45,16 @@ class ClassroomController extends GetxController with CacheManager {
         // Convert the JSON objects to Classroom objects
         final List<Classroom> classroomData =
             classroomList.map((json) => Classroom.fromJson(json)).toList();
-        classrooms.assignAll(classroomData);
-        update();
+        yield classroomData;
       }
     }
+  }
 
-    // Yield the classrooms list to the stream
+  void fetchData() {
+    // Assuming `getStreamOfData()` returns the stream you want to listen to
+    getStreamOfData().listen((List<Classroom>? data) {
+      classrooms.assignAll(data ?? []);
+    });
   }
 
   getClassInfo(String classroomId) async {

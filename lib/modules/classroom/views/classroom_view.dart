@@ -42,80 +42,87 @@ class ClassroomView extends GetView<ClassroomController> {
                         child: Container(
                           height: MediaQuery.of(context).size.height,
                           width: MediaQuery.of(context).size.width,
-                          child: ListView.builder(
-                            padding: GlobalStyles.paddingPageLeftRight_25,
-                            itemCount: controller.classrooms.length,
-                            itemBuilder: (context, index) {
-                              final Classroom classroom =
-                                  controller.classrooms[index];
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    padding:
-                                        GlobalStyles.paddingPageLeftRight_25,
-                                    decoration: BoxDecoration(
-                                      color:
-                                          AppColors.lightWhite.withOpacity(0.7),
-                                      borderRadius: BorderRadius.circular(8),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: AppColors.black,
-                                          blurRadius: 4,
-                                          blurStyle: BlurStyle.outer,
-                                          offset:
-                                              Offset(0, 0), // Shadow position
+                          child: controller.classrooms.isEmpty
+                              ? Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : ListView.builder(
+                                  padding: GlobalStyles.paddingPageLeftRight_25,
+                                  itemCount: controller.classrooms.length,
+                                  itemBuilder: (context, index) {
+                                    final Classroom classroom =
+                                        controller.classrooms[index];
+                                    return Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          padding: GlobalStyles
+                                              .paddingPageLeftRight_25,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.lightWhite
+                                                .withOpacity(0.7),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: AppColors.black,
+                                                blurRadius: 4,
+                                                blurStyle: BlurStyle.outer,
+                                                offset: Offset(
+                                                    0, 0), // Shadow position
+                                              ),
+                                            ],
+                                            gradient: LinearGradient(
+                                              colors: [
+                                                Color(0xFF41D8D7),
+                                                Color(0xFF21A3C6),
+                                                Color(0xFF285DA2),
+                                                Color(0xFF332F61),
+                                                Color(0xFF452E51),
+                                              ],
+                                              begin: Alignment.bottomLeft,
+                                              end: Alignment.topRight,
+                                            ),
+                                          ),
+                                          child: InkWell(
+                                            onTap: () {
+                                              controller.getClassInfo(
+                                                  classroom.id.toString());
+                                            },
+                                            child: ListTile(
+                                              title: Text(
+                                                classroom.term.termName,
+                                                style: TextStyle(
+                                                  color: AppColors.lightWhite,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              subtitle: Text(
+                                                classroom.lecturer.fullname,
+                                                style: TextStyle(
+                                                  color: AppColors.lightWhite,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                              trailing: Text(
+                                                'Credit: ${classroom.term.credit}',
+                                                style: TextStyle(
+                                                  color: AppColors.lightWhite,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ),
+                                        GlobalStyles.sizedBoxHeight,
                                       ],
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          Color(0xFF41D8D7),
-                                          Color(0xFF21A3C6),
-                                          Color(0xFF285DA2),
-                                          Color(0xFF332F61),
-                                          Color(0xFF452E51),
-                                        ],
-                                        begin: Alignment.bottomLeft,
-                                        end: Alignment.topRight,
-                                      ),
-                                    ),
-                                    child: InkWell(
-                                      onTap: () {
-                                        controller.getClassInfo(
-                                            classroom.id.toString());
-                                      },
-                                      child: ListTile(
-                                        title: Text(
-                                          classroom.term.termName,
-                                          style: TextStyle(
-                                            color: AppColors.lightWhite,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        subtitle: Text(
-                                          classroom.lecturer.fullname,
-                                          style: TextStyle(
-                                            color: AppColors.lightWhite,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                        trailing: Text(
-                                          'Credit: ${classroom.term.credit}',
-                                          style: TextStyle(
-                                            color: AppColors.lightWhite,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  GlobalStyles.sizedBoxHeight,
-                                ],
-                              );
-                            },
-                          ),
+                                    );
+                                  },
+                                ),
                         ),
                       ),
                     ),
