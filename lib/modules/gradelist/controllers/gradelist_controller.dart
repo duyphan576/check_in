@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:check_in/core/cache_manager.dart';
 import 'package:check_in/models/gradelist/gradelist.dart';
 import 'package:check_in/models/student/students.dart';
@@ -12,7 +10,7 @@ class GradelistController extends GetxController with CacheManager {
   final AuthenticationService authenticationService = AuthenticationService();
   var classData;
   RxBool isLoading = true.obs;
-  RxList<Gradelist> gradelist = RxList<Gradelist>();
+  Gradelist? gradelist;
   GradelistController({required this.gradelistRepository});
 
   @override
@@ -31,14 +29,14 @@ class GradelistController extends GetxController with CacheManager {
   }
 
   void printGradeDetails() {
-    Gradelist gradelist = Gradelist.fromJson(classData);
-    String grade = gradelist.grade;
-    int classroomId = gradelist.classroom.id;
-    String lecturerCode = gradelist.classroom.lecturer.code;
-    String lecturerFullname = gradelist.classroom.lecturer.fullname;
-    String termName = gradelist.classroom.term.termName;
-    int termCredit = gradelist.classroom.term.credit;
-    List<Students> studentsList = gradelist.studentList;
+    gradelist = Gradelist.fromJson(classData);
+    String? grade = gradelist?.grade;
+    int? classroomId = gradelist?.classroom.id;
+    String? lecturerCode = gradelist?.classroom.lecturer.code;
+    String? lecturerFullname = gradelist?.classroom.lecturer.fullname;
+    String? termName = gradelist?.classroom.term.termName;
+    int? termCredit = gradelist?.classroom.term.credit;
+    List<Students>? studentsList = gradelist?.studentList;
 
     // Display the information
     print("Grade: $grade");
@@ -49,7 +47,7 @@ class GradelistController extends GetxController with CacheManager {
     print("Term Credit: $termCredit");
 
     // Display information about each student in the student list
-    for (Students student in studentsList) {
+    for (Students student in studentsList!) {
       print("\nStudent ID: ${student.id}");
       print("Student Code: ${student.code}");
       print("Student Fullname: ${student.fullname}");
