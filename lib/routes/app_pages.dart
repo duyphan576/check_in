@@ -12,6 +12,9 @@ import 'package:check_in/modules/splash/bindings/splash_binding.dart';
 import 'package:check_in/modules/splash/views/splash_view.dart';
 import 'package:get/get.dart';
 
+import '../modules/document/bindings/document_binding.dart';
+import '../modules/document/view/document_view.dart';
+
 part 'app_routes.dart';
 
 class AppPages {
@@ -47,6 +50,11 @@ class AppPages {
       name: _Paths.GRADELIST,
       page: () => GradelistView(),
       binding: GradelistBinding(),
+    ),
+    GetPage(
+      name: _Paths.DOCUMENT,
+      page: () => DocumentView(),
+      binding: DocumentBinding(),
     ),
   ];
 }

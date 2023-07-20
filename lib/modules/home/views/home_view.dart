@@ -153,7 +153,9 @@ class HomeView extends GetView<HomeController> {
                                       ),
                                       GlobalStyles.sizedBoxHeight,
                                       InkWellCustom(
-                                        function: () {},
+                                        function: () {
+                                          Get.toNamed(Routes.DOCUMENT);
+                                        },
                                         text: HomeString.DOCUMENT,
                                         icon: Icons.storage,
                                         subText: '',
