@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:check_in/core/index.dart';
 import 'package:check_in/modules/grade/models/grade_models.dart';
 import 'package:check_in/services/authenticationService.dart';
@@ -12,7 +10,6 @@ class GradeController extends GetxController with CacheManager {
   final GradeRepository gradeRepository;
   final AuthenticationService authenticationService = AuthenticationService();
   var userData;
-  // var userAvgGrade;
   RxBool isLoading = true.obs;
   var avgGrade;
   GradeController({required this.gradeRepository});
