@@ -20,4 +20,11 @@ abstract class AppColors {
   static final Color white = Color(0xF1F1F1F1);
   static final Color blacks = Color(0xFF303030);
   static final Color accentBlue = Color(0xFF009DFF);
+  static final List<Color> listColorGradientMain = [
+    Color(0xFF41D8D7),
+    Color(0xFF21A3C6),
+    Color(0xFF285DA2),
+    Color(0xFF332F61),
+    Color(0xFF452E51),
+  ];
 }

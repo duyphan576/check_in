@@ -1,4 +1,3 @@
-import 'package:check_in/constants/app_string.dart';
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/modules/home/controllers/home_controller.dart';

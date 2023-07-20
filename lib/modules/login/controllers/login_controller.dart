@@ -8,7 +8,6 @@ import 'package:check_in/services/domain_service.dart';
 import 'package:check_in/utils/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:get_storage/get_storage.dart';
@@ -121,17 +120,16 @@ class LoginController extends GetxController with CacheManager {
           Get.offAndToNamed(Routes.HOME);
         } else {
           isLoading.value = false;
-          final snackbar = GetSnackBar(message: response?.message.toString());
-          Get.showSnackbar(snackbar);
+          final snackBar = GetSnackBar(message: response?.message.toString());
+          Get.showSnackbar(snackBar);
         }
       } else {
         Alert.closeLoadingIndicator();
         isLoading.value = false;
-
         Alert.showSuccess(
-            title: FlutterI18n.translate(Get.context!, "COMMON.error"),
-            message: FlutterI18n.translate(Get.context!, "COMMON.massageError"),
-            buttonText: FlutterI18n.translate(Get.context!, "COMMON.ok"));
+            title: CommonString.ERROR,
+            message: CommonString.ERROR_MESSAGE,
+            buttonText: CommonString.CANCEL);
       }
     }
   }

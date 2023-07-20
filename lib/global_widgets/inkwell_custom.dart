@@ -5,15 +5,19 @@ import 'package:flutter/material.dart';
 class InkWellCustom extends StatelessWidget {
   const InkWellCustom({
     super.key,
-    required this.function,
-    required this.text,
-    required this.icon,
-    required this.subText,
+    this.function,
+    this.text,
+    this.icon,
+    this.subText,
+    this.height,
+    this.width,
   });
   final function;
-  final String text;
-  final String subText;
-  final IconData icon;
+  final String? text;
+  final String? subText;
+  final IconData? icon;
+  final height;
+  final width;
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +34,7 @@ class InkWellCustom extends StatelessWidget {
           ),
         ],
         gradient: LinearGradient(
-          colors: [
-            Color(0xFF41D8D7),
-            Color(0xFF21A3C6),
-            Color(0xFF285DA2),
-            Color(0xFF332F61),
-            Color(0xFF452E51),
-          ],
+          colors: AppColors.listColorGradientMain,
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
         ),
@@ -45,41 +43,44 @@ class InkWellCustom extends StatelessWidget {
         onTap: function,
         child: Container(
           padding: GlobalStyles.paddingPageLeftRight_25,
-          height: MediaQuery.of(context).size.height * 0.1,
-          width: MediaQuery.of(context).size.width,
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+          height: height * 0.1,
+          width: width,
+          child: Row(children: [
+            icon != null
+                ? Icon(
+                    icon,
+                    size: 40,
+                    color: AppColors.lightWhite,
+                  )
+                : SizedBox(
+                    width: 40,
+                  ),
+            GlobalStyles.sizedBoxWidth,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
-                  icon,
-                  size: 40,
-                  color: AppColors.lightWhite,
+                Text(
+                  text ?? "",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: AppColors.lightWhite,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                GlobalStyles.sizedBoxWidth,
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      text,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: AppColors.lightWhite,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      subText,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: AppColors.lightWhite,
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
-                  ],
-                ),
-              ]),
+                subText != null && subText?.isNotEmpty == true
+                    ? Text(
+                        subText ?? "",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: AppColors.lightWhite,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      )
+                    : SizedBox(),
+              ],
+            ),
+          ]),
         ),
       ),
     );
