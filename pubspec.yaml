@@ -56,6 +56,10 @@ dependencies:
   flutter_secure_storage: ^8.0.0
   photo_view: ^0.14.0
   local_auth: ^2.1.6
+  flutter_file_downloader: ^1.1.2
+  permission_handler: ^10.2.0
+  open_file: ^3.3.2
+  url_launcher: ^6.1.12
 
 flutter_icons:
   android: "icon_notification"

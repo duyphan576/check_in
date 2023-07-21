@@ -165,7 +165,16 @@ class DetailView extends GetView<DetailController> {
                                                             .toString(),
                                                       ),
                                                       trailing: IconButton(
-                                                        onPressed: () {},
+                                                        onPressed: () {
+                                                          controller
+                                                              .DownloadDocument(
+                                                                  docs.url
+                                                                      .toString()
+                                                                      .trim(),
+                                                                  docs.fileName
+                                                                      .toString()
+                                                                      .trim());
+                                                        },
                                                         icon: Icon(
                                                           Icons.download,
                                                         ),
