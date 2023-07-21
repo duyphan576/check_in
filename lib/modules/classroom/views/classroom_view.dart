@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 
 class ClassroomView extends GetView<ClassroomController> {
   const ClassroomView({super.key});
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ClassroomController>(

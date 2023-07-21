@@ -19,10 +19,9 @@ class DocumentController extends GetxController with CacheManager {
   @override
   void onInit() {
     // TODO: implement onInit
-
     super.onInit();
     initData();
-    getDocumentOfData();
+    getDocuments("1");
   }
 
   initData() async {
@@ -32,25 +31,22 @@ class DocumentController extends GetxController with CacheManager {
     }
   }
 
-  Future<void> getDocumentOfData() async {
-    final response = await documentRepository.document(
-      DocumentModel(),
+  getDocuments(String classroomId) async {
+    print(classroomId);
+    final response = await documentRepository.postGradeList(
+      classroomId,
       UrlProvider.HANDLES_DOCUMENT,
       cacheGet(CacheManagerKey.TOKEN),
     );
-    if (response != null &&
-        response.data != null &&
-        response.data.containsKey('documents')) {
-      List<dynamic> documentList = response.data['documents'];
-      List<Document> documentsData =
-          documentList.map((json) => Document.fromJson(json)).toList();
-      documents.assignAll(documentsData);
-    } else {
-      // Xử lý trường hợp khi response là null hoặc không chứa khóa 'documents'
-      // Bạn có thể hiển thị thông báo lỗi hoặc thực hiện bất kỳ hành động phù hợp nào ở đây
-      print('Lỗi: Không thể lấy dữ liệu tài liệu.');
+    print(response?.data["documents"]);
+    if (response?.statusCode == HttpStatus.ok) {
+      if (response?.status == 1) {
+        List<dynamic> documentList = response!.data['documents'];
+        List<Document> documentsData =
+            documentList.map((json) => Document.fromJson(json)).toList();
+        documents.assignAll(documentsData);
+        update();
+      }
     }
-
-    update();
   }
 }

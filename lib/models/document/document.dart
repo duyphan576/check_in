@@ -10,7 +10,6 @@ class Document {
   factory Document.fromJson(Map<String, dynamic> json) {
     return Document(
       id: int.parse(json['id'].toString()),
-      classroomId: int.parse(json['classroomId'].toString()),
       fileName: json['fileName'].toString(),
       part: json['part'].toString(),
       url: json['url'].toString(),

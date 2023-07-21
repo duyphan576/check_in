@@ -9,4 +9,6 @@ class DocumentRepository {
 
   Future<BaseResponse?> document(DocumentModel documentModel, url, token) =>
       documentProvider.document(documentModel, url, token);
+  Future<BaseResponse?> postGradeList(String classroomId, url, token) =>
+      documentProvider.postDocumentList(classroomId, url, token);
 }

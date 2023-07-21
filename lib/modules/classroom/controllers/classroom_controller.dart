@@ -13,9 +13,8 @@ class ClassroomController extends GetxController with CacheManager {
   final AuthenticationService authenticationService = AuthenticationService();
   var userData;
   RxBool isLoading = true.obs;
-
+  RxInt isIdChoose = 0.obs;
   ClassroomController({required this.classroomRepository});
-
   @override
   void onInit() {
     // TODO: implement onInit
