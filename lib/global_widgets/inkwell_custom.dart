@@ -74,6 +74,7 @@ class InkWellCustom extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 12,
                           color: AppColors.lightWhite,
+                          fontWeight: FontWeight.w500,
                           fontStyle: FontStyle.italic,
                         ),
                       )

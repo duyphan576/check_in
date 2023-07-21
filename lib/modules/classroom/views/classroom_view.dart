@@ -107,6 +107,7 @@ class ClassroomView extends GetView<ClassroomController> {
                                                 style: TextStyle(
                                                   color: AppColors.lightWhite,
                                                   fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
                                                 ),
                                               ),
                                               trailing: Text(
@@ -114,6 +115,7 @@ class ClassroomView extends GetView<ClassroomController> {
                                                 style: TextStyle(
                                                   color: AppColors.lightWhite,
                                                   fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
                                                 ),
                                               ),
                                             ),

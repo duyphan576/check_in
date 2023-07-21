@@ -122,7 +122,7 @@ class Alert {
                               style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: FontWeight.w500),
                             ),
                           )),
                     ),
@@ -146,7 +146,7 @@ class Alert {
                               style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: FontWeight.w500),
                             ),
                           )),
                     ),
@@ -168,7 +168,7 @@ class Alert {
                             child: Text(
                               FlutterI18n.translate(context, "COMMON.cancel"),
                               style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w400),
+                                  fontSize: 17, fontWeight: FontWeight.w500),
                             ),
                           )),
                     ),

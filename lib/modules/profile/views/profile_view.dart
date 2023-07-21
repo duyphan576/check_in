@@ -1,5 +1,7 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
+import 'package:check_in/global_widgets/profile_detail_column.dart';
+import 'package:check_in/global_widgets/profile_detail_row.dart';
 import 'package:check_in/global_widgets/student_data.dart';
 import 'package:check_in/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
@@ -163,87 +165,6 @@ class ProfileView extends GetView<ProfileController> {
                 ),
         );
       },
-    );
-  }
-}
-
-class ProfileDetailRow extends StatelessWidget {
-  const ProfileDetailRow({Key? key, required this.title, required this.value})
-      : super(key: key);
-  final String title;
-  final String value;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.4,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 16,
-              color: AppColors.lightWhite,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          GlobalStyles.sizedBoxHeight_10,
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 14,
-              color: AppColors.lightWhite,
-              fontStyle: FontStyle.italic,
-            ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.35,
-            child: Divider(
-              thickness: 1.0,
-              color: AppColors.lightWhite,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ProfileDetailColumn extends StatelessWidget {
-  const ProfileDetailColumn(
-      {Key? key, required this.title, required this.value})
-      : super(key: key);
-  final String title;
-  final String value;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 16,
-              color: AppColors.lightWhite,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          GlobalStyles.sizedBoxHeight_10,
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 14,
-              color: AppColors.lightWhite,
-              fontStyle: FontStyle.italic,
-            ),
-          ),
-          Divider(
-            thickness: 1.0,
-            color: AppColors.lightWhite,
-          ),
-        ],
-      ),
     );
   }
 }

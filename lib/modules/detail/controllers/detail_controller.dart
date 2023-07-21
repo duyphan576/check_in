@@ -13,7 +13,8 @@ class DetailController extends GetxController with CacheManager {
   final AuthenticationService authenticationService = AuthenticationService();
   var classData;
   RxBool isLoading = true.obs;
-  Detail? detail;
+  RxBool isStuClick = false.obs;
+  RxBool isDocClick = false.obs;
   String? grade;
   Classroom? classroom;
   final RxList<Students> studentsList = RxList<Students>();
@@ -36,12 +37,12 @@ class DetailController extends GetxController with CacheManager {
   }
 
   void printGradeDetails() {
-    detail = Detail.fromJson(classData);
-    grade = detail?.grade;
-    classroom = detail?.classroom;
-    List<Students>? studentData = detail?.studentList;
-    studentsList.assignAll(studentData!);
-    List<Documents>? docData = detail?.documentList;
-    docList.assignAll(docData!);
+    Detail? detail = Detail.fromJson(classData);
+    grade = detail.grade;
+    classroom = detail.classroom;
+    List<Students>? studentData = detail.studentList;
+    studentsList.assignAll(studentData);
+    List<Documents>? docData = detail.documentList;
+    docList.assignAll(docData);
   }
 }
