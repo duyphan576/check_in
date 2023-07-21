@@ -1,14 +1,14 @@
 import 'package:check_in/constants/index.dart';
-import 'package:check_in/modules/gradelist/controllers/gradelist_controller.dart';
+import 'package:check_in/modules/detail/controllers/detail_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class GradelistView extends GetView<GradelistController> {
-  const GradelistView({super.key});
+class DetailView extends GetView<DetailController> {
+  const DetailView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GradelistController>(
+    return GetBuilder<DetailController>(
       builder: (controller) {
         return Obx(
           () => controller.isLoading.value

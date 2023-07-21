@@ -68,7 +68,7 @@ class ClassroomController extends GetxController with CacheManager {
     if (response?.statusCode == HttpStatus.ok) {
       if (response?.status == 1) {
         cacheSave(CacheManagerKey.CLASS_DATA, response?.data);
-        Get.toNamed(Routes.GRADELIST);
+        Get.toNamed(Routes.DETAIL);
       }
     }
   }

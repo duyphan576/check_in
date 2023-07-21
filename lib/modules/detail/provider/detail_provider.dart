@@ -1,17 +1,16 @@
 import 'package:check_in/core/base_response.dart';
-import 'package:check_in/modules/gradelist/models/gradelist_model.dart';
+import 'package:check_in/modules/detail/models/detail_model.dart';
 import 'package:check_in/services/http_provider.dart';
 import 'package:get/get.dart';
 
-class GradelistProvider extends GetConnect {
-  GradelistProvider({required this.http});
+class DetailProvider extends GetConnect {
+  DetailProvider({required this.http});
 
   final HttpProvider http;
 
-  Future<BaseResponse?> gradelist(
-      GradelistModel gradelistModel, url, token) async {
+  Future<BaseResponse?> detail(DetailModel detailModel, url, token) async {
     Map<String, dynamic> submit = Map<String, dynamic>();
-    submit.addAll(gradelistModel.toMap());
+    submit.addAll(detailModel.toMap());
 
     return await http.doGetWithToken(url, token).then((response) {
       return BaseResponse(

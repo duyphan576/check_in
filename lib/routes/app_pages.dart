@@ -1,7 +1,7 @@
 import 'package:check_in/modules/classroom/bindings/classroom_binding.dart';
 import 'package:check_in/modules/classroom/views/classroom_view.dart';
-import 'package:check_in/modules/gradelist/bindings/gradelist_binding.dart';
-import 'package:check_in/modules/gradelist/views/gradelist_view.dart';
+import 'package:check_in/modules/detail/bindings/detail_binding.dart';
+import 'package:check_in/modules/detail/views/detail_view.dart';
 import 'package:check_in/modules/home/bindings/home_binding.dart';
 import 'package:check_in/modules/home/views/home_view.dart';
 import 'package:check_in/modules/login/bindings/login_binding.dart';
@@ -44,9 +44,9 @@ class AppPages {
       binding: ClassroomBinding(),
     ),
     GetPage(
-      name: _Paths.GRADELIST,
-      page: () => GradelistView(),
-      binding: GradelistBinding(),
+      name: _Paths.DETAIL,
+      page: () => DetailView(),
+      binding: DetailBinding(),
     ),
   ];
 }

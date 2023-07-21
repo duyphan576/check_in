@@ -1,10 +1,10 @@
 import 'package:check_in/core/base_api_model.dart';
 
-class GradelistModel extends BaseApiModel {
-  GradelistModel({act, plus}) : super(act: act, plus: plus);
+class DetailModel extends BaseApiModel {
+  DetailModel({act, plus}) : super(act: act, plus: plus);
 
-  factory GradelistModel.initial() {
-    return GradelistModel(
+  factory DetailModel.initial() {
+    return DetailModel(
       act: '',
       plus: '',
     );
