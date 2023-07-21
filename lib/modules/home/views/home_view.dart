@@ -60,7 +60,9 @@ class HomeView extends GetView<HomeController> {
                               Column(
                                 children: [
                                   InkWellCustom(
-                                    function: () {},
+                                    function: () {
+                                      Get.toNamed(Routes.CHECKIN);
+                                    },
                                     text: HomeString.CHECK_IN,
                                     icon: Icons.check,
                                     height: height,

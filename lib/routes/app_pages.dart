@@ -1,3 +1,5 @@
+import 'package:check_in/modules/checkin/bindings/checkin_binding.dart';
+import 'package:check_in/modules/checkin/views/checkin_view.dart';
 import 'package:check_in/modules/classroom/bindings/classroom_binding.dart';
 import 'package:check_in/modules/classroom/views/classroom_view.dart';
 import 'package:check_in/modules/detail/bindings/detail_binding.dart';
@@ -47,6 +49,11 @@ class AppPages {
       name: _Paths.DETAIL,
       page: () => DetailView(),
       binding: DetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHECKIN,
+      page: () => CheckinView(),
+      binding: CheckinBinding(),
     ),
   ];
 }

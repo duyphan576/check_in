@@ -17,7 +17,7 @@ class Detail {
 
   factory Detail.fromJson(Map<String, dynamic> json) {
     return Detail(
-      grade: json['grade'],
+      grade: json['grade'].toString(),
       classroom: Classroom.fromJson(json['classroom']),
       studentList: List.from(json['studentList'])
           .map(
