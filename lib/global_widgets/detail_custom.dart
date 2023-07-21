@@ -23,7 +23,7 @@ class DetailCustom extends StatelessWidget {
     return Container(
       padding: GlobalStyles.paddingAll18,
       decoration: BoxDecoration(
-        color: AppColors.lightWhite.withOpacity(0.7),
+        color: AppColors.lightWhite.withOpacity(0.75),
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(

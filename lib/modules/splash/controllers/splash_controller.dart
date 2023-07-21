@@ -25,7 +25,7 @@ class SplashController extends GetxController with CacheManager {
     super.onInit();
     arguments = Get.arguments;
 
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 3), () {
       //no return when user is on login screen and press back, it will not return the
       //user to the splash screen
       intData();

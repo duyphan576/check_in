@@ -16,8 +16,17 @@ class DetailView extends GetView<DetailController> {
       builder: (controller) {
         return Obx(
           () => controller.isLoading.value
-              ? Center(
-                  child: CircularProgressIndicator(),
+              ? Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        AppImages.bg,
+                      ),
+                    ),
+                  ),
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 )
               : Container(
                   decoration: BoxDecoration(
@@ -39,7 +48,6 @@ class DetailView extends GetView<DetailController> {
                       ),
                       body: SingleChildScrollView(
                         child: Container(
-                          // height: MediaQuery.of(context).size.height,
                           child: Padding(
                             padding: GlobalStyles.paddingAll18,
                             child: Column(
@@ -59,7 +67,7 @@ class DetailView extends GetView<DetailController> {
                                 Container(
                                   decoration: BoxDecoration(
                                     color:
-                                        AppColors.lightWhite.withOpacity(0.9),
+                                        AppColors.lightWhite.withOpacity(0.75),
                                     borderRadius: BorderRadius.circular(8),
                                     boxShadow: [
                                       BoxShadow(
@@ -115,6 +123,7 @@ class DetailView extends GetView<DetailController> {
                                     ],
                                   ),
                                 ),
+                                GlobalStyles.sizedBoxHeight_10,
                                 controller.isDocClick.value
                                     ? Container(
                                         height:
@@ -169,7 +178,7 @@ class DetailView extends GetView<DetailController> {
                                 Container(
                                   decoration: BoxDecoration(
                                     color:
-                                        AppColors.lightWhite.withOpacity(0.9),
+                                        AppColors.lightWhite.withOpacity(0.75),
                                     borderRadius: BorderRadius.circular(8),
                                     boxShadow: [
                                       BoxShadow(
@@ -225,6 +234,7 @@ class DetailView extends GetView<DetailController> {
                                     ],
                                   ),
                                 ),
+                                GlobalStyles.sizedBoxHeight_10,
                                 controller.isStuClick.value
                                     ? Container(
                                         height:
@@ -242,8 +252,8 @@ class DetailView extends GetView<DetailController> {
                                               color: AppColors.black,
                                               blurRadius: 4,
                                               blurStyle: BlurStyle.outer,
-                                              // offset: Offset(
-                                              //     0, 0), // Shadow position
+                                              offset: Offset(
+                                                  0, 0), // Shadow position
                                             ),
                                           ],
                                         ),

@@ -32,11 +32,11 @@ class DetailController extends GetxController with CacheManager {
     classData = await cacheGet(CacheManagerKey.CLASS_DATA);
     if (classData != null) {
       isLoading.value = false;
-      printGradeDetails();
+      getDetails();
     }
   }
 
-  void printGradeDetails() {
+  void getDetails() {
     Detail? detail = Detail.fromJson(classData);
     grade = detail.grade;
     classroom = detail.classroom;

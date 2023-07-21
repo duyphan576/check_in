@@ -24,13 +24,7 @@ class LeftDrawer extends GetView<HomeController> {
                   )
                 ],
                 gradient: LinearGradient(
-                  colors: [
-                    Color(0xFF41D8D7),
-                    Color(0xFF21A3C6),
-                    Color(0xFF285DA2),
-                    Color(0xFF332F61),
-                    Color(0xFF452E51),
-                  ],
+                  colors: AppColors.listColorGradientMain,
                   begin: Alignment.bottomLeft,
                   end: Alignment.topRight,
                 ),
@@ -42,15 +36,37 @@ class LeftDrawer extends GetView<HomeController> {
                     Container(
                       height: MediaQuery.of(context).size.width / 4,
                       width: MediaQuery.of(context).size.width / 4,
-                      child: CircleAvatar(
-                        backgroundColor: AppColors.white,
-                        backgroundImage:
-                            AssetImage('assets/images/student_profile.jpeg'),
+                      child: GestureDetector(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.lightWhite,
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.lightWhite,
+                                blurRadius: 4,
+                                blurStyle: BlurStyle.outer,
+                                offset: Offset(0, 0), // Shadow position
+                              ),
+                            ],
+                            shape: BoxShape.circle,
+                          ),
+                          child: CircleAvatar(
+                            backgroundColor: Colors.transparent,
+                            child: Text(
+                              controller.userData["name"].substring(0, 1),
+                              style: TextStyle(
+                                color: AppColors.lightBlack,
+                                fontSize: 36,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                     GlobalStyles.sizedBoxHeight,
                     Text(
-                      controller.userData["fullname"],
+                      controller.userData["name"],
                       style: TextStyle(
                         color: AppColors.lightWhite,
                         fontWeight: FontWeight.bold,

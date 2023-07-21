@@ -22,7 +22,7 @@ class StudentPicture extends StatelessWidget {
       height: height * 0.15,
       width: width,
       decoration: BoxDecoration(
-        color: AppColors.lightWhite.withOpacity(0.7),
+        color: AppColors.lightWhite.withOpacity(0.75),
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
@@ -49,20 +49,15 @@ class StudentPicture extends StatelessWidget {
                 onTap: onTap,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: AppColors.lightWhite.withOpacity(0.7),
+                    color: AppColors.lightWhite,
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.black,
+                        color: AppColors.lightWhite,
                         blurRadius: 4,
                         blurStyle: BlurStyle.outer,
                         offset: Offset(0, 0), // Shadow position
                       ),
                     ],
-                    gradient: LinearGradient(
-                      colors: AppColors.listColorGradientMain,
-                      begin: Alignment.bottomLeft,
-                      end: Alignment.topRight,
-                    ),
                     shape: BoxShape.circle,
                   ),
                   child: CircleAvatar(
@@ -72,7 +67,7 @@ class StudentPicture extends StatelessWidget {
                           ? name!.substring(0, 1)
                           : "",
                       style: TextStyle(
-                        color: AppColors.lightWhite,
+                        color: AppColors.lightBlack,
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
                       ),
@@ -83,7 +78,7 @@ class StudentPicture extends StatelessWidget {
             ),
             GlobalStyles.sizedBoxWidth,
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -109,7 +104,8 @@ class StudentPicture extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     fontStyle: FontStyle.italic,
                   ),
-                )
+                ),
+                GlobalStyles.sizedBoxHeight,
               ],
             )
           ],

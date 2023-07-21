@@ -63,7 +63,7 @@ class ClassroomView extends GetView<ClassroomController> {
                                               .paddingPageLeftRight_25,
                                           decoration: BoxDecoration(
                                             color: AppColors.lightWhite
-                                                .withOpacity(0.7),
+                                                .withOpacity(0.75),
                                             borderRadius:
                                                 BorderRadius.circular(8),
                                             boxShadow: [
@@ -76,13 +76,8 @@ class ClassroomView extends GetView<ClassroomController> {
                                               ),
                                             ],
                                             gradient: LinearGradient(
-                                              colors: [
-                                                Color(0xFF41D8D7),
-                                                Color(0xFF21A3C6),
-                                                Color(0xFF285DA2),
-                                                Color(0xFF332F61),
-                                                Color(0xFF452E51),
-                                              ],
+                                              colors: AppColors
+                                                  .listColorGradientMain,
                                               begin: Alignment.bottomLeft,
                                               end: Alignment.topRight,
                                             ),

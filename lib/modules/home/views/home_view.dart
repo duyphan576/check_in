@@ -50,7 +50,7 @@ class HomeView extends GetView<HomeController> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               StudentPicture(
-                                name: controller.userData["name"],
+                                name: controller.userData["fullname"],
                                 code: controller.userData!["code"].toString(),
                                 height: height,
                                 width: width,
@@ -81,14 +81,6 @@ class HomeView extends GetView<HomeController> {
                                     function: () {},
                                     text: HomeString.GRADE,
                                     icon: Icons.grade,
-                                    height: height,
-                                    width: width,
-                                  ),
-                                  GlobalStyles.sizedBoxHeight,
-                                  InkWellCustom(
-                                    function: () {},
-                                    text: HomeString.DOCUMENT,
-                                    icon: Icons.storage,
                                     height: height,
                                     width: width,
                                   ),

@@ -23,7 +23,7 @@ class InkWellCustom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.lightWhite.withOpacity(0.9),
+        color: AppColors.lightWhite.withOpacity(0.75),
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
