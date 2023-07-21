@@ -183,7 +183,7 @@ class DetailView extends GetView<DetailController> {
                                               ),
                                       )
                                     : SizedBox(),
-                                GlobalStyles.sizedBoxHeight,
+                                GlobalStyles.sizedBoxHeight_10,
                                 Container(
                                   decoration: BoxDecoration(
                                     color:
