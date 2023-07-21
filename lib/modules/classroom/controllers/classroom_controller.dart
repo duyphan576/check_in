@@ -61,7 +61,7 @@ class ClassroomController extends GetxController with CacheManager {
     print(classroomId);
     final response = await classroomRepository.postGradeList(
       classroomId,
-      UrlProvider.HANDLES_GRADELIST,
+      UrlProvider.HANDLES_DETAIL,
       cacheGet(CacheManagerKey.TOKEN),
     );
     print(response?.data["studentList"]);
