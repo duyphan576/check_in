@@ -1,14 +1,12 @@
-import 'dart:html';
-
 import 'package:check_in/models/classroom/classroom.dart';
-import 'package:check_in/models/document/document.dart';
+import 'package:check_in/models/documents/documents.dart';
 import 'package:check_in/models/student/students.dart';
 
 class Detail {
   final String grade;
   final Classroom classroom;
   final List<Students> studentList;
-  final List<Document> documentList;
+  final List<Documents> documentList;
 
   Detail({
     required this.grade,
@@ -28,7 +26,7 @@ class Detail {
           .toList(),
       documentList: List.from(json["documents"])
           .map(
-            (documentData) => Document.fromJson(documentData),
+            (documentData) => Documents.fromJson(documentData),
           )
           .toList(),
     );

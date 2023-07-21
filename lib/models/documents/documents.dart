@@ -1,17 +1,17 @@
-class Document {
+class Documents {
   int? id;
   String? fileName;
   String? path;
   String? url;
 
-  Document({
+  Documents({
     this.id,
     this.fileName,
     this.path,
     this.url,
   });
 
-  Document.fromJson(Map<String, dynamic> json) {
+  Documents.fromJson(Map<String, dynamic> json) {
     id = int.parse(json["id"].toString());
     fileName = json["fileName"];
     path = json["path"];
