@@ -43,7 +43,6 @@ class GradeController extends GetxController with CacheManager {
       UrlProvider.HANDLES_GRADE,
       cacheGet(CacheManagerKey.TOKEN),
     );
-
     List<dynamic> gradeList = response?.data['grades'];
     List<Grade> gradesData =
         gradeList.map((json) => Grade.fromJson(json)).toList();

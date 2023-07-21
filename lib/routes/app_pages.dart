@@ -14,6 +14,9 @@ import 'package:check_in/modules/splash/bindings/splash_binding.dart';
 import 'package:check_in/modules/splash/views/splash_view.dart';
 import 'package:get/get.dart';
 
+import '../modules/grade/bindings/grade_binding.dart';
+import '../modules/grade/views/grade_view.dart';
+
 part 'app_routes.dart';
 
 class AppPages {
@@ -54,6 +57,11 @@ class AppPages {
       name: _Paths.CHECKIN,
       page: () => CheckinView(),
       binding: CheckinBinding(),
+    ),
+    GetPage(
+      name: _Paths.GRADE,
+      page: () => GradeView(),
+      binding: GradeBinding(),
     ),
   ];
 }

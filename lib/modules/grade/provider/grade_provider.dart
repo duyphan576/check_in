@@ -9,9 +9,7 @@ class GradeProvider extends GetConnect {
 
   final HttpProvider http;
   Future<BaseResponse?> grade(GradeModel gradeModel, url, token) async {
-    Map<String, dynamic> submit = Map<String, dynamic>();
-    submit.addAll(gradeModel.toMap());
-    return await http.doGetWithToken(url, token, submit).then((response) {
+    return await http.doGetWithToken(url, token).then((response) {
       return BaseResponse(
           statusCode: response.statusCode,
           statusText: response.statusMessage,
