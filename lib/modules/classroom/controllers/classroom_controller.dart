@@ -33,7 +33,7 @@ class ClassroomController extends GetxController with CacheManager {
   }
 
   Stream<List<Classroom>> getStreamOfData() async* {
-    final response = await classroomRepository.getClassroom(
+    final response = await classroomRepository.classroom(
       ClassroomModel(),
       UrlProvider.HANDLES_CLASSROOM,
       cacheGet(CacheManagerKey.TOKEN),
@@ -58,13 +58,11 @@ class ClassroomController extends GetxController with CacheManager {
   }
 
   getClassInfo(String classroomId) async {
-    print(classroomId);
-    final response = await classroomRepository.postGradeList(
+    final response = await classroomRepository.detail(
       classroomId,
       UrlProvider.HANDLES_DETAIL,
       cacheGet(CacheManagerKey.TOKEN),
     );
-    print(response?.data["studentList"]);
     if (response?.statusCode == HttpStatus.ok) {
       if (response?.status == 1) {
         cacheSave(CacheManagerKey.CLASS_DATA, response?.data);

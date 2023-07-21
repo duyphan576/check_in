@@ -7,9 +7,8 @@ class ClassroomRepository {
 
   final ClassroomProvider classroomProvider;
 
-  Future<BaseResponse?> getClassroom(
-          ClassroomModel classroomModel, url, token) =>
-      classroomProvider.getClassroom(classroomModel, url, token);
-  Future<BaseResponse?> postGradeList(String classroomId, url, token) =>
-      classroomProvider.postGradeList(classroomId, url, token);
+  Future<BaseResponse?> classroom(ClassroomModel classroomModel, url, token) =>
+      classroomProvider.classroom(classroomModel, url, token);
+  Future<BaseResponse?> detail(String classroomId, url, token) =>
+      classroomProvider.detail(classroomId, url, token);
 }

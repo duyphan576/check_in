@@ -1,5 +1,8 @@
 import 'package:check_in/core/cache_manager.dart';
+import 'package:check_in/models/classroom/classroom.dart';
 import 'package:check_in/models/detail/detail.dart';
+import 'package:check_in/models/documents/documents.dart';
+import 'package:check_in/models/lecturer/lecturer.dart';
 import 'package:check_in/models/student/students.dart';
 import 'package:check_in/modules/detail/repository/detail_repository.dart';
 import 'package:check_in/services/authenticationService.dart';
@@ -11,6 +14,10 @@ class DetailController extends GetxController with CacheManager {
   var classData;
   RxBool isLoading = true.obs;
   Detail? detail;
+  String? grade;
+  Classroom? classroom;
+  List<Students>? studentsList;
+  List<Documents>? docList;
   DetailController({required this.detailRepository});
 
   @override
@@ -30,31 +37,9 @@ class DetailController extends GetxController with CacheManager {
 
   void printGradeDetails() {
     detail = Detail.fromJson(classData);
-    String? grade = detail?.grade;
-    int? classroomId = detail?.classroom.id;
-    String? lecturerCode = detail?.classroom.lecturer.code;
-    String? lecturerFullname = detail?.classroom.lecturer.fullname;
-    String? termName = detail?.classroom.term.termName;
-    int? termCredit = detail?.classroom.term.credit;
-    List<Students>? studentsList = detail?.studentList;
-
-    // Display the information
-    print("Grade: $grade");
-    print("Classroom ID: $classroomId");
-    print("Lecturer Code: $lecturerCode");
-    print("Lecturer Fullname: $lecturerFullname");
-    print("Term Name: $termName");
-    print("Term Credit: $termCredit");
-
-    // Display information about each student in the student list
-    for (Students student in studentsList!) {
-      print("\nStudent ID: ${student.id}");
-      print("Student Code: ${student.code}");
-      print("Student Fullname: ${student.fullname}");
-      print("Student Gender: ${student.gender}");
-      print("Student Birthdate: ${student.birthdate}");
-      print("Student Phone: ${student.phone}");
-      print("Student Email: ${student.email}");
-    }
+    grade = detail?.grade;
+    classroom = detail?.classroom;
+    studentsList = detail?.studentList;
+    docList = detail?.documentList;
   }
 }

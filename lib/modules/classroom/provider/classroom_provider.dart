@@ -8,7 +8,7 @@ class ClassroomProvider extends GetConnect {
 
   final HttpProvider http;
 
-  Future<BaseResponse?> getClassroom(
+  Future<BaseResponse?> classroom(
       ClassroomModel classroomModel, url, token) async {
     return await http.doGetWithToken(url, token).then((response) {
       return BaseResponse(
@@ -23,7 +23,7 @@ class ClassroomProvider extends GetConnect {
     });
   }
 
-  Future<BaseResponse?> postGradeList(String classroomId, url, token) async {
+  Future<BaseResponse?> detail(String classroomId, url, token) async {
     return await http.doPostWithToken(url, token, classroomId).then((response) {
       return BaseResponse(
           statusCode: response.statusCode,
