@@ -16,8 +16,8 @@ class DetailController extends GetxController with CacheManager {
   Detail? detail;
   String? grade;
   Classroom? classroom;
-  List<Students>? studentsList;
-  List<Documents>? docList;
+  final RxList<Students> studentsList = RxList<Students>();
+  final RxList<Documents> docList = RxList<Documents>();
   DetailController({required this.detailRepository});
 
   @override
@@ -39,7 +39,9 @@ class DetailController extends GetxController with CacheManager {
     detail = Detail.fromJson(classData);
     grade = detail?.grade;
     classroom = detail?.classroom;
-    studentsList = detail?.studentList;
-    docList = detail?.documentList;
+    List<Students>? studentData = detail?.studentList;
+    studentsList.assignAll(studentData!);
+    List<Documents>? docData = detail?.documentList;
+    docList.assignAll(docData!);
   }
 }
