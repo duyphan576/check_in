@@ -137,6 +137,12 @@ abstract class LoginString {
       "Scan your fingerprint or face to log in";
 }
 
+abstract class ChangePasswordString {
+  static const String HINT_OLDPASSWORD = "Old Password";
+  static const String HINT_NEWPASSWORD = "New Password";
+  static const String HINT_CONFIRMPASSWORD = "Confirm Password";
+}
+
 abstract class HomeString {
   static const String CHECK_IN = "Check In";
   static const String CLASSROOM = "Classroom";
