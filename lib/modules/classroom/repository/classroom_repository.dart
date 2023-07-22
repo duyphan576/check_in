@@ -9,6 +9,6 @@ class ClassroomRepository {
 
   Future<BaseResponse?> classroom(ClassroomModel classroomModel, url, token) =>
       classroomProvider.classroom(classroomModel, url, token);
-  Future<BaseResponse?> detail(String classroomId, url, token) =>
+  Future<BaseResponse?> detail(Map<String, dynamic> classroomId, url, token) =>
       classroomProvider.detail(classroomId, url, token);
 }

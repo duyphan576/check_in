@@ -59,7 +59,9 @@ class ClassroomController extends GetxController with CacheManager {
 
   getClassInfo(String classroomId) async {
     final response = await classroomRepository.detail(
-      classroomId,
+      {
+        "classroomId": classroomId,
+      },
       UrlProvider.HANDLES_DETAIL,
       cacheGet(CacheManagerKey.TOKEN),
     );
