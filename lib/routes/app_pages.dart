@@ -14,6 +14,8 @@ import 'package:check_in/modules/splash/bindings/splash_binding.dart';
 import 'package:check_in/modules/splash/views/splash_view.dart';
 import 'package:get/get.dart';
 
+import '../modules/changePassword/bindings/change_password_binding.dart';
+import '../modules/changePassword/view/change_password_view.dart';
 import '../modules/grade/bindings/grade_binding.dart';
 import '../modules/grade/views/grade_view.dart';
 
@@ -62,6 +64,11 @@ class AppPages {
       name: _Paths.GRADE,
       page: () => GradeView(),
       binding: GradeBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHANGE_PASSWORD,
+      page: () => ChangePasswordView(),
+      binding: ChangePasswordBinding(),
     ),
   ];
 }

@@ -7,7 +7,4 @@ class ProfileRepository {
   ProfileRepository({required this.profileProvider});
 
   final ProfileProvider profileProvider;
-
-  Future<BaseResponse?> changePassord(ProfileModel profileModel, url, token) =>
-      profileProvider.changePassord(profileModel, url, token);
 }
