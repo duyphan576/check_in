@@ -65,6 +65,9 @@ class ProfileController extends GetxController with CacheManager {
         isLoading.value = false;
 
         if (response?.status == 1) {
+          userData = cacheGet(CacheManagerKey.CUSTOMER_INFO);
+          userData["password"] = newPassword;
+          cacheSave(CacheManagerKey.CUSTOMER_INFO, userData);
           Alert.showSuccess(
               title: "Change password",
               buttonText: CommonString.CANCEL,
