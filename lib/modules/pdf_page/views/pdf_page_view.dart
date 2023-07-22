@@ -35,58 +35,60 @@ class PdfPageView extends GetView<PdfPageController> {
                       ),
                     ),
                   ),
-                  child: Scaffold(
-                    backgroundColor: Colors.transparent,
-                    appBar: AppBar(
+                  child: SafeArea(
+                    child: Scaffold(
                       backgroundColor: Colors.transparent,
-                      elevation: 0,
-                      iconTheme: IconThemeData(
-                        color: AppColors.lightBlack,
-                      ),
-                      actions: <Widget>[
-                        IconButton(
-                          icon: const Icon(Icons.navigate_before),
-                          onPressed: () {
-                            controller.pdfController.previousPage(
-                              curve: Curves.ease,
-                              duration: const Duration(milliseconds: 100),
-                            );
-                          },
+                      appBar: AppBar(
+                        backgroundColor: Colors.transparent,
+                        elevation: 0,
+                        iconTheme: IconThemeData(
+                          color: AppColors.lightBlack,
                         ),
-                        PdfPageNumber(
-                          controller: controller.pdfController,
-                          builder: (_, loadingState, page, pagesCount) =>
-                              Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              '$page/${pagesCount ?? 0}',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: AppColors.lightBlack,
+                        actions: <Widget>[
+                          IconButton(
+                            icon: const Icon(Icons.navigate_before),
+                            onPressed: () {
+                              controller.pdfController.previousPage(
+                                curve: Curves.ease,
+                                duration: const Duration(milliseconds: 100),
+                              );
+                            },
+                          ),
+                          PdfPageNumber(
+                            controller: controller.pdfController,
+                            builder: (_, loadingState, page, pagesCount) =>
+                                Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                '$page/${pagesCount ?? 0}',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: AppColors.lightBlack,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.navigate_next),
-                          onPressed: () {
-                            controller.pdfController.nextPage(
-                              curve: Curves.ease,
-                              duration: const Duration(milliseconds: 100),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    body: PdfView(
-                      builders: PdfViewBuilders<DefaultBuilderOptions>(
-                        options: const DefaultBuilderOptions(),
-                        documentLoaderBuilder: (_) =>
-                            const Center(child: CircularProgressIndicator()),
-                        pageLoaderBuilder: (_) =>
-                            const Center(child: CircularProgressIndicator()),
+                          IconButton(
+                            icon: const Icon(Icons.navigate_next),
+                            onPressed: () {
+                              controller.pdfController.nextPage(
+                                curve: Curves.ease,
+                                duration: const Duration(milliseconds: 100),
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                      controller: controller.pdfController,
+                      body: PdfView(
+                        builders: PdfViewBuilders<DefaultBuilderOptions>(
+                          options: const DefaultBuilderOptions(),
+                          documentLoaderBuilder: (_) =>
+                              const Center(child: CircularProgressIndicator()),
+                          pageLoaderBuilder: (_) =>
+                              const Center(child: CircularProgressIndicator()),
+                        ),
+                        controller: controller.pdfController,
+                      ),
                     ),
                   ),
                 ),

@@ -23,7 +23,6 @@ class PdfPageController extends GetxController with CacheManager {
 
   initData() async {
     url = await storage.read("url");
-    print(url);
     if (url != null) {
       isLoading.value = false;
       pdfController = PdfController(
@@ -33,6 +32,13 @@ class PdfPageController extends GetxController with CacheManager {
           ),
         ),
       );
+      pdfController.printInfo();
     }
+  }
+
+  @override
+  void dispose() {
+    pdfController.dispose();
+    super.dispose();
   }
 }
