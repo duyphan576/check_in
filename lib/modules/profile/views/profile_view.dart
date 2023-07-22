@@ -162,7 +162,7 @@ class ProfileView extends GetView<ProfileController> {
                       onPressed: () {
                         showDialog(
                           context: context,
-                          builder: (context) => onChangePassword(),
+                          builder: (context) => OnChangePassword(),
                         );
                       },
                       child: Text("Change Password"),
@@ -175,8 +175,8 @@ class ProfileView extends GetView<ProfileController> {
   }
 }
 
-class onChangePassword extends GetView<ProfileController> {
-  const onChangePassword({
+class OnChangePassword extends GetView<ProfileController> {
+  const OnChangePassword({
     super.key,
   });
 

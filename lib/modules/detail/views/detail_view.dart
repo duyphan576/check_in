@@ -166,17 +166,20 @@ class DetailView extends GetView<DetailController> {
                                                       ),
                                                       trailing: IconButton(
                                                         onPressed: () {
-                                                          controller
-                                                              .DownloadDocument(
-                                                                  docs.url
-                                                                      .toString()
-                                                                      .trim(),
-                                                                  docs.fileName
-                                                                      .toString()
-                                                                      .trim());
+                                                          // controller
+                                                          //     .downloadDocument(
+                                                          //         docs.url
+                                                          //             .toString()
+                                                          //             .trim(),
+                                                          //         docs.fileName
+                                                          //             .toString()
+                                                          //             .trim());
+                                                          controller.viewPdf(
+                                                            docs.url.toString(),
+                                                          );
                                                         },
                                                         icon: Icon(
-                                                          Icons.download,
+                                                          Icons.remove_red_eye,
                                                         ),
                                                       ));
                                                 },

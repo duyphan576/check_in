@@ -8,6 +8,8 @@ import 'package:check_in/modules/home/bindings/home_binding.dart';
 import 'package:check_in/modules/home/views/home_view.dart';
 import 'package:check_in/modules/login/bindings/login_binding.dart';
 import 'package:check_in/modules/login/views/login_view.dart';
+import 'package:check_in/modules/pdf_page/bindings/pdf_page_binding.dart';
+import 'package:check_in/modules/pdf_page/views/pdf_page_view.dart';
 import 'package:check_in/modules/profile/bindings/profile_binding.dart';
 import 'package:check_in/modules/profile/views/profile_view.dart';
 import 'package:check_in/modules/splash/bindings/splash_binding.dart';
@@ -62,6 +64,11 @@ class AppPages {
       name: _Paths.GRADE,
       page: () => GradeView(),
       binding: GradeBinding(),
+    ),
+    GetPage(
+      name: _Paths.PDF,
+      page: () => PdfPageView(),
+      binding: PdfPageBinding(),
     ),
   ];
 }
