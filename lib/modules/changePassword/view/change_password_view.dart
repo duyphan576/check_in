@@ -1,5 +1,4 @@
 import 'package:check_in/constants/index.dart';
-import 'package:check_in/core/cache_manager.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/global_widgets/index.dart';
 import 'package:check_in/modules/changePassword/controllers/change_password_controller.dart';
@@ -39,7 +38,6 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                         children: [
                           GlobalStyles.sizedBoxHeight_125,
                           Container(
-                            // padding: GlobalStyles.paddingAll,
                             decoration: BoxDecoration(
                               color: AppColors.lightWhite.withOpacity(0.9),
                               borderRadius: BorderRadius.circular(8),
