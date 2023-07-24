@@ -9,6 +9,7 @@ import '../constants/index.dart';
 
 class Alert {
   static Duration duration = const Duration(seconds: 2);
+  static bool isConfirm = false;
 
   static void showLoadingIndicator({required String message}) {
     Get.dialog(
@@ -18,7 +19,7 @@ class Alert {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CircularProgressIndicator(
-              color: AppColors.main,
+              color: AppColors.white,
             ),
             SizedBox(
               height: 10,
@@ -27,7 +28,7 @@ class Alert {
               message,
               style: TextStyle(
                   fontSize: 14,
-                  color: AppColors.main,
+                  color: AppColors.white,
                   decoration: TextDecoration.none),
             )
           ],
@@ -41,8 +42,20 @@ class Alert {
     Get.back();
   }
 
-  static Future<dynamic> showSuccess(
-      {required String title, String? message, required String buttonText}) {
+  static bool getIsConfirm() {
+    return isConfirm;
+  }
+
+  static void setIsConfirm() {
+    isConfirm = !isConfirm;
+  }
+
+  static Future<dynamic> showSuccess({
+    required String title,
+    String? message,
+    required String buttonText,
+  }) {
+    setIsConfirm();
     return showDialog(
       context: Get.context!,
       builder: (BuildContext context) => CupertinoAlertDialog(
@@ -51,7 +64,10 @@ class Alert {
         actions: <Widget>[
           CupertinoDialogAction(
             child: Text(buttonText),
-            onPressed: () => Get.back(),
+            onPressed: () => {
+              setIsConfirm(),
+              Get.back(),
+            },
           )
         ],
       ),

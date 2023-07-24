@@ -1,3 +1,5 @@
+import 'package:check_in/constants/index.dart';
+import 'package:check_in/core/alert.dart';
 import 'package:check_in/core/cache_manager.dart';
 import 'package:check_in/modules/home/models/home_model.dart';
 import 'package:check_in/modules/home/repository/home_repository.dart';
@@ -36,12 +38,17 @@ class HomeController extends GetxController with CacheManager {
       cacheGet(CacheManagerKey.TOKEN),
     );
     if (response?.status == 1) {
-      authenticationService.clearStorage();
-      cacheRemove(CacheManagerKey.CUSTOMER_INFO);
-      Get.offAndToNamed(Routes.LOGIN);
-      print("logout");
-    } else {
-      print(response?.message);
+      Alert.showSuccess(
+        title: CommonString.SUCCESS,
+        buttonText: CommonString.OK,
+        message: response?.message,
+      );
+      Future.delayed(Duration(seconds: 2), () {
+        authenticationService.clearStorage();
+        cacheRemove(CacheManagerKey.CUSTOMER_INFO);
+        cacheRemove(CacheManagerKey.TOKEN);
+        Get.offAllNamed(Routes.LOGIN);
+      });
     }
   }
 }

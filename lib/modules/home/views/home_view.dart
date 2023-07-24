@@ -80,7 +80,9 @@ class HomeView extends GetView<HomeController> {
                                   ),
                                   GlobalStyles.sizedBoxHeight,
                                   InkWellCustom(
-                                    function: () {},
+                                    function: () {
+                                      Get.toNamed(Routes.GRADE);
+                                    },
                                     text: HomeString.GRADE,
                                     icon: Icons.grade,
                                     height: height,

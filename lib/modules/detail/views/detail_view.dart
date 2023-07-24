@@ -49,7 +49,7 @@ class DetailView extends GetView<DetailController> {
                       body: SingleChildScrollView(
                         child: Container(
                           child: Padding(
-                            padding: GlobalStyles.paddingAll18,
+                            padding: GlobalStyles.paddingPageLeftRight_25,
                             child: Column(
                               children: [
                                 DetailCustom(
@@ -165,16 +165,28 @@ class DetailView extends GetView<DetailController> {
                                                             .toString(),
                                                       ),
                                                       trailing: IconButton(
-                                                        onPressed: () {},
+                                                        onPressed: () {
+                                                          // controller
+                                                          //     .downloadDocument(
+                                                          //         docs.url
+                                                          //             .toString()
+                                                          //             .trim(),
+                                                          //         docs.fileName
+                                                          //             .toString()
+                                                          //             .trim());
+                                                          controller.viewPdf(
+                                                            docs.url.toString(),
+                                                          );
+                                                        },
                                                         icon: Icon(
-                                                          Icons.download,
+                                                          Icons.remove_red_eye,
                                                         ),
                                                       ));
                                                 },
                                               ),
                                       )
                                     : SizedBox(),
-                                GlobalStyles.sizedBoxHeight,
+                                GlobalStyles.sizedBoxHeight_10,
                                 Container(
                                   decoration: BoxDecoration(
                                     color:
