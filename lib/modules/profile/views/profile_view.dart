@@ -4,6 +4,7 @@ import 'package:check_in/global_widgets/profile_detail_column.dart';
 import 'package:check_in/global_widgets/profile_detail_row.dart';
 import 'package:check_in/global_widgets/student_data.dart';
 import 'package:check_in/modules/profile/controllers/profile_controller.dart';
+import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -159,90 +160,13 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                     floatingActionButton: OutlinedButton(
                       style: ButtonStyle(),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => OnChangePassword(),
-                        );
-                      },
+                      onPressed: () => Get.toNamed(Routes.CHANGE_PASSWORD),
                       child: Text("Change Password"),
                     ),
                   )),
                 ),
         );
       },
-    );
-  }
-}
-
-class OnChangePassword extends GetView<ProfileController> {
-  const OnChangePassword({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text('Change Password'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _PasswordEditText(
-              hintText: ChangePasswordString.HINT_OLDPASSWORD,
-              passwordController: controller.oldPasswordController),
-          _PasswordEditText(
-              hintText: ChangePasswordString.HINT_NEWPASSWORD,
-              passwordController: controller.newPasswordController),
-          _PasswordEditText(
-              hintText: ChangePasswordString.HINT_CONFIRMPASSWORD,
-              passwordController: controller.confirmPasswordController),
-        ],
-      ),
-      actions: [
-        TextButton(
-          onPressed: () {
-            // Xử lý khi nhấn nút Hủy
-            Get.back();
-          },
-          child: Text('Hủy'),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            controller.onChangePassword();
-          },
-          child: Text('Xác nhận'),
-        ),
-      ],
-    );
-  }
-}
-
-class _PasswordEditText extends GetView<ProfileController> {
-  const _PasswordEditText({
-    Key? key,
-    required this.hintText,
-    required this.passwordController,
-  }) : super(key: key);
-  final hintText;
-  final passwordController;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: PasswordCustom(
-            hintText: hintText,
-            controller: passwordController,
-            inputType: TextInputType.visiblePassword,
-            inputAction: TextInputAction.done,
-            onChangeFunction: (val) {
-              controller.resetError();
-            },
-            prefixIcon: Icon(Icons.password),
-          ),
-        ),
-      ],
     );
   }
 }
