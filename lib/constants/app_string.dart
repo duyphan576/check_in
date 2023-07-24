@@ -2,6 +2,8 @@ abstract class CommonString {
   static const String ERROR = "Error!";
   static const String ERROR_MESSAGE = "Error! Please try again later";
   static const String CANCEL = "Cancel";
+  static const String SUCCESS = "Success";
+  static const String OK = "Ok";
 }
 
 abstract class Init {
@@ -141,6 +143,7 @@ abstract class ChangePasswordString {
   static const String HINT_OLDPASSWORD = "Old Password";
   static const String HINT_NEWPASSWORD = "New Password";
   static const String HINT_CONFIRMPASSWORD = "Confirm Password";
+  static const String HINT_CHANGEPASSWORD = "Change Password";
 }
 
 abstract class HomeString {

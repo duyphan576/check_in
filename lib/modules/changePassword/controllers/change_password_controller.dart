@@ -1,6 +1,8 @@
 import 'package:check_in/core/index.dart';
 import 'package:check_in/modules/changePassword/models/change_password_model.dart';
 import 'package:check_in/modules/changePassword/repository/change_password_repository.dart';
+import 'package:check_in/routes/app_pages.dart';
+import 'package:check_in/services/authenticationService.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:check_in/utils/validator.dart';
@@ -17,8 +19,13 @@ class ChangePasswordController extends GetxController with CacheManager {
       TextEditingController();
   var userData;
   RxBool isLoading = true.obs;
+  RxBool isOk = false.obs;
+
   RxString errorMessage = "".obs;
   List<String?> validateGroup = [];
+
+  final AuthenticationService authenticationService = AuthenticationService();
+
   ChangePasswordController({required this.changePasswordRepository});
 
   @override
@@ -44,38 +51,31 @@ class ChangePasswordController extends GetxController with CacheManager {
       String oldPassword = oldPasswordController.text;
       String newPassword = newPasswordController.text;
       String confirmPassword = confirmPasswordController.text;
-      final response = await changePasswordRepository.changePassord(
+      final response = await changePasswordRepository.changePassword(
           ChangePasswordModel(
               oldPassword: oldPassword,
               newPassword: newPassword,
               confirmPassword: confirmPassword),
           UrlProvider.HANDLES_PASSWORD,
           cacheGet(CacheManagerKey.TOKEN));
-      print(response?.message);
       if (response?.statusCode == HttpStatus.ok) {
         Alert.closeLoadingIndicator();
         isLoading.value = false;
 
         if (response?.status == 1) {
-          userData = cacheGet(CacheManagerKey.CUSTOMER_INFO);
-          userData["password"] = newPassword;
-          cacheSave(CacheManagerKey.CUSTOMER_INFO, userData);
           Alert.showSuccess(
-              title: "Change password",
-              buttonText: CommonString.CANCEL,
-              message: "Đổi mật khẩu thành công");
+            title: ChangePasswordString.HINT_CHANGEPASSWORD,
+            buttonText: CommonString.OK,
+            message: response?.message,
+          );
+          logout();
         } else {
-          isLoading.value = false;
-          final snackBar = GetSnackBar(message: response?.message.toString());
-          Get.showSnackbar(snackBar);
-        }
-      } else {
-        Alert.closeLoadingIndicator();
-        isLoading.value = false;
-        Alert.showSuccess(
+          Alert.showSuccess(
             title: CommonString.ERROR,
-            message: response?.message.toString(),
-            buttonText: CommonString.CANCEL);
+            message: response?.message,
+            buttonText: CommonString.CANCEL,
+          );
+        }
       }
     }
   }
@@ -83,6 +83,22 @@ class ChangePasswordController extends GetxController with CacheManager {
   resetError() {
     if (errorMessage.isNotEmpty) {
       errorMessage.value = "";
+    }
+  }
+
+  logout() async {
+    final response = await changePasswordRepository.logout(
+      ChangePasswordModel(),
+      UrlProvider.HANDLES_LOGOUT,
+      cacheGet(CacheManagerKey.TOKEN),
+    );
+    if (response?.status == 1) {
+      Future.delayed(Duration(seconds: 2), () {
+        authenticationService.clearStorage();
+        cacheRemove(CacheManagerKey.CUSTOMER_INFO);
+        cacheRemove(CacheManagerKey.TOKEN);
+        Get.offAllNamed(Routes.LOGIN);
+      });
     }
   }
 }

@@ -9,7 +9,7 @@ import '../constants/index.dart';
 
 class Alert {
   static Duration duration = const Duration(seconds: 2);
-  static RxBool isConfirm = false.obs;
+  static bool isConfirm = false;
 
   static void showLoadingIndicator({required String message}) {
     Get.dialog(
@@ -43,15 +43,19 @@ class Alert {
   }
 
   static bool getIsConfirm() {
-    return isConfirm.value;
+    return isConfirm;
   }
 
   static void setIsConfirm() {
-    isConfirm.value = !isConfirm.value;
+    isConfirm = !isConfirm;
   }
 
-  static Future<dynamic> showSuccess(
-      {required String title, String? message, required String buttonText}) {
+  static Future<dynamic> showSuccess({
+    required String title,
+    String? message,
+    required String buttonText,
+  }) {
+    setIsConfirm();
     return showDialog(
       context: Get.context!,
       builder: (BuildContext context) => CupertinoAlertDialog(
@@ -61,7 +65,7 @@ class Alert {
           CupertinoDialogAction(
             child: Text(buttonText),
             onPressed: () => {
-              isConfirm.value = true,
+              setIsConfirm(),
               Get.back(),
             },
           )

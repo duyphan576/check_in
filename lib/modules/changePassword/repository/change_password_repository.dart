@@ -8,7 +8,10 @@ class ChangePasswordRepository {
 
   final ChangePasswordProvider changePasswordProvider;
 
-  Future<BaseResponse?> changePassord(
+  Future<BaseResponse?> changePassword(
           ChangePasswordModel changePasswordModel, url, token) =>
-      changePasswordProvider.changePassord(changePasswordModel, url, token);
+      changePasswordProvider.changePassword(changePasswordModel, url, token);
+  Future<BaseResponse?> logout(
+          ChangePasswordModel changePasswordModel, url, token) =>
+      changePasswordProvider.logout(changePasswordModel, url, token);
 }
