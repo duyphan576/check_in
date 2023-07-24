@@ -25,9 +25,6 @@ class GradeController extends GetxController with CacheManager {
 
   initData() async {
     userData = await cacheGet(CacheManagerKey.CUSTOMER_INFO);
-    if (userData != null) {
-      isLoading.value = false;
-    }
   }
 
   getAvgGrade() async {
@@ -50,5 +47,6 @@ class GradeController extends GetxController with CacheManager {
     // Sử dụng assignAll() hoặc addAll() để cập nhật RxList mà không thay đổi kiểu dữ liệu
     grades.assignAll(gradesData);
     update();
+    isLoading.value = false;
   }
 }
