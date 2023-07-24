@@ -1,22 +1,24 @@
+// ignore_for_file: unused_field
+
 import 'package:check_in/core/alert.dart';
 import 'package:check_in/core/cache_manager.dart';
 import 'package:check_in/models/classroom/classroom.dart';
 import 'package:check_in/models/detail/detail.dart';
 import 'package:check_in/models/documents/documents.dart';
-import 'package:check_in/models/lecturer/lecturer.dart';
 import 'package:check_in/models/student/students.dart';
 import 'package:check_in/modules/detail/repository/detail_repository.dart';
+import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/authenticationService.dart';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:open_file/open_file.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class DetailController extends GetxController with CacheManager {
   final DetailRepository detailRepository;
   final AuthenticationService authenticationService = AuthenticationService();
+  GetStorage storage = GetStorage();
   var classData;
   double? _progress;
   String _status = '';
@@ -54,7 +56,7 @@ class DetailController extends GetxController with CacheManager {
     docList.assignAll(docData);
   }
 
-  Future<void> DownloadDocument(String url, String fileName) async {
+  Future<void> downloadDocument(String url, String fileName) async {
     var status = await Permission.storage.request();
     if (status.isGranted) {
       FileDownloader.downloadFile(
@@ -82,5 +84,10 @@ class DetailController extends GetxController with CacheManager {
           message: "Chưa cấp quyền cho ứng dụng",
           buttonText: "Xác nhận");
     }
+  }
+
+  void viewPdf(String url) {
+    storage.write("url", url);
+    Get.toNamed(Routes.PDF);
   }
 }
