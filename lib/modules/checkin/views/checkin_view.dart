@@ -53,20 +53,18 @@ class CheckinView extends GetView<CheckinController> {
                             child: Container(
                               height: MediaQuery.of(context).size.width,
                               width: MediaQuery.of(context).size.width,
-                              child: Stack(
-                                alignment: Alignment.center,
+                              alignment: Alignment.center,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Expanded(
                                     flex: 4,
                                     child: Container(
-                                      child: Text("ádsadasd"),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 4,
-                                    child: MobileScanner(
-                                      controller: controller.cameraController,
-                                      onDetect: (barcode) => {},
+                                      child: MobileScanner(
+                                        controller: controller.cameraController,
+                                        onDetect: (barcode) => {},
+                                      ),
                                     ),
                                   ),
                                 ],
