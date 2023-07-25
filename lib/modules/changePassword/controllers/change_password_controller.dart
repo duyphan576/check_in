@@ -95,7 +95,6 @@ class ChangePasswordController extends GetxController with CacheManager {
     if (response?.status == 1) {
       Future.delayed(Duration(seconds: 2), () {
         authenticationService.clearStorage();
-        cacheRemove(CacheManagerKey.CUSTOMER_INFO);
         cacheRemove(CacheManagerKey.TOKEN);
         Get.offAllNamed(Routes.LOGIN);
       });
