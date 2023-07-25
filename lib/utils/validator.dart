@@ -63,7 +63,7 @@ class Validator {
     if (!regex.hasMatch(value))
       return message;
     else
-      return null;
+      return "";
   }
 
   String? cPassword(

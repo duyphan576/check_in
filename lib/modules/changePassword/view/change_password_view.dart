@@ -99,7 +99,8 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                         fixedSize: MaterialStateProperty.all(
                                             Size(100, 50)),
                                         side: MaterialStateProperty.all(
-                                            BorderSide(color: Colors.red)),
+                                            BorderSide(
+                                                color: Colors.grey.shade300)),
                                       ),
                                     ),
                                     SizedBox(
@@ -116,7 +117,8 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                         fixedSize: MaterialStateProperty.all(
                                             Size(100, 50)),
                                         side: MaterialStateProperty.all(
-                                            BorderSide(color: Colors.green)),
+                                            BorderSide(
+                                                color: Colors.grey.shade300)),
                                       ),
                                     ),
                                   ],

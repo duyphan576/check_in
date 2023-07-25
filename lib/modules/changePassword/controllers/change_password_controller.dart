@@ -18,6 +18,7 @@ class ChangePasswordController extends GetxController with CacheManager {
   final TextEditingController confirmPasswordController =
       TextEditingController();
   var userData;
+  var messeage = Message;
   RxBool isLoading = true.obs;
   RxBool isOk = false.obs;
 
@@ -38,14 +39,23 @@ class ChangePasswordController extends GetxController with CacheManager {
     validateGroup = [
       Validator().validateRequireAllField(
         {
-          'oldPassword': oldPasswordController.text,
-          'newPassword': newPasswordController.text,
-          'conirmPassword': confirmPasswordController.text
+          'password': oldPasswordController.text,
+          'password': newPasswordController.text,
+          'password': confirmPasswordController.text
         },
         AppString.EMPTY,
       ),
     ];
     this.errorMessage.value = Validator().validateForm(validateGroup)!;
+    if (this.errorMessage.value == "") {
+      this.errorMessage.value = Validator()
+          .validPassword(newPasswordController.text, Message.VALID_PASSWORD)!;
+    }
+    if (this.errorMessage.value == "") {
+      this.errorMessage.value = Validator().validPassword(
+          confirmPasswordController.text, Message.VALID_PASSWORD)!;
+    }
+
     if (this.errorMessage.value == "") {
       isLoading.value = true;
       String oldPassword = oldPasswordController.text;
@@ -77,6 +87,12 @@ class ChangePasswordController extends GetxController with CacheManager {
           );
         }
       }
+    } else {
+      Alert.showSuccess(
+        title: CommonString.ERROR,
+        message: this.errorMessage.value,
+        buttonText: CommonString.CANCEL,
+      );
     }
   }
 
