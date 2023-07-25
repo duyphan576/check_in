@@ -47,28 +47,17 @@ class CheckinView extends GetView<CheckinController> {
                         ),
                       ),
                       body: SingleChildScrollView(
-                        child: Padding(
-                          padding: GlobalStyles.paddingPageLeftRight_25,
-                          child: Center(
-                            child: Container(
-                              height: MediaQuery.of(context).size.width,
-                              width: MediaQuery.of(context).size.width,
-                              alignment: Alignment.center,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    flex: 4,
-                                    child: Container(
-                                      child: MobileScanner(
-                                        controller: controller.cameraController,
-                                        onDetect: (barcode) => {},
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                        child: Center(
+                          child: Container(
+                            height: MediaQuery.of(context).size.width,
+                            width: MediaQuery.of(context).size.width,
+                            child: Stack(
+                              children: [
+                                MobileScanner(
+                                  controller: controller.cameraController,
+                                  onDetect: (barcode) => {},
+                                ),
+                              ],
                             ),
                           ),
                         ),
