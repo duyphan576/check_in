@@ -69,7 +69,17 @@ class GradeView extends GetView<GradeController> {
                                     width: MediaQuery.of(context).size.width,
                                     child: controller.grades.isEmpty
                                         ? Center(
-                                            child: CircularProgressIndicator(),
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                "You don't have any grade.",
+                                                style: TextStyle(
+                                                  color: AppColors.lightBlack,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
                                           )
                                         : ListView.builder(
                                             itemCount: controller.grades.length,
