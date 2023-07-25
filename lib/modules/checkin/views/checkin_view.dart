@@ -46,12 +46,15 @@ class CheckinView extends GetView<CheckinController> {
                           color: AppColors.main,
                         ),
                       ),
-                      body: Stack(
-                        children: [
-                          SingleChildScrollView(
-                            child: Padding(
-                              padding: GlobalStyles.paddingPageLeftRight_25,
-                              child: Column(
+                      body: SingleChildScrollView(
+                        child: Padding(
+                          padding: GlobalStyles.paddingPageLeftRight_25,
+                          child: Center(
+                            child: Container(
+                              height: MediaQuery.of(context).size.width,
+                              width: MediaQuery.of(context).size.width,
+                              child: Stack(
+                                alignment: Alignment.center,
                                 children: [
                                   Expanded(
                                     flex: 4,
@@ -70,7 +73,7 @@ class CheckinView extends GetView<CheckinController> {
                               ),
                             ),
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
