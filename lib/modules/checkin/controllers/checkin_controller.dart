@@ -1,15 +1,22 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:check_in/core/cache_manager.dart';
 import 'package:check_in/modules/checkin/repository/checkin_repository.dart';
 import 'package:check_in/services/authenticationService.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class CheckinController extends GetxController with CacheManager {
   final CheckinRepository checkinRepository;
   final AuthenticationService authenticationService = AuthenticationService();
   var userData;
   RxBool isLoading = true.obs;
+  MobileScannerController cameraController = MobileScannerController();
 
   CheckinController({required this.checkinRepository});
 
@@ -31,6 +38,8 @@ class CheckinController extends GetxController with CacheManager {
       print(wifiName);
       print(wifiBSSID);
       print(wifiIP);
+      isLoading.value = false;
+      print(isLoading.value);
     }
   }
 

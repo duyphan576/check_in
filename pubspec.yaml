@@ -62,6 +62,7 @@ dependencies:
   url_launcher: ^6.1.12
   pdfx: ^2.4.0
   internet_file: ^1.2.0
+  mobile_scanner: ^2.1.0
 
 flutter_icons:
   android: "icon_notification"
