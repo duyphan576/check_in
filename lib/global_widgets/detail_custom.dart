@@ -77,7 +77,7 @@ class DetailCustom extends StatelessWidget {
                     ),
                     GlobalStyles.sizedBoxHeight,
                     Text(
-                      "Lecturer Id:$lecturerCode",
+                      "Lecturer Id: $lecturerCode",
                       style: TextStyle(
                         color: AppColors.lightWhite,
                         fontSize: 14,

@@ -37,6 +37,9 @@ class GlobalStyles {
   static final SizedBox sizedBoxWidth_30 = SizedBox(
     width: 30,
   );
+  static final SizedBox sizedBoxWidth_35 = SizedBox(
+    width: 35,
+  );
   static final SizedBox sizedBoxHeight_25 = SizedBox(
     height: 25,
   );

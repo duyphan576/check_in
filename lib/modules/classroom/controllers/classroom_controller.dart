@@ -14,6 +14,7 @@ class ClassroomController extends GetxController with CacheManager {
   var userData;
   final RxList<Classroom> classrooms = RxList<Classroom>();
   RxBool isLoading = true.obs;
+  RxBool isHasData = true.obs;
 
   ClassroomController({required this.classroomRepository});
 
@@ -29,6 +30,9 @@ class ClassroomController extends GetxController with CacheManager {
     userData = await cacheGet(CacheManagerKey.CUSTOMER_INFO);
     if (userData != null) {
       isLoading.value = false;
+    } else {
+      isLoading.value = false;
+      isHasData.value = false;
     }
   }
 
