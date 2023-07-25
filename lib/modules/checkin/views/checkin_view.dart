@@ -79,7 +79,6 @@ class CheckinView extends GetView<CheckinController> {
                                             const Duration(seconds: 5), () {
                                           Navigator.pop(context);
                                         });
-                                        print("success");
                                       }
                                     },
                                   ),
