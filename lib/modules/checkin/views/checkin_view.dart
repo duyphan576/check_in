@@ -46,27 +46,31 @@ class CheckinView extends GetView<CheckinController> {
                           color: AppColors.main,
                         ),
                       ),
-                      body: SingleChildScrollView(
-                        child: Padding(
-                          padding: GlobalStyles.paddingPageLeftRight_25,
-                          child: Column(
-                            children: [
-                              Expanded(
-                                flex: 4,
-                                child: Container(
-                                  child: Text("ádsadasd"),
-                                ),
+                      body: Stack(
+                        children: [
+                          SingleChildScrollView(
+                            child: Padding(
+                              padding: GlobalStyles.paddingPageLeftRight_25,
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    flex: 4,
+                                    child: Container(
+                                      child: Text("ádsadasd"),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 4,
+                                    child: MobileScanner(
+                                      controller: controller.cameraController,
+                                      onDetect: (barcode) => {},
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Expanded(
-                                flex: 4,
-                                child: MobileScanner(
-                                  controller: controller.cameraController,
-                                  onDetect: (barcode) => {},
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
                   ),
