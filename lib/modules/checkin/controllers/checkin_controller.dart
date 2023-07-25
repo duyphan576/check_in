@@ -1,6 +1,7 @@
 import 'package:check_in/core/cache_manager.dart';
 import 'package:check_in/modules/checkin/repository/checkin_repository.dart';
 import 'package:check_in/services/authenticationService.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:network_info_plus/network_info_plus.dart';
@@ -11,7 +12,16 @@ class CheckinController extends GetxController with CacheManager {
   final AuthenticationService authenticationService = AuthenticationService();
   var userData;
   RxBool isLoading = true.obs;
-  MobileScannerController cameraController = MobileScannerController();
+  MobileScannerController cameraController = MobileScannerController(
+    formats: [BarcodeFormat.qrCode],
+    // facing: CameraFacing.front,
+    detectionSpeed: DetectionSpeed.normal,
+    detectionTimeoutMs: 1000,
+    returnImage: false,
+    torchEnabled: true,
+  );
+  BarcodeCapture? barcode;
+  RxBool isStarted = true.obs;
 
   CheckinController({required this.checkinRepository});
 
@@ -20,6 +30,17 @@ class CheckinController extends GetxController with CacheManager {
     // TODO: implement onInit
     super.onInit();
     initData();
+  }
+
+  void startOrStop() {
+    try {
+      if (isStarted.value) {
+        cameraController.stop();
+      } else {
+        cameraController.start();
+      }
+      isStarted.value = !isStarted.value;
+    } on Exception catch (e) {}
   }
 
   initData() async {
