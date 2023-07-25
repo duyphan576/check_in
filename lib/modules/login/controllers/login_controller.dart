@@ -109,7 +109,6 @@ class LoginController extends GetxController with CacheManager {
             password: password,
           ),
           UrlProvider.HANDLES_LOGIN);
-      print(response);
       if (response?.statusCode == HttpStatus.ok) {
         Alert.closeLoadingIndicator();
         isLoading.value = false;

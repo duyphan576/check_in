@@ -1,7 +1,12 @@
 import 'package:check_in/core/cache_manager.dart';
+import 'package:check_in/modules/checkin/models/checkin_model.dart';
 import 'package:check_in/modules/checkin/repository/checkin_repository.dart';
+import 'package:check_in/modules/classroom/models/classroom_model.dart';
 import 'package:check_in/services/authenticationService.dart';
+import 'package:check_in/services/domain_service.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -10,6 +15,19 @@ class CheckinController extends GetxController with CacheManager {
   final AuthenticationService authenticationService = AuthenticationService();
   var userData;
   RxBool isLoading = true.obs;
+  MobileScannerController cameraController = MobileScannerController(
+    formats: [BarcodeFormat.qrCode],
+    // facing: CameraFacing.front,
+    detectionSpeed: DetectionSpeed.normal,
+    detectionTimeoutMs: 1000,
+    returnImage: false,
+    torchEnabled: false,
+  );
+  RxList<Barcode> barcode = RxList<Barcode>();
+  RxBool isStarted = true.obs;
+  RxString wifiName = "".obs;
+  RxString wifiBSSID = "".obs;
+  RxString wifiIP = "".obs;
 
   CheckinController({required this.checkinRepository});
 
@@ -20,18 +38,54 @@ class CheckinController extends GetxController with CacheManager {
     initData();
   }
 
+  void startOrStop() {
+    if (isStarted.value) {
+      cameraController.stop();
+    } else {
+      cameraController.start();
+    }
+    isStarted.value = !isStarted.value;
+  }
+
   initData() async {
     final info = NetworkInfo();
 
     bool isGranted = await requestWifiInfoPermisson();
     if (isGranted) {
-      String? wifiName = await info.getWifiName(); // FooNetwork
-      String? wifiBSSID = await info.getWifiBSSID(); // 11:22:33:44:55:66
-      String? wifiIP = await info.getWifiIP();
+      wifiName.value = (await info.getWifiName())!; // FooNetwork
+      wifiBSSID.value = (await info.getWifiBSSID())!; // 11:22:33:44:55:66
+      wifiIP.value = (await info.getWifiIP())!;
       print(wifiName);
       print(wifiBSSID);
       print(wifiIP);
+      isLoading.value = false;
     }
+  }
+
+  void checkin(String? token) async {
+    print(token);
+    final response = await checkinRepository.checkin(
+      {
+        "token":
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzc3Jvb21JZCI6IjEiLCJleHAiOjE2OTI3NzE4MDl9.6z0GDq9j8kexLttZsceMY-az6YB0B2qsw8P7bLhqSkc",
+        "wifiName": 'Tenda_7EB5B0_5G',
+        "wifiBSSID": 'c8:3a:35:7e:b5:b6',
+        "wifiIP": '172.17.11.125'
+      },
+      // {
+      //   "token": token,
+      //   "wifiName": wifiName.value,
+      //   "wifiBSSID": wifiBSSID.value,
+      //   "wifiIP": wifiIP.value,
+      // },
+      UrlProvider.HANDLES_CHECKIN,
+      cacheGet(CacheManagerKey.TOKEN),
+    );
+    if (response?.status == 1) {
+      isStarted.value = false;
+      print("message ${response?.message}");
+    } else
+      print("message ${response?.message}");
   }
 
   Future<bool> requestWifiInfoPermisson() async {
