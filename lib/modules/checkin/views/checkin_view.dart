@@ -1,5 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:check_in/constants/index.dart';
+import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/modules/checkin/controllers/checkin_controller.dart';
+import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -49,140 +53,153 @@ class CheckinView extends GetView<CheckinController> {
                       body: SingleChildScrollView(
                         child: Center(
                           child: Container(
-                            height: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
                             width: MediaQuery.of(context).size.width,
-                            child: Stack(
+                            child: Column(
                               children: [
-                                MobileScanner(
-                                  fit: BoxFit.contain,
-                                  controller: controller.cameraController,
-                                  onDetect: (barcode) => {},
+                                Expanded(
+                                  child: MobileScanner(
+                                    fit: BoxFit.contain,
+                                    controller: controller.cameraController,
+                                    onDetect: (capture) {
+                                      final List<Barcode> barcodes =
+                                          capture.barcodes;
+                                      final Uint8List? image = capture.image;
+                                      for (final barcode in barcodes) {
+                                        debugPrint(
+                                            'Barcode found! ${barcode.rawValue}');
+                                      }
+                                      if (image != null) {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) =>
+                                              Image(image: MemoryImage(image)),
+                                        );
+                                        Future.delayed(
+                                            const Duration(seconds: 5), () {
+                                          Navigator.pop(context);
+                                        });
+                                        print("success");
+                                      }
+                                    },
+                                  ),
                                 ),
-                                Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Container(
-                                    alignment: Alignment.bottomCenter,
-                                    height: 100,
-                                    color: Colors.black.withOpacity(0.4),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        ValueListenableBuilder(
-                                          valueListenable: controller
-                                              .cameraController.hasTorchState,
-                                          builder: (context, state, child) {
-                                            if (state != true) {
-                                              return const SizedBox.shrink();
-                                            }
-                                            return IconButton(
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding:
+                                          GlobalStyles.paddingPageLeftRight_25,
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        height: 100,
+                                        color: Colors.black.withOpacity(0.4),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            ValueListenableBuilder(
+                                              valueListenable: controller
+                                                  .cameraController
+                                                  .hasTorchState,
+                                              builder: (context, state, child) {
+                                                if (state != true) {
+                                                  return const SizedBox
+                                                      .shrink();
+                                                }
+                                                return IconButton(
+                                                  color: Colors.white,
+                                                  icon: ValueListenableBuilder(
+                                                    valueListenable: controller
+                                                        .cameraController
+                                                        .torchState,
+                                                    builder: (context, state,
+                                                        child) {
+                                                      if (state == null) {
+                                                        return const Icon(
+                                                          Icons.flash_off,
+                                                          color: Colors.grey,
+                                                        );
+                                                      }
+                                                      switch (
+                                                          state as TorchState) {
+                                                        case TorchState.off:
+                                                          return const Icon(
+                                                            Icons.flash_off,
+                                                            color: Colors.white,
+                                                          );
+                                                        case TorchState.on:
+                                                          return const Icon(
+                                                            Icons.flash_on,
+                                                            color:
+                                                                Colors.yellow,
+                                                          );
+                                                      }
+                                                    },
+                                                  ),
+                                                  iconSize: 24.0,
+                                                  onPressed: () => controller
+                                                      .cameraController
+                                                      .toggleTorch(),
+                                                );
+                                              },
+                                            ),
+                                            IconButton(
+                                              color: Colors.white,
+                                              icon: controller.isStarted.value
+                                                  ? const Icon(Icons.stop)
+                                                  : const Icon(
+                                                      Icons.play_arrow),
+                                              iconSize: 24.0,
+                                              onPressed: () {
+                                                controller.startOrStop();
+                                              },
+                                            ),
+                                            IconButton(
                                               color: Colors.white,
                                               icon: ValueListenableBuilder(
                                                 valueListenable: controller
                                                     .cameraController
-                                                    .torchState,
+                                                    .cameraFacingState,
                                                 builder:
                                                     (context, state, child) {
                                                   if (state == null) {
                                                     return const Icon(
-                                                      Icons.flash_off,
-                                                      color: Colors.grey,
-                                                    );
+                                                        Icons.camera_front);
                                                   }
-                                                  switch (state as TorchState) {
-                                                    case TorchState.off:
+                                                  switch (
+                                                      state as CameraFacing) {
+                                                    case CameraFacing.front:
                                                       return const Icon(
-                                                        Icons.flash_off,
-                                                        color: Colors.grey,
-                                                      );
-                                                    case TorchState.on:
+                                                          Icons.camera_front);
+                                                    case CameraFacing.back:
                                                       return const Icon(
-                                                        Icons.flash_on,
-                                                        color: Colors.yellow,
-                                                      );
+                                                          Icons.camera_rear);
                                                   }
                                                 },
                                               ),
-                                              iconSize: 32.0,
+                                              iconSize: 24.0,
                                               onPressed: () => controller
                                                   .cameraController
-                                                  .toggleTorch(),
-                                            );
-                                          },
-                                        ),
-                                        IconButton(
-                                          color: Colors.white,
-                                          icon: controller.isStarted.value
-                                              ? const Icon(Icons.stop)
-                                              : const Icon(Icons.play_arrow),
-                                          iconSize: 32.0,
-                                          onPressed: () {
-                                            controller.startOrStop();
-                                          },
-                                        ),
-                                        Center(
-                                          child: SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width -
-                                                200,
-                                            height: 50,
-                                            child: FittedBox(
-                                              child: Text(
-                                                controller.barcode?.barcodes
-                                                        .first.rawValue ??
-                                                    'Scan something!',
-                                                overflow: TextOverflow.fade,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .headlineMedium!
-                                                    .copyWith(
-                                                        color: Colors.white),
-                                              ),
+                                                  .switchCamera(),
                                             ),
-                                          ),
+                                            IconButton(
+                                              color: Colors.white,
+                                              icon: const Icon(Icons.image),
+                                              iconSize: 24.0,
+                                              onPressed: () async {
+                                                final ImagePicker picker =
+                                                    ImagePicker();
+                                                // Pick an image
+                                                final XFile? image =
+                                                    await picker.pickImage(
+                                                  source: ImageSource.gallery,
+                                                );
+                                              },
+                                            ),
+                                          ],
                                         ),
-                                        IconButton(
-                                          color: Colors.white,
-                                          icon: ValueListenableBuilder(
-                                            valueListenable: controller
-                                                .cameraController
-                                                .cameraFacingState,
-                                            builder: (context, state, child) {
-                                              if (state == null) {
-                                                return const Icon(
-                                                    Icons.camera_front);
-                                              }
-                                              switch (state as CameraFacing) {
-                                                case CameraFacing.front:
-                                                  return const Icon(
-                                                      Icons.camera_front);
-                                                case CameraFacing.back:
-                                                  return const Icon(
-                                                      Icons.camera_rear);
-                                              }
-                                            },
-                                          ),
-                                          iconSize: 32.0,
-                                          onPressed: () => controller
-                                              .cameraController
-                                              .switchCamera(),
-                                        ),
-                                        IconButton(
-                                          color: Colors.white,
-                                          icon: const Icon(Icons.image),
-                                          iconSize: 32.0,
-                                          onPressed: () async {
-                                            final ImagePicker picker =
-                                                ImagePicker();
-                                            // Pick an image
-                                            final XFile? image =
-                                                await picker.pickImage(
-                                              source: ImageSource.gallery,
-                                            );
-                                          },
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 ),

@@ -18,10 +18,11 @@ class CheckinController extends GetxController with CacheManager {
     detectionSpeed: DetectionSpeed.normal,
     detectionTimeoutMs: 1000,
     returnImage: false,
-    torchEnabled: true,
+    torchEnabled: false,
   );
-  BarcodeCapture? barcode;
+  var barcode;
   RxBool isStarted = true.obs;
+  RxBool isScan = false.obs;
 
   CheckinController({required this.checkinRepository});
 
@@ -41,6 +42,10 @@ class CheckinController extends GetxController with CacheManager {
       }
       isStarted.value = !isStarted.value;
     } on Exception catch (e) {}
+  }
+
+  void isClose() {
+    isScan.value = false;
   }
 
   initData() async {
