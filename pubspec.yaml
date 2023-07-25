@@ -63,6 +63,7 @@ dependencies:
   pdfx: ^2.4.0
   internet_file: ^1.2.0
   mobile_scanner: ^3.3.0
+  image_picker: ^1.0.1
 
 flutter_icons:
   android: "icon_notification"
