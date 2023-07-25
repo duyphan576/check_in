@@ -1,10 +1,7 @@
 import 'package:check_in/core/cache_manager.dart';
-import 'package:check_in/modules/checkin/models/checkin_model.dart';
 import 'package:check_in/modules/checkin/repository/checkin_repository.dart';
-import 'package:check_in/modules/classroom/models/classroom_model.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:network_info_plus/network_info_plus.dart';
@@ -55,9 +52,6 @@ class CheckinController extends GetxController with CacheManager {
       wifiName.value = (await info.getWifiName())!; // FooNetwork
       wifiBSSID.value = (await info.getWifiBSSID())!; // 11:22:33:44:55:66
       wifiIP.value = (await info.getWifiIP())!;
-      print(wifiName);
-      print(wifiBSSID);
-      print(wifiIP);
       isLoading.value = false;
     }
   }

@@ -80,8 +80,6 @@ class CheckinView extends GetView<CheckinController> {
                                           .assignAll(capture.barcodes);
                                       for (final barcode
                                           in controller.barcode) {
-                                        debugPrint(
-                                            'Barcode found! ${barcode.rawValue}');
                                         controller.checkin(barcode.rawValue);
                                       }
                                     },
