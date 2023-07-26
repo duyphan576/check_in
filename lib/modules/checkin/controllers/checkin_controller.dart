@@ -5,6 +5,7 @@ import 'package:check_in/modules/checkin/repository/checkin_repository.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -14,6 +15,8 @@ class CheckinController extends GetxController with CacheManager {
   final AuthenticationService authenticationService = AuthenticationService();
   var userData;
   RxBool isLoading = true.obs;
+  GetStorage box = GetStorage();
+
   MobileScannerController cameraController = MobileScannerController(
     formats: [BarcodeFormat.qrCode],
     // facing: CameraFacing.front,
@@ -23,11 +26,8 @@ class CheckinController extends GetxController with CacheManager {
     torchEnabled: false,
   );
   RxList<Barcode> barcode = RxList<Barcode>();
-  RxBool isStarted = true.obs;
   RxString wifiName = "".obs;
   RxString wifiBSSID = "".obs;
-  RxString wifiIP = "".obs;
-
   CheckinController({required this.checkinRepository});
 
   @override
@@ -37,15 +37,6 @@ class CheckinController extends GetxController with CacheManager {
     initData();
   }
 
-  void startOrStop() {
-    if (isStarted.value) {
-      cameraController.stop();
-    } else {
-      cameraController.start();
-    }
-    isStarted.value = !isStarted.value;
-  }
-
   initData() async {
     final info = NetworkInfo();
 
@@ -53,10 +44,16 @@ class CheckinController extends GetxController with CacheManager {
     if (isGranted) {
       wifiName.value = (await info.getWifiName())!; // FooNetwork
       wifiBSSID.value = (await info.getWifiBSSID())!; // 11:22:33:44:55:66
-      wifiIP.value = (await info.getWifiIP())!;
-      isLoading.value = false;
       print("Name $wifiName");
       print("BSSID $wifiBSSID");
+      final token = box.read("checkinToken");
+      if (token != null) {
+        box.remove("checkinToken");
+        checkin(token);
+      }
+      Future.delayed(Duration(seconds: 3), () {
+        isLoading.value = false;
+      });
     }
   }
 

@@ -58,8 +58,7 @@ class CheckinView extends GetView<CheckinController> {
                         actions: [
                           IconButton(
                             onPressed: () {
-                              Get.toNamed(Routes.QR);
-                              print("click");
+                              Get.offAndToNamed(Routes.QR);
                             },
                             icon: Icon(
                               Icons.qr_code_scanner,

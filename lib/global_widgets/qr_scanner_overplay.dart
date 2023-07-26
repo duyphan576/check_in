@@ -21,17 +21,6 @@ class QRScannerOverlay extends StatelessWidget {
                   backgroundBlendMode: BlendMode
                       .dstOut), // This one will handle background + difference out
             ),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                height: scanArea,
-                width: scanArea,
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-            ),
           ],
         ),
       ),
