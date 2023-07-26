@@ -94,7 +94,9 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                     OutlinedButton(
                                       onPressed: () => Get.back(),
                                       child: Text("Cancel",
-                                          style: TextStyle(color: Colors.red)),
+                                          style: TextStyle(
+                                              color: Colors
+                                                  .lightBlueAccent.shade700)),
                                       style: ButtonStyle(
                                         fixedSize: MaterialStateProperty.all(
                                             Size(100, 50)),
@@ -111,8 +113,9 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                         controller.onChangePassword();
                                       },
                                       child: Text("Confirm",
-                                          style:
-                                              TextStyle(color: Colors.green)),
+                                          style: TextStyle(
+                                              color:
+                                                  Colors.cyanAccent.shade700)),
                                       style: ButtonStyle(
                                         fixedSize: MaterialStateProperty.all(
                                             Size(100, 50)),

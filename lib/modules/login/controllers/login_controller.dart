@@ -128,6 +128,12 @@ class LoginController extends GetxController with CacheManager {
           );
         }
       }
+    } else {
+      Alert.showSuccess(
+        title: CommonString.ERROR,
+        message: this.errorMessage.value,
+        buttonText: CommonString.CANCEL,
+      );
     }
   }
 
