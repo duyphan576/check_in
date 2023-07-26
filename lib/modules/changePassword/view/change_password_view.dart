@@ -98,20 +98,38 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    OutlinedButton(
-                                      onPressed: () {
-                                        controller.onChangePassword();
-                                      },
-                                      child: Text("Confirm",
-                                          style: TextStyle(
-                                              color:
-                                                  Colors.cyanAccent.shade700)),
-                                      style: ButtonStyle(
-                                        fixedSize: MaterialStateProperty.all(
-                                            Size(200, 50)),
-                                        side: MaterialStateProperty.all(
-                                            BorderSide(
-                                                color: Colors.grey.shade300)),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: AppColors.lightWhite
+                                            .withOpacity(0.75),
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: AppColors.black,
+                                            blurRadius: 2,
+                                            blurStyle: BlurStyle.outer,
+                                            offset:
+                                                Offset(0, 0), // Shadow position
+                                          ),
+                                        ],
+                                        gradient: LinearGradient(
+                                          colors:
+                                              AppColors.listColorGradientMain,
+                                          begin: Alignment.bottomLeft,
+                                          end: Alignment.topRight,
+                                        ),
+                                      ),
+                                      child: TextButton(
+                                        onPressed: () {
+                                          controller.onChangePassword();
+                                        },
+                                        child: Text("Confirm",
+                                            style:
+                                                TextStyle(color: Colors.white)),
+                                        style: ButtonStyle(
+                                          fixedSize: MaterialStateProperty.all(
+                                              Size(200, 50)),
+                                        ),
                                       ),
                                     ),
                                   ],
