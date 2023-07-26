@@ -1,16 +1,17 @@
 import 'package:check_in/core/base_response.dart';
-import 'package:check_in/modules/detail/models/detail_model.dart';
+import 'package:check_in/modules/statistical/models/statistical_model.dart';
 import 'package:check_in/services/http_provider.dart';
 import 'package:get/get.dart';
 
-class DetailProvider extends GetConnect {
-  DetailProvider({required this.http});
+class StatisticalProvider extends GetConnect {
+  StatisticalProvider({required this.http});
 
   final HttpProvider http;
 
-  Future<BaseResponse?> detail(DetailModel detailModel, url, token) async {
+  Future<BaseResponse?> statistical(
+      StatisticalModel statisticalModel, url, token) async {
     Map<String, dynamic> submit = Map<String, dynamic>();
-    submit.addAll(detailModel.toMap());
+    submit.addAll(statisticalModel.toMap());
 
     return await http.doGetWithToken(url, token).then((response) {
       return BaseResponse(

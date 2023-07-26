@@ -4,6 +4,7 @@ import 'package:check_in/global_widgets/detail_custom.dart';
 import 'package:check_in/models/documents/documents.dart';
 import 'package:check_in/models/student/students.dart';
 import 'package:check_in/modules/detail/controllers/detail_controller.dart';
+import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -53,16 +54,18 @@ class DetailView extends GetView<DetailController> {
                             child: Column(
                               children: [
                                 DetailCustom(
-                                  termName: controller.classroom!.term.termName,
-                                  lecturerFullname:
-                                      controller.classroom!.lecturer.fullname,
-                                  lecturerCode:
-                                      controller.classroom!.lecturer.code,
-                                  termId:
-                                      controller.classroom!.term.id.toString(),
-                                  termCredit: controller.classroom!.term.credit
-                                      .toString(),
-                                ),
+                                    termName:
+                                        controller.classroom!.term.termName,
+                                    lecturerFullname:
+                                        controller.classroom!.lecturer.fullname,
+                                    lecturerCode:
+                                        controller.classroom!.lecturer.code,
+                                    termId: controller.classroom!.term.id
+                                        .toString(),
+                                    termCredit: controller
+                                        .classroom!.term.credit
+                                        .toString(),
+                                    isOnTap: true),
                                 GlobalStyles.sizedBoxHeight,
                                 Container(
                                   decoration: BoxDecoration(

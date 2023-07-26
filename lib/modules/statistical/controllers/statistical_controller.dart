@@ -17,16 +17,7 @@ import 'package:permission_handler/permission_handler.dart';
 class StatisticalController extends GetxController with CacheManager {
   final StatisticalRepository statisticalRepository;
   final AuthenticationService authenticationService = AuthenticationService();
-  var classData;
-  double? _progress;
-  String _status = '';
-  RxBool isLoading = true.obs;
-  RxBool isStuClick = false.obs;
-  RxBool isDocClick = false.obs;
-  String? grade;
-  Classroom? classroom;
-  final RxList<Students> studentsList = RxList<Students>();
-  final RxList<Documents> docList = RxList<Documents>();
+  RxInt ClassroomId = int.parse(Get.arguments.toString()).obs;
   StatisticalController({required this.statisticalRepository});
 
   @override
@@ -34,14 +25,15 @@ class StatisticalController extends GetxController with CacheManager {
     // TODO: implement onInit
     super.onInit();
     initData();
+    print(ClassroomId);
   }
 
   initData() async {
-    classData = await cacheGet(CacheManagerKey.CLASS_DATA);
-    if (classData != null) {
-      isLoading.value = false;
-      // getDetails();
-    }
+    // classData = await cacheGet(CacheManagerKey.CLASS_DATA);
+    // if (classData != null) {
+    //   isLoading.value = false;
+    //   // getDetails();
+    // }
   }
   // void getDetails() {
   //   Detail? detail = Detail.fromJson(classData);

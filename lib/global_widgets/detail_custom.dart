@@ -1,22 +1,27 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
+import 'package:check_in/models/statistical/statistical.dart';
+import 'package:check_in/modules/statistical/view/statistical_view.dart';
+import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DetailCustom extends StatelessWidget {
-  const DetailCustom({
-    super.key,
-    required this.termName,
-    required this.termId,
-    required this.termCredit,
-    required this.lecturerCode,
-    required this.lecturerFullname,
-  });
+  DetailCustom(
+      {super.key,
+      required this.termName,
+      required this.termId,
+      required this.termCredit,
+      required this.lecturerCode,
+      required this.lecturerFullname,
+      required this.isOnTap});
 
   final String termName;
   final String termId;
   final String termCredit;
   final String lecturerCode;
   final String lecturerFullname;
+  final bool isOnTap;
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +47,30 @@ class DetailCustom extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            termName,
-            style: TextStyle(
-              color: AppColors.lightWhite,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+          Padding(
+            padding: GlobalStyles.paddingPageLeftRight,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  termName,
+                  style: TextStyle(
+                    color: AppColors.lightWhite,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                isOnTap
+                    ? OutlinedButton(
+                        onPressed: () {
+                          Get.toNamed(Routes.STATISTICAL, arguments: termId);
+                        },
+                        child: Text(
+                          "Statistical",
+                          style: TextStyle(color: Colors.white),
+                        ))
+                    : Container(),
+              ],
             ),
           ),
           SizedBox(

@@ -1,3 +1,4 @@
+import 'package:check_in/models/statistical/statistical.dart';
 import 'package:check_in/modules/checkin/bindings/checkin_binding.dart';
 import 'package:check_in/modules/checkin/views/checkin_view.dart';
 import 'package:check_in/modules/classroom/bindings/classroom_binding.dart';
@@ -12,6 +13,8 @@ import 'package:check_in/modules/profile/bindings/profile_binding.dart';
 import 'package:check_in/modules/profile/views/profile_view.dart';
 import 'package:check_in/modules/splash/bindings/splash_binding.dart';
 import 'package:check_in/modules/splash/views/splash_view.dart';
+import 'package:check_in/modules/statistical/bindings/statistical_bindings.dart';
+import 'package:check_in/modules/statistical/view/statistical_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/grade/bindings/grade_binding.dart';
@@ -62,6 +65,11 @@ class AppPages {
       name: _Paths.GRADE,
       page: () => GradeView(),
       binding: GradeBinding(),
+    ),
+    GetPage(
+      name: _Paths.STATISTICAL,
+      page: () => StatisticalView(),
+      binding: StatisticalBinding(),
     ),
   ];
 }

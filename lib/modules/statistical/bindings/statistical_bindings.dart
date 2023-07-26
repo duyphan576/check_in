@@ -1,18 +1,20 @@
 import 'package:check_in/modules/detail/controllers/detail_controller.dart';
-import 'package:check_in/modules/detail/provider/detail_provider.dart';
-import 'package:check_in/modules/detail/repository/detail_repository.dart';
+import 'package:check_in/modules/statistical/controllers/statistical_controller.dart';
+import 'package:check_in/modules/statistical/provider/statistical_provider.dart';
+import 'package:check_in/modules/statistical/repository/statistical_repository.dart';
 import 'package:check_in/services/http_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
-class DetailBinding extends Bindings {
+class StatisticalBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => DetailProvider(http: HttpProvider(httpClient: Dio())));
     Get.lazyPut(
-        () => DetailRepository(detailProvider: Get.find<DetailProvider>()));
-    Get.put(DetailController(
-      detailRepository: Get.find<DetailRepository>(),
+        () => StatisticalProvider(http: HttpProvider(httpClient: Dio())));
+    Get.lazyPut(() => StatisticalRepository(
+        statisticalProvider: Get.find<StatisticalProvider>()));
+    Get.put(StatisticalController(
+      statisticalRepository: Get.find<StatisticalRepository>(),
     ));
   }
 }
