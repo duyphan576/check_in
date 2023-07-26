@@ -13,7 +13,7 @@ class StatisticalProvider extends GetConnect {
     Map<String, dynamic> submit = Map<String, dynamic>();
     submit.addAll(statisticalModel.toMap());
 
-    return await http.doGetWithToken(url, token).then((response) {
+    return await http.doPostWithToken1(url, token, submit).then((response) {
       return BaseResponse(
           statusCode: response.statusCode,
           statusText: response.statusMessage,

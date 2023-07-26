@@ -1,5 +1,6 @@
 import 'package:check_in/constants/app_images.dart';
 import 'package:check_in/global_styles/global_styles.dart';
+import 'package:check_in/global_widgets/PeiChart.dart';
 import 'package:check_in/models/statistical/statistical.dart';
 import 'package:check_in/modules/statistical/controllers/statistical_controller.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -47,52 +48,49 @@ class StatisticalView extends GetView<StatisticalController> {
                 child: Padding(
                   padding: GlobalStyles.paddingAll18,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Row(
+                      Container(
+                          height: MediaQuery.of(context).size.width / 2,
+                          width: MediaQuery.of(context).size.width / 2,
+                          child: PeiChartWidget(
+                            countLessThan5: controller.countLessThan5,
+                            countForm5To7: controller.countForm5To7,
+                            countForm7ToLessThan10:
+                                controller.countForm7ToLessThan10,
+                            countEqual10: controller.countEqual10,
+                          )),
+                      GlobalStyles.sizedBoxHeight_25,
+                      Column(
                         children: [
-                          Container(
-                            height: MediaQuery.of(context).size.height / 3.5,
-                            width: MediaQuery.of(context).size.width / 1.8,
-                            child: PieChart(
-                              PieChartData(
-                                  centerSpaceRadius: 4,
-                                  borderData: FlBorderData(
-                                    show: false,
-                                  ),
-                                  sectionsSpace: 2,
-                                  sections: [
-                                    PieChartSectionData(
-                                        value: 25,
-                                        showTitle: true,
-                                        title: "haha",
-                                        radius: 115,
-                                        color: Colors.pink),
-                                    PieChartSectionData(
-                                        value: 45,
-                                        showTitle: true,
-                                        title: "haha",
-                                        radius: 115,
-                                        color: Colors.pink),
-                                    PieChartSectionData(
-                                        value: 25,
-                                        showTitle: true,
-                                        title: "haha",
-                                        radius: 115,
-                                        color: Colors.pink),
-                                    PieChartSectionData(
-                                        value: 05,
-                                        showTitle: true,
-                                        title: "haha",
-                                        radius: 115,
-                                        color: Colors.pink),
-                                  ]),
-                            ),
-                          ),
-                          GlobalStyles.sizedBoxWidth_45,
-                          Text("data")
+                          controller.countLessThan5 != 0
+                              ? TextWidget(
+                                  color: Colors.red,
+                                  titleStr: "Percentage score less than 5")
+                              : Container()
                         ],
                       ),
+                      GlobalStyles.sizedBoxHeight_25,
+                      Container(
+                        height: MediaQuery.of(context).size.width / 1.5,
+                        width: MediaQuery.of(context).size.width / 1.5,
+                        child: AspectRatio(
+                          aspectRatio: 1,
+                          child: BarChart(
+                            BarChartData(
+                                borderData: FlBorderData(
+                                  border: Border(
+                                      top: BorderSide.none,
+                                      right: BorderSide.none,
+                                      left: BorderSide(width: 1),
+                                      bottom: BorderSide(width: 1)),
+                                ),
+                                groupsSpace: 10,
+                                barGroups: controller.barGroups),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -101,6 +99,25 @@ class StatisticalView extends GetView<StatisticalController> {
           ),
         );
       },
+    );
+  }
+}
+
+class TextWidget extends StatelessWidget {
+  const TextWidget({super.key, required this.color, required this.titleStr});
+  final Color color;
+  final String titleStr;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(children: [
+        Icon(
+          Icons.pie_chart,
+          color: color,
+        ),
+        GlobalStyles.sizedBoxWidth,
+        Text(titleStr),
+      ]),
     );
   }
 }

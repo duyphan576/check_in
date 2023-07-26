@@ -1,16 +1,18 @@
+import 'dart:ffi';
+
 import 'package:check_in/core/alert.dart';
 import 'package:check_in/core/cache_manager.dart';
-import 'package:check_in/models/classroom/classroom.dart';
+import 'package:check_in/modules/statistical/models/statistical_model.dart';
 
-import 'package:check_in/models/documents/documents.dart';
-import 'package:check_in/models/lecturer/lecturer.dart';
-import 'package:check_in/models/student/students.dart';
 import 'package:check_in/modules/statistical/repository/statistical_repository.dart';
 import 'package:check_in/services/authenticationService.dart';
+import 'package:check_in/services/domain_service.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:open_file/open_file.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -18,60 +20,90 @@ class StatisticalController extends GetxController with CacheManager {
   final StatisticalRepository statisticalRepository;
   final AuthenticationService authenticationService = AuthenticationService();
   int ClassroomId = int.parse(Get.arguments.toString());
+  RxList<int?> grades = <int?>[].obs;
+  var countLessThan5 = 0.0;
+  var countForm5To7 = 0.0;
+  var countForm7ToLessThan10 = 0.0;
+  var countEqual10 = 0.0;
+  List<BarChartGroupData> barGroups = [];
   StatisticalController({required this.statisticalRepository});
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    initData();
     print(ClassroomId);
+    getGradesData();
   }
 
-  initData() async {
-    // classData = await cacheGet(CacheManagerKey.CLASS_DATA);
-    // if (classData != null) {
-    //   isLoading.value = false;
-    //   // getDetails();
-    // }
-  }
-  // void getDetails() {
-  //   Detail? detail = Detail.fromJson(classData);
-  //   grade = detail.grade;
-  //   classroom = detail.classroom;
-  //   List<Students>? studentData = detail.studentList;
-  //   studentsList.assignAll(studentData);
-  //   List<Documents>? docData = detail.documentList;
-  //   docList.assignAll(docData);
-  // }
+  void getGradesData() async {
+    final response = await statisticalRepository.statistical(
+      StatisticalModel(classroomId: ClassroomId.toString()),
+      UrlProvider.HANDLES_GRADELISTCLASS,
+      cacheGet(CacheManagerKey.TOKEN),
+    );
 
-  // Future<void> DownloadDocument(String url, String fileName) async {
-  //   var status = await Permission.storage.request();
-  //   if (status.isGranted) {
-  //     FileDownloader.downloadFile(
-  //         url: url,
-  //         name: fileName,
-  //         onProgress: (name, progress) {
-  //           _progress = progress;
-  //           _status = 'Progress: $progress%';
-  //         },
-  //         onDownloadCompleted: (path) {
-  //           _progress = null;
-  //           _status = 'File downloaded to: $path';
-  //         },
-  //         onDownloadError: (error) {
-  //           _progress = null;
-  //           _status = 'Download error: $error';
-  //           Alert.showError(
-  //               title: "title", message: "message", buttonText: "buttonText");
-  //         }).then((file) {
-  //       OpenFile.open(file!.path);
-  //     });
-  //   } else {
-  //     Alert.showError(
-  //         title: "Fail",
-  //         message: "Chưa cấp quyền cho ứng dụng",
-  //         buttonText: "Xác nhận");
-  //   }
-  // }
+    List<dynamic> gradeList = response?.data['gradeList'];
+    List<int?> gradesList =
+        gradeList.map((dynamic item) => item is int ? item : null).toList();
+    grades.addAll(gradesList);
+    update();
+    for (int i = 0; i < grades.length; i++) {
+      if (grades[i]! < 5) {
+        countLessThan5++;
+      } else if (grades[i]! >= 5 && grades[i]! < 7) {
+        countForm5To7++;
+      } else if (grades[i]! >= 7 && grades[i]! < 10) {
+        countForm7ToLessThan10++;
+      } else if (grades[i] == 10) {
+        countEqual10++;
+      }
+    }
+    countLessThan5 = CalculatePercent(
+        countLessThan5, double.parse(grades.length.toString()));
+    countForm5To7 =
+        CalculatePercent(countForm5To7, double.parse(grades.length.toString()));
+    countForm7ToLessThan10 = CalculatePercent(
+        countForm7ToLessThan10, double.parse(grades.length.toString()));
+    countEqual10 =
+        CalculatePercent(countEqual10, double.parse(grades.length.toString()));
+    Map<int, int> occurrences = countOccurrences(grades);
+    for (var grade in occurrences.keys) {
+      int count = occurrences[grade] ?? 0;
+      print("$count $grade");
+      BarChartGroupData barGroup = BarChartGroupData(
+        x: grade,
+        barRods: [
+          BarChartRodData(
+            fromY: 0,
+            toY: count.toDouble(), // Use the count as the Y value
+            width: 15,
+            color: Colors.amber,
+          ),
+        ],
+      );
+
+      barGroups.add(barGroup);
+    }
+  }
+
+  Map<int, int> countOccurrences(List<int?> grades) {
+    Map<int, int> occurrences = {};
+
+    for (int i = 1; i <= 10; i++) {
+      occurrences[i] = 0;
+    }
+
+    for (int? grade in grades) {
+      if (grade != null && grade >= 1 && grade <= 10) {
+        occurrences[grade] = (occurrences[grade] ?? 0) + 1;
+      }
+    }
+
+    return occurrences;
+  }
+
+  double CalculatePercent(double count, double all) {
+    return ((count / all) * 100);
+  }
 }
