@@ -1,3 +1,5 @@
+import 'package:check_in/constants/app_string.dart';
+import 'package:check_in/core/alert.dart';
 import 'package:check_in/core/cache_manager.dart';
 import 'package:check_in/modules/checkin/repository/checkin_repository.dart';
 import 'package:check_in/services/authenticationService.dart';
@@ -53,33 +55,40 @@ class CheckinController extends GetxController with CacheManager {
       wifiBSSID.value = (await info.getWifiBSSID())!; // 11:22:33:44:55:66
       wifiIP.value = (await info.getWifiIP())!;
       isLoading.value = false;
+      print("Name $wifiName");
+      print("BSSID $wifiBSSID");
     }
   }
 
   void checkin(String? token) async {
     print(token);
     final response = await checkinRepository.checkin(
-      {
-        "token":
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzc3Jvb21JZCI6IjEiLCJleHAiOjE2OTI3NzE4MDl9.6z0GDq9j8kexLttZsceMY-az6YB0B2qsw8P7bLhqSkc",
-        "wifiName": 'Tenda_7EB5B0_5G',
-        "wifiBSSID": 'c8:3a:35:7e:b5:b6',
-        "wifiIP": '172.17.11.125'
-      },
       // {
-      //   "token": token,
-      //   "wifiName": wifiName.value,
-      //   "wifiBSSID": wifiBSSID.value,
-      //   "wifiIP": wifiIP.value,
+      //   "token":
+      //       "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzc3Jvb21JZCI6IjEiLCJleHAiOjE2OTI3NzE4MDl9.6z0GDq9j8kexLttZsceMY-az6YB0B2qsw8P7bLhqSkc",
+      //   "wifiName": 'Tenda_7EB5B0_5G',
+      //   "wifiBSSID": 'c8:3a:35:7e:b5:b6',
       // },
+      {
+        "token": token,
+        "wifiName": wifiName.value,
+        "wifiBSSID": wifiBSSID.value,
+      },
       UrlProvider.HANDLES_CHECKIN,
       cacheGet(CacheManagerKey.TOKEN),
     );
     if (response?.status == 1) {
-      isStarted.value = false;
-      print("message ${response?.message}");
+      Alert.showSuccess(
+        title: CheckinString.CHECK_IN,
+        buttonText: CommonString.OK,
+        message: response?.message,
+      );
     } else
-      print("message ${response?.message}");
+      Alert.showSuccess(
+        title: CommonString.ERROR,
+        buttonText: CommonString.OK,
+        message: response?.message,
+      );
   }
 
   Future<bool> requestWifiInfoPermisson() async {

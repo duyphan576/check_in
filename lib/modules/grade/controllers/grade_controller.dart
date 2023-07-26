@@ -10,7 +10,6 @@ class GradeController extends GetxController with CacheManager {
   final GradeRepository gradeRepository;
   final AuthenticationService authenticationService = AuthenticationService();
   var userData;
-  RxBool isLoading = true.obs;
   var avgGrade;
   RxList<Grade> grades = <Grade>[].obs;
   GradeController({required this.gradeRepository});
@@ -47,6 +46,5 @@ class GradeController extends GetxController with CacheManager {
     // Sử dụng assignAll() hoặc addAll() để cập nhật RxList mà không thay đổi kiểu dữ liệu
     grades.assignAll(gradesData);
     update();
-    isLoading.value = false;
   }
 }

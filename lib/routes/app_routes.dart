@@ -14,6 +14,7 @@ abstract class Routes {
   static const DETAIL = _Paths.DETAIL;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
   static const PDF = _Paths.PDF;
+  static const QR = _Paths.QR;
 }
 
 abstract class _Paths {
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const DETAIL = '/detail';
   static const CHANGE_PASSWORD = '/change-password';
   static const PDF = '/pdf_page';
+  static const QR = '/qr';
 }

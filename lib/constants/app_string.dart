@@ -154,3 +154,7 @@ abstract class HomeString {
   static const String PROFILE = "Profile";
   static const String LOGOUT = "Logout";
 }
+
+abstract class CheckinString {
+  static const String CHECK_IN = "Checkin Success";
+}

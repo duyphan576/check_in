@@ -12,6 +12,8 @@ import 'package:check_in/modules/pdf_page/bindings/pdf_page_binding.dart';
 import 'package:check_in/modules/pdf_page/views/pdf_page_view.dart';
 import 'package:check_in/modules/profile/bindings/profile_binding.dart';
 import 'package:check_in/modules/profile/views/profile_view.dart';
+import 'package:check_in/modules/qr/bindings/qr_binding.dart';
+import 'package:check_in/modules/qr/views/qr_view.dart';
 import 'package:check_in/modules/splash/bindings/splash_binding.dart';
 import 'package:check_in/modules/splash/views/splash_view.dart';
 import 'package:get/get.dart';
@@ -76,6 +78,11 @@ class AppPages {
       name: _Paths.PDF,
       page: () => PdfPageView(),
       binding: PdfPageBinding(),
+    ),
+    GetPage(
+      name: _Paths.QR,
+      page: () => QrView(),
+      binding: QrBinding(),
     ),
   ];
 }

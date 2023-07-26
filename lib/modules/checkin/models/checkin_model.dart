@@ -5,21 +5,18 @@ class CheckinModel extends BaseApiModel {
     required this.token,
     required this.wifiName,
     required this.wifiBSSID,
-    required this.wifiIP,
     act,
     plus,
   }) : super(act: act, plus: plus);
   String token;
   String wifiName;
   String wifiBSSID;
-  String wifiIP;
 
   factory CheckinModel.initial() {
     return CheckinModel(
       token: '',
       wifiName: '',
       wifiBSSID: '',
-      wifiIP: '',
       act: '',
       plus: '',
     );
@@ -30,7 +27,6 @@ class CheckinModel extends BaseApiModel {
       "token": token,
       "wifiName": wifiName,
       "wifiBSSID": wifiBSSID,
-      "wifiIP": wifiIP,
       "act": act,
       "plus": plus,
     };
