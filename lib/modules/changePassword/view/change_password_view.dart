@@ -21,6 +21,13 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
         ),
         child: SafeArea(
           child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              iconTheme: IconThemeData(
+                color: AppColors.lightBlack,
+              ),
+            ),
             backgroundColor: Colors.transparent,
             extendBodyBehindAppBar: true,
             resizeToAvoidBottomInset: true,
@@ -92,23 +99,6 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     OutlinedButton(
-                                      onPressed: () => Get.back(),
-                                      child: Text("Cancel",
-                                          style: TextStyle(
-                                              color: Colors
-                                                  .lightBlueAccent.shade700)),
-                                      style: ButtonStyle(
-                                        fixedSize: MaterialStateProperty.all(
-                                            Size(100, 50)),
-                                        side: MaterialStateProperty.all(
-                                            BorderSide(
-                                                color: Colors.grey.shade300)),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 50,
-                                    ),
-                                    OutlinedButton(
                                       onPressed: () {
                                         controller.onChangePassword();
                                       },
@@ -118,7 +108,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                                   Colors.cyanAccent.shade700)),
                                       style: ButtonStyle(
                                         fixedSize: MaterialStateProperty.all(
-                                            Size(100, 50)),
+                                            Size(200, 50)),
                                         side: MaterialStateProperty.all(
                                             BorderSide(
                                                 color: Colors.grey.shade300)),

@@ -69,10 +69,10 @@ class ChangePasswordController extends GetxController with CacheManager {
           UrlProvider.HANDLES_PASSWORD,
           cacheGet(CacheManagerKey.TOKEN));
       if (response?.statusCode == HttpStatus.ok) {
-        Alert.closeLoadingIndicator();
         isLoading.value = false;
 
         if (response?.status == 1) {
+          Alert.closeLoadingIndicator();
           Alert.showSuccess(
             title: ChangePasswordString.HINT_CHANGEPASSWORD,
             buttonText: CommonString.OK,
