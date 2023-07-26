@@ -1,10 +1,12 @@
 import 'package:check_in/core/base_api_model.dart';
 
 class StatisticalModel extends BaseApiModel {
-  StatisticalModel({act, plus}) : super(act: act, plus: plus);
-
+  StatisticalModel({required this.classroomId, act, plus})
+      : super(act: act, plus: plus);
+  String classroomId;
   factory StatisticalModel.initial() {
     return StatisticalModel(
+      classroomId: '',
       act: '',
       plus: '',
     );
@@ -12,6 +14,7 @@ class StatisticalModel extends BaseApiModel {
 
   Map<String, dynamic> toMap() {
     return {
+      "classroomId": classroomId,
       "act": act,
       "plus": plus,
     };

@@ -17,7 +17,7 @@ import 'package:permission_handler/permission_handler.dart';
 class StatisticalController extends GetxController with CacheManager {
   final StatisticalRepository statisticalRepository;
   final AuthenticationService authenticationService = AuthenticationService();
-  RxInt ClassroomId = int.parse(Get.arguments.toString()).obs;
+  int ClassroomId = int.parse(Get.arguments.toString());
   StatisticalController({required this.statisticalRepository});
 
   @override
