@@ -10,4 +10,6 @@ class CheckinRepository {
 
   Future<BaseResponse?> checkin(Map<String, dynamic> wifi, url, token) =>
       checkinProvider.checkin(wifi, url, token);
+  Future<BaseResponse?> history(url, token) =>
+      checkinProvider.history(url, token);
 }

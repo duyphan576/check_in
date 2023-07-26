@@ -111,8 +111,8 @@ class DetailView extends GetView<DetailController> {
                                               ),
                                               trailing: Icon(
                                                 controller.isDocClick.value
-                                                    ? Icons.arrow_drop_down
-                                                    : Icons.arrow_drop_up,
+                                                    ? Icons.arrow_drop_up
+                                                    : Icons.arrow_drop_down,
                                                 size: 40,
                                                 color: AppColors.lightWhite,
                                               ),
@@ -234,8 +234,8 @@ class DetailView extends GetView<DetailController> {
                                               ),
                                               trailing: Icon(
                                                 controller.isStuClick.value
-                                                    ? Icons.arrow_drop_down
-                                                    : Icons.arrow_drop_up,
+                                                    ? Icons.arrow_drop_up
+                                                    : Icons.arrow_drop_down,
                                                 size: 40,
                                                 color: AppColors.lightWhite,
                                               ),

@@ -126,7 +126,10 @@ class ProfileView extends GetView<ProfileController> {
                                                 child: ProfileDetailRow(
                                                   title: 'Birthdate',
                                                   value: controller
-                                                      .userData["birthdate"],
+                                                      .getFormatedDate(
+                                                    controller
+                                                        .userData["birthdate"],
+                                                  ),
                                                 ),
                                               ),
                                             ],

@@ -64,6 +64,7 @@ dependencies:
   internet_file: ^1.2.0
   mobile_scanner: ^3.3.0
   image_picker: ^1.0.1
+  intl: ^0.18.1
 
 flutter_icons:
   android: "icon_notification"
@@ -72,6 +73,7 @@ flutter_icons:
 
 
 dependency_overrides:
+  intl: any
   webview_flutter: ^3.0.0
   test_api: 0.5.2
 
