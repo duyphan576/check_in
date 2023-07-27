@@ -34,8 +34,10 @@ class CheckinController extends GetxController with CacheManager {
   RxString wifiName = "".obs;
   RxString wifiBSSID = "".obs;
   RxBool isClick = false.obs;
-  final RxList<Classroom> classroom = RxList<Classroom>();
-  final RxList<CheckinDate> checkinDate = RxList<CheckinDate>();
+  RxList<Classroom> classroom = RxList<Classroom>();
+  RxList<CheckinDate> checkinDate = RxList<CheckinDate>();
+  final RxList<CheckinHistory> checkHistory = RxList<CheckinHistory>();
+  RxString chooseItem = "1".obs;
 
   CheckinController({required this.checkinRepository});
 
@@ -74,9 +76,11 @@ class CheckinController extends GetxController with CacheManager {
     if (response?.status == 1) {
       for (final list in response?.data["checkedInList"]) {
         CheckinHistory history = CheckinHistory.fromJson(list);
-        classroom.add(history.classroom);
-        checkinDate.assignAll(history.checkinDate);
+        checkHistory.add(history);
+        // classroom.add(history.classroom);
+        // checkinDate.addAll(history.checkinDate);
       }
+
       isLoading.value = false;
     } else {
       Alert.showSuccess(

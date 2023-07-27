@@ -7,7 +7,7 @@ class CheckinDate {
   factory CheckinDate.fromJson(Map<String, dynamic> json) {
     return CheckinDate(
       date: json['date'],
-      isChecked: json['isChecked'] ?? false,
+      isChecked: json['isChecked '],
     );
   }
 }

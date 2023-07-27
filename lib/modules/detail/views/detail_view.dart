@@ -1,6 +1,7 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/global_widgets/detail_custom.dart';
+import 'package:check_in/global_widgets/detail_inkwell.dart';
 import 'package:check_in/models/documents/documents.dart';
 import 'package:check_in/models/student/students.dart';
 import 'package:check_in/modules/detail/controllers/detail_controller.dart';
@@ -85,40 +86,12 @@ class DetailView extends GetView<DetailController> {
                                   ),
                                   child: Column(
                                     children: [
-                                      InkWell(
-                                        onTap: () {
+                                      DetailInkWell(
+                                        text: "List of Document",
+                                        function: () {
                                           controller.isDocClick.value =
                                               !controller.isDocClick.value;
                                         },
-                                        child: Container(
-                                          padding: GlobalStyles
-                                              .paddingPageLeftRight_15,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.1,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: Center(
-                                            child: ListTile(
-                                              title: Text(
-                                                "Documents List",
-                                                style: TextStyle(
-                                                  fontSize: 18,
-                                                  color: AppColors.lightWhite,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              trailing: Icon(
-                                                controller.isDocClick.value
-                                                    ? Icons.arrow_drop_up
-                                                    : Icons.arrow_drop_down,
-                                                size: 40,
-                                                color: AppColors.lightWhite,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
                                       ),
                                     ],
                                   ),
@@ -185,7 +158,7 @@ class DetailView extends GetView<DetailController> {
                                                 },
                                               ),
                                       )
-                                    : SizedBox(),
+                                    : Container(),
                                 GlobalStyles.sizedBoxHeight_10,
                                 Container(
                                   decoration: BoxDecoration(
@@ -208,40 +181,12 @@ class DetailView extends GetView<DetailController> {
                                   ),
                                   child: Column(
                                     children: [
-                                      InkWell(
-                                        onTap: () {
+                                      DetailInkWell(
+                                        text: "List of Students",
+                                        function: () {
                                           controller.isStuClick.value =
                                               !controller.isStuClick.value;
                                         },
-                                        child: Container(
-                                          padding: GlobalStyles
-                                              .paddingPageLeftRight_15,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.1,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: Center(
-                                            child: ListTile(
-                                              title: Text(
-                                                "List of Students",
-                                                style: TextStyle(
-                                                  fontSize: 18,
-                                                  color: AppColors.lightWhite,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              trailing: Icon(
-                                                controller.isStuClick.value
-                                                    ? Icons.arrow_drop_up
-                                                    : Icons.arrow_drop_down,
-                                                size: 40,
-                                                color: AppColors.lightWhite,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
                                       ),
                                     ],
                                   ),
