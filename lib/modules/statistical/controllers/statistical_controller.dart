@@ -1,5 +1,4 @@
-import 'dart:ffi';
-
+import 'package:check_in/constants/index.dart';
 import 'package:check_in/core/alert.dart';
 import 'package:check_in/core/cache_manager.dart';
 import 'package:check_in/modules/statistical/models/statistical_model.dart';
@@ -10,11 +9,9 @@ import 'package:check_in/services/domain_service.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/status/http_status.dart';
-import 'package:open_file/open_file.dart';
-import 'package:permission_handler/permission_handler.dart';
+
+RxBool isLoading = true.obs;
 
 class StatisticalController extends GetxController with CacheManager {
   final StatisticalRepository statisticalRepository;
@@ -25,6 +22,7 @@ class StatisticalController extends GetxController with CacheManager {
   var countForm5To7 = 0.0;
   var countForm7ToLessThan10 = 0.0;
   var countEqual10 = 0.0;
+  RxBool isLoading = true.obs;
   List<BarChartGroupData> barGroups = [];
   StatisticalController({required this.statisticalRepository});
 
@@ -37,53 +35,68 @@ class StatisticalController extends GetxController with CacheManager {
   }
 
   void getGradesData() async {
+    isLoading.value = true;
     final response = await statisticalRepository.statistical(
       StatisticalModel(classroomId: ClassroomId.toString()),
       UrlProvider.HANDLES_GRADELISTCLASS,
       cacheGet(CacheManagerKey.TOKEN),
     );
-
-    List<dynamic> gradeList = response?.data['gradeList'];
-    List<int?> gradesList =
-        gradeList.map((dynamic item) => item is int ? item : null).toList();
-    grades.addAll(gradesList);
-    update();
-    for (int i = 0; i < grades.length; i++) {
-      if (grades[i]! < 5) {
-        countLessThan5++;
-      } else if (grades[i]! >= 5 && grades[i]! < 7) {
-        countForm5To7++;
-      } else if (grades[i]! >= 7 && grades[i]! < 10) {
-        countForm7ToLessThan10++;
-      } else if (grades[i] == 10) {
-        countEqual10++;
+    if (response?.status == 1) {
+      List<dynamic> gradeList = response?.data['gradeList'];
+      if (gradeList.isNotEmpty) {
+        List<int?> gradesList =
+            gradeList.map((dynamic item) => item is int ? item : null).toList();
+        grades.addAll(gradesList);
+        update();
+        for (int i = 0; i < grades.length; i++) {
+          if (grades[i]! < 5) {
+            countLessThan5++;
+          } else if (grades[i]! >= 5 && grades[i]! < 7) {
+            countForm5To7++;
+          } else if (grades[i]! >= 7 && grades[i]! < 10) {
+            countForm7ToLessThan10++;
+          } else if (grades[i] == 10) {
+            countEqual10++;
+          }
+        }
+        countLessThan5 = CalculatePercent(
+            countLessThan5, double.parse(grades.length.toString()));
+        countForm5To7 = CalculatePercent(
+            countForm5To7, double.parse(grades.length.toString()));
+        countForm7ToLessThan10 = CalculatePercent(
+            countForm7ToLessThan10, double.parse(grades.length.toString()));
+        countEqual10 = CalculatePercent(
+            countEqual10, double.parse(grades.length.toString()));
+        Map<int, int> occurrences = countOccurrences(grades);
+        for (var grade in occurrences.keys) {
+          int count = occurrences[grade] ?? 0;
+          BarChartGroupData barGroup = BarChartGroupData(
+            x: grade,
+            barRods: [
+              BarChartRodData(
+                fromY: 0,
+                toY: count.toDouble(), // Convert to int
+                width: 15,
+                color: Colors.amber,
+              ),
+            ],
+          );
+          barGroups.add(barGroup);
+          isLoading.value = false;
+        }
+      } else {
+        Alert.showSuccess(
+            title: "Error",
+            message: StatisticalString.GradesEmpty,
+            buttonText: AppString.CANCEL);
+        Get.back();
       }
-    }
-    countLessThan5 = CalculatePercent(
-        countLessThan5, double.parse(grades.length.toString()));
-    countForm5To7 =
-        CalculatePercent(countForm5To7, double.parse(grades.length.toString()));
-    countForm7ToLessThan10 = CalculatePercent(
-        countForm7ToLessThan10, double.parse(grades.length.toString()));
-    countEqual10 =
-        CalculatePercent(countEqual10, double.parse(grades.length.toString()));
-    Map<int, int> occurrences = countOccurrences(grades);
-    for (var grade in occurrences.keys) {
-      int count = occurrences[grade] ?? 0;
-      print("$count $grade");
-      BarChartGroupData barGroup = BarChartGroupData(
-        x: grade,
-        barRods: [
-          BarChartRodData(
-            fromY: 0,
-            toY: count.toDouble(), // Use the count as the Y value
-            width: 15,
-            color: Colors.amber,
-          ),
-        ],
-      );
-
-      barGroups.add(barGroup);
+    } else {
+      Alert.showSuccess(
+          title: "Error",
+          message: response!.message.toString(),
+          buttonText: AppString.CANCEL);
+      Get.back();
     }
   }
 

@@ -7,20 +7,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DetailCustom extends StatelessWidget {
-  DetailCustom(
-      {super.key,
-      required this.termName,
-      required this.termId,
-      required this.termCredit,
-      required this.lecturerCode,
-      required this.lecturerFullname,
-      required this.isOnTap});
+  DetailCustom({
+    super.key,
+    required this.termName,
+    required this.termId,
+    required this.termCredit,
+    required this.lecturerCode,
+    required this.lecturerFullname,
+    required this.classroomId,
+    required this.isOnTap,
+  });
 
   final String termName;
   final String termId;
   final String termCredit;
   final String lecturerCode;
   final String lecturerFullname;
+  final String classroomId;
   final bool isOnTap;
 
   @override
@@ -63,7 +66,8 @@ class DetailCustom extends StatelessWidget {
                 isOnTap
                     ? OutlinedButton(
                         onPressed: () {
-                          Get.toNamed(Routes.STATISTICAL, arguments: termId);
+                          Get.toNamed(Routes.STATISTICAL,
+                              arguments: classroomId);
                         },
                         child: Text(
                           "Statistical",

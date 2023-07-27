@@ -24,7 +24,7 @@ class GlobalStyles {
       EdgeInsets.symmetric(horizontal: 45);
   static final EdgeInsets paddingAll = EdgeInsets.all(12);
   static final EdgeInsets paddingAll18 = EdgeInsets.all(18);
-
+  static final EdgeInsets paddingAll25 = EdgeInsets.all(25);
   static final SizedBox sizedBoxHeight_10 = SizedBox(
     height: 10,
   );

@@ -143,6 +143,10 @@ abstract class ChangePasswordString {
   static const String HINT_CONFIRMPASSWORD = "Confirm Password";
 }
 
+abstract class StatisticalString {
+  static const String GradesEmpty = "Grade in class empty";
+}
+
 abstract class HomeString {
   static const String CHECK_IN = "Check In";
   static const String CLASSROOM = "Classroom";
