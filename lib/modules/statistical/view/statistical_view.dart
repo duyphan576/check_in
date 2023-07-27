@@ -1,4 +1,5 @@
 import 'package:check_in/constants/app_images.dart';
+import 'package:check_in/constants/app_string.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/global_widgets/pei_chart.dart';
 import 'package:check_in/modules/statistical/controllers/statistical_controller.dart';
@@ -97,14 +98,14 @@ class StatisticalView extends GetView<StatisticalController> {
                                       )),
                                   GlobalStyles.sizedBoxHeight_25,
                                   Text(
-                                    "Pie chart depicting the percentage of students ",
+                                    StatisticalString.PieChartAnnounce,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                         fontSize: 16),
                                   ),
                                   Text(
-                                    "in the class on the scale",
+                                    StatisticalString.PieChartAnnounce2,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
@@ -243,14 +244,14 @@ class StatisticalView extends GetView<StatisticalController> {
                                   ),
                                   GlobalStyles.sizedBoxHeight_10,
                                   Text(
-                                    "The chart lists the number of students ",
+                                    StatisticalString.BarChartAnnounce,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                         fontSize: 16),
                                   ),
                                   Text(
-                                    "achieved at each point",
+                                    StatisticalString.BarChartAnnounce2,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
