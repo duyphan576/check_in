@@ -16,7 +16,7 @@ class BarChartWidget extends StatelessWidget {
         child: BarChart(
           BarChartData(
               minY: 0,
-              maxY: gradesLength < 10 ? 10 : gradesLength,
+              maxY: gradesLength < 5 ? 5 : gradesLength,
               titlesData: FlTitlesData(
                   bottomTitles: AxisTitles(
                       sideTitles: SideTitles(
