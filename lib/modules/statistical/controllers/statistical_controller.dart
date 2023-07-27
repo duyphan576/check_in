@@ -93,11 +93,11 @@ class StatisticalController extends GetxController with CacheManager {
         }
       }
     } else {
+      Alert.closeLoadingIndicator();
       Alert.showSuccess(
           title: "Error",
           message: response!.message.toString(),
           buttonText: AppString.CANCEL);
-      Get.back();
     }
   }
 

@@ -1,6 +1,7 @@
 import 'package:check_in/constants/app_images.dart';
 import 'package:check_in/constants/app_string.dart';
 import 'package:check_in/global_styles/global_styles.dart';
+import 'package:check_in/global_widgets/bar_chart.dart';
 import 'package:check_in/global_widgets/pei_chart.dart';
 import 'package:check_in/modules/statistical/controllers/statistical_controller.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -82,77 +83,17 @@ class StatisticalView extends GetView<StatisticalController> {
                               ),
                               child: Column(
                                 children: [
-                                  Container(
-                                      height:
-                                          MediaQuery.of(context).size.width /
-                                              1.7,
-                                      width: MediaQuery.of(context).size.width /
-                                          1.8,
-                                      child: PeiChartWidget(
-                                        countLessThan5:
-                                            controller.countLessThan5,
-                                        countForm5To7: controller.countForm5To7,
-                                        countForm7ToLessThan10:
-                                            controller.countForm7ToLessThan10,
-                                        countEqual10: controller.countEqual10,
-                                      )),
-                                  GlobalStyles.sizedBoxHeight_25,
-                                  Text(
-                                    StatisticalString.PieChartAnnounce,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontSize: 16),
-                                  ),
-                                  Text(
-                                    StatisticalString.PieChartAnnounce2,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontSize: 16),
-                                  ),
-                                  GlobalStyles.sizedBoxHeight_25,
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Pie chart annotation :",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
-                                      ),
-                                      GlobalStyles.sizedBoxHeight_10,
-                                      controller.countLessThan5 != 0
-                                          ? TextWidget(
-                                              color: Colors.red,
-                                              titleStr:
-                                                  "Percentage score less than 5")
-                                          : Container(),
-                                      GlobalStyles.sizedBoxHeight_10,
-                                      controller.countForm5To7 != 0
-                                          ? TextWidget(
-                                              color: Colors.yellow,
-                                              titleStr:
-                                                  "Score percentage from 5 to less than 7")
-                                          : Container(),
-                                      GlobalStyles.sizedBoxHeight_10,
-                                      controller.countForm7ToLessThan10 != 0
-                                          ? TextWidget(
-                                              color: Colors.green,
-                                              titleStr:
-                                                  "Score percentage from 7 to less than 10")
-                                          : Container(),
-                                      GlobalStyles.sizedBoxHeight_10,
-                                      controller.countEqual10 != 0
-                                          ? TextWidget(
-                                              color: Colors.pink,
-                                              titleStr:
-                                                  "Point percentage equals 10")
-                                          : Container(),
-                                    ],
-                                  ),
+                                  PeiChartWidget(
+                                    countLessThan5: controller.countLessThan5,
+                                    countForm5To7: controller.countForm5To7,
+                                    countForm7ToLessThan10:
+                                        controller.countForm7ToLessThan10,
+                                    countEqual10: controller.countEqual10,
+                                    pieAnouce1:
+                                        StatisticalString.PieChartAnnounce,
+                                    pieAnouce2:
+                                        StatisticalString.PieChartAnnounce2,
+                                  )
                                 ],
                               ),
                             ),
@@ -180,68 +121,10 @@ class StatisticalView extends GetView<StatisticalController> {
                               ),
                               child: Column(
                                 children: [
-                                  Container(
-                                    height:
-                                        MediaQuery.of(context).size.width / 1.1,
-                                    width:
-                                        MediaQuery.of(context).size.width / 1.2,
-                                    child: AspectRatio(
-                                      aspectRatio: 1,
-                                      child: BarChart(
-                                        BarChartData(
-                                            minY: 0,
-                                            maxY: controller.grades.length
-                                                        .toDouble() <
-                                                    10
-                                                ? 10
-                                                : controller.grades.length
-                                                    .toDouble(),
-                                            titlesData: FlTitlesData(
-                                                bottomTitles: AxisTitles(
-                                                    sideTitles: SideTitles(
-                                                  showTitles: true,
-                                                  getTitlesWidget:
-                                                      (value, meta) {
-                                                    return Text(
-                                                      value.toInt().toString(),
-                                                      style: TextStyle(
-                                                          color: Colors.white),
-                                                    );
-                                                  },
-                                                )),
-                                                leftTitles: AxisTitles(
-                                                    sideTitles: SideTitles(
-                                                  showTitles: true,
-                                                  getTitlesWidget:
-                                                      (value, meta) {
-                                                    return Text(
-                                                      value.toInt().toString(),
-                                                      style: TextStyle(
-                                                          color: Colors.white),
-                                                    );
-                                                  },
-                                                )),
-                                                topTitles: AxisTitles(
-                                                    sideTitles: SideTitles(
-                                                        showTitles: false)),
-                                                rightTitles: AxisTitles(
-                                                    sideTitles: SideTitles(
-                                                        showTitles: false))),
-                                            borderData: FlBorderData(
-                                              border: Border(
-                                                  top: BorderSide.none,
-                                                  right: BorderSide.none,
-                                                  left: BorderSide(
-                                                      width: 1,
-                                                      color: Colors.white),
-                                                  bottom: BorderSide(
-                                                      width: 1,
-                                                      color: Colors.white)),
-                                            ),
-                                            barGroups: controller.barGroups),
-                                      ),
-                                    ),
-                                  ),
+                                  BarChartWidget(
+                                      gradesLength:
+                                          controller.grades.length.toDouble(),
+                                      barGroupsList: controller.barGroups),
                                   GlobalStyles.sizedBoxHeight_10,
                                   Text(
                                     StatisticalString.BarChartAnnounce,
@@ -268,28 +151,6 @@ class StatisticalView extends GetView<StatisticalController> {
                 ),
               ));
       },
-    );
-  }
-}
-
-class TextWidget extends StatelessWidget {
-  const TextWidget({super.key, required this.color, required this.titleStr});
-  final Color color;
-  final String titleStr;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Row(children: [
-        Icon(
-          Icons.pie_chart,
-          color: color,
-        ),
-        GlobalStyles.sizedBoxWidth,
-        Text(
-          titleStr,
-          style: TextStyle(color: Colors.white),
-        ),
-      ]),
     );
   }
 }
