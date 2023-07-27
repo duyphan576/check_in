@@ -43,7 +43,14 @@ class StatisticalController extends GetxController with CacheManager {
     );
     if (response?.status == 1) {
       List<dynamic> gradeList = response?.data['gradeList'];
-      if (gradeList.isNotEmpty) {
+      print(response?.data['gradeList'].isEmpty);
+      if (response?.data['gradeList'].isEmpty) {
+        Alert.closeLoadingIndicator();
+        Alert.showSuccess(
+            title: "Error",
+            message: StatisticalString.GradesEmpty,
+            buttonText: AppString.CANCEL);
+      } else {
         List<int?> gradesList =
             gradeList.map((dynamic item) => item is int ? item : null).toList();
         grades.addAll(gradesList);
@@ -84,12 +91,6 @@ class StatisticalController extends GetxController with CacheManager {
           barGroups.add(barGroup);
           isLoading.value = false;
         }
-      } else {
-        Alert.showSuccess(
-            title: "Error",
-            message: StatisticalString.GradesEmpty,
-            buttonText: AppString.CANCEL);
-        Get.back();
       }
     } else {
       Alert.showSuccess(
