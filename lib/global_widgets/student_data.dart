@@ -9,15 +9,19 @@ class StudentPicture extends StatelessWidget {
     this.code,
     this.height,
     this.width,
+    this.grade,
     this.onTap,
   }) : super(key: key);
   final String? name;
   final String? code;
   final height;
   final width;
+  final String? grade;
   final onTap;
+
   @override
   Widget build(BuildContext context) {
+    bool isGrade = grade == null;
     return Container(
       height: height * 0.15,
       width: width,
@@ -90,7 +94,7 @@ class StudentPicture extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: width * 0.45,
+                  width: width * 0.4,
                   child: Divider(
                     thickness: 1.0,
                     color: AppColors.lightWhite,
@@ -105,7 +109,29 @@ class StudentPicture extends StatelessWidget {
                     fontStyle: FontStyle.italic,
                   ),
                 ),
-                GlobalStyles.sizedBoxHeight,
+                isGrade
+                    ? GlobalStyles.sizedBoxHeight_25
+                    : Column(
+                        children: [
+                          SizedBox(
+                            width: width * 0.3,
+                            child: Divider(
+                              thickness: 1.0,
+                              color: AppColors.lightWhite,
+                            ),
+                          ),
+                          Text(
+                            "Average Grade : $grade",
+                            style: TextStyle(
+                              color: AppColors.lightWhite,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                          GlobalStyles.sizedBoxHeight_10
+                        ],
+                      )
               ],
             )
           ],

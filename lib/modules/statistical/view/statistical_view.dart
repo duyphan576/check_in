@@ -100,7 +100,7 @@ class StatisticalView extends GetView<StatisticalController> {
                             GlobalStyles.sizedBoxHeight_25,
                             Container(
                               width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.width / 0.9,
+                              height: MediaQuery.of(context).size.width / 0.8,
                               padding: GlobalStyles.paddingAll,
                               decoration: BoxDecoration(
                                 color: AppColors.lightWhite.withOpacity(0.75),
@@ -120,25 +120,54 @@ class StatisticalView extends GetView<StatisticalController> {
                                 ),
                               ),
                               child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   BarChartWidget(
                                       gradesLength:
                                           controller.grades.length.toDouble(),
                                       barGroupsList: controller.barGroups),
                                   GlobalStyles.sizedBoxHeight_10,
-                                  Text(
-                                    StatisticalString.BarChartAnnounce,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontSize: 16),
-                                  ),
-                                  Text(
-                                    StatisticalString.BarChartAnnounce2,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontSize: 16),
+                                  Padding(
+                                    padding:
+                                        GlobalStyles.paddingPageLeftRight_15,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          StatisticalString.BarChartAnnounce,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                              fontSize: 16),
+                                        ),
+                                        GlobalStyles.sizedBoxHeight_10,
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Bar Chart Annouce :",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    fontSize: 16)),
+                                            GlobalStyles.sizedBoxHeight_10,
+                                            Text(
+                                              "X-axis represents the number of people",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                            GlobalStyles.sizedBoxHeight_10,
+                                            Text(
+                                              "Y-axis represents the point",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),

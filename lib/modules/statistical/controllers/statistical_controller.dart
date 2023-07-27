@@ -42,9 +42,9 @@ class StatisticalController extends GetxController with CacheManager {
       cacheGet(CacheManagerKey.TOKEN),
     );
     if (response?.status == 1) {
-      List<dynamic> gradeList = response?.data['gradeList'];
-      print(response?.data['gradeList'].isEmpty);
-      if (response?.data['gradeList'].isEmpty) {
+      List<dynamic> gradeList = response?.data['examGradeList'];
+      print(response?.data['examGradeList'].isEmpty);
+      if (response?.data['examGradeList'].isEmpty) {
         Alert.closeLoadingIndicator();
         Alert.showSuccess(
             title: "Error",
@@ -104,12 +104,12 @@ class StatisticalController extends GetxController with CacheManager {
   Map<int, int> countOccurrences(List<int?> grades) {
     Map<int, int> occurrences = {};
 
-    for (int i = 1; i <= 10; i++) {
+    for (int i = 0; i <= 10; i++) {
       occurrences[i] = 0;
     }
 
     for (int? grade in grades) {
-      if (grade != null && grade >= 1 && grade <= 10) {
+      if (grade != null && grade >= 0 && grade <= 10) {
         occurrences[grade] = (occurrences[grade] ?? 0) + 1;
       }
     }

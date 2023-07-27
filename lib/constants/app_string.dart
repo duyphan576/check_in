@@ -146,10 +146,9 @@ abstract class ChangePasswordString {
 abstract class StatisticalString {
   static const String GradesEmpty = "Grade in class empty";
   static const String PieChartAnnounce = "The pie chart shows the percentage";
-  static const String PieChartAnnounce2 = "of students' test scores";
+  static const String PieChartAnnounce2 = "of students' exam scores";
   static const String BarChartAnnounce =
-      "Statistical chart of the number of students achieving at each";
-  static const String BarChartAnnounce2 = "test score from 1 to 10";
+      "Statistical chart of the number of students achieving at each exam score from 0 to 10";
 }
 
 abstract class HomeString {

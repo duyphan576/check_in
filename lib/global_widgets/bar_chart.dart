@@ -9,7 +9,7 @@ class BarChartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.width / 1.1,
+      height: MediaQuery.of(context).size.width / 1.2,
       width: MediaQuery.of(context).size.width / 1.2,
       child: AspectRatio(
         aspectRatio: 1,
@@ -46,8 +46,14 @@ class BarChartWidget extends StatelessWidget {
                 border: Border(
                     top: BorderSide.none,
                     right: BorderSide.none,
-                    left: BorderSide(width: 1, color: Colors.white),
-                    bottom: BorderSide(width: 1, color: Colors.white)),
+                    left: BorderSide(
+                      width: 1,
+                      color: Colors.white,
+                    ),
+                    bottom: BorderSide(
+                      width: 1,
+                      color: Colors.white,
+                    )),
               ),
               barGroups: barGroupsList),
         ),
