@@ -125,6 +125,8 @@ abstract class Message {
       "8 character password including uppercase, lowercase and special characters";
   static const String REQUIRE_PASSWORD = "Vui lòng nhập mật khẩu";
   static const String REQUIRE_USERNAME = "Vui lòng nhập tên tài khoản";
+  static const String EMPTY_PASSWORD = "Please enter a new password";
+  static const String EMPTY_CPASSWORD = "Please enter a confirm password";
 }
 
 abstract class LoginString {

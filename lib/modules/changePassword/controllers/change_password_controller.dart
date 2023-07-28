@@ -39,23 +39,25 @@ class ChangePasswordController extends GetxController with CacheManager {
     validateGroup = [
       Validator().validateRequireAllField(
         {
-          'password': oldPasswordController.text,
-          'password': newPasswordController.text,
-          'password': confirmPasswordController.text
+          'oldPassword': oldPasswordController.text,
+          'newPassword': newPasswordController.text,
+          'confirmPassword': confirmPasswordController.text
         },
         AppString.EMPTY,
       ),
+      Validator()
+          .validPassword(newPasswordController.text, Message.VALID_PASSWORD),
+      Validator().validPassword(
+          confirmPasswordController.text, Message.VALID_PASSWORD),
+      Validator().cPassword(
+          confirmPasswordController.text, newPasswordController.text, {
+        'VALID_C_PASSWORD': Message.VALID_C_PASSWORD,
+        'EMPTY_PASSWORD': Message.EMPTY_PASSWORD,
+        'EMPTY_CPASSWORD': Message.EMPTY_CPASSWORD,
+      }),
     ];
     this.errorMessage.value = Validator().validateForm(validateGroup)!;
-    if (this.errorMessage.value == "") {
-      this.errorMessage.value = Validator()
-          .validPassword(newPasswordController.text, Message.VALID_PASSWORD)!;
-    }
-    if (this.errorMessage.value == "") {
-      this.errorMessage.value = Validator().validPassword(
-          confirmPasswordController.text, Message.VALID_PASSWORD)!;
-    }
-
+    print(this.errorMessage.value);
     if (this.errorMessage.value == "") {
       isLoading.value = true;
       String oldPassword = oldPasswordController.text;
@@ -70,15 +72,14 @@ class ChangePasswordController extends GetxController with CacheManager {
           cacheGet(CacheManagerKey.TOKEN));
       if (response?.statusCode == HttpStatus.ok) {
         isLoading.value = false;
-
+        print(response?.status);
         if (response?.status == 1) {
           Alert.closeLoadingIndicator();
           Alert.showSuccess(
             title: ChangePasswordString.HINT_CHANGEPASSWORD,
             buttonText: CommonString.OK,
             message: response?.message,
-          );
-          logout();
+          ).then((value) => logout());
         } else {
           Alert.showSuccess(
             title: CommonString.ERROR,
@@ -109,11 +110,9 @@ class ChangePasswordController extends GetxController with CacheManager {
       cacheGet(CacheManagerKey.TOKEN),
     );
     if (response?.status == 1) {
-      Future.delayed(Duration(seconds: 2), () {
-        authenticationService.clearStorage();
-        cacheRemove(CacheManagerKey.TOKEN);
-        Get.offAllNamed(Routes.LOGIN);
-      });
+      authenticationService.clearStorage();
+      cacheRemove(CacheManagerKey.TOKEN);
+      Get.offAllNamed(Routes.LOGIN);
     }
   }
 }

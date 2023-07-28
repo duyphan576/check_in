@@ -63,7 +63,7 @@ class Validator {
     if (!regex.hasMatch(value))
       return message;
     else
-      return "";
+      return null;
   }
 
   String? cPassword(
@@ -102,6 +102,7 @@ class Validator {
     var length = validateGroup.length;
     for (var i = 0; i < length; i++) {
       String? message = validateGroup[i];
+
       if (message != null) {
         return message;
       } else {
