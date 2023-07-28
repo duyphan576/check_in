@@ -464,4 +464,31 @@ class Alert {
       },
     );
   }
+
+  static Future<dynamic> showErrorGeolocator({
+    required String title,
+    required String message,
+    required String buttonTextOK,
+    required String buttonTextCancel,
+    required onPressed,
+  }) {
+    return showDialog(
+      context: Get.context!,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: <Widget>[
+          CupertinoDialogAction(
+            child: Text(buttonTextCancel),
+            onPressed: () => Get.back(),
+          ),
+          CupertinoDialogAction(
+            child: Text(buttonTextOK),
+            onPressed: onPressed,
+          )
+        ],
+      ),
+      barrierDismissible: false,
+    );
+  }
 }
