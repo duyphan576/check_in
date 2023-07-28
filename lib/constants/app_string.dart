@@ -13,7 +13,7 @@ abstract class Init {
 }
 
 abstract class AppString {
-  static const String EMPTY = "Vui lòng điền các trường thông tin bắt buộc";
+  static const String EMPTY = "Please fill in the required fields";
   static const String EMPTY_EMAIL = "Vui lòng nhập email của bạn";
   static const String EMPTY_TEL = "Vui lòng nhập số điện thoại";
   static const String EMPTY_VNID = "Vui lòng nhập mã số nuskin";
@@ -123,11 +123,13 @@ abstract class AppString {
 }
 
 abstract class Message {
-  static const String VALID_C_PASSWORD = "Vui lòng nhập đúng mật khẩu";
+  static const String VALID_C_PASSWORD = "Please enter the correct password";
   static const String VALID_PASSWORD =
-      "Mật khẩu 8 ký tự bao gồm chữ hoa, chữ thường và ký tự đặc biệt";
+      "8 character password including uppercase, lowercase and special characters";
   static const String REQUIRE_PASSWORD = "Vui lòng nhập mật khẩu";
   static const String REQUIRE_USERNAME = "Vui lòng nhập tên tài khoản";
+  static const String EMPTY_PASSWORD = "Please enter a new password";
+  static const String EMPTY_CPASSWORD = "Please enter a confirm password";
 }
 
 abstract class LoginString {
