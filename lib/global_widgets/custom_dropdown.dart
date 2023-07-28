@@ -1,6 +1,8 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
+import 'package:check_in/models/checkin_history/checkin_history.dart';
 import 'package:check_in/modules/checkin/controllers/checkin_controller.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,55 +13,63 @@ class CustomDropdown extends GetView<CheckinController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: GlobalStyles.paddingAll18,
-      height: MediaQuery.of(context).size.height * 0.1,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: AppColors.lightWhite.withOpacity(0.75),
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black,
-            blurRadius: 4,
-            blurStyle: BlurStyle.outer,
-            offset: Offset(0, 0), // Shadow position
+    return Padding(
+      padding: GlobalStyles.paddingPageLeftRight_25,
+      child: DropdownSearch<CheckinHistory>(
+        items: controller.checkHistory,
+        compareFn: (i, c) => i.classroom.id == c.classroom.id,
+        itemAsString: (CheckinHistory item) => item.classroom.term.termName,
+        onChanged: (value) {
+          controller.isReady.value = true;
+          controller.getDateCheckin(value!.classroom.id.toString());
+        },
+        dropdownDecoratorProps: DropDownDecoratorProps(
+          dropdownSearchDecoration: InputDecoration(
+            labelText: CheckinString.CLASSROOM,
+            border: InputBorder.none,
           ),
-        ],
-        gradient: LinearGradient(
-          colors: AppColors.listColorGradientMain,
-          begin: Alignment.bottomLeft,
-          end: Alignment.topRight,
         ),
-      ),
-      child: DropdownButton<String>(
-        items: controller.checkHistory.map<DropdownMenuItem<String>>(
-          (element) {
-            return DropdownMenuItem<String>(
-              value: element.classroom.id.toString(),
-              child: Text(
-                element.classroom.term.termName,
+        popupProps: PopupProps.modalBottomSheet(
+          showSelectedItems: true,
+          showSearchBox: true,
+          containerBuilder: (context, popupWidget) {
+            return Container(
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+              padding: GlobalStyles.paddingAll18,
+              width: MediaQuery.of(context).size.width,
+              child: popupWidget,
+            );
+          },
+          itemBuilder: (context, item, isSelected) {
+            return Container(
+              margin: GlobalStyles.paddingPageLeftRight,
+              decoration: !isSelected
+                  ? null
+                  : BoxDecoration(
+                      border: Border.all(color: Theme.of(context).primaryColor),
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white,
+                    ),
+              child: ListTile(
+                selected: isSelected,
+                title: Text(
+                  item.classroom.term.termName,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppColors.lightBlack,
+                  ),
+                ),
+                trailing: Text(
+                  item.classroom.id.toString(),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppColors.lightBlack,
+                  ),
+                ),
               ),
             );
           },
-        ).toList(),
-        iconEnabledColor: AppColors.lightWhite,
-        isExpanded: true,
-        borderRadius: BorderRadius.circular(8),
-        dropdownColor: Colors.transparent,
-        value: controller.chooseItem.value,
-        icon: const Icon(Icons.arrow_downward),
-        elevation: 16,
-        style: TextStyle(
-          fontSize: 18,
-          color: AppColors.lightWhite,
-          fontWeight: FontWeight.bold,
         ),
-        hint: Text("Select a classroom"),
-        onChanged: (value) {
-          controller.getDateCheckin(value);
-          print(controller.isClick.value);
-        },
       ),
     );
   }

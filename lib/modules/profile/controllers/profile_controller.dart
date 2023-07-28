@@ -1,11 +1,10 @@
 import 'package:check_in/core/index.dart';
-import 'package:check_in/core/my_date_format.dart';
 import 'package:check_in/modules/profile/repository/profile_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class ProfileController extends GetxController with CacheManager, MyDateFormat {
+class ProfileController extends GetxController with CacheManager {
   final ProfileRepository profileRepository;
   final TextEditingController oldPasswordController = TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();

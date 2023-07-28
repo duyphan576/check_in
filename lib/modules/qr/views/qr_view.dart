@@ -1,10 +1,9 @@
+import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/global_widgets/qr_scanner_overplay.dart';
 import 'package:check_in/modules/qr/controllers/qr_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:check_in/constants/index.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QrView extends GetView<QrController> {
@@ -41,38 +40,77 @@ class QrView extends GetView<QrController> {
             centerTitle: true,
           ),
           body: GetBuilder<QrController>(
-            builder: (controller) => Padding(
-              padding: GlobalStyles.paddingPageLeftRight_25,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GlobalStyles.sizedBoxHeight,
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.width,
-                        child: MobileScanner(
-                          controller: controller.cameraController,
-                          onDetect: (capture) {
-                            controller.barcode.assignAll(capture.barcodes);
-                            controller.startOrStop();
-                            for (final barcode in controller.barcode) {
-                              controller.saveToken(barcode.rawValue);
-                            }
-                          },
-                        ),
-                      ),
-                      QRScannerOverlay(
-                        overlayColour: Colors.black.withOpacity(0.5),
+            builder: (controller) =>
+                Obx(() => controller.isLoading.value == true
+                    ? Center(
+                        child: CircularProgressIndicator(),
                       )
-                    ],
-                  ),
-                  GlobalStyles.sizedBoxHeight,
-                ],
-              ),
-            ),
+                    : Padding(
+                        padding: GlobalStyles.paddingPageLeftRight_25,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GlobalStyles.sizedBoxHeight,
+                            Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: MediaQuery.of(context).size.width,
+                                  child: MobileScanner(
+                                    controller: controller.cameraController,
+                                    onDetect: (capture) {
+                                      controller.barcode
+                                          .assignAll(capture.barcodes);
+                                      //controller.startOrStop();
+                                      for (final barcode
+                                          in controller.barcode) {
+                                        controller.saveToken(barcode.rawValue);
+                                      }
+                                    },
+                                  ),
+                                ),
+                                Center(
+                                    child: Stack(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      height: 300.0,
+                                      width: 300.0,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.transparent,
+                                                width: 2.0)),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      bottom: controller.animationScanner,
+                                      child: Container(
+                                          width: 300.0,
+                                          height: 24.0,
+                                          decoration: new BoxDecoration(
+                                              gradient: new LinearGradient(
+                                                  begin: Alignment.topCenter,
+                                                  end: Alignment.bottomCenter,
+                                                  stops: [
+                                                0.0,
+                                                1.0
+                                              ],
+                                                  colors: [
+                                                controller.firstColor,
+                                                controller.secondColor
+                                              ]))),
+                                    )
+                                  ],
+                                )),
+                                QRScannerOverlay(
+                                  overlayColour: Colors.black.withOpacity(0.5),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )),
           ),
         ),
       ),

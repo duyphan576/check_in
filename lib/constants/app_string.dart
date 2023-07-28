@@ -117,6 +117,9 @@ abstract class AppString {
 
   static const String NOTE_STATUS_2 = "Tra cứu hành trình chuyến hàng: ";
   static const String NOTE_STATUS_3 = "Nhấn vào dây";
+
+  static const String CAMERA_ERROR = "Ứng dụng không cho phép truy cập Camera.";
+  static const String GO_TO_SETTINGS = "Mở cài đặt ứng dụng";
 }
 
 abstract class Message {
@@ -156,5 +159,9 @@ abstract class HomeString {
 }
 
 abstract class CheckinString {
-  static const String CHECK_IN = "Checkin Success";
+  static const String CHECKIN = "Checkin";
+  static const String CHECKIN_HISTORY = "Checkin History";
+  static const String CLASSROOM = "Classroom";
+  static const String DATE = "Date";
+  static const String ATTENDANCE = "Your class has never been in attendance";
 }

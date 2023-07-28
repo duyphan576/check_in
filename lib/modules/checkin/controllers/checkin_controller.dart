@@ -82,7 +82,7 @@ class CheckinController extends GetxController with CacheManager {
       if (response?.status == 1) {
         isLoading.value = false;
         Alert.showSuccess(
-          title: CheckinString.CHECK_IN,
+          title: CommonString.SUCCESS,
           buttonText: CommonString.OK,
           message: response?.message,
         );
@@ -101,7 +101,7 @@ class CheckinController extends GetxController with CacheManager {
     if (wifiName.value.isNotEmpty == true) {
       bool isGrantedCamera = await requestWifiInfoPermissions();
       if (isGrantedCamera) {
-        Get.offAndToNamed(Routes.QR)?.then((value) => checkin(value));
+        Get.toNamed(Routes.QR)?.then((value) => checkin(value));
       }
     } else {
       infoWifi = await Utils.getWifiName();
@@ -110,8 +110,7 @@ class CheckinController extends GetxController with CacheManager {
         wifiBSSID.value = infoWifi["bssidWifi"];
         bool isGrantedCamera = await requestWifiInfoPermissions();
         if (isGrantedCamera) {
-          Get.offAndToNamed(Routes.QR)?.then((value) {
-            print(value);
+          Get.toNamed(Routes.QR)?.then((value) {
             checkin(value);
           });
         }
@@ -120,20 +119,17 @@ class CheckinController extends GetxController with CacheManager {
   }
 
   Future<bool> requestWifiInfoPermissions() async {
-    print('Checking Android permissions');
     PermissionStatus status = await Permission.camera.status;
 
     if (status.isDenied || status.isRestricted) {
       if (await Permission.camera.request().isGranted) {
-        print('Camera permission granted');
         return true;
       } else {
-        print('Camera permission not granted');
         Alert.showErrorGeolocator(
-          title: "Lỗi",
-          message: "Ứng dụng không cho phép truy cập Camera.",
-          buttonTextOK: "Mở cài đặt ứng dụng",
-          buttonTextCancel: "Cancel",
+          title: CommonString.ERROR,
+          message: AppString.CAMERA_ERROR,
+          buttonTextOK: AppString.GO_TO_SETTINGS,
+          buttonTextCancel: CommonString.CANCEL,
           onPressed: () {
             openAppSettings();
             Get.back();
@@ -142,7 +138,6 @@ class CheckinController extends GetxController with CacheManager {
         return false;
       }
     } else {
-      print('Camera already granted (previous execution?)');
       return true;
     }
   }

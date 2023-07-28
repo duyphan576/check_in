@@ -1,5 +1,6 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
+import 'package:check_in/global_widgets/custom_dropdown.dart';
 import 'package:check_in/models/checkin_date/checkin_date.dart';
 import 'package:check_in/models/checkin_history/checkin_history.dart';
 import 'package:check_in/modules/checkin/controllers/checkin_controller.dart';
@@ -49,7 +50,7 @@ class CheckinView extends GetView<CheckinController> {
                           color: AppColors.main,
                         ),
                         title: Text(
-                          "Check in",
+                          CheckinString.CHECKIN,
                           style: TextStyle(
                             color: AppColors.lightBlack,
                             fontSize: 36,
@@ -74,7 +75,7 @@ class CheckinView extends GetView<CheckinController> {
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  "Checkin History",
+                                  CheckinString.CHECKIN_HISTORY,
                                   style: TextStyle(
                                     fontSize: 24,
                                     color: AppColors.lightBlack,
@@ -95,45 +96,7 @@ class CheckinView extends GetView<CheckinController> {
                                     ),
                                   ],
                                 ),
-                                child: DropdownSearch<CheckinHistory>(
-                                  items: controller.checkHistory,
-                                  compareFn: (i, c) =>
-                                      i.classroom.id == c.classroom.id,
-                                  itemAsString: (CheckinHistory item) =>
-                                      item.classroom.term.termName,
-                                  onChanged: (value) {
-                                    controller.isReady.value = true;
-                                    controller.getDateCheckin(
-                                        value!.classroom.id.toString());
-                                  },
-                                  popupProps: PopupProps.modalBottomSheet(
-                                    showSelectedItems: true,
-                                    showSearchBox: true,
-                                    itemBuilder: (context, item, isSelected) {
-                                      return Container(
-                                        margin:
-                                            EdgeInsets.symmetric(horizontal: 8),
-                                        decoration: !isSelected
-                                            ? null
-                                            : BoxDecoration(
-                                                border: Border.all(
-                                                    color: Theme.of(context)
-                                                        .primaryColor),
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                color: Colors.white,
-                                              ),
-                                        child: ListTile(
-                                          selected: isSelected,
-                                          title: Text(
-                                              item.classroom.term.termName),
-                                          trailing: Text(
-                                              item.classroom.id.toString()),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
+                                child: CustomDropdown(),
                               ),
                               GlobalStyles.sizedBoxHeight_10,
                               controller.isReady.value
@@ -157,7 +120,8 @@ class CheckinView extends GetView<CheckinController> {
                                       child: controller.checkinDate.isEmpty
                                           ? Center(
                                               child: Text(
-                                                  "Your class has never been in attendance"),
+                                                CheckinString.ATTENDANCE,
+                                              ),
                                             )
                                           : ListView.builder(
                                               padding: GlobalStyles
@@ -170,7 +134,7 @@ class CheckinView extends GetView<CheckinController> {
                                                         .checkinDate[index];
                                                 return ListTile(
                                                   title: Text(
-                                                    "Date",
+                                                    CheckinString.DATE,
                                                     style: TextStyle(
                                                       fontSize: 18,
                                                       color:
