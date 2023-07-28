@@ -72,8 +72,6 @@ class CheckinController extends GetxController with CacheManager {
       "wifiName": wifiName.value,
       "wifiBSSID": wifiBSSID.value,
     };
-    print("checkincheckincheckin");
-    print(submit);
     final response = await checkinRepository.checkin(
       submit,
       UrlProvider.HANDLES_CHECKIN,
@@ -87,13 +85,14 @@ class CheckinController extends GetxController with CacheManager {
         buttonText: CommonString.OK,
         message: response?.message,
       );
-    } else
+    } else {
       isLoading.value = false;
-    Alert.showSuccess(
-      title: CommonString.ERROR,
-      buttonText: CommonString.OK,
-      message: response?.message,
-    );
+      Alert.showSuccess(
+        title: CommonString.ERROR,
+        buttonText: CommonString.OK,
+        message: response?.message,
+      );
+    }
   }
 
   handleOpenCamera() async {
@@ -176,54 +175,6 @@ class CheckinController extends GetxController with CacheManager {
       chooseItem.value = value;
     }
   }
-
-  // void checkin(String? token) async {
-  //   final response = await checkinRepository.checkin(
-  //     // {
-  //     //   "token":
-  //     //       "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFzc3Jvb21JZCI6IjEiLCJleHAiOjE2OTI3NzE4MDl9.6z0GDq9j8kexLttZsceMY-az6YB0B2qsw8P7bLhqSkc",
-  //     //   "wifiName": '"Tenda_7EB5B0_5G"',
-  //     //   "wifiBSSID": 'c8:3a:35:7e:b5:b6',
-  //     // },
-  //     {
-  //       "token": token,
-  //       "wifiName": wifiName.value,
-  //       "wifiBSSID": wifiBSSID.value,
-  //     },
-  //     UrlProvider.HANDLES_CHECKIN,
-  //     cacheGet(CacheManagerKey.TOKEN),
-  //   );
-  //   if (response?.status == 1) {
-  //     Alert.showSuccess(
-  //       title: CheckinString.CHECK_IN,
-  //       buttonText: CommonString.OK,
-  //       message: response?.message,
-  //     );
-  //   } else {
-  //     Alert.showSuccess(
-  //       title: CommonString.ERROR,
-  //       buttonText: CommonString.OK,
-  //       message: response?.message,
-  //     );
-  //   }
-  // }
-
-  // Future<bool> requestWifiInfoPermisson() async {
-  //   print('Checking Android permissions');
-  //   PermissionStatus status = await Permission.location.status;
-  //   if (status.isDenied || status.isRestricted) {
-  //     if (await Permission.location.request().isGranted) {
-  //       print('Location permission granted');
-  //       return true;
-  //     } else {
-  //       print('Location permission not granted');
-  //       return false;
-  //     }
-  //   } else {
-  //     print('Permission already granted (previous execution?)');
-  //     return true;
-  //   }
-  // }
 
   getFormatedDate(date) {
     var inputFormat = DateFormat('yyyy-MM-dd');

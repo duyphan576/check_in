@@ -1,13 +1,12 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
-import 'package:check_in/global_widgets/custom_dropdown.dart';
 import 'package:check_in/models/checkin_date/checkin_date.dart';
-import 'package:check_in/models/classroom/classroom.dart';
+import 'package:check_in/models/checkin_history/checkin_history.dart';
 import 'package:check_in/modules/checkin/controllers/checkin_controller.dart';
 import 'package:check_in/routes/app_pages.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 
 class CheckinView extends GetView<CheckinController> {
   CheckinView({super.key});
@@ -88,124 +87,158 @@ class CheckinView extends GetView<CheckinController> {
                               GlobalStyles.sizedBoxHeight,
                               // CustomDropdown(),
                               Container(
-                                padding: GlobalStyles.paddingAll18,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.1,
-                                width: MediaQuery.of(context).size.width,
+                                // padding: GlobalStyles.paddingAll18,
+                                // height:
+                                //     MediaQuery.of(context).size.height * 0.1,
+                                // width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
-                                  color: AppColors.lightWhite.withOpacity(0.75),
+                                  color: AppColors.lightWhite.withOpacity(0.9),
                                   borderRadius: BorderRadius.circular(8),
                                   boxShadow: [
                                     BoxShadow(
                                       color: AppColors.black,
                                       blurRadius: 4,
                                       blurStyle: BlurStyle.outer,
-                                      offset: Offset(0, 0), // Shadow position
+                                      // offset: Offset(
+                                      //     0, 0), // Shadow position
                                     ),
                                   ],
-                                  gradient: LinearGradient(
-                                    colors: AppColors.listColorGradientMain,
-                                    begin: Alignment.bottomLeft,
-                                    end: Alignment.topRight,
-                                  ),
                                 ),
-                                child: InkWell(
-                                  onTap: () {
-                                    controller.isClick.value =
-                                        !controller.isClick.value;
-                                    controller.isReady.value = false;
+                                // child: InkWell(
+                                //   onTap: () {
+                                //     controller.isClick.value =
+                                //         !controller.isClick.value;
+                                //     controller.isReady.value = false;
+                                //   },
+                                //   child: ListTile(
+                                //     title: Text(
+                                //       controller.termName.value == ""
+                                //           ? "Select a classroom"
+                                //           : controller.termName.value,
+                                //       style: TextStyle(
+                                //         fontSize: 18,
+                                //         color: AppColors.lightWhite,
+                                //         fontWeight: FontWeight.bold,
+                                //       ),
+                                //     ),
+                                //     trailing: Icon(
+                                //       controller.isClick.value
+                                //           ? Icons.arrow_upward
+                                //           : Icons.arrow_downward,
+                                //       color: AppColors.lightWhite,
+                                //     ),
+                                //   ),
+                                // ),
+                                child: DropdownSearch<CheckinHistory>(
+                                  items: controller.checkHistory,
+                                  compareFn: (i, c) =>
+                                      i.classroom.id == c.classroom.id,
+                                  itemAsString: (CheckinHistory item) =>
+                                      item.classroom.term.termName,
+                                  onChanged: (value) {
+                                    controller.isReady.value = true;
+                                    controller.getDateCheckin(
+                                        value!.classroom.id.toString());
                                   },
-                                  child: ListTile(
-                                    title: Text(
-                                      controller.termName.value == ""
-                                          ? "Select a classroom"
-                                          : controller.termName.value,
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        color: AppColors.lightWhite,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    trailing: Icon(
-                                      controller.isClick.value
-                                          ? Icons.arrow_upward
-                                          : Icons.arrow_downward,
-                                      color: AppColors.lightWhite,
-                                    ),
+                                  popupProps: PopupProps.modalBottomSheet(
+                                    showSelectedItems: true,
+                                    showSearchBox: true,
+                                    itemBuilder: (context, item, isSelected) {
+                                      return Container(
+                                        margin:
+                                            EdgeInsets.symmetric(horizontal: 8),
+                                        decoration: !isSelected
+                                            ? null
+                                            : BoxDecoration(
+                                                border: Border.all(
+                                                    color: Theme.of(context)
+                                                        .primaryColor),
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: Colors.white,
+                                              ),
+                                        child: ListTile(
+                                          selected: isSelected,
+                                          title: Text(
+                                              item.classroom.term.termName),
+                                          trailing: Text(
+                                              item.classroom.id.toString()),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
                               GlobalStyles.sizedBoxHeight_10,
-                              GlobalStyles.sizedBoxHeight_10,
-                              controller.isClick.value
-                                  ? Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.4,
-                                      width: MediaQuery.of(context).size.width,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.lightWhite
-                                            .withOpacity(0.9),
-                                        borderRadius: BorderRadius.circular(8),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: AppColors.black,
-                                            blurRadius: 4,
-                                            blurStyle: BlurStyle.outer,
-                                            // offset: Offset(
-                                            //     0, 0), // Shadow position
-                                          ),
-                                        ],
-                                      ),
-                                      child: controller.checkHistory.isEmpty
-                                          ? Center(
-                                              child: Text(
-                                                  " You don't have any class."),
-                                            )
-                                          : ListView.builder(
-                                              padding: GlobalStyles
-                                                  .paddingPageLeftRight_15,
-                                              itemCount: controller
-                                                  .checkHistory.length,
-                                              itemBuilder: (context, index) {
-                                                final Classroom classroom =
-                                                    controller
-                                                        .checkHistory[index]
-                                                        .classroom;
-                                                return ListTile(
-                                                  title: Text(
-                                                    classroom.term.termName,
-                                                    style: TextStyle(
-                                                      fontSize: 18,
-                                                      color:
-                                                          AppColors.lightBlack,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                  trailing: IconButton(
-                                                    icon:
-                                                        Icon(Icons.visibility),
-                                                    onPressed: () {
-                                                      controller
-                                                              .termName.value =
-                                                          classroom
-                                                              .term.termName;
-                                                      controller.isClick.value =
-                                                          !controller
-                                                              .isClick.value;
-                                                      controller.isReady.value =
-                                                          true;
-                                                      controller.getDateCheckin(
-                                                          classroom.id
-                                                              .toString());
-                                                    },
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                    )
-                                  : SizedBox(),
+                              // controller.isClick.value
+                              //     ? Container(
+                              //         height:
+                              //             MediaQuery.of(context).size.height *
+                              //                 0.4,
+                              //         width: MediaQuery.of(context).size.width,
+                              //         decoration: BoxDecoration(
+                              //           color: AppColors.lightWhite
+                              //               .withOpacity(0.9),
+                              //           borderRadius: BorderRadius.circular(8),
+                              //           boxShadow: [
+                              //             BoxShadow(
+                              //               color: AppColors.black,
+                              //               blurRadius: 4,
+                              //               blurStyle: BlurStyle.outer,
+                              //               // offset: Offset(
+                              //               //     0, 0), // Shadow position
+                              //             ),
+                              //           ],
+                              //         ),
+                              //         child: controller.checkHistory.isEmpty
+                              //             ? Center(
+                              //                 child: Text(
+                              //                     " You don't have any class."),
+                              //               )
+                              //             : ListView.builder(
+                              //                 padding: GlobalStyles
+                              //                     .paddingPageLeftRight_15,
+                              //                 itemCount: controller
+                              //                     .checkHistory.length,
+                              //                 itemBuilder: (context, index) {
+                              //                   final Classroom classroom =
+                              //                       controller
+                              //                           .checkHistory[index]
+                              //                           .classroom;
+                              //                   return ListTile(
+                              //                     title: Text(
+                              //                       classroom.term.termName,
+                              //                       style: TextStyle(
+                              //                         fontSize: 18,
+                              //                         color:
+                              //                             AppColors.lightBlack,
+                              //                         fontWeight:
+                              //                             FontWeight.bold,
+                              //                       ),
+                              //                     ),
+                              //                     trailing: IconButton(
+                              //                       icon:
+                              //                           Icon(Icons.visibility),
+                              //                       onPressed: () {
+                              //                         controller
+                              //                                 .termName.value =
+                              //                             classroom
+                              //                                 .term.termName;
+                              //                         controller.isClick.value =
+                              //                             !controller
+                              //                                 .isClick.value;
+                              //                         controller.isReady.value =
+                              //                             true;
+                              //                         controller.getDateCheckin(
+                              //                             classroom.id
+                              //                                 .toString());
+                              //                       },
+                              //                     ),
+                              //                   );
+                              //                 },
+                              //               ),
+                              //       )
+                              //     : SizedBox(),
                               controller.isReady.value
                                   ? Container(
                                       height:
