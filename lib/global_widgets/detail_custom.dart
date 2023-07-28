@@ -117,7 +117,7 @@ class DetailCustom extends StatelessWidget {
                     ),
                   ],
                 ),
-                GlobalStyles.sizedBoxWidth_45,
+                GlobalStyles.sizedBoxWidth_35,
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
