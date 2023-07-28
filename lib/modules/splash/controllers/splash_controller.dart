@@ -1,16 +1,13 @@
 import 'dart:convert';
 
 import 'package:check_in/core/index.dart';
+import 'package:check_in/modules/splash/repository/splash_repository.dart';
 import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/global_service.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-
-import '../repository/splash_repository.dart';
 
 class SplashController extends GetxController with CacheManager {
   final SplashRepository splashRepository;
-  final storage = GetStorage();
   final globalService = Get.find<GlobalService>();
   var result;
   bool isNotification = false;

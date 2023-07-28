@@ -1,16 +1,18 @@
-import 'package:check_in/core/base_response.dart';
-import 'package:check_in/modules/classroom/models/classroom_model.dart';
+import 'package:check_in/modules/changePassword/models/change_password_model.dart';
 import 'package:check_in/services/http_provider.dart';
 import 'package:get/get.dart';
 
-class ClassroomProvider extends GetConnect {
-  ClassroomProvider({required this.http});
+import '../../../core/base_response.dart';
+
+class ChangePasswordProvider extends GetConnect {
+  ChangePasswordProvider({required this.http});
 
   final HttpProvider http;
-
-  Future<BaseResponse?> classroom(
-      ClassroomModel classroomModel, url, token) async {
-    return await http.doGetWithToken(url, token).then((response) {
+  Future<BaseResponse?> changePassword(
+      ChangePasswordModel changePasswordModel, url, token) async {
+    Map<String, dynamic> submit = Map<String, dynamic>();
+    submit.addAll(changePasswordModel.toMap());
+    return await http.doPostWithToken(url, token, submit).then((response) {
       return BaseResponse(
           statusCode: response.statusCode,
           statusText: response.statusMessage,
@@ -23,9 +25,9 @@ class ClassroomProvider extends GetConnect {
     });
   }
 
-  Future<BaseResponse?> detail(
-      Map<String, dynamic> classroomId, url, token) async {
-    return await http.doPostWithToken(url, token, classroomId).then((response) {
+  Future<BaseResponse?> logout(
+      ChangePasswordModel changePasswordModel, url, token) async {
+    return await http.doGetWithToken(url, token).then((response) {
       return BaseResponse(
           statusCode: response.statusCode,
           statusText: response.statusMessage,

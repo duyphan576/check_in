@@ -9,6 +9,8 @@ import 'package:check_in/modules/home/bindings/home_binding.dart';
 import 'package:check_in/modules/home/views/home_view.dart';
 import 'package:check_in/modules/login/bindings/login_binding.dart';
 import 'package:check_in/modules/login/views/login_view.dart';
+import 'package:check_in/modules/pdf_page/bindings/pdf_page_binding.dart';
+import 'package:check_in/modules/pdf_page/views/pdf_page_view.dart';
 import 'package:check_in/modules/profile/bindings/profile_binding.dart';
 import 'package:check_in/modules/profile/views/profile_view.dart';
 import 'package:check_in/modules/splash/bindings/splash_binding.dart';
@@ -17,6 +19,8 @@ import 'package:check_in/modules/statistical/bindings/statistical_bindings.dart'
 import 'package:check_in/modules/statistical/view/statistical_view.dart';
 import 'package:get/get.dart';
 
+import '../modules/changePassword/bindings/change_password_binding.dart';
+import '../modules/changePassword/view/change_password_view.dart';
 import '../modules/grade/bindings/grade_binding.dart';
 import '../modules/grade/views/grade_view.dart';
 
@@ -70,6 +74,16 @@ class AppPages {
       name: _Paths.STATISTICAL,
       page: () => StatisticalView(),
       binding: StatisticalBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHANGE_PASSWORD,
+      page: () => ChangePasswordView(),
+      binding: ChangePasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.PDF,
+      page: () => PdfPageView(),
+      binding: PdfPageBinding(),
     ),
   ];
 }

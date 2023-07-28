@@ -21,6 +21,7 @@ class LoginController extends GetxController with CacheManager {
   GetStorage data = GetStorage();
   RxBool isLoading = false.obs;
   RxString errorMessage = "".obs;
+  RxBool isOk = false.obs;
   List<String?> validateGroup = [];
   var userData;
   RxBool isNewUser = true.obs;
@@ -108,7 +109,7 @@ class LoginController extends GetxController with CacheManager {
             password: password,
           ),
           UrlProvider.HANDLES_LOGIN);
-
+      print(response);
       if (response?.statusCode == HttpStatus.ok) {
         Alert.closeLoadingIndicator();
         isLoading.value = false;
@@ -118,19 +119,21 @@ class LoginController extends GetxController with CacheManager {
           cacheSave(CacheManagerKey.CUSTOMER_INFO, response?.data["user"]);
           authenticationService.write("pin", password);
           Get.offAndToNamed(Routes.HOME);
-        } else {
+        } else if (response?.status == 0) {
           isLoading.value = false;
-          final snackBar = GetSnackBar(message: response?.message.toString());
-          Get.showSnackbar(snackBar);
-        }
-      } else {
-        Alert.closeLoadingIndicator();
-        isLoading.value = false;
-        Alert.showSuccess(
+          Alert.showSuccess(
             title: CommonString.ERROR,
-            message: CommonString.ERROR_MESSAGE,
-            buttonText: CommonString.CANCEL);
+            message: response?.message,
+            buttonText: CommonString.CANCEL,
+          );
+        }
       }
+    } else {
+      Alert.showSuccess(
+        title: CommonString.ERROR,
+        message: this.errorMessage.value,
+        buttonText: CommonString.CANCEL,
+      );
     }
   }
 

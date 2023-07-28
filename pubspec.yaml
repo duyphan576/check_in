@@ -61,6 +61,9 @@ dependencies:
   open_file: ^3.3.2
   url_launcher: ^6.1.12
   fl_chart: ^0.63.0
+  pdfx: ^2.4.0
+  internet_file: ^1.2.0
+
 flutter_icons:
   android: "icon_notification"
   ios: true
