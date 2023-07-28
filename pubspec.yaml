@@ -65,6 +65,8 @@ dependencies:
   mobile_scanner: ^3.3.0
   image_picker: ^1.0.1
   intl: ^0.18.1
+  geolocator: ^9.0.2
+
 
 flutter_icons:
   android: "icon_notification"
