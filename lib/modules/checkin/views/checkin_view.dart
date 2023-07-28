@@ -86,9 +86,127 @@ class CheckinView extends GetView<CheckinController> {
                                 ),
                               ),
                               GlobalStyles.sizedBoxHeight,
-                              CustomDropdown(),
+                              // CustomDropdown(),
+                              Container(
+                                padding: GlobalStyles.paddingAll18,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.1,
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  color: AppColors.lightWhite.withOpacity(0.75),
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.black,
+                                      blurRadius: 4,
+                                      blurStyle: BlurStyle.outer,
+                                      offset: Offset(0, 0), // Shadow position
+                                    ),
+                                  ],
+                                  gradient: LinearGradient(
+                                    colors: AppColors.listColorGradientMain,
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topRight,
+                                  ),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    controller.isClick.value =
+                                        !controller.isClick.value;
+                                    controller.isReady.value = false;
+                                  },
+                                  child: ListTile(
+                                    title: Text(
+                                      controller.termName.value == ""
+                                          ? "Select a classroom"
+                                          : controller.termName.value,
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: AppColors.lightWhite,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    trailing: Icon(
+                                      controller.isClick.value
+                                          ? Icons.arrow_upward
+                                          : Icons.arrow_downward,
+                                      color: AppColors.lightWhite,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              GlobalStyles.sizedBoxHeight_10,
                               GlobalStyles.sizedBoxHeight_10,
                               controller.isClick.value
+                                  ? Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.4,
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.lightWhite
+                                            .withOpacity(0.9),
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: AppColors.black,
+                                            blurRadius: 4,
+                                            blurStyle: BlurStyle.outer,
+                                            // offset: Offset(
+                                            //     0, 0), // Shadow position
+                                          ),
+                                        ],
+                                      ),
+                                      child: controller.checkHistory.isEmpty
+                                          ? Center(
+                                              child: Text(
+                                                  " You don't have any class."),
+                                            )
+                                          : ListView.builder(
+                                              padding: GlobalStyles
+                                                  .paddingPageLeftRight_15,
+                                              itemCount: controller
+                                                  .checkHistory.length,
+                                              itemBuilder: (context, index) {
+                                                final Classroom classroom =
+                                                    controller
+                                                        .checkHistory[index]
+                                                        .classroom;
+                                                return ListTile(
+                                                  title: Text(
+                                                    classroom.term.termName,
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                      color:
+                                                          AppColors.lightBlack,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  trailing: IconButton(
+                                                    icon:
+                                                        Icon(Icons.visibility),
+                                                    onPressed: () {
+                                                      controller
+                                                              .termName.value =
+                                                          classroom
+                                                              .term.termName;
+                                                      controller.isClick.value =
+                                                          !controller
+                                                              .isClick.value;
+                                                      controller.isReady.value =
+                                                          true;
+                                                      controller.getDateCheckin(
+                                                          classroom.id
+                                                              .toString());
+                                                    },
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                    )
+                                  : SizedBox(),
+                              controller.isReady.value
                                   ? Container(
                                       height:
                                           MediaQuery.of(context).size.height *
@@ -170,4 +288,3 @@ class CheckinView extends GetView<CheckinController> {
     );
   }
 }
-

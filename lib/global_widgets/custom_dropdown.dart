@@ -57,22 +57,8 @@ class CustomDropdown extends GetView<CheckinController> {
         ),
         hint: Text("Select a classroom"),
         onChanged: (value) {
-          if (controller.chooseItem.value != value!) {
-            controller.chooseItem.value = value;
-            controller.isClick.value = true;
-            controller.checkinDate.assignAll(controller.checkHistory
-                .firstWhere(
-                  (element) => element.classroom.id.toString() == value,
-                )
-                .checkinDate);
-            print(controller.checkinDate.isEmpty);
-          } else
-            controller.isClick.value = !controller.isClick.value;
-          controller.checkinDate.assignAll(controller.checkHistory
-              .firstWhere(
-                (element) => element.classroom.id.toString() == value,
-              )
-              .checkinDate);
+          controller.getDateCheckin(value);
+          print(controller.isClick.value);
         },
       ),
     );

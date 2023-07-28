@@ -4,7 +4,6 @@ import 'package:check_in/core/cache_manager.dart';
 import 'package:check_in/models/checkin_date/checkin_date.dart';
 import 'package:check_in/models/checkin_history/checkin_history.dart';
 import 'package:check_in/models/classroom/classroom.dart';
-import 'package:check_in/models/list_history/list_history.dart';
 import 'package:check_in/modules/checkin/repository/checkin_repository.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
@@ -34,10 +33,12 @@ class CheckinController extends GetxController with CacheManager {
   RxString wifiName = "".obs;
   RxString wifiBSSID = "".obs;
   RxBool isClick = false.obs;
+  RxBool isReady = false.obs;
   RxList<Classroom> classroom = RxList<Classroom>();
   RxList<CheckinDate> checkinDate = RxList<CheckinDate>();
   final RxList<CheckinHistory> checkHistory = RxList<CheckinHistory>();
   RxString chooseItem = "1".obs;
+  RxString termName = "".obs;
 
   CheckinController({required this.checkinRepository});
 
@@ -88,6 +89,17 @@ class CheckinController extends GetxController with CacheManager {
         buttonText: CommonString.OK,
         message: response?.message,
       );
+    }
+  }
+
+  void getDateCheckin(String? value) {
+    if (value != null) {
+      checkinDate.assignAll(checkHistory
+          .firstWhere(
+            (element) => element.classroom.id.toString() == value,
+          )
+          .checkinDate);
+      chooseItem.value = value;
     }
   }
 
