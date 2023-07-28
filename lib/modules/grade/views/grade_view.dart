@@ -13,6 +13,9 @@ class GradeView extends GetView<GradeController> {
 
   @override
   Widget build(BuildContext context) {
+    final TextStyle textStyleBold = TextStyle(
+        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16);
+    final TextStyle textStyle = TextStyle(color: Colors.white, fontSize: 16);
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return GetBuilder<GradeController>(
@@ -63,123 +66,120 @@ class GradeView extends GetView<GradeController> {
                               ),
                               GlobalStyles.sizedBoxHeight,
                               Container(
-                                height: MediaQuery.of(context).size.height,
+                                height: MediaQuery.of(context).size.width / 0.8,
                                 width: MediaQuery.of(context).size.width,
-                                child: controller.grades.isEmpty
-                                    ? Center(
-                                        child: CircularProgressIndicator(),
-                                      )
-                                    : ListView.builder(
-                                        itemCount: controller.grades.length,
-                                        itemBuilder: (context, index) {
-                                          final Grade grade =
-                                              controller.grades[index];
-                                          return Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: Container(
-                                                padding: GlobalStyles
-                                                    .paddingPageLeftRight_25,
-                                                decoration: BoxDecoration(
-                                                  color: AppColors.lightWhite
-                                                      .withOpacity(0.7),
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: AppColors.black,
-                                                      blurRadius: 2,
-                                                      blurStyle:
-                                                          BlurStyle.outer,
-                                                      offset: Offset(0,
-                                                          0), // Shadow position
-                                                    ),
-                                                  ],
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                      Color(0xFF41D8D7),
-                                                      Color(0xFF21A3C6),
-                                                      Color(0xFF285DA2),
-                                                      Color(0xFF332F61),
-                                                      Color(0xFF452E51),
-                                                    ],
-                                                    begin: Alignment.bottomLeft,
-                                                    end: Alignment.topRight,
-                                                  ),
-                                                ),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                          "Term Name : ${grade.termName.toString()}",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                        Text(
-                                                          "Term Id : ${grade.termId}",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Divider(
-                                                        color: Colors
-                                                            .grey.shade400,
-                                                        thickness: 2),
-                                                    Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Text(
-                                                          "Grade Attendance : ${grade.attendanceGrade}",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white),
-                                                        ),
-                                                        Text(
-                                                          "Grade Exam : ${grade.examGrade}",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white),
-                                                        ),
-                                                        Container(
-                                                          width: 200,
-                                                          child: Divider(
-                                                            color: Colors.white,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          "Grade Final: ${grade.finalGrade}",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                )),
-                                          );
-                                        },
+                                decoration: BoxDecoration(
+                                  color: AppColors.lightWhite.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.black,
+                                      blurRadius: 2,
+                                      blurStyle: BlurStyle.outer,
+                                      offset: Offset(0, 0), // Shadow position
+                                    ),
+                                  ],
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFF41D8D7),
+                                      Color(0xFF21A3C6),
+                                      Color(0xFF285DA2),
+                                      Color(0xFF332F61),
+                                      Color(0xFF452E51),
+                                    ],
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topRight,
+                                  ),
+                                ),
+                                child: Table(
+                                  border: TableBorder(
+                                    horizontalInside:
+                                        BorderSide(color: Colors.white),
+                                    verticalInside:
+                                        BorderSide(color: Colors.white),
+                                  ),
+                                  columnWidths: const <int, TableColumnWidth>{
+                                    0: IntrinsicColumnWidth(),
+                                    1: FixedColumnWidth(60),
+                                    2: FixedColumnWidth(30),
+                                    3: FixedColumnWidth(30),
+                                  },
+                                  children: [
+                                    TableRow(children: [
+                                      Center(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          child: Text("Term",
+                                              style: textStyleBold),
+                                        ),
                                       ),
+                                      Center(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          child: Text("Attendance Grade",
+                                              style: textStyleBold),
+                                        ),
+                                      ),
+                                      Center(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          child: Text("Exam Grade",
+                                              style: textStyleBold),
+                                        ),
+                                      ),
+                                      Center(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          child: Text("Final Grade",
+                                              style: textStyleBold),
+                                        ),
+                                      ),
+                                    ]),
+                                    for (int i = 0;
+                                        i < controller.grades.length;
+                                        i++)
+                                      TableRow(children: [
+                                        Center(
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                                controller.grades[i].termName
+                                                    .toString(),
+                                                style: textStyleBold),
+                                          ),
+                                        ),
+                                        Center(
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                                controller
+                                                    .grades[i].attendanceGrade
+                                                    .toString(),
+                                                style: textStyle),
+                                          ),
+                                        ),
+                                        Center(
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                                controller.grades[i].examGrade
+                                                    .toString(),
+                                                style: textStyle),
+                                          ),
+                                        ),
+                                        Center(
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                                controller.grades[i].finalGrade
+                                                    .toString(),
+                                                style: textStyle),
+                                          ),
+                                        ),
+                                      ]),
+                                    // Dòng dữ liệu từ controller.grades
+                                  ],
+                                ),
                               ),
                             ],
                           ),
