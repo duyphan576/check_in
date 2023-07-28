@@ -66,32 +66,34 @@ class CheckinController extends GetxController with CacheManager {
   }
 
   void checkin(String? token) async {
-    isLoading.value = true;
-    final submit = {
-      "token": token,
-      "wifiName": wifiName.value,
-      "wifiBSSID": wifiBSSID.value,
-    };
-    final response = await checkinRepository.checkin(
-      submit,
-      UrlProvider.HANDLES_CHECKIN,
-      cacheGet(CacheManagerKey.TOKEN),
-    );
+    if (token != null) {
+      print(token);
+      final submit = {
+        "token": token,
+        "wifiName": wifiName.value,
+        "wifiBSSID": wifiBSSID.value,
+      };
+      final response = await checkinRepository.checkin(
+        submit,
+        UrlProvider.HANDLES_CHECKIN,
+        cacheGet(CacheManagerKey.TOKEN),
+      );
 
-    if (response?.status == 1) {
-      isLoading.value = false;
-      Alert.showSuccess(
-        title: CheckinString.CHECK_IN,
-        buttonText: CommonString.OK,
-        message: response?.message,
-      );
-    } else {
-      isLoading.value = false;
-      Alert.showSuccess(
-        title: CommonString.ERROR,
-        buttonText: CommonString.OK,
-        message: response?.message,
-      );
+      if (response?.status == 1) {
+        isLoading.value = false;
+        Alert.showSuccess(
+          title: CheckinString.CHECK_IN,
+          buttonText: CommonString.OK,
+          message: response?.message,
+        );
+      } else {
+        isLoading.value = false;
+        Alert.showSuccess(
+          title: CommonString.ERROR,
+          buttonText: CommonString.OK,
+          message: response?.message,
+        );
+      }
     }
   }
 
@@ -99,7 +101,7 @@ class CheckinController extends GetxController with CacheManager {
     if (wifiName.value.isNotEmpty == true) {
       bool isGrantedCamera = await requestWifiInfoPermissions();
       if (isGrantedCamera) {
-        Get.toNamed(Routes.QR)?.then((value) => checkin(value));
+        Get.offAndToNamed(Routes.QR)?.then((value) => checkin(value));
       }
     } else {
       infoWifi = await Utils.getWifiName();
@@ -108,7 +110,10 @@ class CheckinController extends GetxController with CacheManager {
         wifiBSSID.value = infoWifi["bssidWifi"];
         bool isGrantedCamera = await requestWifiInfoPermissions();
         if (isGrantedCamera) {
-          Get.toNamed(Routes.QR)?.then((value) => checkin(value));
+          Get.offAndToNamed(Routes.QR)?.then((value) {
+            print(value);
+            checkin(value);
+          });
         }
       }
     }
