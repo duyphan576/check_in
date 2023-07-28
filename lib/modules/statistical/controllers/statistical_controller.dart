@@ -18,6 +18,7 @@ class StatisticalController extends GetxController with CacheManager {
   final AuthenticationService authenticationService = AuthenticationService();
   int ClassroomId = int.parse(Get.parameters['classroomId'].toString());
   bool isClassroom = "true" == Get.parameters['isClassroom'].toString();
+
   RxList<double?> grades =
       <double?>[].obs; // Change the type to RxList<double?>
   var countLessThan5 = 0.0;
@@ -39,76 +40,78 @@ class StatisticalController extends GetxController with CacheManager {
 
   void getGradesData() async {
     isLoading.value = true;
-    final response = await statisticalRepository.statistical(
-      StatisticalModel(classroomId: ClassroomId.toString()),
-      UrlProvider.HANDLES_GRADELISTCLASS,
-      cacheGet(CacheManagerKey.TOKEN),
-    );
-    if (response?.status == 1) {
-      List<dynamic> gradeList = response?.data['examGradeList'];
-      print(response?.data['examGradeList'].isEmpty);
-      if (response?.data['examGradeList'].isEmpty) {
+    if (isClassroom) {
+      final response = await statisticalRepository.statistical(
+        StatisticalModel(classroomId: ClassroomId.toString()),
+        UrlProvider.HANDLES_GRADELISTCLASS,
+        cacheGet(CacheManagerKey.TOKEN),
+      );
+      if (response?.status == 1) {
+        List<dynamic> gradeList = response?.data['examGradeList'];
+        print(response?.data['examGradeList'].isEmpty);
+        if (response?.data['examGradeList'].isEmpty) {
+          Alert.closeLoadingIndicator();
+          Alert.showSuccess(
+              title: "Error",
+              message: StatisticalString.GradesEmpty,
+              buttonText: AppString.CANCEL);
+        } else {
+          List<double?> gradesList = gradeList.map((dynamic item) {
+            if (item is int) {
+              return item.toDouble(); // Convert to double
+            } else if (item is double) {
+              return item;
+            } else {
+              return null;
+            }
+          }).toList();
+          grades.addAll(gradesList);
+          update();
+          print(grades);
+          for (int i = 0; i < grades.length; i++) {
+            if (grades[i]! < 5) {
+              countLessThan5++;
+            } else if (grades[i]! >= 5 && grades[i]! < 7) {
+              countForm5To7++;
+            } else if (grades[i]! >= 7 && grades[i]! < 10) {
+              countForm7ToLessThan10++;
+            } else if (grades[i] == 10) {
+              countEqual10++;
+            }
+          }
+          countLessThan5 = CalculatePercent(
+              countLessThan5, double.parse(grades.length.toString()));
+          countForm5To7 = CalculatePercent(
+              countForm5To7, double.parse(grades.length.toString()));
+          countForm7ToLessThan10 = CalculatePercent(
+              countForm7ToLessThan10, double.parse(grades.length.toString()));
+          countEqual10 = CalculatePercent(
+              countEqual10, double.parse(grades.length.toString()));
+          Map<int, int> occurrences = countOccurrences(grades);
+          for (var grade in occurrences.keys) {
+            int count = occurrences[grade] ?? 0;
+            BarChartGroupData barGroup = BarChartGroupData(
+              x: grade,
+              barRods: [
+                BarChartRodData(
+                  fromY: 0,
+                  toY: count.toDouble(), // Convert to double
+                  width: 15,
+                  color: Colors.amber,
+                ),
+              ],
+            );
+            barGroups.add(barGroup);
+            isLoading.value = false;
+          }
+        }
+      } else {
         Alert.closeLoadingIndicator();
         Alert.showSuccess(
             title: "Error",
-            message: StatisticalString.GradesEmpty,
+            message: response!.message.toString(),
             buttonText: AppString.CANCEL);
-      } else {
-        List<double?> gradesList = gradeList.map((dynamic item) {
-          if (item is int) {
-            return item.toDouble(); // Convert to double
-          } else if (item is double) {
-            return item;
-          } else {
-            return null;
-          }
-        }).toList();
-        grades.addAll(gradesList);
-        update();
-        print(grades);
-        for (int i = 0; i < grades.length; i++) {
-          if (grades[i]! < 5) {
-            countLessThan5++;
-          } else if (grades[i]! >= 5 && grades[i]! < 7) {
-            countForm5To7++;
-          } else if (grades[i]! >= 7 && grades[i]! < 10) {
-            countForm7ToLessThan10++;
-          } else if (grades[i] == 10) {
-            countEqual10++;
-          }
-        }
-        countLessThan5 = CalculatePercent(
-            countLessThan5, double.parse(grades.length.toString()));
-        countForm5To7 = CalculatePercent(
-            countForm5To7, double.parse(grades.length.toString()));
-        countForm7ToLessThan10 = CalculatePercent(
-            countForm7ToLessThan10, double.parse(grades.length.toString()));
-        countEqual10 = CalculatePercent(
-            countEqual10, double.parse(grades.length.toString()));
-        Map<int, int> occurrences = countOccurrences(grades);
-        for (var grade in occurrences.keys) {
-          int count = occurrences[grade] ?? 0;
-          BarChartGroupData barGroup = BarChartGroupData(
-            x: grade,
-            barRods: [
-              BarChartRodData(
-                fromY: 0,
-                toY: count.toDouble(), // Convert to double
-                width: 15,
-                color: Colors.amber,
-              ),
-            ],
-          );
-          barGroups.add(barGroup);
-          isLoading.value = false;
-        }
       }
-    } else {
-      Alert.closeLoadingIndicator();
-      Alert.showSuccess(
-          title: "Error",
-          message: response!.message.toString(),
-          buttonText: AppString.CANCEL);
     }
   }
 

@@ -221,6 +221,7 @@ class GradeView extends GetView<GradeController> {
                                   "isClassroom": "false",
                                 };
                                 Get.toNamed(Routes.STATISTICAL,
+                                    arguments: controller.gradeFinalList,
                                     parameters: parameters);
                               },
                               child: Text(
