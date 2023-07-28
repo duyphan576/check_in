@@ -1,5 +1,6 @@
 import 'package:check_in/global_widgets/student_data.dart';
 import 'package:check_in/modules/grade/controllers/grade_controller.dart';
+import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:check_in/models/grade/grade.dart';
 import 'package:get/get.dart';
@@ -215,7 +216,13 @@ class GradeView extends GetView<GradeController> {
                             ),
                           ),
                           child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                var parameters = <String, String>{
+                                  "isClassroom": "false",
+                                };
+                                Get.toNamed(Routes.STATISTICAL,
+                                    parameters: parameters);
+                              },
                               child: Text(
                                 "Satistical",
                                 style: TextStyle(color: Colors.white),

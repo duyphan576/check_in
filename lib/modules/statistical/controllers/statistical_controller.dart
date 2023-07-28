@@ -16,8 +16,10 @@ RxBool isLoading = true.obs;
 class StatisticalController extends GetxController with CacheManager {
   final StatisticalRepository statisticalRepository;
   final AuthenticationService authenticationService = AuthenticationService();
-  int ClassroomId = int.parse(Get.arguments.toString());
-  RxList<int?> grades = <int?>[].obs;
+  int ClassroomId = int.parse(Get.parameters['classroomId'].toString());
+  bool isClassroom = "true" == Get.parameters['isClassroom'].toString();
+  RxList<double?> grades =
+      <double?>[].obs; // Change the type to RxList<double?>
   var countLessThan5 = 0.0;
   var countForm5To7 = 0.0;
   var countForm7ToLessThan10 = 0.0;
@@ -30,7 +32,8 @@ class StatisticalController extends GetxController with CacheManager {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    print(ClassroomId);
+    print(isClassroom);
+
     getGradesData();
   }
 
@@ -51,10 +54,18 @@ class StatisticalController extends GetxController with CacheManager {
             message: StatisticalString.GradesEmpty,
             buttonText: AppString.CANCEL);
       } else {
-        List<int?> gradesList =
-            gradeList.map((dynamic item) => item is int ? item : null).toList();
+        List<double?> gradesList = gradeList.map((dynamic item) {
+          if (item is int) {
+            return item.toDouble(); // Convert to double
+          } else if (item is double) {
+            return item;
+          } else {
+            return null;
+          }
+        }).toList();
         grades.addAll(gradesList);
         update();
+        print(grades);
         for (int i = 0; i < grades.length; i++) {
           if (grades[i]! < 5) {
             countLessThan5++;
@@ -82,7 +93,7 @@ class StatisticalController extends GetxController with CacheManager {
             barRods: [
               BarChartRodData(
                 fromY: 0,
-                toY: count.toDouble(), // Convert to int
+                toY: count.toDouble(), // Convert to double
                 width: 15,
                 color: Colors.amber,
               ),
@@ -101,16 +112,17 @@ class StatisticalController extends GetxController with CacheManager {
     }
   }
 
-  Map<int, int> countOccurrences(List<int?> grades) {
+  Map<int, int> countOccurrences(List<double?> grades) {
     Map<int, int> occurrences = {};
 
     for (int i = 0; i <= 10; i++) {
       occurrences[i] = 0;
     }
 
-    for (int? grade in grades) {
+    for (double? grade in grades) {
       if (grade != null && grade >= 0 && grade <= 10) {
-        occurrences[grade] = (occurrences[grade] ?? 0) + 1;
+        occurrences[grade.toInt()] =
+            (occurrences[grade.toInt()] ?? 0) + 1; // Convert to int
       }
     }
 
