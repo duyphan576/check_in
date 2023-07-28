@@ -32,6 +32,8 @@ class CheckinController extends GetxController with CacheManager {
   RxList<Barcode> barcode = RxList<Barcode>();
   RxString wifiName = "".obs;
   RxString wifiBSSID = "".obs;
+  var infoWifi;
+  RxBool isStarted = true.obs;
   RxBool isClick = false.obs;
   RxBool isReady = false.obs;
   RxList<Classroom> classroom = RxList<Classroom>();
