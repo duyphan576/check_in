@@ -184,6 +184,44 @@ class GradeView extends GetView<GradeController> {
                           ),
                         ),
                       ),
+                      floatingActionButtonLocation:
+                          FloatingActionButtonLocation.endDocked,
+                      floatingActionButton: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 40,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            color: AppColors.lightWhite.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.black,
+                                blurRadius: 2,
+                                blurStyle: BlurStyle.outer,
+                                offset: Offset(0, 0), // Shadow position
+                              ),
+                            ],
+                            gradient: LinearGradient(
+                              colors: [
+                                Color(0xFF41D8D7),
+                                Color(0xFF21A3C6),
+                                Color(0xFF285DA2),
+                                Color(0xFF332F61),
+                                Color(0xFF452E51),
+                              ],
+                              begin: Alignment.bottomLeft,
+                              end: Alignment.topRight,
+                            ),
+                          ),
+                          child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "Satistical",
+                                style: TextStyle(color: Colors.white),
+                              )),
+                        ),
+                      ),
                     ),
                   ),
                 ),
