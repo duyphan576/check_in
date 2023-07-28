@@ -50,7 +50,8 @@ class GradeController extends GetxController with CacheManager {
       List<Grade> gradesData =
           gradeList.map((json) => Grade.fromJson(json)).toList();
       // Sử dụng assignAll() hoặc addAll() để cập nhật RxList mà không thay đổi kiểu dữ liệu
-      grades.assignAll(gradesData);
+      grades.addAll(gradesData);
+
       update();
       // for (var i = 0; i < grades.length; i++) {
       //   gradeFinalList?.add(grades[i].finalGrade!.toDouble());
