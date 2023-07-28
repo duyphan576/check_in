@@ -13,7 +13,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:network_info_plus/network_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class CheckinController extends GetxController with CacheManager {
@@ -59,8 +58,11 @@ class CheckinController extends GetxController with CacheManager {
     if (infoWifi != null) {
       wifiName.value = infoWifi["wifiName"];
       wifiBSSID.value = infoWifi["bssidWifi"];
+      getCheckinHistory();
+    } else {
+      getCheckinHistory();
+      isLoading.value = false;
     }
-    isLoading.value = false;
   }
 
   void checkin(String? token) async {
