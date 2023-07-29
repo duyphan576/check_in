@@ -1,18 +1,47 @@
+import 'package:check_in/constants/app_string.dart';
+import 'package:check_in/core/alert.dart';
 import 'package:check_in/core/cache_manager.dart';
-import 'package:check_in/modules/checkin/models/checkin_model.dart';
+import 'package:check_in/models/checkin_date/checkin_date.dart';
+import 'package:check_in/models/checkin_history/checkin_history.dart';
+import 'package:check_in/models/classroom/classroom.dart';
 import 'package:check_in/modules/checkin/repository/checkin_repository.dart';
 import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
+import 'package:check_in/utils/utils.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/status/http_status.dart';
-import 'package:network_info_plus/network_info_plus.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class CheckinController extends GetxController with CacheManager {
   final CheckinRepository checkinRepository;
   final AuthenticationService authenticationService = AuthenticationService();
   var userData;
   RxBool isLoading = true.obs;
+  GetStorage box = GetStorage();
+
+  MobileScannerController cameraController = MobileScannerController(
+    formats: [BarcodeFormat.qrCode],
+    // facing: CameraFacing.front,
+    detectionSpeed: DetectionSpeed.normal,
+    detectionTimeoutMs: 1000,
+    returnImage: false,
+    torchEnabled: false,
+  );
+  RxList<Barcode> barcode = RxList<Barcode>();
+  RxString wifiName = "".obs;
+  RxString wifiBSSID = "".obs;
+  var infoWifi;
+  RxBool isStarted = true.obs;
+  RxBool isClick = false.obs;
+  RxBool isReady = false.obs;
+  RxList<Classroom> classroom = RxList<Classroom>();
+  RxList<CheckinDate> checkinDate = RxList<CheckinDate>();
+  final RxList<CheckinHistory> checkHistory = RxList<CheckinHistory>();
+  RxString chooseItem = "1".obs;
+  RxString termName = "".obs;
 
   CheckinController({required this.checkinRepository});
 
@@ -24,14 +53,128 @@ class CheckinController extends GetxController with CacheManager {
   }
 
   initData() async {
-    final info = NetworkInfo();
+    infoWifi = await Utils.getWifiName();
+    await requestWifiInfoPermissions();
+    if (infoWifi != null) {
+      wifiName.value = infoWifi["wifiName"];
+      wifiBSSID.value = infoWifi["bssidWifi"];
+      getCheckinHistory();
+    } else {
+      getCheckinHistory();
+    }
+  }
 
-    final wifiName = await info.getWifiName(); // "FooNetwork"
-    final wifiBSSID = await info.getWifiBSSID(); // 11:22:33:44:55:66
-    final wifiIP = await info.getWifiIP(); // 192.168.1.43
+  void checkin(String? token) async {
+    if (token != null) {
+      final submit = {
+        "token": token,
+        "wifiName": wifiName.value,
+        "wifiBSSID": wifiBSSID.value,
+      };
+      final response = await checkinRepository.checkin(
+        submit,
+        UrlProvider.HANDLES_CHECKIN,
+        cacheGet(CacheManagerKey.TOKEN),
+      );
 
-    print(wifiName);
-    print(wifiBSSID);
-    print(wifiIP);
+      if (response?.status == 1) {
+        isLoading.value = false;
+        Alert.showSuccess(
+          title: CommonString.SUCCESS,
+          buttonText: CommonString.OK,
+          message: response?.message,
+        );
+      } else {
+        isLoading.value = false;
+        Alert.showSuccess(
+          title: CommonString.ERROR,
+          buttonText: CommonString.OK,
+          message: response?.message,
+        );
+      }
+    }
+  }
+
+  handleOpenCamera() async {
+    if (wifiName.value.isNotEmpty == true) {
+      bool isGrantedCamera = await requestWifiInfoPermissions();
+      if (isGrantedCamera) {
+        Get.toNamed(Routes.QR)?.then((value) => checkin(value));
+      }
+    } else {
+      infoWifi = await Utils.getWifiName();
+      if (infoWifi != null) {
+        wifiName.value = infoWifi["wifiName"];
+        wifiBSSID.value = infoWifi["bssidWifi"];
+        bool isGrantedCamera = await requestWifiInfoPermissions();
+        if (isGrantedCamera) {
+          Get.toNamed(Routes.QR)?.then((value) {
+            checkin(value);
+          });
+        }
+      }
+    }
+  }
+
+  Future<bool> requestWifiInfoPermissions() async {
+    PermissionStatus status = await Permission.camera.status;
+
+    if (status.isDenied || status.isRestricted) {
+      if (await Permission.camera.request().isGranted) {
+        return true;
+      } else {
+        Alert.showErrorGeolocator(
+          title: CommonString.ERROR,
+          message: AppString.CAMERA_ERROR,
+          buttonTextOK: AppString.GO_TO_SETTINGS,
+          buttonTextCancel: CommonString.CANCEL,
+          onPressed: () {
+            openAppSettings();
+            Get.back();
+          },
+        );
+        return false;
+      }
+    } else {
+      return true;
+    }
+  }
+
+  void getCheckinHistory() async {
+    final response = await checkinRepository.history(
+      UrlProvider.HANDLES_HISTORY,
+      cacheGet(CacheManagerKey.TOKEN),
+    );
+    if (response?.status == 1) {
+      for (final list in response?.data["checkedInList"]) {
+        CheckinHistory history = CheckinHistory.fromJson(list);
+        checkHistory.add(history);
+      }
+      isLoading.value = false;
+    } else {
+      Alert.showSuccess(
+        title: CommonString.ERROR,
+        buttonText: CommonString.OK,
+        message: response?.message,
+      );
+    }
+  }
+
+  void getDateCheckin(String? value) {
+    if (value != null) {
+      checkinDate.assignAll(checkHistory
+          .firstWhere(
+            (element) => element.classroom.id.toString() == value,
+          )
+          .checkinDate);
+      chooseItem.value = value;
+    }
+  }
+
+  getFormatedDate(date) {
+    var inputFormat = DateFormat('yyyy-MM-dd');
+    var inputDate = inputFormat.parse(date);
+    var outputFormat = DateFormat('dd/MM/yyyy');
+    return outputFormat.format(inputDate);
   }
 }

@@ -91,7 +91,7 @@ class DetailCustom extends StatelessWidget {
                     ),
                     GlobalStyles.sizedBoxHeight,
                     Text(
-                      "Lecturer Id:$lecturerCode",
+                      "Lecturer Id: $lecturerCode",
                       style: TextStyle(
                         color: AppColors.lightWhite,
                         fontSize: 14,
@@ -100,7 +100,7 @@ class DetailCustom extends StatelessWidget {
                     ),
                   ],
                 ),
-                GlobalStyles.sizedBoxWidth_45,
+                GlobalStyles.sizedBoxWidth_30,
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,

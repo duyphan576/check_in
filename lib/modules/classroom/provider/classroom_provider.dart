@@ -23,7 +23,8 @@ class ClassroomProvider extends GetConnect {
     });
   }
 
-  Future<BaseResponse?> detail(String classroomId, url, token) async {
+  Future<BaseResponse?> detail(
+      Map<String, dynamic> classroomId, url, token) async {
     return await http.doPostWithToken(url, token, classroomId).then((response) {
       return BaseResponse(
           statusCode: response.statusCode,

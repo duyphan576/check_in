@@ -60,6 +60,13 @@ dependencies:
   permission_handler: ^10.2.0
   open_file: ^3.3.2
   url_launcher: ^6.1.12
+  pdfx: ^2.4.0
+  internet_file: ^1.2.0
+  mobile_scanner: ^3.3.0
+  image_picker: ^1.0.1
+  intl: ^0.18.1
+  geolocator: ^9.0.2
+  dropdown_search: ^5.0.6
 
 flutter_icons:
   android: "icon_notification"
@@ -68,6 +75,7 @@ flutter_icons:
 
 
 dependency_overrides:
+  intl: any
   webview_flutter: ^3.0.0
   test_api: 0.5.2
 
