@@ -18,7 +18,6 @@ class StatisticalController extends GetxController with CacheManager {
   final AuthenticationService authenticationService = AuthenticationService();
   int ClassroomId = int.parse(Get.parameters['classroomId'].toString());
   bool isClassroom = "true" == Get.parameters['isClassroom'].toString();
-  List<double> gradeFinal = Get.arguments;
   RxList<double?> grades =
       <double?>[].obs; // Change the type to RxList<double?>
   var countLessThan4 = 0.0;
@@ -40,7 +39,6 @@ class StatisticalController extends GetxController with CacheManager {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    print(gradeFinal);
 
     getGradesData();
   }
