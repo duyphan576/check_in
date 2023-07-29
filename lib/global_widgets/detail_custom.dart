@@ -64,7 +64,7 @@ class DetailCustom extends StatelessWidget {
                   ),
                 ),
                 isOnTap
-                    ? OutlinedButton(
+                    ? IconButton(
                         onPressed: () {
                           var parameters = <String, String>{
                             "classroomId": "$classroomId",
@@ -73,9 +73,9 @@ class DetailCustom extends StatelessWidget {
                           Get.toNamed(Routes.STATISTICAL,
                               parameters: parameters);
                         },
-                        child: Text(
-                          "Statistical",
-                          style: TextStyle(color: Colors.white),
+                        icon: Icon(
+                          Icons.bar_chart,
+                          color: Colors.white,
                         ))
                     : Container(),
               ],
