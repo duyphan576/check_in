@@ -1,15 +1,21 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
+import 'package:check_in/models/statistical/statistical.dart';
+import 'package:check_in/modules/statistical/view/statistical_view.dart';
+import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DetailCustom extends StatelessWidget {
-  const DetailCustom({
+  DetailCustom({
     super.key,
     required this.termName,
     required this.termId,
     required this.termCredit,
     required this.lecturerCode,
     required this.lecturerFullname,
+    required this.classroomId,
+    required this.isOnTap,
   });
 
   final String termName;
@@ -17,6 +23,8 @@ class DetailCustom extends StatelessWidget {
   final String termCredit;
   final String lecturerCode;
   final String lecturerFullname;
+  final String classroomId;
+  final bool isOnTap;
 
   @override
   Widget build(BuildContext context) {
@@ -55,12 +63,21 @@ class DetailCustom extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Thống kê",
-                      style: TextStyle(color: Colors.indigoAccent.shade100),
-                    ))
+                isOnTap
+                    ? IconButton(
+                        onPressed: () {
+                          var parameters = <String, String>{
+                            "classroomId": "$classroomId",
+                            "isClassroom": "true",
+                          };
+                          Get.toNamed(Routes.STATISTICAL,
+                              parameters: parameters);
+                        },
+                        icon: Icon(
+                          Icons.bar_chart,
+                          color: Colors.white,
+                        ))
+                    : Container(),
               ],
             ),
           ),

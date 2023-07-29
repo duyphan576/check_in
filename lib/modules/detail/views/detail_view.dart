@@ -5,6 +5,7 @@ import 'package:check_in/global_widgets/detail_inkwell.dart';
 import 'package:check_in/models/documents/documents.dart';
 import 'package:check_in/models/student/students.dart';
 import 'package:check_in/modules/detail/controllers/detail_controller.dart';
+import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
