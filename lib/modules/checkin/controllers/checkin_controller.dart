@@ -61,13 +61,11 @@ class CheckinController extends GetxController with CacheManager {
       getCheckinHistory();
     } else {
       getCheckinHistory();
-      isLoading.value = false;
     }
   }
 
   void checkin(String? token) async {
     if (token != null) {
-      print(token);
       final submit = {
         "token": token,
         "wifiName": wifiName.value,
@@ -151,10 +149,7 @@ class CheckinController extends GetxController with CacheManager {
       for (final list in response?.data["checkedInList"]) {
         CheckinHistory history = CheckinHistory.fromJson(list);
         checkHistory.add(history);
-        // classroom.add(history.classroom);
-        // checkinDate.addAll(history.checkinDate);
       }
-
       isLoading.value = false;
     } else {
       Alert.showSuccess(
