@@ -50,7 +50,6 @@ class QrView extends GetView<QrController> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            GlobalStyles.sizedBoxHeight,
                             Stack(
                               alignment: Alignment.center,
                               children: [

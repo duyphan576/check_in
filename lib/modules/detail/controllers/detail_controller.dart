@@ -9,13 +9,15 @@ import 'package:check_in/models/student/students.dart';
 import 'package:check_in/modules/detail/repository/detail_repository.dart';
 import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/authenticationService.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:open_file/open_file.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class DetailController extends GetxController with CacheManager {
+class DetailController extends GetxController
+    with CacheManager, GetSingleTickerProviderStateMixin {
   final DetailRepository detailRepository;
   final AuthenticationService authenticationService = AuthenticationService();
   GetStorage storage = GetStorage();
@@ -29,11 +31,13 @@ class DetailController extends GetxController with CacheManager {
   Classroom? classroom;
   final RxList<Students> studentsList = RxList<Students>();
   final RxList<Documents> docList = RxList<Documents>();
+  late TabController tabController;
   DetailController({required this.detailRepository});
 
   @override
   void onInit() {
     // TODO: implement onInit
+    tabController = TabController(length: 2, vsync: this);
     super.onInit();
     initData();
   }
