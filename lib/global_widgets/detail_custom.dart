@@ -42,12 +42,26 @@ class DetailCustom extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            termName,
-            style: TextStyle(
-              color: AppColors.lightWhite,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+          Padding(
+            padding: GlobalStyles.paddingPageLeftRight,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  termName,
+                  style: TextStyle(
+                    color: AppColors.lightWhite,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Thống kê",
+                      style: TextStyle(color: Colors.indigoAccent.shade100),
+                    ))
+              ],
             ),
           ),
           SizedBox(

@@ -46,202 +46,160 @@ class DetailView extends GetView<DetailController> {
                         iconTheme: IconThemeData(
                           color: AppColors.lightBlack,
                         ),
+                        bottom: TabBar(
+                          labelColor: AppColors.main,
+                          unselectedLabelColor: Colors.grey,
+                          labelStyle:
+                              const TextStyle(fontWeight: FontWeight.bold),
+                          unselectedLabelStyle:
+                              const TextStyle(fontStyle: FontStyle.italic),
+                          indicatorWeight: 2,
+                          indicatorColor: AppColors.red,
+                          indicatorSize: TabBarIndicatorSize.label,
+                          indicatorPadding: EdgeInsets.all(4),
+                          indicator: ShapeDecoration(
+                            shape: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 0,
+                                  style: BorderStyle.solid),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(16),
+                              ),
+                            ),
+                            color: AppColors.white,
+                          ),
+                          enableFeedback: true,
+                          controller: controller.tabController,
+                          tabs: <Widget>[
+                            Tab(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Students",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: AppColors.lightBlack,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Tab(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Document",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: AppColors.lightBlack,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       body: SingleChildScrollView(
                         child: Container(
-                          child: Padding(
-                            padding: GlobalStyles.paddingPageLeftRight_25,
-                            child: Column(
-                              children: [
-                                DetailCustom(
-                                  termName: controller.classroom!.term.termName,
-                                  lecturerFullname:
-                                      controller.classroom!.lecturer.fullname,
-                                  lecturerCode:
-                                      controller.classroom!.lecturer.code,
-                                  termId:
-                                      controller.classroom!.term.id.toString(),
-                                  termCredit: controller.classroom!.term.credit
-                                      .toString(),
-                                ),
-                                GlobalStyles.sizedBoxHeight,
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color:
-                                        AppColors.lightWhite.withOpacity(0.75),
-                                    borderRadius: BorderRadius.circular(8),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: AppColors.black,
-                                        blurRadius: 4,
-                                        blurStyle: BlurStyle.outer,
-                                        offset: Offset(0, 0), // Shadow position
-                                      ),
-                                    ],
-                                    gradient: LinearGradient(
-                                      colors: AppColors.listColorGradientMain,
-                                      begin: Alignment.bottomLeft,
-                                      end: Alignment.topRight,
+                          alignment: Alignment.bottomCenter,
+                          padding: GlobalStyles.paddingAll18,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              DetailCustom(
+                                termName: controller.classroom!.term.termName,
+                                lecturerFullname:
+                                    controller.classroom!.lecturer.fullname,
+                                lecturerCode:
+                                    controller.classroom!.lecturer.code,
+                                termId:
+                                    controller.classroom!.term.id.toString(),
+                                termCredit: controller.classroom!.term.credit
+                                    .toString(),
+                              ),
+                              GlobalStyles.sizedBoxHeight,
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.55,
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  color: AppColors.lightWhite.withOpacity(0.9),
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.black,
+                                      blurRadius: 4,
+                                      blurStyle: BlurStyle.outer,
+                                      offset: Offset(0, 0), // Shadow position
                                     ),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      DetailInkWell(
-                                        text: "List of Document",
-                                        function: () {
-                                          controller.isDocClick.value =
-                                              !controller.isDocClick.value;
-                                        },
-                                      ),
-                                    ],
-                                  ),
+                                  ],
                                 ),
-                                GlobalStyles.sizedBoxHeight_10,
-                                controller.isDocClick.value
-                                    ? Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.4,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                          color: AppColors.lightWhite
-                                              .withOpacity(0.9),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: AppColors.black,
-                                              blurRadius: 4,
-                                              blurStyle: BlurStyle.outer,
-                                              // offset: Offset(
-                                              //     0, 0), // Shadow position
+                                child: TabBarView(
+                                  controller: controller.tabController,
+                                  children: <Widget>[
+                                    Container(
+                                      child: controller.studentsList.isEmpty
+                                          ? Center(
+                                              child:
+                                                  CircularProgressIndicator(),
+                                            )
+                                          : ListView.builder(
+                                              padding: GlobalStyles
+                                                  .paddingPageLeftRight_25,
+                                              itemCount: controller
+                                                  .studentsList.length,
+                                              itemBuilder: (context, index) {
+                                                final Students? students =
+                                                    controller
+                                                        .studentsList[index];
+                                                return ListTile(
+                                                  title: Text(
+                                                    students!.code.toString(),
+                                                  ),
+                                                  trailing: Text(students
+                                                      .fullname
+                                                      .toString()),
+                                                );
+                                              },
                                             ),
-                                          ],
-                                        ),
-                                        child: controller.studentsList.isEmpty
-                                            ? Center(
-                                                child:
-                                                    CircularProgressIndicator(),
-                                              )
-                                            : ListView.builder(
-                                                padding: GlobalStyles
-                                                    .paddingPageLeftRight_25,
-                                                itemCount:
-                                                    controller.docList.length,
-                                                itemBuilder: (context, index) {
-                                                  final Documents docs =
-                                                      controller.docList[index];
-                                                  return ListTile(
-                                                      title: Text(
-                                                        docs.fileName
-                                                            .toString(),
-                                                      ),
-                                                      trailing: IconButton(
-                                                        onPressed: () {
-                                                          // controller
-                                                          //     .downloadDocument(
-                                                          //         docs.url
-                                                          //             .toString()
-                                                          //             .trim(),
-                                                          //         docs.fileName
-                                                          //             .toString()
-                                                          //             .trim());
-                                                          controller.viewPdf(
-                                                            docs.url.toString(),
-                                                          );
-                                                        },
-                                                        icon: Icon(
-                                                          Icons.remove_red_eye,
-                                                        ),
-                                                      ));
-                                                },
-                                              ),
-                                      )
-                                    : Container(),
-                                GlobalStyles.sizedBoxHeight_10,
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color:
-                                        AppColors.lightWhite.withOpacity(0.75),
-                                    borderRadius: BorderRadius.circular(8),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: AppColors.black,
-                                        blurRadius: 4,
-                                        blurStyle: BlurStyle.outer,
-                                        offset: Offset(0, 0), // Shadow position
-                                      ),
-                                    ],
-                                    gradient: LinearGradient(
-                                      colors: AppColors.listColorGradientMain,
-                                      begin: Alignment.bottomLeft,
-                                      end: Alignment.topRight,
                                     ),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      DetailInkWell(
-                                        text: "List of Students",
-                                        function: () {
-                                          controller.isStuClick.value =
-                                              !controller.isStuClick.value;
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                GlobalStyles.sizedBoxHeight_10,
-                                controller.isStuClick.value
-                                    ? Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.4,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                          color: AppColors.lightWhite
-                                              .withOpacity(0.9),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: AppColors.black,
-                                              blurRadius: 4,
-                                              blurStyle: BlurStyle.outer,
-                                              offset: Offset(
-                                                  0, 0), // Shadow position
-                                            ),
-                                          ],
-                                        ),
-                                        child: controller.studentsList.isEmpty
-                                            ? Center(
-                                                child:
-                                                    CircularProgressIndicator(),
-                                              )
-                                            : ListView.builder(
-                                                padding: GlobalStyles
-                                                    .paddingPageLeftRight_25,
-                                                itemCount: controller
-                                                    .studentsList.length,
-                                                itemBuilder: (context, index) {
-                                                  final Students? students =
-                                                      controller
-                                                          .studentsList[index];
-                                                  return ListTile(
+                                    Container(
+                                      child: controller.studentsList.isEmpty
+                                          ? Center(
+                                              child:
+                                                  CircularProgressIndicator(),
+                                            )
+                                          : ListView.builder(
+                                              padding: GlobalStyles
+                                                  .paddingPageLeftRight_25,
+                                              itemCount:
+                                                  controller.docList.length,
+                                              itemBuilder: (context, index) {
+                                                final Documents docs =
+                                                    controller.docList[index];
+                                                return ListTile(
                                                     title: Text(
-                                                      students!.code.toString(),
+                                                      docs.fileName.toString(),
                                                     ),
-                                                    trailing: Text(students
-                                                        .fullname
-                                                        .toString()),
-                                                  );
-                                                },
-                                              ),
-                                      )
-                                    : SizedBox(),
-                              ],
-                            ),
+                                                    trailing: IconButton(
+                                                      onPressed: () {
+                                                        controller.viewPdf(
+                                                          docs.url.toString(),
+                                                        );
+                                                      },
+                                                      icon: Icon(
+                                                        Icons.remove_red_eye,
+                                                      ),
+                                                    ));
+                                              },
+                                            ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
