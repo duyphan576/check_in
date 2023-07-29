@@ -119,6 +119,9 @@ class DetailView extends GetView<DetailController> {
                                     controller.classroom!.term.id.toString(),
                                 termCredit: controller.classroom!.term.credit
                                     .toString(),
+                                classroomId:
+                                    controller.classroom!.id.toString(),
+                                isOnTap: true,
                               ),
                               GlobalStyles.sizedBoxHeight,
                               Container(
