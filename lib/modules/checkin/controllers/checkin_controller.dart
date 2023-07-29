@@ -9,6 +9,8 @@ import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
 import 'package:check_in/utils/utils.dart';
+import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
@@ -21,6 +23,7 @@ class CheckinController extends GetxController with CacheManager {
   var userData;
   RxBool isLoading = true.obs;
   GetStorage box = GetStorage();
+  final keyHistoryCheckIn = GlobalKey<DropdownSearchState<CheckinHistory>>();
 
   MobileScannerController cameraController = MobileScannerController(
     formats: [BarcodeFormat.qrCode],
@@ -34,14 +37,10 @@ class CheckinController extends GetxController with CacheManager {
   RxString wifiName = "".obs;
   RxString wifiBSSID = "".obs;
   var infoWifi;
-  RxBool isStarted = true.obs;
-  RxBool isClick = false.obs;
   RxBool isReady = false.obs;
   RxList<Classroom> classroom = RxList<Classroom>();
   RxList<CheckinDate> checkinDate = RxList<CheckinDate>();
-  final RxList<CheckinHistory> checkHistory = RxList<CheckinHistory>();
-  RxString chooseItem = "1".obs;
-  RxString termName = "".obs;
+  final RxList<CheckinHistory> listCheckHistory = RxList<CheckinHistory>();
 
   CheckinController({required this.checkinRepository});
 
@@ -58,10 +57,8 @@ class CheckinController extends GetxController with CacheManager {
     if (infoWifi != null) {
       wifiName.value = infoWifi["wifiName"];
       wifiBSSID.value = infoWifi["bssidWifi"];
-      getCheckinHistory();
-    } else {
-      getCheckinHistory();
     }
+    getCheckinHistory();
   }
 
   void checkin(String? token) async {
@@ -83,7 +80,7 @@ class CheckinController extends GetxController with CacheManager {
           title: CommonString.SUCCESS,
           buttonText: CommonString.OK,
           message: response?.message,
-        );
+        ).then((value) => getCheckinHistory());
       } else {
         isLoading.value = false;
         Alert.showSuccess(
@@ -145,10 +142,15 @@ class CheckinController extends GetxController with CacheManager {
       UrlProvider.HANDLES_HISTORY,
       cacheGet(CacheManagerKey.TOKEN),
     );
+    print(response?.toMap());
     if (response?.status == 1) {
       for (final list in response?.data["checkedInList"]) {
         CheckinHistory history = CheckinHistory.fromJson(list);
-        checkHistory.add(history);
+        listCheckHistory.add(history);
+        if (listCheckHistory != null && listCheckHistory.isNotEmpty == true) {
+          isReady.value = true;
+          getDateCheckin(listCheckHistory[0].classroom.id.toString());
+        }
       }
       isLoading.value = false;
     } else {
@@ -157,21 +159,21 @@ class CheckinController extends GetxController with CacheManager {
         buttonText: CommonString.OK,
         message: response?.message,
       );
+      isLoading.value = false;
     }
   }
 
   void getDateCheckin(String? value) {
     if (value != null) {
-      checkinDate.assignAll(checkHistory
+      checkinDate.assignAll(listCheckHistory
           .firstWhere(
             (element) => element.classroom.id.toString() == value,
           )
           .checkinDate);
-      chooseItem.value = value;
     }
   }
 
-  getFormatedDate(date) {
+  getFormatDate(date) {
     var inputFormat = DateFormat('yyyy-MM-dd');
     var inputDate = inputFormat.parse(date);
     var outputFormat = DateFormat('dd/MM/yyyy');

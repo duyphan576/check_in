@@ -161,9 +161,13 @@ abstract class HomeString {
 }
 
 abstract class CheckinString {
-  static const String CHECKIN = "Checkin";
+  static const String CHECK_IN = "Check In";
   static const String CHECKIN_HISTORY = "Checkin History";
   static const String CLASSROOM = "Classroom";
   static const String DATE = "Date";
   static const String ATTENDANCE = "Your class has never been in attendance";
+  static const String CHOOSE_CLASSROOM = "Choose Classroom";
+  static const String ENTER_CLASSROOM = "Please enter name classroom";
+  static const String PRESENCE = "Presence";
+  static const String NO_PRESENCE = "No presence";
 }
