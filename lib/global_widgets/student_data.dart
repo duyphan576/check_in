@@ -82,7 +82,7 @@ class StudentPicture extends StatelessWidget {
             ),
             GlobalStyles.sizedBoxWidth,
             Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -109,9 +109,11 @@ class StudentPicture extends StatelessWidget {
                     fontStyle: FontStyle.italic,
                   ),
                 ),
+                // GlobalStyles.sizedBoxHeight_25,
                 isGrade
-                    ? GlobalStyles.sizedBoxHeight_25
+                    ? Container()
                     : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
                             width: width * 0.3,
@@ -129,7 +131,6 @@ class StudentPicture extends StatelessWidget {
                               fontStyle: FontStyle.italic,
                             ),
                           ),
-                          GlobalStyles.sizedBoxHeight_10
                         ],
                       )
               ],
