@@ -13,8 +13,9 @@ class GradeController extends GetxController with CacheManager {
   var userData;
   RxBool isLoading = true.obs;
   var avgGrade;
-  List<double>? gradeFinalList;
+  List<double> gradeFinalList = [];
   RxList<Grade> grades = <Grade>[].obs;
+  double? gradeFinal;
   GradeController({required this.gradeRepository});
 
   @override
@@ -51,12 +52,11 @@ class GradeController extends GetxController with CacheManager {
           gradeList.map((json) => Grade.fromJson(json)).toList();
       // Sử dụng assignAll() hoặc addAll() để cập nhật RxList mà không thay đổi kiểu dữ liệu
       grades.addAll(gradesData);
-
+      for (int i = 0; i < grades.length; i++) {
+        gradeFinal = grades[i].finalGrade;
+        gradeFinalList.add(gradeFinal!);
+      }
       update();
-      // for (var i = 0; i < grades.length; i++) {
-      //   gradeFinalList?.add(grades[i].finalGrade!.toDouble());
-      // }
-      print(gradeFinalList);
       isLoading.value = false;
     } else {
       Alert.showSuccess(

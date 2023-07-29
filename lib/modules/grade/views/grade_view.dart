@@ -1,8 +1,8 @@
 import 'package:check_in/global_widgets/student_data.dart';
+import 'package:check_in/global_widgets/table_custom.dart';
 import 'package:check_in/modules/grade/controllers/grade_controller.dart';
 import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
-import 'package:check_in/models/grade/grade.dart';
 import 'package:get/get.dart';
 import '../../../constants/app_colors.dart';
 import '../../../constants/app_images.dart';
@@ -13,9 +13,6 @@ class GradeView extends GetView<GradeController> {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle textStyleBold = TextStyle(
-        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16);
-    final TextStyle textStyle = TextStyle(color: Colors.white, fontSize: 16);
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return GetBuilder<GradeController>(
@@ -91,94 +88,9 @@ class GradeView extends GetView<GradeController> {
                                     end: Alignment.topRight,
                                   ),
                                 ),
-                                child: Table(
-                                  border: TableBorder(
-                                    horizontalInside:
-                                        BorderSide(color: Colors.white),
-                                    verticalInside:
-                                        BorderSide(color: Colors.white),
-                                  ),
-                                  columnWidths: const <int, TableColumnWidth>{
-                                    0: IntrinsicColumnWidth(),
-                                    1: FixedColumnWidth(60),
-                                    2: FixedColumnWidth(30),
-                                    3: FixedColumnWidth(30),
-                                  },
-                                  children: [
-                                    TableRow(children: [
-                                      Center(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          child: Text("Term",
-                                              style: textStyleBold),
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          child: Text("Attendance Grade",
-                                              style: textStyleBold),
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          child: Text("Exam Grade",
-                                              style: textStyleBold),
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          child: Text("Final Grade",
-                                              style: textStyleBold),
-                                        ),
-                                      ),
-                                    ]),
-                                    for (int i = 0;
-                                        i < controller.grades.length;
-                                        i++)
-                                      TableRow(children: [
-                                        Center(
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                                controller.grades[i].termName
-                                                    .toString(),
-                                                style: textStyleBold),
-                                          ),
-                                        ),
-                                        Center(
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                                controller
-                                                    .grades[i].attendanceGrade
-                                                    .toString(),
-                                                style: textStyle),
-                                          ),
-                                        ),
-                                        Center(
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                                controller.grades[i].examGrade
-                                                    .toString(),
-                                                style: textStyle),
-                                          ),
-                                        ),
-                                        Center(
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                                controller.grades[i].finalGrade
-                                                    .toString(),
-                                                style: textStyle),
-                                          ),
-                                        ),
-                                      ]),
-                                    // Dòng dữ liệu từ controller.grades
-                                  ],
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TableWidget(grades: controller.grades),
                                 ),
                               ),
                             ],

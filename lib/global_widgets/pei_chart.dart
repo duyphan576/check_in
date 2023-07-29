@@ -6,17 +6,21 @@ import 'package:flutter/material.dart';
 class PeiChartWidget extends StatelessWidget {
   PeiChartWidget({
     super.key,
-    required this.countLessThan5,
-    required this.countForm5To7,
-    required this.countForm7ToLessThan10,
-    required this.countEqual10,
+    required this.countLessThan4Percentage,
+    required this.countForm4ToLessThan55Percentage,
+    required this.countForm55ToLessThan7Percentage,
+    required this.countFor7ToLessThan85Percentage,
+    required this.countGreaterThan85Percentage,
+    required this.count,
     required this.pieAnouce1,
     required this.pieAnouce2,
   });
-  double countLessThan5;
-  double countForm5To7;
-  double countForm7ToLessThan10;
-  double countEqual10;
+  double countLessThan4Percentage;
+  double countForm4ToLessThan55Percentage;
+  double countForm55ToLessThan7Percentage;
+  double countFor7ToLessThan85Percentage;
+  double countGreaterThan85Percentage;
+  List<double> count;
   String pieAnouce1;
   String pieAnouce2;
   @override
@@ -24,8 +28,8 @@ class PeiChartWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: MediaQuery.of(context).size.width / 1.7,
-          width: MediaQuery.of(context).size.width / 1.8,
+          height: MediaQuery.of(context).size.width / 1.1,
+          width: MediaQuery.of(context).size.width / 1.1,
           child: PieChart(
             PieChartData(
                 centerSpaceRadius: 4,
@@ -35,29 +39,44 @@ class PeiChartWidget extends StatelessWidget {
                 sectionsSpace: 2,
                 sections: [
                   PieChartSectionData(
-                      value: double.parse(countLessThan5.toString()),
+                      value: double.parse(countLessThan4Percentage.toString()),
                       showTitle: true,
-                      title: "${countLessThan5.toStringAsFixed(2)}%",
-                      radius: 115,
+                      title:
+                          "${countLessThan4Percentage.toStringAsFixed(2)}% - ${count[0]}",
+                      radius: 170,
                       color: Colors.red),
                   PieChartSectionData(
-                      value: double.parse(countForm5To7.toString()),
+                      value: double.parse(
+                          countForm4ToLessThan55Percentage.toString()),
                       showTitle: true,
-                      title: "${countForm5To7.toStringAsFixed(2)}%",
-                      radius: 115,
+                      title:
+                          "${countForm4ToLessThan55Percentage.toStringAsFixed(2)}% - ${count[1]}",
+                      radius: 170,
+                      color: Colors.orange),
+                  PieChartSectionData(
+                      value: double.parse(
+                          countForm55ToLessThan7Percentage.toString()),
+                      showTitle: true,
+                      title:
+                          "${countForm55ToLessThan7Percentage.toStringAsFixed(2)}% - ${count[2]}",
+                      radius: 170,
                       color: Colors.yellow),
                   PieChartSectionData(
-                      value: double.parse(countForm7ToLessThan10.toString()),
+                      value: double.parse(
+                          countFor7ToLessThan85Percentage.toString()),
                       showTitle: true,
-                      title: "${countForm7ToLessThan10.toStringAsFixed(2)}%",
-                      radius: 115,
+                      title:
+                          "${countFor7ToLessThan85Percentage.toStringAsFixed(2)}% - ${count[3]}",
+                      radius: 170,
                       color: Colors.green),
                   PieChartSectionData(
-                      value: double.parse(countEqual10.toString()),
+                      value:
+                          double.parse(countGreaterThan85Percentage.toString()),
                       showTitle: true,
-                      title: "${countEqual10.toStringAsFixed(2)}%",
-                      radius: 115,
-                      color: Colors.pink),
+                      title:
+                          "${countGreaterThan85Percentage.toStringAsFixed(2)}% - ${count[4]}",
+                      radius: 170,
+                      color: Colors.pink.shade300),
                 ]),
           ),
         ),
@@ -83,26 +102,32 @@ class PeiChartWidget extends StatelessWidget {
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
             ),
             GlobalStyles.sizedBoxHeight_10,
-            countLessThan5 != 0
+            countLessThan4Percentage != 0
                 ? TextWidget(
-                    color: Colors.red, titleStr: "Percentage score less than 5")
+                    color: Colors.red, titleStr: "Percentage score less than 4")
                 : Container(),
             GlobalStyles.sizedBoxHeight_10,
-            countForm5To7 != 0
+            countForm4ToLessThan55Percentage != 0
+                ? TextWidget(
+                    color: Colors.orange,
+                    titleStr: "Score percentage from 4 to less than 5.5")
+                : Container(),
+            GlobalStyles.sizedBoxHeight_10,
+            countForm55ToLessThan7Percentage != 0
                 ? TextWidget(
                     color: Colors.yellow,
-                    titleStr: "Score percentage from 5 to less than 7")
+                    titleStr: "Score percentage from 5.5 to less than 7")
                 : Container(),
             GlobalStyles.sizedBoxHeight_10,
-            countForm7ToLessThan10 != 0
+            countFor7ToLessThan85Percentage != 0
                 ? TextWidget(
                     color: Colors.green,
-                    titleStr: "Score percentage from 7 to less than 10")
+                    titleStr: "Score percentage from 7 to less than 8.5")
                 : Container(),
-            GlobalStyles.sizedBoxHeight_10,
-            countEqual10 != 0
+            countGreaterThan85Percentage != 0
                 ? TextWidget(
-                    color: Colors.pink, titleStr: "Point percentage equals 10")
+                    color: Colors.pink.shade300,
+                    titleStr: "Point percentage greater then 8.5")
                 : Container(),
           ],
         ),

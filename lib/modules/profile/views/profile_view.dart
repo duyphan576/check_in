@@ -43,6 +43,15 @@ class ProfileView extends GetView<ProfileController> {
                       iconTheme: IconThemeData(
                         color: AppColors.lightBlack,
                       ),
+                      actions: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: IconButton(
+                              onPressed: () =>
+                                  Get.toNamed(Routes.CHANGE_PASSWORD),
+                              icon: Icon(Icons.password)),
+                        )
+                      ],
                     ),
                     body: LayoutBuilder(
                       builder: (context, constraints) {
@@ -157,11 +166,6 @@ class ProfileView extends GetView<ProfileController> {
                           ),
                         );
                       },
-                    ),
-                    floatingActionButton: OutlinedButton(
-                      style: ButtonStyle(),
-                      onPressed: () => Get.toNamed(Routes.CHANGE_PASSWORD),
-                      child: Text("Change Password"),
                     ),
                   )),
                 ),
