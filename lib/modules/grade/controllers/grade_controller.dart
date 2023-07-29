@@ -1,3 +1,4 @@
+import 'package:check_in/constants/index.dart';
 import 'package:check_in/core/index.dart';
 import 'package:check_in/modules/grade/models/grade_models.dart';
 import 'package:check_in/services/authenticationService.dart';
@@ -12,19 +13,24 @@ class GradeController extends GetxController with CacheManager {
   var userData;
   RxBool isLoading = true.obs;
   var avgGrade;
+  List<double> gradeFinalList = [];
   RxList<Grade> grades = <Grade>[].obs;
+  double? gradeFinal;
   GradeController({required this.gradeRepository});
 
   @override
   void onInit() async {
+    super.onInit();
     initData();
     avgGrade = getAvgGrade();
     getGradesData();
-    super.onInit();
   }
 
   initData() async {
     userData = await cacheGet(CacheManagerKey.CUSTOMER_INFO);
+    if (userData != null) {
+      isLoading.value = true;
+    }
   }
 
   getAvgGrade() async {
@@ -40,13 +46,23 @@ class GradeController extends GetxController with CacheManager {
       UrlProvider.HANDLES_GRADE,
       cacheGet(CacheManagerKey.TOKEN),
     );
-    List<dynamic> gradeList = response?.data['grades'];
-    List<Grade> gradesData =
-        gradeList.map((json) => Grade.fromJson(json)).toList();
-
-    // Sử dụng assignAll() hoặc addAll() để cập nhật RxList mà không thay đổi kiểu dữ liệu
-    grades.assignAll(gradesData);
-    update();
-    isLoading.value = false;
+    if (response?.status == 1) {
+      List<dynamic> gradeList = response?.data['grades'];
+      List<Grade> gradesData =
+          gradeList.map((json) => Grade.fromJson(json)).toList();
+      // Sử dụng assignAll() hoặc addAll() để cập nhật RxList mà không thay đổi kiểu dữ liệu
+      grades.addAll(gradesData);
+      for (int i = 0; i < grades.length; i++) {
+        gradeFinal = grades[i].finalGrade;
+        gradeFinalList.add(gradeFinal!);
+      }
+      update();
+      isLoading.value = false;
+    } else {
+      Alert.showSuccess(
+          title: AppString.ERROR,
+          buttonText: AppString.CANCEL,
+          message: response?.message.toString());
+    }
   }
 }

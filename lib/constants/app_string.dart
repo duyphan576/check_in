@@ -151,6 +151,14 @@ abstract class ChangePasswordString {
   static const String HINT_CHANGEPASSWORD = "Change Password";
 }
 
+abstract class StatisticalString {
+  static const String GradesEmpty = "Grade in class empty";
+  static const String PieChartAnnounce = "The pie chart shows the percentage";
+  static const String PieChartAnnounce2 = "of students' exam scores";
+  static const String BarChartAnnounce =
+      "Statistical chart of the number of students achieving at each exam score from 0 to 10";
+}
+
 abstract class HomeString {
   static const String CHECK_IN = "Check In";
   static const String CLASSROOM = "Classroom";
