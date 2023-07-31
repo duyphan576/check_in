@@ -40,16 +40,8 @@ class ClassroomView extends GetView<ClassroomController> {
                       child: controller.classrooms.isEmpty
                           ? Center(
                               child: Container(
-                                alignment: Alignment.topCenter,
-                                child: Text(
-                                  "You don't have data in any classroom",
-                                  style: TextStyle(
-                                    color: AppColors.lightBlack,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
+                                  alignment: Alignment.center,
+                                  child: CircularProgressIndicator()),
                             )
                           : ListView.builder(
                               padding: GlobalStyles.paddingPageLeftRight_25,

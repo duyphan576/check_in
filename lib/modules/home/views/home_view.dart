@@ -88,16 +88,6 @@ class HomeView extends GetView<HomeController> {
                                     height: height,
                                     width: width,
                                   ),
-                                  GlobalStyles.sizedBoxHeight,
-                                  InkWellCustom(
-                                    function: () {
-                                      Get.toNamed(Routes.PROFILE);
-                                    },
-                                    text: HomeString.PROFILE,
-                                    icon: Icons.person,
-                                    height: height,
-                                    width: width,
-                                  ),
                                 ],
                               ),
                             ],

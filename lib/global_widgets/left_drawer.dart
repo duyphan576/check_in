@@ -1,6 +1,7 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/modules/home/controllers/home_controller.dart';
+import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -78,23 +79,27 @@ class LeftDrawer extends GetView<HomeController> {
           ),
           _ListTileCustom(
             text: HomeString.CHECK_IN,
-            function: () {},
+            function: () {
+              Get.toNamed(Routes.CHECKIN);
+            },
           ),
           _ListTileCustom(
             text: HomeString.CLASSROOM,
-            function: () {},
+            function: () {
+              Get.toNamed(Routes.CLASSROOM);
+            },
           ),
           _ListTileCustom(
             text: HomeString.GRADE,
-            function: () {},
-          ),
-          _ListTileCustom(
-            text: HomeString.DOCUMENT,
-            function: () {},
+            function: () {
+              Get.toNamed(Routes.GRADE);
+            },
           ),
           _ListTileCustom(
             text: HomeString.PROFILE,
-            function: () {},
+            function: () {
+              Get.toNamed(Routes.PROFILE);
+            },
           ),
           _ListTileCustom(
             text: HomeString.LOGOUT,
