@@ -1,11 +1,9 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
-import 'package:check_in/global_widgets/detail_custom.dart';
-import 'package:check_in/global_widgets/detail_inkwell.dart';
+import 'package:check_in/global_widgets/info_custom.dart';
 import 'package:check_in/models/documents/documents.dart';
 import 'package:check_in/models/student/students.dart';
 import 'package:check_in/modules/detail/controllers/detail_controller.dart';
-import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -86,7 +84,7 @@ class DetailView extends GetView<DetailController> {
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  "Students",
+                                  DetailString.STUDENT,
                                   style: TextStyle(
                                     fontSize: 18,
                                     color: AppColors.lightBlack,
@@ -99,7 +97,7 @@ class DetailView extends GetView<DetailController> {
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  "Document",
+                                  DetailString.DOCUMENT,
                                   style: TextStyle(
                                     fontSize: 18,
                                     color: AppColors.lightBlack,
@@ -110,6 +108,27 @@ class DetailView extends GetView<DetailController> {
                             ),
                           ],
                         ),
+                        actions: [
+                          IconButton(
+                            onPressed: () {
+                              controller.goToStatistical(
+                                controller.classroom!.id.toString(),
+                              );
+                            },
+                            icon: Icon(Icons.bar_chart),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              controller.showInfo(
+                                InfoCustom(),
+                              );
+                            },
+                            icon: Icon(
+                              Icons.info_outline_rounded,
+                              size: 28,
+                            ),
+                          )
+                        ],
                       ),
                       body: SingleChildScrollView(
                         child: Container(
@@ -118,20 +137,20 @@ class DetailView extends GetView<DetailController> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              DetailCustom(
-                                termName: controller.classroom!.term.termName,
-                                lecturerFullname:
-                                    controller.classroom!.lecturer.fullname,
-                                lecturerCode:
-                                    controller.classroom!.lecturer.code,
-                                termId:
-                                    controller.classroom!.term.id.toString(),
-                                termCredit: controller.classroom!.term.credit
-                                    .toString(),
-                                classroomId:
-                                    controller.classroom!.id.toString(),
-                                isOnTap: true,
-                              ),
+                              // DetailCustom(
+                              //   termName: controller.classroom!.term.termName,
+                              //   lecturerFullname:
+                              //       controller.classroom!.lecturer.fullname,
+                              //   lecturerCode:
+                              //       controller.classroom!.lecturer.code,
+                              //   termId:
+                              //       controller.classroom!.term.id.toString(),
+                              //   termCredit: controller.classroom!.term.credit
+                              //       .toString(),
+                              //   classroomId:
+                              //       controller.classroom!.id.toString(),
+                              //   isOnTap: true,
+                              // ),
                               GlobalStyles.sizedBoxHeight,
                               Container(
                                 height:
@@ -155,8 +174,8 @@ class DetailView extends GetView<DetailController> {
                                     Container(
                                       child: controller.studentsList.isEmpty
                                           ? Center(
-                                              child:
-                                                  CircularProgressIndicator(),
+                                              child: Text(
+                                                  DetailString.EMPTY_STUDENT),
                                             )
                                           : ListView.builder(
                                               padding: GlobalStyles
@@ -179,10 +198,10 @@ class DetailView extends GetView<DetailController> {
                                             ),
                                     ),
                                     Container(
-                                      child: controller.studentsList.isEmpty
+                                      child: controller.docList.isEmpty
                                           ? Center(
                                               child:
-                                                  CircularProgressIndicator(),
+                                                  Text(DetailString.EMPTY_DOC),
                                             )
                                           : ListView.builder(
                                               padding: GlobalStyles
@@ -193,19 +212,20 @@ class DetailView extends GetView<DetailController> {
                                                 final Documents docs =
                                                     controller.docList[index];
                                                 return ListTile(
-                                                    title: Text(
-                                                      docs.fileName.toString(),
+                                                  title: Text(
+                                                    docs.fileName.toString(),
+                                                  ),
+                                                  trailing: IconButton(
+                                                    onPressed: () {
+                                                      controller.viewPdf(
+                                                        docs.url.toString(),
+                                                      );
+                                                    },
+                                                    icon: Icon(
+                                                      Icons.remove_red_eye,
                                                     ),
-                                                    trailing: IconButton(
-                                                      onPressed: () {
-                                                        controller.viewPdf(
-                                                          docs.url.toString(),
-                                                        );
-                                                      },
-                                                      icon: Icon(
-                                                        Icons.remove_red_eye,
-                                                      ),
-                                                    ));
+                                                  ),
+                                                );
                                               },
                                             ),
                                     ),

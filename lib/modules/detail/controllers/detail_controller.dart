@@ -1,5 +1,6 @@
 // ignore_for_file: unused_field
 
+import 'package:check_in/constants/app_string.dart';
 import 'package:check_in/core/alert.dart';
 import 'package:check_in/core/cache_manager.dart';
 import 'package:check_in/models/classroom/classroom.dart';
@@ -88,6 +89,22 @@ class DetailController extends GetxController
           message: "Chưa cấp quyền cho ứng dụng",
           buttonText: "Xác nhận");
     }
+  }
+
+  void showInfo(Widget widget) {
+    Alert.showInfo(
+      title: DetailString.CLASS_INFO,
+      buttonText: CommonString.OK,
+      widget: widget,
+    );
+  }
+
+  void goToStatistical(String classroomId) {
+    var parameters = <String, String>{
+      "classroomId": "$classroomId",
+      "isClassroom": "true",
+    };
+    Get.toNamed(Routes.STATISTICAL, parameters: parameters);
   }
 
   void viewPdf(String url) {

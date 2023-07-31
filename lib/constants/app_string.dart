@@ -185,6 +185,11 @@ abstract class ProfileString {
 
 abstract class DetailString {
   static const String DETAIL = "Detail";
+  static const String STUDENT = "Students";
+  static const String DOCUMENT = "Document";
+  static const String CLASS_INFO = "Infomation";
+  static const String EMPTY_STUDENT = "No student in class";
+  static const String EMPTY_DOC = "No document in class";
 }
 
 abstract class CheckinString {
