@@ -15,8 +15,8 @@ RxBool isLoading = true.obs;
 class StatisticalController extends GetxController with CacheManager {
   final StatisticalRepository statisticalRepository;
   final AuthenticationService authenticationService = AuthenticationService();
-  int ClassroomId = int.parse(Get.parameters['classroomId'].toString());
-  bool isClassroom = "true" == Get.parameters['isClassroom'].toString();
+  int classroomId = int.parse(Get.parameters['classroomId'].toString());
+  bool isClassroom = "true" == Get.parameters['isClassroom'];
   RxList<double?> grades =
       <double?>[].obs; // Change the type to RxList<double?>
   var countLessThan4 = 0.0;
@@ -46,7 +46,7 @@ class StatisticalController extends GetxController with CacheManager {
     isLoading.value = true;
     if (isClassroom) {
       final response = await statisticalRepository.statistical(
-        StatisticalModel(classroomId: ClassroomId.toString()),
+        StatisticalModel(classroomId: classroomId.toString()),
         UrlProvider.HANDLES_SATISTICAL,
         cacheGet(CacheManagerKey.TOKEN),
       );
@@ -85,15 +85,15 @@ class StatisticalController extends GetxController with CacheManager {
           }
 
           countList();
-          countLessThan4Percentage = CalculatePercent(
+          countLessThan4Percentage = calculatePercent(
               countLessThan4, double.parse(grades.length.toString()));
-          countForm4ToLessThan55Percentage = CalculatePercent(
+          countForm4ToLessThan55Percentage = calculatePercent(
               countForm4ToLessThan55, double.parse(grades.length.toString()));
-          countForm55ToLessThan7Percentage = CalculatePercent(
+          countForm55ToLessThan7Percentage = calculatePercent(
               countForm55ToLessThan7, double.parse(grades.length.toString()));
-          countFor7ToLessThan85Percentage = CalculatePercent(
+          countFor7ToLessThan85Percentage = calculatePercent(
               countFor7ToLessThan85, double.parse(grades.length.toString()));
-          countGreaterThan85Percentage = CalculatePercent(
+          countGreaterThan85Percentage = calculatePercent(
               countGreaterThan85, double.parse(grades.length.toString()));
           // Map<int, int> occurrences = countOccurrences(grades);
           // for (var grade in occurrences.keys) {
@@ -116,7 +116,7 @@ class StatisticalController extends GetxController with CacheManager {
       } else {
         Alert.closeLoadingIndicator();
         Alert.showSuccess(
-            title: "Error",
+            title: CommonString.ERROR,
             message: response!.message.toString(),
             buttonText: AppString.CANCEL);
       }
@@ -148,7 +148,7 @@ class StatisticalController extends GetxController with CacheManager {
     return occurrences;
   }
 
-  double CalculatePercent(double count, double all) {
+  double calculatePercent(double count, double all) {
     return ((count / all) * 100);
   }
 }

@@ -75,6 +75,31 @@ class Alert {
     );
   }
 
+  static Future<dynamic> showInfo({
+    required String title,
+    Widget? widget,
+    required String buttonText,
+  }) {
+    setIsConfirm();
+    return showDialog(
+      context: Get.context!,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+        title: Text(title),
+        content: widget,
+        actions: <Widget>[
+          CupertinoDialogAction(
+            child: Text(buttonText),
+            onPressed: () => {
+              setIsConfirm(),
+              Get.back(),
+            },
+          )
+        ],
+      ),
+      barrierDismissible: false,
+    );
+  }
+
   static Future<dynamic> showError(
       {required String title,
       required String message,
