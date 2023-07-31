@@ -78,9 +78,9 @@ class CheckinController extends GetxController with CacheManager {
       if (response?.status == 1) {
         isLoading.value = false;
         Alert.showSuccess(
-          title: CommonString.SUCCESS,
+          title: response!.message.toString(),
           buttonText: CommonString.OK,
-          message: response?.data,
+          message: response.data.toString(),
         ).then((value) => getCheckinHistory());
       } else {
         isLoading.value = false;

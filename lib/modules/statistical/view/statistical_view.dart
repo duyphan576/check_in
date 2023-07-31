@@ -67,8 +67,8 @@ class StatisticalView extends GetView<StatisticalController> {
                                     IconButton(
                                       onPressed: () {
                                         Alert.showInfo(
-                                            title: "Information",
-                                            buttonText: AppString.CONFIRM,
+                                            title: "Notes",
+                                            buttonText: CommonString.OK,
                                             widget: Container(
                                               child: Column(
                                                   mainAxisAlignment:
