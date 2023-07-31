@@ -93,7 +93,7 @@ class DetailController extends GetxController
 
   void showInfo(Widget widget) {
     Alert.showInfo(
-      title: DetailString.CLASS_INFO,
+      title: classroom!.term.termName,
       buttonText: CommonString.OK,
       widget: widget,
     );

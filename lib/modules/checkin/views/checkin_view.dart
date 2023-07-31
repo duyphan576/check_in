@@ -134,6 +134,12 @@ class CheckinView extends GetView<CheckinController> {
                                               final CheckinDate dates =
                                                   controller.checkinDate[index];
                                               return ListTile(
+                                                leading: Icon(
+                                                  dates.time == "0"
+                                                      ? Icons.wb_sunny
+                                                      : Icons.wb_sunny_outlined,
+                                                  color: AppColors.orange,
+                                                ),
                                                 title: Text(
                                                   controller.getFormatDate(
                                                     dates.date,
@@ -144,14 +150,33 @@ class CheckinView extends GetView<CheckinController> {
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
+                                                subtitle: Text(
+                                                  dates.isChecked.type == "0"
+                                                      ? ""
+                                                      : controller
+                                                          .getFormatDateWithTime(
+                                                          dates.isChecked
+                                                              .checkinTime,
+                                                        ),
+                                                ),
                                                 trailing: Icon(
-                                                  Icons.check_circle_rounded,
-                                                  color: dates.type == "in"
+                                                  dates.isChecked.type == "0"
+                                                      ? Icons
+                                                          .check_circle_outline_rounded
+                                                      : Icons
+                                                          .check_circle_rounded,
+                                                  color: dates.isChecked.type ==
+                                                          "1"
                                                       ? AppColors.greenLight
-                                                      : dates.type == "out"
+                                                      : dates.isChecked.type ==
+                                                              "2"
                                                           ? AppColors.red
-                                                          : AppColors
-                                                              .accentBlue,
+                                                          : dates.isChecked
+                                                                      .type ==
+                                                                  "3"
+                                                              ? AppColors
+                                                                  .accentBlue
+                                                              : AppColors.black,
                                                 ),
                                               );
                                             },
@@ -178,62 +203,144 @@ class CheckinView extends GetView<CheckinController> {
                                     CheckinString.NOTES,
                                     style: TextStyle(
                                       color: AppColors.main,
-                                      fontSize: 20,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  GlobalStyles.sizedBoxHeight,
+                                  GlobalStyles.sizedBoxHeight_10,
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Icon(
-                                        Icons.check_circle_rounded,
-                                        color: AppColors.greenLight,
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Icon(
+                                                Icons.check_circle_rounded,
+                                                color: AppColors.greenLight,
+                                              ),
+                                              GlobalStyles.sizedBoxWidth_5,
+                                              Text(
+                                                CheckinString.IN_ATTENDANCE,
+                                                style: TextStyle(
+                                                  color: AppColors.main,
+                                                  fontSize: 16,
+                                                  fontStyle: FontStyle.italic,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          GlobalStyles.sizedBoxHeight_10,
+                                          Row(
+                                            children: [
+                                              Icon(
+                                                Icons.check_circle_rounded,
+                                                color: AppColors.red,
+                                              ),
+                                              GlobalStyles.sizedBoxWidth_5,
+                                              Text(
+                                                CheckinString.END_ATTENDANCE,
+                                                style: TextStyle(
+                                                  color: AppColors.main,
+                                                  fontSize: 16,
+                                                  fontStyle: FontStyle.italic,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          GlobalStyles.sizedBoxHeight_10,
+                                          Row(
+                                            children: [
+                                              Icon(
+                                                Icons.check_circle_rounded,
+                                                color: AppColors.accentBlue,
+                                              ),
+                                              GlobalStyles.sizedBoxWidth_5,
+                                              Text(
+                                                CheckinString.MID_ATTENDANCE,
+                                                style: TextStyle(
+                                                  color: AppColors.main,
+                                                  fontSize: 16,
+                                                  fontStyle: FontStyle.italic,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          GlobalStyles.sizedBoxHeight_10,
+                                          Row(
+                                            children: [
+                                              Icon(
+                                                Icons
+                                                    .check_circle_outline_rounded,
+                                                color: AppColors.black,
+                                              ),
+                                              GlobalStyles.sizedBoxWidth_5,
+                                              Text(
+                                                CheckinString.NO_ATTENDANCE,
+                                                style: TextStyle(
+                                                  color: AppColors.main,
+                                                  fontSize: 16,
+                                                  fontStyle: FontStyle.italic,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
                                       GlobalStyles.sizedBoxWidth,
-                                      Text(
-                                        CheckinString.IN_ATTENDANCE,
-                                        style: TextStyle(
-                                          color: AppColors.main,
-                                          fontSize: 20,
-                                          fontStyle: FontStyle.italic,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  GlobalStyles.sizedBoxHeight,
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.check_circle_rounded,
-                                        color: AppColors.red,
-                                      ),
-                                      GlobalStyles.sizedBoxWidth,
-                                      Text(
-                                        CheckinString.END_ATTENDANCE,
-                                        style: TextStyle(
-                                          color: AppColors.main,
-                                          fontSize: 20,
-                                          fontStyle: FontStyle.italic,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  GlobalStyles.sizedBoxHeight,
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.check_circle_rounded,
-                                        color: AppColors.accentBlue,
-                                      ),
-                                      GlobalStyles.sizedBoxWidth,
-                                      Text(
-                                        CheckinString.MID_ATTENDANCE,
-                                        style: TextStyle(
-                                          color: AppColors.main,
-                                          fontSize: 20,
-                                          fontStyle: FontStyle.italic,
-                                        ),
-                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Icon(
+                                                Icons.wb_sunny,
+                                                color: AppColors.orange,
+                                              ),
+                                              GlobalStyles.sizedBoxWidth_5,
+                                              Text(
+                                                CheckinString.MORNING,
+                                                style: TextStyle(
+                                                  color: AppColors.main,
+                                                  fontSize: 16,
+                                                  fontStyle: FontStyle.italic,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          GlobalStyles.sizedBoxHeight_10,
+                                          Row(
+                                            children: [
+                                              Icon(
+                                                Icons.wb_sunny_outlined,
+                                                color: AppColors.orange,
+                                              ),
+                                              GlobalStyles.sizedBoxWidth_5,
+                                              Text(
+                                                CheckinString.AFTERNOON,
+                                                style: TextStyle(
+                                                  color: AppColors.main,
+                                                  fontSize: 16,
+                                                  fontStyle: FontStyle.italic,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      )
                                     ],
                                   )
                                 ],

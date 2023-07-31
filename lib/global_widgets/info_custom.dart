@@ -16,14 +16,6 @@ class InfoCustom extends GetView<DetailController> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            controller.classroom!.term.termName,
-            style: TextStyle(
-              color: AppColors.black,
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
           SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Divider(

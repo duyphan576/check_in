@@ -1,13 +1,20 @@
+import 'package:check_in/models/is_checked/is_checked.dart';
+
 class CheckinDate {
   final String date;
-  final String type;
+  final String time;
+  final IsChecked isChecked;
 
-  CheckinDate({required this.date, required this.type});
+  CheckinDate(
+      {required this.date, required this.time, required this.isChecked});
 
   factory CheckinDate.fromJson(Map<String, dynamic> json) {
     return CheckinDate(
-      type: json['type'],
-      date: json['checkinTime'],
+      date: json['date'],
+      time: json['time'].toString(),
+      isChecked: IsChecked.fromJson(
+        json['isChecked'],
+      ),
     );
   }
 }
