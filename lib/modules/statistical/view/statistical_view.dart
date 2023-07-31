@@ -1,10 +1,11 @@
 import 'package:check_in/constants/app_images.dart';
 import 'package:check_in/constants/app_string.dart';
+import 'package:check_in/core/alert.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/global_widgets/bar_chart.dart';
-import 'package:check_in/global_widgets/information_statistical.dart';
 import 'package:check_in/global_widgets/pei_chart.dart';
 import 'package:check_in/modules/statistical/controllers/statistical_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -65,7 +66,53 @@ class StatisticalView extends GetView<StatisticalController> {
                                 children: [
                                     IconButton(
                                       onPressed: () {
-                                        controller.showInfo(Information());
+                                        Alert.showInfo(
+                                            title: "Information",
+                                            buttonText: AppString.CONFIRM,
+                                            widget: Container(
+                                              child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    GlobalStyles
+                                                        .sizedBoxHeight_10,
+                                                    Text(
+                                                      "Grade F is a grade from 0 to less than 4.",
+                                                      style: TextStyle(
+                                                          fontSize: 12.5),
+                                                    ),
+                                                    GlobalStyles
+                                                        .sizedBoxHeight_10,
+                                                    Text(
+                                                      "Grade D is a grade from 4 to less than 5,5.",
+                                                      style: TextStyle(
+                                                          fontSize: 12.5),
+                                                    ),
+                                                    GlobalStyles
+                                                        .sizedBoxHeight_10,
+                                                    Text(
+                                                      "Grade C is a grade from 5,5 to less than 7.",
+                                                      style: TextStyle(
+                                                          fontSize: 12.5),
+                                                    ),
+                                                    GlobalStyles
+                                                        .sizedBoxHeight_10,
+                                                    Text(
+                                                      "Grade B is a grade from 7 to less than 8,5.",
+                                                      style: TextStyle(
+                                                          fontSize: 12.5),
+                                                    ),
+                                                    GlobalStyles
+                                                        .sizedBoxHeight_10,
+                                                    Text(
+                                                      "Grade A is a grade 8.5 or higher.",
+                                                      style: TextStyle(
+                                                          fontSize: 12),
+                                                    ),
+                                                  ]),
+                                            ));
                                       },
                                       icon: Icon(
                                         Icons.info_outline_rounded,

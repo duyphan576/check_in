@@ -26,7 +26,7 @@ abstract class AppString {
   static const String ERROR_MESSAGE = "Có lỗi! Vui lòng thử lại";
   static const String SAVE_REQUEST = "Đang lưu";
   static const String SENDING_REQUEST = "Đang gửi yêu cầu";
-  static const String OK = "Chấp nhận";
+  static const String OK = "OK";
   static const String CANCEL = "Hủy";
   static const String SUCCESS = "Thành công";
   static const String ENTER_TEL = "Nhập số điện thoại *";
