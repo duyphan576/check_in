@@ -32,18 +32,19 @@ class HomeController extends GetxController with CacheManager {
   }
 
   logout() async {
+    Alert.showLoadingIndicator(message: "Logout");
     final response = await homeRepository.home(
       HomeModel(),
       UrlProvider.HANDLES_LOGOUT,
       cacheGet(CacheManagerKey.TOKEN),
     );
     if (response?.status == 1) {
+      Alert.closeLoadingIndicator();
       Alert.showSuccess(
         title: CommonString.SUCCESS,
         buttonText: CommonString.OK,
         message: response?.message,
-      );
-      Future.delayed(Duration(seconds: 2), () {
+      ).then((value) {
         authenticationService.clearStorage();
         cacheRemove(CacheManagerKey.CUSTOMER_INFO);
         cacheRemove(CacheManagerKey.TOKEN);

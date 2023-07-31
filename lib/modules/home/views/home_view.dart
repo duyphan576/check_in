@@ -35,6 +35,15 @@ class HomeView extends GetView<HomeController> {
                       // extendBodyBehindAppBar: true,
                       resizeToAvoidBottomInset: true,
                       appBar: AppBar(
+                        title: Text(
+                          HomeString.HOME,
+                          style: TextStyle(
+                            color: AppColors.lightBlack,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        centerTitle: true,
                         backgroundColor: Colors.transparent,
                         elevation: 0,
                         iconTheme: IconThemeData(
@@ -85,16 +94,6 @@ class HomeView extends GetView<HomeController> {
                                     },
                                     text: HomeString.GRADE,
                                     icon: Icons.grade,
-                                    height: height,
-                                    width: width,
-                                  ),
-                                  GlobalStyles.sizedBoxHeight,
-                                  InkWellCustom(
-                                    function: () {
-                                      Get.toNamed(Routes.PROFILE);
-                                    },
-                                    text: HomeString.PROFILE,
-                                    icon: Icons.person,
                                     height: height,
                                     width: width,
                                   ),

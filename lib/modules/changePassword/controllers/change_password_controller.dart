@@ -57,7 +57,6 @@ class ChangePasswordController extends GetxController with CacheManager {
       }),
     ];
     this.errorMessage.value = Validator().validateForm(validateGroup)!;
-    print(this.errorMessage.value);
     if (this.errorMessage.value == "") {
       isLoading.value = true;
       String oldPassword = oldPasswordController.text;
@@ -72,7 +71,6 @@ class ChangePasswordController extends GetxController with CacheManager {
           cacheGet(CacheManagerKey.TOKEN));
       if (response?.statusCode == HttpStatus.ok) {
         isLoading.value = false;
-        print(response?.status);
         if (response?.status == 1) {
           Alert.closeLoadingIndicator();
           Alert.showSuccess(

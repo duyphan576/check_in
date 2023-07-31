@@ -1,13 +1,13 @@
 class CheckinDate {
   final String date;
-  final bool isChecked;
+  final String type;
 
-  CheckinDate({required this.date, required this.isChecked});
+  CheckinDate({required this.date, required this.type});
 
   factory CheckinDate.fromJson(Map<String, dynamic> json) {
     return CheckinDate(
-      date: json['date'],
-      isChecked: json['isChecked '],
+      type: json['type'],
+      date: json['checkinTime'],
     );
   }
 }

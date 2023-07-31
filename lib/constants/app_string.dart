@@ -119,6 +119,7 @@ abstract class AppString {
   static const String NOTE_STATUS_3 = "Nhấn vào dây";
 
   static const String CAMERA_ERROR = "Ứng dụng không cho phép truy cập Camera.";
+  static const String GEO_ERROR = "Ứng dụng không cho phép truy cập vị trí.";
   static const String GO_TO_SETTINGS = "Mở cài đặt ứng dụng";
 }
 
@@ -152,14 +153,16 @@ abstract class ChangePasswordString {
 }
 
 abstract class StatisticalString {
-  static const String GradesEmpty = "Grade in class empty";
-  static const String PieChartAnnounce = "The pie chart shows the percentage";
-  static const String PieChartAnnounce2 = "of students' exam scores";
-  static const String BarChartAnnounce =
+  static const String STATISTICAL = "Statistical";
+  static const String GRADE_EMPTY = "Grade in class empty";
+  static const String PIE_CHART = "The pie chart shows the percentage";
+  static const String PIE_ANNOUNCE = "of students' exam scores";
+  static const String BAR_CHART =
       "Statistical chart of the number of students achieving at each exam score from 0 to 10";
 }
 
 abstract class HomeString {
+  static const String HOME = "Home";
   static const String CHECK_IN = "Check In";
   static const String CLASSROOM = "Classroom";
   static const String GRADE = "Grade";
@@ -168,14 +171,32 @@ abstract class HomeString {
   static const String LOGOUT = "Logout";
 }
 
+abstract class ClassroomString {
+  static const String CLASSROOM = "Classroom";
+}
+
+abstract class GradeString {
+  static const String GRADE = "Grade";
+}
+
+abstract class ProfileString {
+  static const String PROFILE = "Profile";
+}
+
+abstract class DetailString {
+  static const String DETAIL = "Detail";
+}
+
 abstract class CheckinString {
   static const String CHECK_IN = "Check In";
   static const String CHECKIN_HISTORY = "Checkin History";
   static const String CLASSROOM = "Classroom";
   static const String DATE = "Date";
+  static const String NOTES = "Notes";
   static const String ATTENDANCE = "Your class has never been in attendance";
   static const String CHOOSE_CLASSROOM = "Choose Classroom";
   static const String ENTER_CLASSROOM = "Please enter name classroom";
-  static const String PRESENCE = "Presence";
-  static const String NO_PRESENCE = "No presence";
+  static const String IN_ATTENDANCE = "In-hour Attendance";
+  static const String MID_ATTENDANCE = "Mid-hour Attendance";
+  static const String END_ATTENDANCE = "End-hour Attendance";
 }

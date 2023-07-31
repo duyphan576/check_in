@@ -83,14 +83,14 @@ class LoginController extends GetxController with CacheManager {
           onLogin();
         }
       }
-    } on PlatformException catch (e) {
-      print(e);
+    } on PlatformException {
       return;
     }
   }
 
   onLogin() async {
     resetError();
+    Alert.showLoadingIndicator(message: LoginString.LOGIN);
     validateGroup = [
       Validator().validateRequireAllField(
         {'code': codeController.text, 'password': passwordController.text},
@@ -100,7 +100,6 @@ class LoginController extends GetxController with CacheManager {
     this.errorMessage.value = Validator().validateForm(validateGroup)!;
 
     if (this.errorMessage.value == "") {
-      isLoading.value = true;
       String code = codeController.text;
       String password = passwordController.text;
       final response = await loginRepository.login(
@@ -111,8 +110,6 @@ class LoginController extends GetxController with CacheManager {
           UrlProvider.HANDLES_LOGIN);
       if (response?.statusCode == HttpStatus.ok) {
         Alert.closeLoadingIndicator();
-        isLoading.value = false;
-
         if (response?.status == 1) {
           cacheSave(CacheManagerKey.TOKEN, response?.data["access_token"]);
           cacheSave(CacheManagerKey.CUSTOMER_INFO, response?.data["user"]);

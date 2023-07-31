@@ -57,7 +57,7 @@ class StatisticalController extends GetxController with CacheManager {
         if (response?.data['examGradeList'].isEmpty) {
           Alert.showSuccess(
                   title: "Error",
-                  message: StatisticalString.GradesEmpty,
+                  message: StatisticalString.GRADE_EMPTY,
                   buttonText: AppString.CANCEL)
               .then((value) => Alert.closeLoadingIndicator());
         } else {

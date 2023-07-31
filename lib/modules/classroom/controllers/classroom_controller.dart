@@ -1,3 +1,5 @@
+import 'package:check_in/constants/app_string.dart';
+import 'package:check_in/core/alert.dart';
 import 'package:check_in/core/cache_manager.dart';
 import 'package:check_in/models/classroom/classroom.dart';
 import 'package:check_in/modules/classroom/models/classroom_model.dart';
@@ -46,6 +48,14 @@ class ClassroomController extends GetxController with CacheManager {
         final List<Classroom> classroomData =
             classroomList.map((json) => Classroom.fromJson(json)).toList();
         yield classroomData;
+      } else {
+        Alert.showError(
+          title: CommonString.ERROR,
+          message: "You don't have data in any classroom",
+          buttonText: CommonString.OK,
+        ).then(
+          (value) => Get.back(),
+        );
       }
     }
   }
@@ -58,6 +68,7 @@ class ClassroomController extends GetxController with CacheManager {
   }
 
   getClassInfo(String classroomId) async {
+    Alert.showLoadingIndicator(message: "Loading");
     final response = await classroomRepository.detail(
       {
         "classroomId": classroomId,
@@ -66,6 +77,7 @@ class ClassroomController extends GetxController with CacheManager {
       cacheGet(CacheManagerKey.TOKEN),
     );
     if (response?.status == 1) {
+      Alert.closeLoadingIndicator();
       cacheSave(CacheManagerKey.CLASS_DATA, response?.data);
       Get.toNamed(Routes.DETAIL);
     }
