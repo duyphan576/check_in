@@ -56,6 +56,7 @@ class GradeController extends GetxController with CacheManager {
         gradeFinal = grades[i].finalGrade;
         gradeFinalList.add(gradeFinal!);
       }
+      print(gradeFinalList);
       update();
       isLoading.value = false;
     } else {

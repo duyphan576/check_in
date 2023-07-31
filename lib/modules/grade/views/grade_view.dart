@@ -48,6 +48,24 @@ class GradeView extends GetView<GradeController> {
                         iconTheme: IconThemeData(
                           color: AppColors.lightBlack,
                         ),
+                        actions: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconButton(
+                              onPressed: () {
+                                var parameters = <String, String>{
+                                  "isClassroom": "false",
+                                };
+                                Get.toNamed(Routes.STATISTICAL,
+                                    arguments:
+                                        controller.gradeFinalList.toList(),
+                                    parameters: parameters);
+                              },
+                              icon: Icon(Icons.bar_chart,
+                                  color: Colors.grey.shade600),
+                            ),
+                          )
+                        ],
                       ),
                       body: SingleChildScrollView(
                         child: Padding(
@@ -82,58 +100,10 @@ class GradeView extends GetView<GradeController> {
                                     end: Alignment.topRight,
                                   ),
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TableWidget(grades: controller.grades),
-                                ),
+                                child: TableWidget(grades: controller.grades),
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                      floatingActionButtonLocation:
-                          FloatingActionButtonLocation.endDocked,
-                      floatingActionButton: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: 40,
-                          width: 100,
-                          decoration: BoxDecoration(
-                            color: AppColors.lightWhite.withOpacity(0.7),
-                            borderRadius: BorderRadius.circular(8),
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.black,
-                                blurRadius: 2,
-                                blurStyle: BlurStyle.outer,
-                                offset: Offset(0, 0), // Shadow position
-                              ),
-                            ],
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xFF41D8D7),
-                                Color(0xFF21A3C6),
-                                Color(0xFF285DA2),
-                                Color(0xFF332F61),
-                                Color(0xFF452E51),
-                              ],
-                              begin: Alignment.bottomLeft,
-                              end: Alignment.topRight,
-                            ),
-                          ),
-                          child: TextButton(
-                              onPressed: () {
-                                var parameters = <String, String>{
-                                  "isClassroom": "false",
-                                };
-                                Get.toNamed(Routes.STATISTICAL,
-                                    arguments: controller.gradeFinalList,
-                                    parameters: parameters);
-                              },
-                              child: Text(
-                                "Satistical",
-                                style: TextStyle(color: Colors.white),
-                              )),
                         ),
                       ),
                     ),

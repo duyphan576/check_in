@@ -16,6 +16,7 @@ class AppImages {
   static final String icFaceId = 'assets/icons/ic_face_id.png';
   static final String icChevronDown = 'assets/images/icons/icChevronDown.svg';
   static final String icAttachment = 'assets/images/icons/ic_attachment.svg';
+  static final String icChangePassword = 'assets/icons/ic_change_password.png';
 
   //logo
   static final String icLogo = 'assets/images/OIG.png';

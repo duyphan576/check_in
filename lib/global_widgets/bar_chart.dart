@@ -22,8 +22,36 @@ class BarChartWidget extends StatelessWidget {
                       sideTitles: SideTitles(
                     showTitles: true,
                     getTitlesWidget: (value, meta) {
+                      int xvalue = value.toInt();
+                      print(xvalue);
+                      if (xvalue == 0) {
+                        return Text(
+                          "F",
+                          style: TextStyle(color: Colors.white),
+                        );
+                      } else if (xvalue == 1) {
+                        return Text(
+                          "D",
+                          style: TextStyle(color: Colors.white),
+                        );
+                      } else if (xvalue == 2) {
+                        return Text(
+                          "C",
+                          style: TextStyle(color: Colors.white),
+                        );
+                      } else if (xvalue == 3) {
+                        return Text(
+                          "B",
+                          style: TextStyle(color: Colors.white),
+                        );
+                      } else if (xvalue == 4) {
+                        return Text(
+                          "A",
+                          style: TextStyle(color: Colors.white),
+                        );
+                      }
                       return Text(
-                        value.toInt().toString(),
+                        xvalue.toInt().toString(),
                         style: TextStyle(color: Colors.white),
                       );
                     },

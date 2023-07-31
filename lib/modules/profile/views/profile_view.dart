@@ -45,11 +45,18 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       actions: [
                         Container(
-                          padding: EdgeInsets.all(10),
-                          child: IconButton(
+                          padding: EdgeInsets.all(5),
+                          child: TextButton(
                               onPressed: () =>
                                   Get.toNamed(Routes.CHANGE_PASSWORD),
-                              icon: Icon(Icons.password)),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    AppImages.icChangePassword,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ],
+                              )),
                         )
                       ],
                     ),
