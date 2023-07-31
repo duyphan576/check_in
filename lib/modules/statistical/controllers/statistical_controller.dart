@@ -46,9 +46,9 @@ class StatisticalController extends GetxController with CacheManager {
   void getGradesData() async {
     isLoading.value = true;
     if (isClassroom) {
-      int ClassroomId = int.parse(Get.arguments['classroomId']);
+      int classroomId = int.parse(Get.arguments['classroomId']);
       final response = await statisticalRepository.statistical(
-        StatisticalModel(classroomId: ClassroomId.toString()),
+        StatisticalModel(classroomId: classroomId.toString()),
         UrlProvider.HANDLES_SATISTICAL,
         cacheGet(CacheManagerKey.TOKEN),
       );
