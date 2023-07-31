@@ -63,6 +63,7 @@ class CheckinController extends GetxController with CacheManager {
 
   void checkin(String? token) async {
     if (token != null) {
+      print(token);
       final submit = {
         "token": token,
         "wifiName": wifiName.value,
@@ -73,13 +74,13 @@ class CheckinController extends GetxController with CacheManager {
         UrlProvider.HANDLES_CHECKIN,
         cacheGet(CacheManagerKey.TOKEN),
       );
-
+      print(response?.data);
       if (response?.status == 1) {
         isLoading.value = false;
         Alert.showSuccess(
           title: CommonString.SUCCESS,
           buttonText: CommonString.OK,
-          message: response?.message,
+          message: response?.data,
         ).then((value) => getCheckinHistory());
       } else {
         isLoading.value = false;
@@ -142,7 +143,6 @@ class CheckinController extends GetxController with CacheManager {
       UrlProvider.HANDLES_HISTORY,
       cacheGet(CacheManagerKey.TOKEN),
     );
-    print(response?.toMap());
     if (response?.status == 1) {
       for (final list in response?.data["checkedInList"]) {
         CheckinHistory history = CheckinHistory.fromJson(list);
@@ -173,10 +173,9 @@ class CheckinController extends GetxController with CacheManager {
     }
   }
 
-  getFormatDate(date) {
-    var inputFormat = DateFormat('yyyy-MM-dd');
-    var inputDate = inputFormat.parse(date);
-    var outputFormat = DateFormat('dd/MM/yyyy');
-    return outputFormat.format(inputDate);
+  getFormatDate(dateString) {
+    DateTime date = DateTime.parse(dateString);
+    String formattedDate = DateFormat('dd/MM/yyyy HH:mm:ss').format(date);
+    return formattedDate;
   }
 }

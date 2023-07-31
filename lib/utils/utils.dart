@@ -1,3 +1,4 @@
+import 'package:check_in/constants/app_string.dart';
 import 'package:check_in/core/index.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -47,17 +48,15 @@ class Utils {
         return Future.error('Location services are disabled.');
       }
 
-      print('Checking Android permissions');
       PermissionStatus status = await Permission.location.status;
 
       if (status.isDenied || status.isRestricted) {
         if (!(await Permission.location.request().isGranted)) {
-          print('Location permission not granted');
           Alert.showErrorGeolocator(
-            title: "Lỗi",
-            message: "Ứng dụng không cho phép truy cập vị trí.",
-            buttonTextOK: "Mở cài đặt ứng dụng",
-            buttonTextCancel: "Cancel",
+            title: CommonString.ERROR,
+            message: AppString.GEO_ERROR,
+            buttonTextOK: AppString.GO_TO_SETTINGS,
+            buttonTextCancel: CommonString.CANCEL,
             onPressed: () async {
               openAppSettings();
               Get.back();
@@ -70,50 +69,12 @@ class Utils {
         var wifiBSSID = await info.getWifiBSSID();
         String nameWifi = wifiName.toString().replaceAll('"', "");
         String bssidWifi = wifiBSSID.toString().replaceAll('"', "");
-        print("wifiName:  " + nameWifi);
-        print("bssidWifi:  " + bssidWifi);
+
         return {
           "wifiName": nameWifi,
           "bssidWifi": bssidWifi,
         };
       }
-
-      // permission = await Geolocator.checkPermission();
-      // if (permission == LocationPermission.denied) {
-      //   permission = await Geolocator.requestPermission();
-      //   if (permission == LocationPermission.denied) {
-      //     print("Aaaaaaaaaaaaa");
-      //     await Geolocator.openLocationSettings();
-      //   }
-      // }
-      //
-      // if (permission == LocationPermission.deniedForever) {
-      //   Alert.showErrorGeolocator(
-      //     title: "Lỗi",
-      //     message: "Thiết bị không cho phép truy cập vị trí.",
-      //     buttonTextOK: "Đi tới cài đặt",
-      //     buttonTextCancel: "Cancel",
-      //     onPressed: () async {
-      //       await Geolocator.openLocationSettings();
-      //       Get.back();
-      //     },
-      //   );
-      // }
-
-      // if (permission == LocationPermission.whileInUse ||
-      //     permission == LocationPermission.always) {
-      //   final info = NetworkInfo();
-      //   var wifiName = await info.getWifiName();
-      //   var wifiBSSID = await info.getWifiBSSID();
-      //   String nameWifi = wifiName.toString().replaceAll('"', "");
-      //   String bssidWifi = wifiBSSID.toString().replaceAll('"', "");
-      //   print("wifiName:  " + nameWifi);
-      //   print("bssidWifi:  " + bssidWifi);
-      //   return {
-      //     "wifiName": nameWifi,
-      //     "bssidWifi": bssidWifi,
-      //   };
-      // }
     } catch (error) {
       await Geolocator.requestPermission();
     }

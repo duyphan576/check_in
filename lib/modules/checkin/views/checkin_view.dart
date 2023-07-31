@@ -47,13 +47,13 @@ class CheckinView extends GetView<CheckinController> {
                         ? Container(
                             margin: EdgeInsets.only(right: 8.0, bottom: 8.0),
                             decoration: BoxDecoration(
-                                color: AppColors.main,
                                 borderRadius: BorderRadius.circular(10.0)),
                             child: IconButton(
                               onPressed: () => controller.handleOpenCamera(),
                               icon: Icon(
                                 Icons.qr_code,
-                                color: AppColors.lightWhite,
+                                color: AppColors.lightBlack,
+                                size: 36,
                               ),
                             ),
                           )
@@ -105,7 +105,7 @@ class CheckinView extends GetView<CheckinController> {
                             controller.isReady.value
                                 ? Container(
                                     height: MediaQuery.of(context).size.height *
-                                        0.6,
+                                        0.5,
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
                                       color:
@@ -134,56 +134,24 @@ class CheckinView extends GetView<CheckinController> {
                                               final CheckinDate dates =
                                                   controller.checkinDate[index];
                                               return ListTile(
-                                                title: Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: dates.isChecked
-                                                          ? Text(
-                                                              controller
-                                                                  .getFormatDate(
-                                                                dates.date
-                                                                    .toString(),
-                                                              ),
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  color: AppColors
-                                                                      .accentBlue,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            )
-                                                          : SizedBox(),
-                                                    ),
-                                                    Expanded(
-                                                      child: !dates.isChecked
-                                                          ? Text(
-                                                              controller
-                                                                  .getFormatDate(
-                                                                dates.date
-                                                                    .toString(),
-                                                              ),
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  color:
-                                                                      AppColors
-                                                                          .main,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            )
-                                                          : SizedBox(),
-                                                    ),
-                                                  ],
+                                                title: Text(
+                                                  controller.getFormatDate(
+                                                    dates.date,
+                                                  ),
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: AppColors.lightBlack,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                                 ),
                                                 trailing: Icon(
-                                                  dates.isChecked
-                                                      ? Icons
-                                                          .check_circle_rounded
-                                                      : Icons
-                                                          .check_circle_outlined,
-                                                  color: dates.isChecked
+                                                  Icons.check_circle_rounded,
+                                                  color: dates.type == "in"
                                                       ? AppColors.greenLight
-                                                      : AppColors.red,
+                                                      : dates.type == "out"
+                                                          ? AppColors.red
+                                                          : AppColors
+                                                              .accentBlue,
                                                 ),
                                               );
                                             },
@@ -207,20 +175,23 @@ class CheckinView extends GetView<CheckinController> {
                               child: Column(
                                 children: [
                                   Text(
-                                    "Ghi chú",
+                                    CheckinString.NOTES,
                                     style: TextStyle(
                                       color: AppColors.main,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                  GlobalStyles.sizedBoxHeight,
                                   Row(
                                     children: [
-                                      Icon(Icons.check_circle_rounded,
-                                          color: AppColors.greenLight),
+                                      Icon(
+                                        Icons.check_circle_rounded,
+                                        color: AppColors.greenLight,
+                                      ),
                                       GlobalStyles.sizedBoxWidth,
                                       Text(
-                                        CheckinString.PRESENCE,
+                                        CheckinString.IN_ATTENDANCE,
                                         style: TextStyle(
                                           color: AppColors.main,
                                           fontSize: 20,
@@ -233,12 +204,30 @@ class CheckinView extends GetView<CheckinController> {
                                   Row(
                                     children: [
                                       Icon(
-                                        Icons.check_circle_outlined,
+                                        Icons.check_circle_rounded,
                                         color: AppColors.red,
                                       ),
                                       GlobalStyles.sizedBoxWidth,
                                       Text(
-                                        CheckinString.NO_PRESENCE,
+                                        CheckinString.END_ATTENDANCE,
+                                        style: TextStyle(
+                                          color: AppColors.main,
+                                          fontSize: 20,
+                                          fontStyle: FontStyle.italic,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  GlobalStyles.sizedBoxHeight,
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.check_circle_rounded,
+                                        color: AppColors.accentBlue,
+                                      ),
+                                      GlobalStyles.sizedBoxWidth,
+                                      Text(
+                                        CheckinString.MID_ATTENDANCE,
                                         style: TextStyle(
                                           color: AppColors.main,
                                           fontSize: 20,

@@ -40,10 +40,14 @@ class StatisticalView extends GetView<StatisticalController> {
                   child: Scaffold(
                     backgroundColor: Colors.transparent,
                     appBar: AppBar(
-                      // title: Text(
-                      //   "Statistical",
-                      //   style: TextStyle(color: Colors.black, fontSize: 24),
-                      // ),
+                      title: Text(
+                        StatisticalString.STATISTICAL,
+                        style: TextStyle(
+                          color: AppColors.lightBlack,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       centerTitle: true,
                       backgroundColor: Colors.transparent,
                       elevation: 0,
@@ -93,10 +97,8 @@ class StatisticalView extends GetView<StatisticalController> {
                                     count: controller.count,
                                     countGreaterThan85Percentage:
                                         controller.countGreaterThan85Percentage,
-                                    pieAnouce1:
-                                        StatisticalString.PieChartAnnounce,
-                                    pieAnouce2:
-                                        StatisticalString.PieChartAnnounce2,
+                                    pieAnouce1: StatisticalString.PIE_CHART,
+                                    pieAnouce2: StatisticalString.PIE_ANNOUNCE,
                                   )
                                 ],
                               ),

@@ -1,3 +1,4 @@
+import 'package:check_in/constants/app_string.dart';
 import 'package:check_in/global_widgets/student_data.dart';
 import 'package:check_in/global_widgets/table_custom.dart';
 import 'package:check_in/modules/grade/controllers/grade_controller.dart';
@@ -43,6 +44,15 @@ class GradeView extends GetView<GradeController> {
                       // extendBodyBehindAppBar: true,
                       resizeToAvoidBottomInset: true,
                       appBar: AppBar(
+                        title: Text(
+                          GradeString.GRADE,
+                          style: TextStyle(
+                            color: AppColors.lightBlack,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        centerTitle: true,
                         backgroundColor: Colors.transparent,
                         elevation: 0,
                         iconTheme: IconThemeData(

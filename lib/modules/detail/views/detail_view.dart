@@ -42,6 +42,15 @@ class DetailView extends GetView<DetailController> {
                     child: Scaffold(
                       backgroundColor: Colors.transparent,
                       appBar: AppBar(
+                        title: Text(
+                          ClassroomString.CLASSROOM,
+                          style: TextStyle(
+                            color: AppColors.lightBlack,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        centerTitle: true,
                         backgroundColor: Colors.transparent,
                         elevation: 0,
                         iconTheme: IconThemeData(

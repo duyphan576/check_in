@@ -2,7 +2,6 @@ import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/models/classroom/classroom.dart';
 import 'package:check_in/modules/classroom/controllers/classroom_controller.dart';
-import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,6 +26,15 @@ class ClassroomView extends GetView<ClassroomController> {
                   // extendBodyBehindAppBar: true,
                   resizeToAvoidBottomInset: true,
                   appBar: AppBar(
+                    title: Text(
+                      ClassroomString.CLASSROOM,
+                      style: TextStyle(
+                        color: AppColors.lightBlack,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    centerTitle: true,
                     backgroundColor: Colors.transparent,
                     elevation: 0,
                     iconTheme: IconThemeData(
