@@ -63,13 +63,13 @@ class GradeView extends GetView<GradeController> {
                             padding: const EdgeInsets.all(8.0),
                             child: IconButton(
                               onPressed: () {
-                                var parameters = <String, String>{
-                                  "isClassroom": "false",
+                                var argumentsList = <String, dynamic>{
+                                  "isClassroom": false,
+                                  "gradeFinalList":
+                                      controller.gradeFinalList.toList(),
                                 };
                                 Get.toNamed(Routes.STATISTICAL,
-                                    arguments:
-                                        controller.gradeFinalList.toList(),
-                                    parameters: parameters);
+                                    arguments: argumentsList);
                               },
                               icon: Icon(Icons.bar_chart,
                                   color: Colors.grey.shade600),

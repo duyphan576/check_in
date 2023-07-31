@@ -17,7 +17,7 @@ class StatisticalController extends GetxController with CacheManager {
   final StatisticalRepository statisticalRepository;
   final AuthenticationService authenticationService = AuthenticationService();
 
-  bool isClassroom = "true" == Get.parameters['isClassroom'].toString();
+  bool isClassroom = Get.arguments['isClassroom'];
   RxList<double?> grades = <double?>[].obs;
   var countLessThan4 = 0.0;
   var countForm4ToLessThan55 = 0.0;
@@ -46,7 +46,7 @@ class StatisticalController extends GetxController with CacheManager {
   void getGradesData() async {
     isLoading.value = true;
     if (isClassroom) {
-      int ClassroomId = int.parse(Get.parameters['classroomId'].toString());
+      int ClassroomId = int.parse(Get.arguments['classroomId']);
       final response = await statisticalRepository.statistical(
         StatisticalModel(classroomId: ClassroomId.toString()),
         UrlProvider.HANDLES_SATISTICAL,
@@ -109,7 +109,7 @@ class StatisticalController extends GetxController with CacheManager {
             buttonText: AppString.CANCEL);
       }
     } else {
-      gradesFinal = Get.arguments;
+      gradesFinal = Get.arguments["gradeFinalList"];
       for (int i = 0; i < gradesFinal.length; i++) {
         if (gradesFinal[i]! < 4) {
           countLessThan4++;

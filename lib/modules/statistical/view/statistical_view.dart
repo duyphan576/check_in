@@ -102,10 +102,10 @@ class StatisticalView extends GetView<StatisticalController> {
                                           countGreaterThan85Percentage:
                                               controller
                                                   .countGreaterThan85Percentage,
-                                          pieAnouce1: StatisticalString
-                                              .PieChartAnnounce,
-                                          pieAnouce2: StatisticalString
-                                              .PieChartAnnounce2,
+                                          pieAnouce1:
+                                              StatisticalString.PIE_CHART,
+                                          pieAnouce2:
+                                              StatisticalString.PIE_ANNOUNCE,
                                         )
                                       ],
                                     ),
@@ -136,10 +136,20 @@ class StatisticalView extends GetView<StatisticalController> {
                                     ),
                                     child: Column(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.start,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                          CrossAxisAlignment.start,
                                       children: [
+                                        Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Icon(
+                                                Icons.info_outline_rounded,
+                                              )
+                                            ]),
                                         BarChartWidget(
                                             gradesLength: controller
                                                 .count.length
@@ -153,8 +163,14 @@ class StatisticalView extends GetView<StatisticalController> {
                                           child: Column(
                                             children: [
                                               Text(
-                                                StatisticalString
-                                                    .BarChartAnnounce,
+                                                StatisticalString.BAR_CHART,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    fontSize: 16),
+                                              ),
+                                              Text(
+                                                StatisticalString.BAR_ANNOUNCE,
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.white,
@@ -167,7 +183,7 @@ class StatisticalView extends GetView<StatisticalController> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Text("Bar Chart Annouce :",
+                                                  Text("Bar Chart Note :",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -187,6 +203,8 @@ class StatisticalView extends GetView<StatisticalController> {
                                                     style: TextStyle(
                                                         color: Colors.white),
                                                   ),
+                                                  GlobalStyles
+                                                      .sizedBoxHeight_10,
                                                 ],
                                               )
                                             ],

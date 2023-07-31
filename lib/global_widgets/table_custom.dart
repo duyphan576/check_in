@@ -56,7 +56,7 @@ class TableWidget extends StatelessWidget {
           TableRow(children: [
             Center(
               child: Container(
-                margin: EdgeInsets.only(top: 5, bottom: 5),
+                margin: EdgeInsets.only(top: 5, bottom: 5, left: 5),
                 alignment: Alignment.centerLeft,
                 child:
                     Text(grades[i].termName.toString(), style: textStyleBold),

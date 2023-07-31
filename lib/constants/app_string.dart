@@ -157,8 +157,8 @@ abstract class StatisticalString {
   static const String GRADE_EMPTY = "Grade in class empty";
   static const String PIE_CHART = "The pie chart shows the percentage";
   static const String PIE_ANNOUNCE = "of students' exam scores";
-  static const String BAR_CHART =
-      "Statistical chart of the number of students achieving at each exam score from 0 to 10";
+  static const String BAR_CHART = "Statistical chart of the number";
+  static const String BAR_ANNOUNCE = "of points achieved";
 }
 
 abstract class HomeString {
