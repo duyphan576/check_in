@@ -22,13 +22,13 @@ abstract class AppString {
   static const String VALID_TEL = "Số điện thoại không hợp lệ";
   static const String VALID_VNID =
       "Mã số Nu Skin bắt đầu bằng \"VN\" viết hoa và không có khoảng trống";
-  static const String ERROR = "Lỗi!";
-  static const String ERROR_MESSAGE = "Có lỗi! Vui lòng thử lại";
+  static const String ERROR = "Error!";
+  static const String ERROR_MESSAGE = "Error! Please try again";
   static const String SAVE_REQUEST = "Đang lưu";
   static const String SENDING_REQUEST = "Đang gửi yêu cầu";
   static const String OK = "OK";
-  static const String CANCEL = "Hủy";
-  static const String SUCCESS = "Thành công";
+  static const String CANCEL = "Cancel";
+  static const String SUCCESS = "Success";
   static const String ENTER_TEL = "Nhập số điện thoại *";
   static const String ENTER_EMAIL = "Nhập Email *";
   static const String EMPTY_CONTENT =
@@ -127,8 +127,8 @@ abstract class Message {
   static const String VALID_C_PASSWORD = "Please enter the correct password";
   static const String VALID_PASSWORD =
       "8 character password including uppercase, lowercase and special characters";
-  static const String REQUIRE_PASSWORD = "Vui lòng nhập mật khẩu";
-  static const String REQUIRE_USERNAME = "Vui lòng nhập tên tài khoản";
+  static const String REQUIRE_PASSWORD = "Please enter password";
+  static const String REQUIRE_USERNAME = "Please enter username";
   static const String EMPTY_PASSWORD = "Please enter a new password";
   static const String EMPTY_CPASSWORD = "Please enter a confirm password";
 }
@@ -208,4 +208,7 @@ abstract class CheckinString {
   static const String IN_ATTENDANCE = "In-hour Attendance";
   static const String MID_ATTENDANCE = "Mid-hour Attendance";
   static const String END_ATTENDANCE = "End-hour Attendance";
+  static const String NO_ATTENDANCE = "No Attendance";
+  static const String MORNING = "Morning";
+  static const String AFTERNOON = "Afternoon";
 }

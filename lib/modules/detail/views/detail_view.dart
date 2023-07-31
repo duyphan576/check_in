@@ -41,11 +41,12 @@ class DetailView extends GetView<DetailController> {
                       backgroundColor: Colors.transparent,
                       appBar: AppBar(
                         title: Text(
-                          ClassroomString.CLASSROOM,
+                          controller.classroom!.term.termName,
                           style: TextStyle(
                             color: AppColors.lightBlack,
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
+                            overflow: TextOverflow.visible,
                           ),
                         ),
                         centerTitle: true,
@@ -75,7 +76,7 @@ class DetailView extends GetView<DetailController> {
                                 Radius.circular(16),
                               ),
                             ),
-                            color: AppColors.white,
+                            color: AppColors.subMain.withOpacity(0.6),
                           ),
                           enableFeedback: true,
                           controller: controller.tabController,
@@ -179,7 +180,7 @@ class DetailView extends GetView<DetailController> {
                                             )
                                           : ListView.builder(
                                               padding: GlobalStyles
-                                                  .paddingPageLeftRight_25,
+                                                  .paddingPageLeftRight_15,
                                               itemCount: controller
                                                   .studentsList.length,
                                               itemBuilder: (context, index) {

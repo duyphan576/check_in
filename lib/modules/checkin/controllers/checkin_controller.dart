@@ -174,8 +174,20 @@ class CheckinController extends GetxController with CacheManager {
   }
 
   getFormatDate(dateString) {
-    DateTime date = DateTime.parse(dateString);
-    String formattedDate = DateFormat('dd/MM/yyyy HH:mm:ss').format(date);
-    return formattedDate;
+    if (dateString != "null") {
+      DateTime date = DateTime.parse(dateString);
+      String formattedDate = DateFormat('dd/MM/yyyy').format(date);
+      return formattedDate;
+    }
+    return "";
+  }
+
+  getFormatDateWithTime(dateString) {
+    if (dateString != "null") {
+      DateTime date = DateTime.parse(dateString);
+      String formattedDate = DateFormat('dd/MM/yyyy HH:mm:ss').format(date);
+      return formattedDate;
+    }
+    return "";
   }
 }

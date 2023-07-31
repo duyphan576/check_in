@@ -8,6 +8,8 @@ abstract class AppColors {
 
   //static final Color gray = Color(0xffF2F2F2);
   static final Color lightBlack = Color(0xff63656A);
+  static final Color purple = Color(0xff6A65FF);
+
   static final Color black = Color(0xff2B2B2B);
   static final Color green = Color(0xffB7BD88);
   static final Color red = Color(0xffE00000);
