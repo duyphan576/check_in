@@ -22,7 +22,6 @@ class GradeController extends GetxController with CacheManager {
   void onInit() async {
     super.onInit();
     initData();
-    avgGrade = getAvgGrade();
     getGradesData();
   }
 
@@ -33,13 +32,6 @@ class GradeController extends GetxController with CacheManager {
     }
   }
 
-  getAvgGrade() async {
-    final respone = await gradeRepository.grade(GradeModel(),
-        UrlProvider.HANDLES_GRADE, cacheGet(CacheManagerKey.TOKEN));
-    avgGrade = respone?.data['avgGrade'];
-    update();
-  }
-
   Future<void> getGradesData() async {
     final response = await gradeRepository.grade(
       GradeModel(),
@@ -48,23 +40,22 @@ class GradeController extends GetxController with CacheManager {
     );
     if (response?.status == 1) {
       List<dynamic> gradeList = response?.data['grades'];
+      avgGrade = response?.data['avgGrade'];
       List<Grade> gradesData =
           gradeList.map((json) => Grade.fromJson(json)).toList();
-      // Sử dụng assignAll() hoặc addAll() để cập nhật RxList mà không thay đổi kiểu dữ liệu
+
       grades.addAll(gradesData);
-      update();
       for (int i = 0; i < grades.length; i++) {
         gradeFinal = grades[i].finalGrade;
         gradeFinalList.add(gradeFinal!);
       }
-      print(gradeFinalList);
-
+      update();
       isLoading.value = false;
     } else {
-      Alert.showSuccess(
+      Alert.showError(
           title: AppString.ERROR,
           buttonText: AppString.CANCEL,
-          message: response?.message.toString());
+          message: response!.message.toString());
     }
   }
 }

@@ -21,7 +21,6 @@ class ClassroomController extends GetxController with CacheManager {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     fetchData();
     initData();

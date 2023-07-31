@@ -16,9 +16,7 @@ RxBool isLoading = true.obs;
 class StatisticalController extends GetxController with CacheManager {
   final StatisticalRepository statisticalRepository;
   final AuthenticationService authenticationService = AuthenticationService();
-
   bool isClassroom = Get.arguments['isClassroom'];
-  RxList<double?> grades = <double?>[].obs;
   var countLessThan4 = 0.0;
   var countForm4ToLessThan55 = 0.0;
   var countForm55ToLessThan7 = 0.0;
@@ -29,6 +27,7 @@ class StatisticalController extends GetxController with CacheManager {
   var countForm55ToLessThan7Percentage = 0.0;
   var countFor7ToLessThan85Percentage = 0.0;
   var countGreaterThan85Percentage = 0.0;
+  List<double?> grades = [];
   List<double> count = [];
   List<double> gradesFinal = [];
   RxBool isLoading = true.obs;
@@ -39,23 +38,22 @@ class StatisticalController extends GetxController with CacheManager {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-
     getGradesData();
   }
 
   void getGradesData() async {
     isLoading.value = true;
     if (isClassroom) {
-      int ClassroomId = int.parse(Get.arguments['classroomId']);
+      int classroomId = int.parse(Get.arguments['classroomId']);
       final response = await statisticalRepository.statistical(
-        StatisticalModel(classroomId: ClassroomId.toString()),
+        StatisticalModel(classroomId: classroomId.toString()),
         UrlProvider.HANDLES_SATISTICAL,
         cacheGet(CacheManagerKey.TOKEN),
       );
       if (response?.status == 1) {
         List<dynamic> gradeList = response?.data['examGradeList'];
         if (response?.data['examGradeList'].isEmpty) {
-          Alert.showSuccess(
+          Alert.showError(
                   title: "Error",
                   message: StatisticalString.GRADE_EMPTY,
                   buttonText: AppString.CANCEL)
@@ -63,7 +61,7 @@ class StatisticalController extends GetxController with CacheManager {
         } else {
           List<double?> gradesList = gradeList.map((dynamic item) {
             if (item is int) {
-              return item.toDouble(); // Convert to double
+              return item.toDouble();
             } else if (item is double) {
               return item;
             } else {
@@ -84,7 +82,6 @@ class StatisticalController extends GetxController with CacheManager {
               countGreaterThan85++;
             }
           }
-          update();
 
           countList();
           countLessThan4Percentage = calculatePercent(
@@ -97,13 +94,13 @@ class StatisticalController extends GetxController with CacheManager {
               countFor7ToLessThan85, double.parse(grades.length.toString()));
           countGreaterThan85Percentage = calculatePercent(
               countGreaterThan85, double.parse(grades.length.toString()));
-
+          update();
           isLoading.value = false;
           // }
         }
       } else {
         Alert.closeLoadingIndicator();
-        Alert.showSuccess(
+        Alert.showError(
             title: "Error",
             message: response!.message.toString(),
             buttonText: AppString.CANCEL);
@@ -111,23 +108,22 @@ class StatisticalController extends GetxController with CacheManager {
     } else {
       gradesFinal = Get.arguments["gradeFinalList"];
       for (int i = 0; i < gradesFinal.length; i++) {
-        if (gradesFinal[i]! < 4) {
+        if (gradesFinal[i] < 4) {
           countLessThan4++;
-        } else if (gradesFinal[i]! >= 4 && gradesFinal[i]! < 5.5) {
+        } else if (gradesFinal[i] >= 4 && gradesFinal[i] < 5.5) {
           countForm4ToLessThan55++;
-        } else if (gradesFinal[i]! >= 5.5 && gradesFinal[i]! < 7) {
+        } else if (gradesFinal[i] >= 5.5 && gradesFinal[i] < 7) {
           countForm55ToLessThan7++;
-        } else if (gradesFinal[i]! >= 7 && gradesFinal[i]! < 8.5) {
+        } else if (gradesFinal[i] >= 7 && gradesFinal[i] < 8.5) {
           countFor7ToLessThan85++;
-        } else if (gradesFinal[i]! >= 8.5) {
+        } else if (gradesFinal[i] >= 8.5) {
           countGreaterThan85++;
         }
       }
       countList();
-
       for (int i = 0; i < count.length; i++) {
         BarChartGroupData barGroup = BarChartGroupData(
-          x: i, // Use 'i' as the 'x' value
+          x: i,
           barRods: [
             BarChartRodData(
               fromY: 0,
@@ -139,6 +135,7 @@ class StatisticalController extends GetxController with CacheManager {
         );
         barGroups.add(barGroup);
       }
+      update();
       isLoading.value = false;
     }
   }
@@ -149,11 +146,6 @@ class StatisticalController extends GetxController with CacheManager {
     count.add(countForm55ToLessThan7);
     count.add(countFor7ToLessThan85);
     count.add(countGreaterThan85);
-  }
-
-  void showInfo(Widget widget) {
-    Alert.showInfo(
-        title: "Information", buttonText: AppString.OK, widget: widget);
   }
 
   double calculatePercent(double count, double all) {

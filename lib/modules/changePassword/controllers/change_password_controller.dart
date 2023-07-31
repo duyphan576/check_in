@@ -79,15 +79,15 @@ class ChangePasswordController extends GetxController with CacheManager {
             message: response?.message,
           ).then((value) => logout());
         } else {
-          Alert.showSuccess(
+          Alert.showError(
             title: CommonString.ERROR,
-            message: response?.message,
+            message: response!.message.toString(),
             buttonText: CommonString.CANCEL,
           );
         }
       }
     } else {
-      Alert.showSuccess(
+      Alert.showError(
         title: CommonString.ERROR,
         message: this.errorMessage.value,
         buttonText: CommonString.CANCEL,
@@ -111,6 +111,11 @@ class ChangePasswordController extends GetxController with CacheManager {
       authenticationService.clearStorage();
       cacheRemove(CacheManagerKey.TOKEN);
       Get.offAllNamed(Routes.LOGIN);
+    } else {
+      Alert.showError(
+          title: CommonString.ERROR,
+          message: response!.message.toString(),
+          buttonText: CommonString.CANCEL);
     }
   }
 }
