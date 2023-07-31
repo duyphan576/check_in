@@ -2,6 +2,7 @@ import 'package:check_in/constants/app_images.dart';
 import 'package:check_in/constants/app_string.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/global_widgets/bar_chart.dart';
+import 'package:check_in/global_widgets/information_statistical.dart';
 import 'package:check_in/global_widgets/pei_chart.dart';
 import 'package:check_in/modules/statistical/controllers/statistical_controller.dart';
 import 'package:flutter/material.dart';
@@ -41,16 +42,38 @@ class StatisticalView extends GetView<StatisticalController> {
                   child: Scaffold(
                     backgroundColor: Colors.transparent,
                     appBar: AppBar(
-                      // title: Text(
-                      //   "Statistical",
-                      //   style: TextStyle(color: Colors.black, fontSize: 24),
-                      // ),
+                      title: Text(
+                        StatisticalString.STATISTICAL,
+                        style: TextStyle(
+                          color: AppColors.lightBlack,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       centerTitle: true,
                       backgroundColor: Colors.transparent,
                       elevation: 0,
                       iconTheme: IconThemeData(
                         color: AppColors.lightBlack,
                       ),
+                      actions: [
+                        controller.isClassroom
+                            ? Container()
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        controller.showInfo(Information());
+                                      },
+                                      icon: Icon(
+                                        Icons.info_outline_rounded,
+                                        size: 28,
+                                      ),
+                                    )
+                                  ]),
+                      ],
                     ),
                     body: SingleChildScrollView(
                       child: Padding(
@@ -136,20 +159,10 @@ class StatisticalView extends GetView<StatisticalController> {
                                     ),
                                     child: Column(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                          MainAxisAlignment.center,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                          CrossAxisAlignment.center,
                                       children: [
-                                        Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Icon(
-                                                Icons.info_outline_rounded,
-                                              )
-                                            ]),
                                         BarChartWidget(
                                             gradesLength: controller
                                                 .count.length
@@ -183,7 +196,9 @@ class StatisticalView extends GetView<StatisticalController> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Text("Bar Chart Note :",
+                                                  Text(
+                                                      StatisticalString
+                                                          .BAR_NOTE,
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -192,14 +207,16 @@ class StatisticalView extends GetView<StatisticalController> {
                                                   GlobalStyles
                                                       .sizedBoxHeight_10,
                                                   Text(
-                                                    "X-axis represents the number of people",
+                                                    StatisticalString
+                                                        .BAR_NOTE_XAXIS,
                                                     style: TextStyle(
                                                         color: Colors.white),
                                                   ),
                                                   GlobalStyles
                                                       .sizedBoxHeight_10,
                                                   Text(
-                                                    "Y-axis represents the point",
+                                                    StatisticalString
+                                                        .BAR_NOTE_YAXIS,
                                                     style: TextStyle(
                                                         color: Colors.white),
                                                   ),

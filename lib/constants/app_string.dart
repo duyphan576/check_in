@@ -159,6 +159,10 @@ abstract class StatisticalString {
   static const String PIE_ANNOUNCE = "of students' exam scores";
   static const String BAR_CHART = "Statistical chart of the number";
   static const String BAR_ANNOUNCE = "of points achieved";
+  static const String BAR_NOTE = "Bar Chart Note :";
+  static const String BAR_NOTE_XAXIS =
+      "X-axis represents the number of people.";
+  static const String BAR_NOTE_YAXIS = "Y-axis represents the point.";
 }
 
 abstract class HomeString {

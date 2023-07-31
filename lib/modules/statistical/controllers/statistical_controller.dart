@@ -87,15 +87,15 @@ class StatisticalController extends GetxController with CacheManager {
           update();
 
           countList();
-          countLessThan4Percentage = CalculatePercent(
+          countLessThan4Percentage = calculatePercent(
               countLessThan4, double.parse(grades.length.toString()));
-          countForm4ToLessThan55Percentage = CalculatePercent(
+          countForm4ToLessThan55Percentage = calculatePercent(
               countForm4ToLessThan55, double.parse(grades.length.toString()));
-          countForm55ToLessThan7Percentage = CalculatePercent(
+          countForm55ToLessThan7Percentage = calculatePercent(
               countForm55ToLessThan7, double.parse(grades.length.toString()));
-          countFor7ToLessThan85Percentage = CalculatePercent(
+          countFor7ToLessThan85Percentage = calculatePercent(
               countFor7ToLessThan85, double.parse(grades.length.toString()));
-          countGreaterThan85Percentage = CalculatePercent(
+          countGreaterThan85Percentage = calculatePercent(
               countGreaterThan85, double.parse(grades.length.toString()));
 
           isLoading.value = false;
@@ -151,24 +151,12 @@ class StatisticalController extends GetxController with CacheManager {
     count.add(countGreaterThan85);
   }
 
-  Map<int, int> countOccurrences(List<double?> grades) {
-    Map<int, int> occurrences = {};
-
-    for (int i = 0; i <= 10; i++) {
-      occurrences[i] = 0;
-    }
-
-    for (double? grade in grades) {
-      if (grade != null && grade >= 0 && grade <= 10) {
-        occurrences[grade.toInt()] =
-            (occurrences[grade.toInt()] ?? 0) + 1; // Convert to int
-      }
-    }
-
-    return occurrences;
+  void showInfo(Widget widget) {
+    Alert.showInfo(
+        title: "Information", buttonText: AppString.OK, widget: widget);
   }
 
-  double CalculatePercent(double count, double all) {
+  double calculatePercent(double count, double all) {
     return ((count / all) * 100);
   }
 }

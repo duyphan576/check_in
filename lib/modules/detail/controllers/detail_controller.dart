@@ -100,11 +100,11 @@ class DetailController extends GetxController
   }
 
   void goToStatistical(String classroomId) {
-    var parameters = <String, String>{
+    var argument = <String, dynamic>{
       "classroomId": "$classroomId",
-      "isClassroom": "true",
+      "isClassroom": true,
     };
-    Get.toNamed(Routes.STATISTICAL, parameters: parameters);
+    Get.toNamed(Routes.STATISTICAL, arguments: argument);
   }
 
   void viewPdf(String url) {
