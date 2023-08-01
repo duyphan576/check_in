@@ -83,10 +83,10 @@ class CheckinController extends GetxController with CacheManager {
         ).then((value) => getCheckinHistory());
       } else {
         isLoading.value = false;
-        Alert.showSuccess(
+        Alert.showError(
           title: CommonString.ERROR,
           buttonText: CommonString.OK,
-          message: response?.message,
+          message: response!.message.toString(),
         );
       }
     }
@@ -153,10 +153,10 @@ class CheckinController extends GetxController with CacheManager {
       }
       isLoading.value = false;
     } else {
-      Alert.showSuccess(
+      Alert.showError(
         title: CommonString.ERROR,
         buttonText: CommonString.OK,
-        message: response?.message,
+        message: response!.message.toString(),
       );
       isLoading.value = false;
     }
