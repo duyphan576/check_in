@@ -117,9 +117,9 @@ class LoginController extends GetxController with CacheManager {
           Get.offAndToNamed(Routes.HOME);
         } else if (response?.status == 0) {
           isLoading.value = false;
-          Alert.showSuccess(
+          Alert.showError(
             title: CommonString.ERROR,
-            message: response?.message,
+            message: response!.message.toString(),
             buttonText: CommonString.CANCEL,
           );
         }

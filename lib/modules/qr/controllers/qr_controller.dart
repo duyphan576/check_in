@@ -12,10 +12,10 @@ class QrController extends GetxController
   MobileScannerController cameraController = MobileScannerController(
     formats: [BarcodeFormat.qrCode],
     // facing: CameraFacing.front,
-    detectionSpeed: DetectionSpeed.normal,
-    detectionTimeoutMs: 1000,
-    returnImage: false,
-    torchEnabled: false,
+    detectionSpeed: DetectionSpeed.normal, //tốc độ quét phát hiện mã qr
+    detectionTimeoutMs: 1000, //thời gian chờ phát hiện mã
+    returnImage: false, //không trả về hình ảnh
+    torchEnabled: false, //không bật đèn flash
   );
   RxList<Barcode> barcode = RxList<Barcode>();
   RxBool isStarted = true.obs;

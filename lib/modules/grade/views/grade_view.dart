@@ -94,7 +94,7 @@ class GradeView extends GetView<GradeController> {
                                 height: MediaQuery.of(context).size.width / 0.8,
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
-                                  color: AppColors.lightWhite.withOpacity(0.7),
+                                  color: AppColors.lightWhite.withOpacity(0.9),
                                   borderRadius: BorderRadius.circular(8),
                                   boxShadow: [
                                     BoxShadow(
@@ -104,11 +104,11 @@ class GradeView extends GetView<GradeController> {
                                       offset: Offset(0, 0), // Shadow position
                                     ),
                                   ],
-                                  gradient: LinearGradient(
-                                    colors: AppColors.listColorGradientMain,
-                                    begin: Alignment.bottomLeft,
-                                    end: Alignment.topRight,
-                                  ),
+                                  // gradient: LinearGradient(
+                                  //   colors: AppColors.listColorGradientMain,
+                                  //   begin: Alignment.bottomLeft,
+                                  //   end: Alignment.topRight,
+                                  // ),
                                 ),
                                 child: TableWidget(grades: controller.grades),
                               ),
