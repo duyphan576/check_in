@@ -67,52 +67,49 @@ class StatisticalView extends GetView<StatisticalController> {
                                     IconButton(
                                       onPressed: () {
                                         Alert.showInfo(
-                                            title: "Notes",
-                                            buttonText: CommonString.OK,
-                                            widget: Container(
-                                              child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    GlobalStyles
-                                                        .sizedBoxHeight_10,
-                                                    Text(
-                                                      "Grade F is a grade from 0 to less than 4.",
-                                                      style: TextStyle(
-                                                          fontSize: 12.5),
-                                                    ),
-                                                    GlobalStyles
-                                                        .sizedBoxHeight_10,
-                                                    Text(
-                                                      "Grade D is a grade from 4 to less than 5,5.",
-                                                      style: TextStyle(
-                                                          fontSize: 12.5),
-                                                    ),
-                                                    GlobalStyles
-                                                        .sizedBoxHeight_10,
-                                                    Text(
-                                                      "Grade C is a grade from 5,5 to less than 7.",
-                                                      style: TextStyle(
-                                                          fontSize: 12.5),
-                                                    ),
-                                                    GlobalStyles
-                                                        .sizedBoxHeight_10,
-                                                    Text(
-                                                      "Grade B is a grade from 7 to less than 8,5.",
-                                                      style: TextStyle(
-                                                          fontSize: 12.5),
-                                                    ),
-                                                    GlobalStyles
-                                                        .sizedBoxHeight_10,
-                                                    Text(
-                                                      "Grade A is a grade 8.5 or higher.",
-                                                      style: TextStyle(
-                                                          fontSize: 12),
-                                                    ),
-                                                  ]),
-                                            ));
+                                          title: StatisticalString.NOTE,
+                                          buttonText: CommonString.OK,
+                                          widget: Container(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                GlobalStyles.sizedBoxHeight_10,
+                                                Text(
+                                                  StatisticalString.GRADE_F,
+                                                  style:
+                                                      TextStyle(fontSize: 12.5),
+                                                ),
+                                                GlobalStyles.sizedBoxHeight_10,
+                                                Text(
+                                                  StatisticalString.GRADE_D,
+                                                  style:
+                                                      TextStyle(fontSize: 12.5),
+                                                ),
+                                                GlobalStyles.sizedBoxHeight_10,
+                                                Text(
+                                                  StatisticalString.GRADE_C,
+                                                  style:
+                                                      TextStyle(fontSize: 12.5),
+                                                ),
+                                                GlobalStyles.sizedBoxHeight_10,
+                                                Text(
+                                                  StatisticalString.GRADE_B,
+                                                  style:
+                                                      TextStyle(fontSize: 12.5),
+                                                ),
+                                                GlobalStyles.sizedBoxHeight_10,
+                                                Text(
+                                                  StatisticalString.GRADE_A,
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
                                       },
                                       icon: Icon(
                                         Icons.info_outline_rounded,

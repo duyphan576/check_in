@@ -1,4 +1,5 @@
 import 'package:check_in/constants/app_colors.dart';
+import 'package:check_in/constants/index.dart';
 import 'package:check_in/models/grade/grade.dart';
 import 'package:flutter/material.dart';
 
@@ -32,38 +33,47 @@ class TableWidget extends StatelessWidget {
                 Center(
                   child: Container(
                     margin: EdgeInsets.all(10),
-                    alignment: Alignment.centerLeft,
-                    child: Text("Term", style: textStyleBold),
+                    alignment: Alignment.center,
+                    child: Text(
+                      GradeString.TERM,
+                      style: textStyleBold,
+                    ),
                   ),
                 ),
                 Center(
                   child: Container(
                     margin: EdgeInsets.all(10),
-                    child: Text("Attendance Grade", style: textStyleBold),
+                    child: Text(
+                      GradeString.A_GRADE,
+                      style: textStyleBold,
+                    ),
                   ),
                 ),
                 Center(
                   child: Container(
                     margin: EdgeInsets.all(10),
-                    child: Text("Coefficient 1 Exam", style: textStyleBold),
+                    child: Text(
+                      GradeString.C1_GRADE,
+                      style: textStyleBold,
+                    ),
                   ),
                 ),
                 Center(
                   child: Container(
                     margin: EdgeInsets.all(10),
-                    child: Text("Coefficient 2 Exam", style: textStyleBold),
+                    child: Text(GradeString.C2_GRADE, style: textStyleBold),
                   ),
                 ),
                 Center(
                   child: Container(
                     margin: EdgeInsets.all(10),
-                    child: Text("Exam Grade", style: textStyleBold),
+                    child: Text(GradeString.E_GRADE, style: textStyleBold),
                   ),
                 ),
                 Center(
                   child: Container(
                     margin: EdgeInsets.all(10),
-                    child: Text("Final Grade", style: textStyleBold),
+                    child: Text(GradeString.F_GRADE, style: textStyleBold),
                   ),
                 ),
               ],

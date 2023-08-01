@@ -154,6 +154,7 @@ abstract class ChangePasswordString {
 
 abstract class StatisticalString {
   static const String STATISTICAL = "Thống Kê";
+  static const String NOTE = "Lưu ý";
   static const String GRADE_EMPTY = "Điểm trong lớp trống";
   static const String PIE_CHART = "Biểu đồ hình tròn cho thấy tỷ lệ phần trăm";
   static const String PIE_ANNOUNCE = "điểm thi của học sinh";
@@ -162,6 +163,11 @@ abstract class StatisticalString {
   static const String BAR_NOTE = "Lưu ý biểu đồ cột:";
   static const String BAR_NOTE_XAXIS = "Trục X biểu thị số lượng sinh viên.";
   static const String BAR_NOTE_YAXIS = "Trục Y đại diện cho điểm.";
+  static const String GRADE_F = "F: Điểm dưới 4.0";
+  static const String GRADE_D = "D: Điểm từ 4.0 đến 5.5";
+  static const String GRADE_C = "C: Điểm từ 5.5 đến 7.0";
+  static const String GRADE_B = "B: Điểm từ 7.0 đến 8.5";
+  static const String GRADE_A = "A: Điểm từ 8.5 trở lên";
 }
 
 abstract class HomeString {
@@ -180,6 +186,13 @@ abstract class ClassroomString {
 
 abstract class GradeString {
   static const String GRADE = "Điểm";
+  static const String TERM = "Môn học";
+  static const String A_GRADE = "Điểm chuyên cần";
+  static const String C1_GRADE = "Điểm hệ số 1";
+  static const String C2_GRADE = "Điểm hệ số 2";
+  static const String E_GRADE = "Điểm thi";
+  static const String F_GRADE = "Điểm cuối kỳ";
+  static const String AV_GRADE = "Điểm trung bình";
 }
 
 abstract class QrString {
