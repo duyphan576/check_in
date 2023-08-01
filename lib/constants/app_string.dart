@@ -1,19 +1,19 @@
 abstract class CommonString {
-  static const String ERROR = "Error!";
-  static const String ERROR_MESSAGE = "Error! Please try again later";
-  static const String CANCEL = "Cancel";
-  static const String SUCCESS = "Success";
+  static const String ERROR = "Lỗi!";
+  static const String ERROR_MESSAGE = "Lỗi! Vui lòng thử lại";
+  static const String CANCEL = "Hủy";
+  static const String SUCCESS = "Thành công";
   static const String OK = "Ok";
 }
 
 abstract class Init {
-  static const String ERROR = "Error!";
-  static const String ERROR_MESSAGE = "Error! Please try again later";
-  static const String CANCEL = "Cancel";
+  static const String ERROR = "Lỗi!";
+  static const String ERROR_MESSAGE = "Lỗi! Vui lòng thử lại";
+  static const String CANCEL = "Hủy";
 }
 
 abstract class AppString {
-  static const String EMPTY = "Please fill in the required fields";
+  static const String EMPTY = "Vui lòng điền vào phần được yêu cầu.";
   static const String EMPTY_EMAIL = "Vui lòng nhập email của bạn";
   static const String EMPTY_TEL = "Vui lòng nhập số điện thoại";
   static const String EMPTY_VNID = "Vui lòng nhập mã số nuskin";
@@ -22,13 +22,13 @@ abstract class AppString {
   static const String VALID_TEL = "Số điện thoại không hợp lệ";
   static const String VALID_VNID =
       "Mã số Nu Skin bắt đầu bằng \"VN\" viết hoa và không có khoảng trống";
-  static const String ERROR = "Error!";
-  static const String ERROR_MESSAGE = "Error! Please try again";
+  static const String ERROR = "Lỗi!";
+  static const String ERROR_MESSAGE = "Lỗi! Vui lòng thử lại";
   static const String SAVE_REQUEST = "Đang lưu";
   static const String SENDING_REQUEST = "Đang gửi yêu cầu";
   static const String OK = "OK";
   static const String CANCEL = "Cancel";
-  static const String SUCCESS = "Success";
+  static const String SUCCESS = "Thành công";
   static const String ENTER_TEL = "Nhập số điện thoại *";
   static const String ENTER_EMAIL = "Nhập Email *";
   static const String EMPTY_CONTENT =
@@ -124,91 +124,104 @@ abstract class AppString {
 }
 
 abstract class Message {
-  static const String VALID_C_PASSWORD = "Please enter the correct password";
+  static const String VALID_C_PASSWORD = "Vui lòng nhập đúng mật khẩu";
   static const String VALID_PASSWORD =
-      "8 character password including uppercase, lowercase and special characters";
-  static const String REQUIRE_PASSWORD = "Please enter password";
-  static const String REQUIRE_USERNAME = "Please enter username";
-  static const String EMPTY_PASSWORD = "Please enter a new password";
-  static const String EMPTY_CPASSWORD = "Please enter a confirm password";
+      "Mật khẩu có tối thiểu 8 ký tự gồm chữ hoa, chữ thường và ký tự đặc biệt";
+  static const String REQUIRE_PASSWORD = "Vui lòng nhập mật khẩu";
+  static const String REQUIRE_USERNAME = "Vui lòng nhập ID Sinh Viên";
+  static const String EMPTY_PASSWORD = "Vui lòng nhập mật khẩu mới";
+  static const String EMPTY_CPASSWORD = "Vui lòng xác nhận mật khẩu";
 }
 
 abstract class LoginString {
-  static const String HINT_CODE = "Student ID";
-  static const String HINT_PASSWORD = "Password";
-  static const String REMEMBER_TEXT = "Remember";
-  static const String FORGOT_PASSWORD = "Forgot Password";
+  static const String HINT_CODE = "ID Sinh Viên";
+  static const String HINT_PASSWORD = "Mật khẩu";
+  static const String REMEMBER_TEXT = "Ghi nhớ";
+  static const String FORGOT_PASSWORD = "Quên mật khẩu";
   static const String FACE_ID = "Face Id";
-  static const String FINGER_PRINT = "Finger Print";
-  static const String LOGIN = "Login";
+  static const String FINGER_PRINT = "Vân tay";
+  static const String LOGIN = "Đăng nhập";
   static const String FINGER_DESCRIPTION =
-      "Scan your fingerprint or face to log in";
+      "Quét vân tay hoặc khuôn mặt của bạn để đăng nhập";
 }
 
 abstract class ChangePasswordString {
-  static const String HINT_OLDPASSWORD = "Old Password";
-  static const String HINT_NEWPASSWORD = "New Password";
-  static const String HINT_CONFIRMPASSWORD = "Confirm Password";
-  static const String HINT_CHANGEPASSWORD = "Change Password";
+  static const String HINT_OLDPASSWORD = "Mật khẩu cũ";
+  static const String HINT_NEWPASSWORD = "Mật khẩu mới";
+  static const String HINT_CONFIRMPASSWORD = "Xác nhận mật khẩu";
+  static const String HINT_CHANGEPASSWORD = "Đổi Mật Khẩu";
 }
 
 abstract class StatisticalString {
-  static const String STATISTICAL = "Statistical";
-  static const String GRADE_EMPTY = "Grade in class empty";
-  static const String PIE_CHART = "The pie chart shows the percentage";
-  static const String PIE_ANNOUNCE = "of students' exam scores";
-  static const String BAR_CHART = "Statistical chart of the number";
-  static const String BAR_ANNOUNCE = "of points achieved";
-  static const String BAR_NOTE = "Bar Chart Note :";
-  static const String BAR_NOTE_XAXIS =
-      "X-axis represents the number of people.";
-  static const String BAR_NOTE_YAXIS = "Y-axis represents the point.";
+  static const String STATISTICAL = "Thống Kê";
+  static const String GRADE_EMPTY = "Điểm trong lớp trống";
+  static const String PIE_CHART = "Biểu đồ hình tròn cho thấy tỷ lệ phần trăm";
+  static const String PIE_ANNOUNCE = "điểm thi của học sinh";
+  static const String BAR_CHART = "Biểu đồ thống kê số lượng";
+  static const String BAR_ANNOUNCE = "điểm đạt được";
+  static const String BAR_NOTE = "Lưu ý biểu đồ cột:";
+  static const String BAR_NOTE_XAXIS = "Trục X biểu thị số lượng sinh viên.";
+  static const String BAR_NOTE_YAXIS = "Trục Y đại diện cho điểm.";
 }
 
 abstract class HomeString {
-  static const String HOME = "Home";
-  static const String CHECK_IN = "Check In";
-  static const String CLASSROOM = "Classroom";
-  static const String GRADE = "Grade";
-  static const String DOCUMENT = "Document";
-  static const String PROFILE = "Profile";
-  static const String LOGOUT = "Logout";
+  static const String HOME = "Trang Chủ";
+  static const String CHECK_IN = "Điểm Danh";
+  static const String CLASSROOM = "Lớp Học";
+  static const String GRADE = "Điểm";
+  static const String PROFILE = "Hồ Sơ";
+  static const String LOGOUT = "Đăng xuất";
 }
 
 abstract class ClassroomString {
-  static const String CLASSROOM = "Classroom";
+  static const String CLASSROOM = "Lớp Học";
+  static const String CREDIT = "Tín chỉ";
 }
 
 abstract class GradeString {
-  static const String GRADE = "Grade";
+  static const String GRADE = "Điểm";
+}
+
+abstract class QrString {
+  static const String QR = "Quét mã QR để điểm danh";
 }
 
 abstract class ProfileString {
-  static const String PROFILE = "Profile";
+  static const String PROFILE = "Hồ Sơ";
+  static const String FMNAME = "Họ";
+  static const String NAME = "Tên";
+  static const String GENDER = "Giới tính";
+  static const String BIRTHDATE = "Ngày sinh";
+  static const String EMAIL = "Email";
+  static const String PHONE_NUMBER = "Số điện thoại";
 }
 
 abstract class DetailString {
-  static const String DETAIL = "Detail";
-  static const String STUDENT = "Students";
-  static const String DOCUMENT = "Document";
-  static const String CLASS_INFO = "Infomation";
-  static const String EMPTY_STUDENT = "No student in class";
-  static const String EMPTY_DOC = "No document in class";
+  static const String DETAIL = "Chi tiết";
+  static const String LECTURE = "Giảng viên";
+  static const String LECTURE_ID = "Mã giảng viên";
+  static const String TERM_ID = "Mã môn";
+  static const String TERM_CREDIT = "Số tín chỉ";
+  static const String STUDENT = "Sinh viên";
+  static const String DOCUMENT = "Tài liệu";
+  static const String CLASS_INFO = "Thông tin";
+  static const String EMPTY_STUDENT = "Lớp không có sinh viên";
+  static const String EMPTY_DOC = "Lớp không có tài liệu";
 }
 
 abstract class CheckinString {
-  static const String CHECK_IN = "Check In";
-  static const String CHECKIN_HISTORY = "Checkin History";
-  static const String CLASSROOM = "Classroom";
-  static const String DATE = "Date";
-  static const String NOTES = "Notes";
-  static const String ATTENDANCE = "Your class has never been in attendance";
-  static const String CHOOSE_CLASSROOM = "Choose Classroom";
-  static const String ENTER_CLASSROOM = "Please enter name classroom";
-  static const String IN_ATTENDANCE = "In-hour Attendance";
-  static const String MID_ATTENDANCE = "Mid-hour Attendance";
-  static const String END_ATTENDANCE = "End-hour Attendance";
-  static const String NO_ATTENDANCE = "No Attendance";
-  static const String MORNING = "Morning";
-  static const String AFTERNOON = "Afternoon";
+  static const String CHECK_IN = "Điểm Danh";
+  static const String CHECKIN_HISTORY = "Lịch sử điểm danh";
+  static const String CLASSROOM = "Lớp học";
+  static const String DATE = "Ngày";
+  static const String NOTES = "Lưu ý";
+  static const String ATTENDANCE = "Lớp của bạn chưa bao giờ điểm danh";
+  static const String CHOOSE_CLASSROOM = "Chọn lớp";
+  static const String ENTER_CLASSROOM = "Hãy nhập tên lớp";
+  static const String IN_ATTENDANCE = "Điểm danh đầu giờ";
+  static const String MID_ATTENDANCE = "Điểm danh giữa giờ";
+  static const String END_ATTENDANCE = "Điểm danh cuối giờ";
+  static const String NO_ATTENDANCE = "Chưa điểm danh";
+  static const String MORNING = "Buổi sáng";
+  static const String AFTERNOON = "Buổi chiều";
 }

@@ -108,7 +108,7 @@ class ClassroomView extends GetView<ClassroomController> {
                                             ),
                                           ),
                                           trailing: Text(
-                                            'Credit: ${classroom.term.credit}',
+                                            '${ClassroomString.CREDIT}: ${classroom.term.credit}',
                                             style: TextStyle(
                                               color: AppColors.lightWhite,
                                               fontSize: 14,

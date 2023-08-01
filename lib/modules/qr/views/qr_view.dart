@@ -30,7 +30,7 @@ class QrView extends GetView<QrController> {
               color: AppColors.main,
             ),
             title: Text(
-              "Scan QR code to checkin",
+              QrString.QR,
               style: TextStyle(
                 color: AppColors.lightBlack,
                 fontSize: 18,

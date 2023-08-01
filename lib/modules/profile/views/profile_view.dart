@@ -119,7 +119,7 @@ class ProfileView extends GetView<ProfileController> {
                                             children: [
                                               Expanded(
                                                 child: ProfileDetailRow(
-                                                  title: 'Family Mid Name',
+                                                  title: ProfileString.FMNAME,
                                                   value: controller
                                                       .userData["famMidName"],
                                                 ),
@@ -127,7 +127,7 @@ class ProfileView extends GetView<ProfileController> {
                                               GlobalStyles.sizedBoxHeight,
                                               Expanded(
                                                 child: ProfileDetailRow(
-                                                  title: 'Name',
+                                                  title: ProfileString.NAME,
                                                   value: controller
                                                       .userData["name"],
                                                 ),
@@ -141,7 +141,7 @@ class ProfileView extends GetView<ProfileController> {
                                             children: [
                                               Expanded(
                                                 child: ProfileDetailRow(
-                                                  title: 'Gender',
+                                                  title: ProfileString.GENDER,
                                                   value: controller
                                                       .userData["gender"],
                                                 ),
@@ -149,7 +149,8 @@ class ProfileView extends GetView<ProfileController> {
                                               GlobalStyles.sizedBoxHeight,
                                               Expanded(
                                                 child: ProfileDetailRow(
-                                                  title: 'Birthdate',
+                                                  title:
+                                                      ProfileString.BIRTHDATE,
                                                   value: controller
                                                       .getFormatedDate(
                                                     controller
@@ -163,13 +164,14 @@ class ProfileView extends GetView<ProfileController> {
                                           Column(
                                             children: [
                                               ProfileDetailColumn(
-                                                title: 'Email',
+                                                title: ProfileString.EMAIL,
                                                 value: controller
                                                     .userData["email"],
                                               ),
                                               GlobalStyles.sizedBoxHeight,
                                               ProfileDetailColumn(
-                                                title: 'Phone Number',
+                                                title:
+                                                    ProfileString.PHONE_NUMBER,
                                                 value: controller
                                                     .userData["phone"],
                                               ),
