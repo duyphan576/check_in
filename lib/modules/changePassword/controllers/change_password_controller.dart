@@ -17,11 +17,7 @@ class ChangePasswordController extends GetxController with CacheManager {
   final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-  var userData;
-  var messeage = Message;
   RxBool isLoading = true.obs;
-  RxBool isOk = false.obs;
-
   RxString errorMessage = "".obs;
   List<String?> validateGroup = [];
 

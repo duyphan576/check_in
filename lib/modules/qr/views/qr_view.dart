@@ -64,6 +64,7 @@ class QrView extends GetView<QrController> {
                                       //controller.startOrStop();
                                       for (final barcode
                                           in controller.barcode) {
+                                        print(barcode.rawValue);
                                         controller.saveToken(barcode.rawValue);
                                       }
                                     },
