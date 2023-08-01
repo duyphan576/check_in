@@ -32,7 +32,7 @@ class PeiChartWidget extends StatelessWidget {
           width: MediaQuery.of(context).size.width / 1.1,
           child: PieChart(
             PieChartData(
-                centerSpaceRadius: 4,
+                centerSpaceRadius: 5,
                 borderData: FlBorderData(
                   show: false,
                 ),
@@ -44,6 +44,7 @@ class PeiChartWidget extends StatelessWidget {
                       title:
                           "${countLessThan4Percentage.toStringAsFixed(2)}% - ${count[0]}",
                       radius: 170,
+                      titlePositionPercentageOffset: 0.6,
                       color: Colors.red),
                   PieChartSectionData(
                       value: double.parse(
@@ -52,6 +53,7 @@ class PeiChartWidget extends StatelessWidget {
                       title:
                           "${countForm4ToLessThan55Percentage.toStringAsFixed(2)}% - ${count[1]}",
                       radius: 170,
+                      titlePositionPercentageOffset: 0.6,
                       color: Colors.orange),
                   PieChartSectionData(
                       value: double.parse(
@@ -59,12 +61,14 @@ class PeiChartWidget extends StatelessWidget {
                       showTitle: true,
                       title:
                           "${countForm55ToLessThan7Percentage.toStringAsFixed(2)}% - ${count[2]}",
+                      titlePositionPercentageOffset: 0.6,
                       radius: 170,
                       color: Colors.yellow),
                   PieChartSectionData(
                       value: double.parse(
                           countFor7ToLessThan85Percentage.toString()),
                       showTitle: true,
+                      titlePositionPercentageOffset: 0.6,
                       title:
                           "${countFor7ToLessThan85Percentage.toStringAsFixed(2)}% - ${count[3]}",
                       radius: 170,
@@ -73,6 +77,7 @@ class PeiChartWidget extends StatelessWidget {
                       value:
                           double.parse(countGreaterThan85Percentage.toString()),
                       showTitle: true,
+                      titlePositionPercentageOffset: 0.6,
                       title:
                           "${countGreaterThan85Percentage.toStringAsFixed(2)}% - ${count[4]}",
                       radius: 170,
