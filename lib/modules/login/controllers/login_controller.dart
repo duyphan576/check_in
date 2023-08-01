@@ -125,6 +125,7 @@ class LoginController extends GetxController with CacheManager {
         }
       }
     } else {
+      Alert.closeLoadingIndicator();
       Alert.showError(
         title: CommonString.ERROR,
         message: this.errorMessage.value,

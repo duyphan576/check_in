@@ -123,9 +123,15 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                         onPressed: () {
                                           controller.onChangePassword();
                                         },
-                                        child: Text("Confirm",
-                                            style:
-                                                TextStyle(color: Colors.white)),
+                                        child: Text(
+                                          ChangePasswordString
+                                              .HINT_CHANGEPASSWORD,
+                                          style: TextStyle(
+                                            color: AppColors.lightWhite,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                         style: ButtonStyle(
                                           fixedSize: MaterialStateProperty.all(
                                               Size(200, 50)),

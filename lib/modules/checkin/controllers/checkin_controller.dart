@@ -74,13 +74,12 @@ class CheckinController extends GetxController with CacheManager {
         UrlProvider.HANDLES_CHECKIN,
         cacheGet(CacheManagerKey.TOKEN),
       );
-      print(response?.data);
       if (response?.status == 1) {
         isLoading.value = false;
         Alert.showSuccess(
           title: CommonString.SUCCESS,
           buttonText: CommonString.OK,
-          message: response?.data,
+          message: response!.message.toString(),
         ).then((value) => getCheckinHistory());
       } else {
         isLoading.value = false;

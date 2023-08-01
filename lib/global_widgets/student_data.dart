@@ -1,4 +1,5 @@
 import 'package:check_in/constants/app_colors.dart';
+import 'package:check_in/constants/app_string.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -104,7 +105,7 @@ class StudentPicture extends StatelessWidget {
                   code ?? "",
                   style: TextStyle(
                     color: AppColors.lightWhite,
-                    fontSize: 16,
+                    fontSize: 15,
                     fontWeight: FontWeight.w500,
                     fontStyle: FontStyle.italic,
                   ),
@@ -116,19 +117,18 @@ class StudentPicture extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: width * 0.3,
+                            width: width * 0.35,
                             child: Divider(
                               thickness: 1.0,
                               color: AppColors.lightWhite,
                             ),
                           ),
                           Text(
-                            "Average Grade : $grade",
+                            "${GradeString.AV_GRADE}: $grade",
                             style: TextStyle(
                               color: AppColors.lightWhite,
-                              fontSize: 16,
+                              fontSize: 14,
                               fontWeight: FontWeight.w500,
-                              fontStyle: FontStyle.italic,
                             ),
                           ),
                         ],

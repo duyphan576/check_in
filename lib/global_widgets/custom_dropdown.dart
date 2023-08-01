@@ -96,6 +96,7 @@ class CustomDropdown extends GetView<CheckinController> {
         },
         searchFieldProps: TextFieldProps(
             decoration: InputDecoration(
+          contentPadding: GlobalStyles.paddingPageLeftRight,
           label: Text(CheckinString.ENTER_CLASSROOM),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.gray),
@@ -106,7 +107,7 @@ class CustomDropdown extends GetView<CheckinController> {
         )),
         itemBuilder: (context, item, isSelected) {
           return Container(
-            margin: GlobalStyles.paddingPageLeftRight,
+            margin: GlobalStyles.paddingPageLeftRight_15,
             decoration: !isSelected
                 ? null
                 : BoxDecoration(
