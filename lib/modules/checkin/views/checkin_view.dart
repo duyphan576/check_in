@@ -63,7 +63,9 @@ class CheckinView extends GetView<CheckinController> {
               ),
               body: Obx(() => controller.isLoading.value == true
                   ? Center(
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator(
+                        color: AppColors.main,
+                      ),
                     )
                   : SingleChildScrollView(
                       child: Padding(
@@ -151,31 +153,31 @@ class CheckinView extends GetView<CheckinController> {
                                                   ),
                                                 ),
                                                 subtitle: Text(
-                                                  dates.isChecked.type == "0"
+                                                  dates.isChecked!.type == "0"
                                                       ? ""
                                                       : controller
                                                           .getFormatDateWithTime(
-                                                          dates.isChecked
+                                                          dates.isChecked!
                                                               .checkinTime,
                                                         ),
                                                 ),
                                                 trailing: Icon(
-                                                  dates.isChecked.type == "0"
+                                                  dates.isChecked!.type == "0"
                                                       ? Icons
                                                           .check_circle_outline_rounded
                                                       : Icons
                                                           .check_circle_rounded,
-                                                  color: dates.isChecked.type ==
+                                                  color: dates.isChecked!
+                                                              .type ==
                                                           "1"
                                                       ? AppColors.greenLight
-                                                      : dates.isChecked.type ==
+                                                      : dates.isChecked!.type ==
                                                               "2"
-                                                          ? AppColors.red
-                                                          : dates.isChecked
+                                                          ? AppColors.accentBlue
+                                                          : dates.isChecked!
                                                                       .type ==
                                                                   "3"
-                                                              ? AppColors
-                                                                  .accentBlue
+                                                              ? AppColors.red
                                                               : AppColors.black,
                                                 ),
                                               );
@@ -245,11 +247,11 @@ class CheckinView extends GetView<CheckinController> {
                                             children: [
                                               Icon(
                                                 Icons.check_circle_rounded,
-                                                color: AppColors.red,
+                                                color: AppColors.accentBlue,
                                               ),
                                               GlobalStyles.sizedBoxWidth_5,
                                               Text(
-                                                CheckinString.END_ATTENDANCE,
+                                                CheckinString.MID_ATTENDANCE,
                                                 style: TextStyle(
                                                   color: AppColors.main,
                                                   fontSize: 16,
@@ -263,11 +265,11 @@ class CheckinView extends GetView<CheckinController> {
                                             children: [
                                               Icon(
                                                 Icons.check_circle_rounded,
-                                                color: AppColors.accentBlue,
+                                                color: AppColors.red,
                                               ),
                                               GlobalStyles.sizedBoxWidth_5,
                                               Text(
-                                                CheckinString.MID_ATTENDANCE,
+                                                CheckinString.END_ATTENDANCE,
                                                 style: TextStyle(
                                                   color: AppColors.main,
                                                   fontSize: 16,

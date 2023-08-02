@@ -1,9 +1,9 @@
 class Term {
-  final int id;
-  final String termName;
-  final int credit;
+  int? id;
+  String? termName;
+  int? credit;
 
-  Term({required this.id, required this.termName, required this.credit});
+  Term({this.id, this.termName, this.credit});
 
   factory Term.fromJson(Map<String, dynamic> json) {
     return Term(

@@ -17,11 +17,11 @@ class CustomDropdown extends GetView<CheckinController> {
       key: controller.keyHistoryCheckIn,
       items: controller.listCheckHistory,
       compareFn: (i, c) => i.classroom == c.classroom,
-      itemAsString: (CheckinHistory item) => item.classroom.term.termName,
+      itemAsString: (CheckinHistory item) => item.classroom!.term!.termName!,
       selectedItem: controller.listCheckHistory[0],
       onChanged: (value) {
         controller.isReady.value = true;
-        controller.getDateCheckin(value!.classroom.id.toString());
+        controller.getDateCheckin(value!.classroom!.id.toString());
       },
       dropdownDecoratorProps: DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
@@ -53,12 +53,12 @@ class CustomDropdown extends GetView<CheckinController> {
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
-                text: item?.checkinDate.length.toString() != null
-                    ? "(${item?.checkinDate.length.toString()}) "
+                text: item?.checkinDate!.length.toString() != null
+                    ? "(${item?.checkinDate!.length.toString()}) "
                     : "",
                 children: [
                   TextSpan(
-                    text: item?.classroom.term.termName ?? "",
+                    text: item?.classroom!.term!.termName ?? "",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -118,7 +118,7 @@ class CustomDropdown extends GetView<CheckinController> {
             child: ListTile(
               selected: isSelected,
               title: Text(
-                item.classroom.term.termName,
+                item.classroom!.term!.termName!,
                 style: TextStyle(
                     fontSize: 16,
                     color: isSelected

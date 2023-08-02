@@ -41,7 +41,7 @@ class DetailView extends GetView<DetailController> {
                       backgroundColor: Colors.transparent,
                       appBar: AppBar(
                         title: Text(
-                          controller.classroom!.term.termName,
+                          controller.classroom!.term!.termName!,
                           style: TextStyle(
                             color: AppColors.lightBlack,
                             fontSize: 24,
@@ -56,8 +56,8 @@ class DetailView extends GetView<DetailController> {
                           color: AppColors.lightBlack,
                         ),
                         bottom: TabBar(
-                          labelColor: AppColors.main,
-                          unselectedLabelColor: Colors.grey,
+                          labelColor: AppColors.lightWhite,
+                          unselectedLabelColor: AppColors.lightBlack,
                           labelStyle:
                               const TextStyle(fontWeight: FontWeight.bold),
                           unselectedLabelStyle:
@@ -69,14 +69,19 @@ class DetailView extends GetView<DetailController> {
                           indicator: ShapeDecoration(
                             shape: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 0,
-                                  style: BorderStyle.solid),
+                                color: Colors.transparent,
+                                width: 0,
+                                style: BorderStyle.solid,
+                              ),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(16),
                               ),
                             ),
-                            color: AppColors.subMain.withOpacity(0.6),
+                            gradient: LinearGradient(
+                              colors: AppColors.listColorGradientMain,
+                              begin: Alignment.bottomLeft,
+                              end: Alignment.topRight,
+                            ),
                           ),
                           enableFeedback: true,
                           controller: controller.tabController,
@@ -88,7 +93,6 @@ class DetailView extends GetView<DetailController> {
                                   DetailString.STUDENT,
                                   style: TextStyle(
                                     fontSize: 18,
-                                    color: AppColors.lightBlack,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -101,7 +105,6 @@ class DetailView extends GetView<DetailController> {
                                   DetailString.DOCUMENT,
                                   style: TextStyle(
                                     fontSize: 18,
-                                    color: AppColors.lightBlack,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),

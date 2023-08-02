@@ -4,6 +4,7 @@ abstract class CommonString {
   static const String CANCEL = "Hủy";
   static const String SUCCESS = "Thành công";
   static const String OK = "Ok";
+  static const String LOADING = "Đang tải";
 }
 
 abstract class Init {
@@ -27,6 +28,9 @@ abstract class AppString {
   static const String SAVE_REQUEST = "Đang lưu";
   static const String SENDING_REQUEST = "Đang gửi yêu cầu";
   static const String OK = "OK";
+  static const String NOTI = "Thông báo";
+  static const String NOTI_FORGOT =
+      "Liên hệ với nhà trường để được cấp lại mật khẩu!";
   static const String CANCEL = "Quay lại";
   static const String SUCCESS = "Thành công";
   static const String ENTER_TEL = "Nhập số điện thoại *";
@@ -231,6 +235,7 @@ abstract class DetailString {
 
 abstract class CheckinString {
   static const String CHECK_IN = "Điểm Danh";
+  static const String IS_LOADING = "Đang điểm danh";
   static const String CHECKIN_HISTORY = "Lịch sử điểm danh";
   static const String CLASSROOM = "Lớp học";
   static const String DATE = "Ngày";

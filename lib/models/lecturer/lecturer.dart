@@ -1,8 +1,8 @@
 class Lecturer {
-  final String code;
-  final String fullname;
+  String? code;
+  String? fullname;
 
-  Lecturer({required this.code, required this.fullname});
+  Lecturer({this.code, this.fullname});
 
   factory Lecturer.fromJson(Map<String, dynamic> json) {
     return Lecturer(

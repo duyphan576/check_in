@@ -67,7 +67,7 @@ class ClassroomController extends GetxController with CacheManager {
   }
 
   getClassInfo(String classroomId) async {
-    Alert.showLoadingIndicator(message: "Loading");
+    Alert.showLoadingIndicator(message: CommonString.LOADING);
     final response = await classroomRepository.detail(
       {
         "classroomId": classroomId,

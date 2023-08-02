@@ -32,7 +32,7 @@ class InfoCustom extends GetView<DetailController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${DetailString.LECTURE}: ${controller.classroom!.lecturer.fullname}",
+                    "${DetailString.LECTURE}: ${controller.classroom!.lecturer!.fullname}",
                     style: TextStyle(
                       color: AppColors.black,
                       fontSize: 12,
@@ -41,7 +41,7 @@ class InfoCustom extends GetView<DetailController> {
                   ),
                   GlobalStyles.sizedBoxHeight_10,
                   Text(
-                    "${DetailString.LECTURE_ID}: ${controller.classroom!.lecturer.code}",
+                    "${DetailString.LECTURE_ID}: ${controller.classroom!.lecturer!.code}",
                     style: TextStyle(
                       color: AppColors.black,
                       fontSize: 12,
@@ -56,7 +56,7 @@ class InfoCustom extends GetView<DetailController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${DetailString.TERM_ID}: ${controller.classroom!.term.id.toString()}",
+                    "${DetailString.TERM_ID}: ${controller.classroom!.term!.id.toString()}",
                     style: TextStyle(
                       color: AppColors.black,
                       fontSize: 12,
@@ -65,7 +65,7 @@ class InfoCustom extends GetView<DetailController> {
                   ),
                   GlobalStyles.sizedBoxHeight_10,
                   Text(
-                    "${DetailString.TERM_CREDIT}: ${controller.classroom!.term.credit.toString()}",
+                    "${DetailString.TERM_CREDIT}: ${controller.classroom!.term!.credit.toString()}",
                     style: TextStyle(
                       color: AppColors.black,
                       fontSize: 12,

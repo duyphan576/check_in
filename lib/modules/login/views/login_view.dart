@@ -112,13 +112,9 @@ class LoginView extends GetView<LoginController> with CacheManager {
                                         ),
                                       ],
                                       gradient: LinearGradient(
-                                        colors: [
-                                          Color(0xFF41D8D7),
-                                          Color(0xFF21A3C6),
-                                          Color(0xFF285DA2),
-                                          Color(0xFF332F61),
-                                          Color(0xFF452E51),
-                                        ],
+                                        colors: AppColors.listColorGradientMain,
+                                        begin: Alignment.bottomLeft,
+                                        end: Alignment.topRight,
                                       ),
                                     ),
                                     child: Center(
@@ -252,7 +248,7 @@ class RememberPass extends GetView<LoginController> {
               Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  // onTap: () => Get.toNamed(Routes.FORGOT_PASSWORD_EMAIL),
+                  onTap: () => controller.forgotPassword(),
                   child: Text(
                     LoginString.FORGOT_PASSWORD,
                     style: TextStyle(
@@ -315,7 +311,7 @@ class _BiometricLogin extends GetView<LoginController> {
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        // onTap: () => Get.toNamed(Routes.FORGOT_PASSWORD_EMAIL),
+                        onTap: () => controller.forgotPassword(),
                         child: Text(
                           LoginString.FORGOT_PASSWORD,
                           style: TextStyle(
@@ -367,7 +363,7 @@ class _BiometricLogin extends GetView<LoginController> {
                         child: Material(
                           color: Colors.transparent,
                           child: InkWell(
-                            // onTap: () => Get.toNamed(Routes.FORGOT_PASSWORD_EMAIL),
+                            onTap: () => controller.forgotPassword(),
                             child: Text(
                               LoginString.FORGOT_PASSWORD,
                               style: TextStyle(
