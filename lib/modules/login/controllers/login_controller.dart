@@ -134,6 +134,14 @@ class LoginController extends GetxController with CacheManager {
     }
   }
 
+  void forgotPassword() {
+    Alert.showSuccess(
+      title: AppString.NOTI,
+      buttonText: CommonString.OK,
+      message: AppString.NOTI_FORGOT,
+    );
+  }
+
   resetError() {
     if (errorMessage.isNotEmpty) {
       errorMessage.value = "";

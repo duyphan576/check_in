@@ -248,7 +248,7 @@ class RememberPass extends GetView<LoginController> {
               Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  // onTap: () => Get.toNamed(Routes.FORGOT_PASSWORD_EMAIL),
+                  onTap: () => controller.forgotPassword(),
                   child: Text(
                     LoginString.FORGOT_PASSWORD,
                     style: TextStyle(
@@ -311,7 +311,7 @@ class _BiometricLogin extends GetView<LoginController> {
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        // onTap: () => Get.toNamed(Routes.FORGOT_PASSWORD_EMAIL),
+                        onTap: () => controller.forgotPassword(),
                         child: Text(
                           LoginString.FORGOT_PASSWORD,
                           style: TextStyle(
@@ -363,7 +363,7 @@ class _BiometricLogin extends GetView<LoginController> {
                         child: Material(
                           color: Colors.transparent,
                           child: InkWell(
-                            // onTap: () => Get.toNamed(Routes.FORGOT_PASSWORD_EMAIL),
+                            onTap: () => controller.forgotPassword(),
                             child: Text(
                               LoginString.FORGOT_PASSWORD,
                               style: TextStyle(

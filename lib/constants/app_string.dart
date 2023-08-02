@@ -28,6 +28,9 @@ abstract class AppString {
   static const String SAVE_REQUEST = "Đang lưu";
   static const String SENDING_REQUEST = "Đang gửi yêu cầu";
   static const String OK = "OK";
+  static const String NOTI = "Thông báo";
+  static const String NOTI_FORGOT =
+      "Liên hệ với nhà trường để được cấp lại mật khẩu!";
   static const String CANCEL = "Cancel";
   static const String SUCCESS = "Thành công";
   static const String ENTER_TEL = "Nhập số điện thoại *";
