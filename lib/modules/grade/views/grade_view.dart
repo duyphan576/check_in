@@ -4,7 +4,6 @@ import 'package:check_in/global_widgets/bar_chart.dart';
 import 'package:check_in/global_widgets/student_data.dart';
 import 'package:check_in/global_widgets/table_custom.dart';
 import 'package:check_in/modules/grade/controllers/grade_controller.dart';
-import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../constants/app_colors.dart';
@@ -43,7 +42,6 @@ class GradeView extends GetView<GradeController> {
                   child: SafeArea(
                     child: Scaffold(
                       backgroundColor: Colors.transparent,
-                      // extendBodyBehindAppBar: true,
                       resizeToAvoidBottomInset: true,
                       appBar: AppBar(
                         title: Text(
@@ -74,8 +72,8 @@ class GradeView extends GetView<GradeController> {
                                   );
                                 } else {
                                   Alert.showError(
-                                      title: "Thất bại",
-                                      message: "message",
+                                      title: AppString.ERROR,
+                                      message: GradeString.ERROR_GRADE,
                                       buttonText: AppString.CANCEL);
                                 }
                               },
@@ -109,14 +107,9 @@ class GradeView extends GetView<GradeController> {
                                       color: AppColors.black,
                                       blurRadius: 2,
                                       blurStyle: BlurStyle.outer,
-                                      offset: Offset(0, 0), // Shadow position
+                                      offset: Offset(0, 0),
                                     ),
                                   ],
-                                  // gradient: LinearGradient(
-                                  //   colors: AppColors.listColorGradientMain,
-                                  //   begin: Alignment.bottomLeft,
-                                  //   end: Alignment.topRight,
-                                  // ),
                                 ),
                                 child: TableWidget(grades: controller.grades),
                               ),

@@ -6,8 +6,6 @@ import 'package:check_in/modules/statistical/models/statistical_model.dart';
 import 'package:check_in/modules/statistical/repository/statistical_repository.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
@@ -16,7 +14,6 @@ RxBool isLoading = true.obs;
 class StatisticalController extends GetxController with CacheManager {
   final StatisticalRepository statisticalRepository;
   final AuthenticationService authenticationService = AuthenticationService();
-  bool isClassroom = Get.arguments['isClassroom'];
   var countLessThan4 = 0.0;
   var countForm4ToLessThan55 = 0.0;
   var countForm55ToLessThan7 = 0.0;
@@ -29,14 +26,12 @@ class StatisticalController extends GetxController with CacheManager {
   var countGreaterThan85Percentage = 0.0;
   List<double?> grades = [];
   List<double> count = [];
-  List<double> gradesFinal = [];
   RxBool isLoading = true.obs;
 
   StatisticalController({required this.statisticalRepository});
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     getGradesData();
   }
@@ -53,7 +48,7 @@ class StatisticalController extends GetxController with CacheManager {
       List<dynamic> gradeList = response?.data['examGradeList'];
       if (response?.data['examGradeList'].isEmpty) {
         Alert.showError(
-                title: "Thất bại",
+                title: AppString.ERROR,
                 message: StatisticalString.GRADE_EMPTY,
                 buttonText: AppString.CANCEL)
             .then((value) => Alert.closeLoadingIndicator());
@@ -100,9 +95,10 @@ class StatisticalController extends GetxController with CacheManager {
     } else {
       Alert.closeLoadingIndicator();
       Alert.showError(
-          title: "Thất bại",
-          message: response!.message.toString(),
-          buttonText: AppString.CANCEL);
+              title: AppString.ERROR,
+              message: response!.message.toString(),
+              buttonText: AppString.CANCEL)
+          .then((value) => Alert.closeLoadingIndicator());
     }
   }
 

@@ -27,7 +27,7 @@ abstract class AppString {
   static const String SAVE_REQUEST = "Đang lưu";
   static const String SENDING_REQUEST = "Đang gửi yêu cầu";
   static const String OK = "OK";
-  static const String CANCEL = "Cancel";
+  static const String CANCEL = "Quay lại";
   static const String SUCCESS = "Thành công";
   static const String ENTER_TEL = "Nhập số điện thoại *";
   static const String ENTER_EMAIL = "Nhập Email *";
@@ -167,7 +167,13 @@ abstract class StatisticalString {
   static const String GRADE_C = "C: Điểm từ 5.5 đến dưới 7.0.";
   static const String GRADE_B = "B: Điểm từ 7.0 đến dưới 8.5.";
   static const String GRADE_A = "A: Điểm từ 8.5 trở lên.";
-  static const String GRADEFINAL_ERROR = "Điểm quá trình rỗng.";
+  static const String GRADEFINAL_ERROR = "Chưa có điểm quá trình nào";
+  static const String PEI_ANOUNCE = "Chú thích biểu đồ hình tròn :";
+  static const String PEI_GRADE_1 = "Tỷ lệ phần trăm điểm dưới 4.";
+  static const String PEI_GRADE_2 = "Tỷ lệ phần trăm điểm từ 4 đến dưới 5,5";
+  static const String PEI_GRADE_3 = "Tỷ lệ phần trăm điểm từ 5,5 đến dưới 7.";
+  static const String PEI_GRADE_4 = "Tỷ lệ phần trăm điểm từ 7 đến dưới 8,5";
+  static const String PEI_GRADE_5 = "Điểm từ 8.5 trở lên.";
 }
 
 abstract class HomeString {
@@ -191,8 +197,9 @@ abstract class GradeString {
   static const String C1_GRADE = "Điểm hệ số 1";
   static const String C2_GRADE = "Điểm hệ số 2";
   static const String E_GRADE = "Điểm thi";
-  static const String F_GRADE = "Điểm cuối kỳ";
+  static const String F_GRADE = "Điểm quá trình";
   static const String AV_GRADE = "Điểm trung bình";
+  static const String ERROR_GRADE = "Chưa có điểm quá trình nào";
 }
 
 abstract class QrString {

@@ -86,7 +86,7 @@ class GradeController extends GetxController with CacheManager {
             barRods: [
               BarChartRodData(
                 fromY: 0,
-                toY: count[i].toDouble(), // Convert the value to double
+                toY: count[i].toDouble(),
                 width: 15,
                 color: Colors.amber,
               ),
@@ -99,9 +99,10 @@ class GradeController extends GetxController with CacheManager {
       isLoading.value = false;
     } else {
       Alert.showError(
-          title: AppString.ERROR,
-          buttonText: AppString.CANCEL,
-          message: response!.message.toString());
+              title: AppString.ERROR,
+              buttonText: AppString.CANCEL,
+              message: response!.message.toString())
+          .then((value) => Alert.closeLoadingIndicator());
     }
   }
 

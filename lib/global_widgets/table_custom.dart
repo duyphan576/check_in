@@ -1,4 +1,5 @@
 import 'package:check_in/constants/app_colors.dart';
+import 'package:check_in/constants/app_string.dart';
 import 'package:check_in/models/grade/grade.dart';
 import 'package:flutter/material.dart';
 
@@ -26,37 +27,37 @@ class TableWidget extends StatelessWidget {
           DataColumn(
             label: Container(
               alignment: Alignment.center,
-              child: Text("Môn học", style: textStyleBold),
+              child: Text(GradeString.TERM, style: textStyleBold),
             ),
           ),
           DataColumn(
             label: Container(
               alignment: Alignment.center,
-              child: Text("Điểm chuyên cần", style: textStyleBold),
+              child: Text(GradeString.A_GRADE, style: textStyleBold),
             ),
           ),
           DataColumn(
             label: Container(
               alignment: Alignment.center,
-              child: Text("Điểm hệ số 1", style: textStyleBold),
+              child: Text(GradeString.C1_GRADE, style: textStyleBold),
             ),
           ),
           DataColumn(
             label: Container(
               alignment: Alignment.center,
-              child: Text("Điểm hệ số 2", style: textStyleBold),
+              child: Text(GradeString.C2_GRADE, style: textStyleBold),
             ),
           ),
           DataColumn(
             label: Container(
               alignment: Alignment.center,
-              child: Text("Điểm thi", style: textStyleBold),
+              child: Text(GradeString.E_GRADE, style: textStyleBold),
             ),
           ),
           DataColumn(
             label: Container(
               alignment: Alignment.center,
-              child: Text("Điểm quá trình", style: textStyleBold),
+              child: Text(GradeString.F_GRADE, style: textStyleBold),
             ),
           ),
         ],

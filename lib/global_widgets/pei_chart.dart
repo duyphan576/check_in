@@ -97,37 +97,37 @@ class PeiChartWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Chú thích biểu đồ hình tròn :",
+              StatisticalString.PEI_ANOUNCE,
               style:
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
             ),
             GlobalStyles.sizedBoxHeight_10,
             countLessThan4Percentage != 0
                 ? TextWidget(
-                    color: Colors.red, titleStr: "Tỷ lệ phần trăm điểm dưới 4")
+                    color: Colors.red, titleStr: StatisticalString.PEI_GRADE_1)
                 : Container(),
             GlobalStyles.sizedBoxHeight_10,
             countForm4ToLessThan55Percentage != 0
                 ? TextWidget(
                     color: Colors.orange,
-                    titleStr: "Tỷ lệ phần trăm điểm từ 4 đến dưới 5,5")
+                    titleStr: StatisticalString.PEI_GRADE_2)
                 : Container(),
             GlobalStyles.sizedBoxHeight_10,
             countForm55ToLessThan7Percentage != 0
                 ? TextWidget(
                     color: Colors.yellow,
-                    titleStr: "Tỷ lệ phần trăm điểm từ 5,5 đến dưới 7")
+                    titleStr: StatisticalString.PEI_GRADE_3)
                 : Container(),
             GlobalStyles.sizedBoxHeight_10,
             countFor7ToLessThan85Percentage != 0
                 ? TextWidget(
                     color: Colors.green,
-                    titleStr: "Tỷ lệ phần trăm điểm từ 7 đến dưới 8,5")
+                    titleStr: StatisticalString.PEI_GRADE_4)
                 : Container(),
             countGreaterThan85Percentage != 0
                 ? TextWidget(
                     color: Colors.pink.shade300,
-                    titleStr: "Tỷ lệ phần trăm điểm lớn hơn 8,5")
+                    titleStr: StatisticalString.PEI_GRADE_5)
                 : Container(),
           ],
         ),
