@@ -12,8 +12,7 @@ class PeiChartWidget extends StatelessWidget {
     required this.countFor7ToLessThan85Percentage,
     required this.countGreaterThan85Percentage,
     required this.count,
-    required this.pieAnouce1,
-    required this.pieAnouce2,
+    required this.pieAnouce,
   });
   double countLessThan4Percentage;
   double countForm4ToLessThan55Percentage;
@@ -21,8 +20,7 @@ class PeiChartWidget extends StatelessWidget {
   double countFor7ToLessThan85Percentage;
   double countGreaterThan85Percentage;
   List<double> count;
-  String pieAnouce1;
-  String pieAnouce2;
+  String pieAnouce;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -32,7 +30,7 @@ class PeiChartWidget extends StatelessWidget {
           width: MediaQuery.of(context).size.width / 1.1,
           child: PieChart(
             PieChartData(
-                centerSpaceRadius: 4,
+                centerSpaceRadius: 5,
                 borderData: FlBorderData(
                   show: false,
                 ),
@@ -44,6 +42,7 @@ class PeiChartWidget extends StatelessWidget {
                       title:
                           "${countLessThan4Percentage.toStringAsFixed(2)}% - ${count[0]}",
                       radius: 170,
+                      titlePositionPercentageOffset: 0.6,
                       color: Colors.red),
                   PieChartSectionData(
                       value: double.parse(
@@ -52,6 +51,7 @@ class PeiChartWidget extends StatelessWidget {
                       title:
                           "${countForm4ToLessThan55Percentage.toStringAsFixed(2)}% - ${count[1]}",
                       radius: 170,
+                      titlePositionPercentageOffset: 0.6,
                       color: Colors.orange),
                   PieChartSectionData(
                       value: double.parse(
@@ -59,12 +59,14 @@ class PeiChartWidget extends StatelessWidget {
                       showTitle: true,
                       title:
                           "${countForm55ToLessThan7Percentage.toStringAsFixed(2)}% - ${count[2]}",
+                      titlePositionPercentageOffset: 0.6,
                       radius: 170,
                       color: Colors.yellow),
                   PieChartSectionData(
                       value: double.parse(
                           countFor7ToLessThan85Percentage.toString()),
                       showTitle: true,
+                      titlePositionPercentageOffset: 0.6,
                       title:
                           "${countFor7ToLessThan85Percentage.toStringAsFixed(2)}% - ${count[3]}",
                       radius: 170,
@@ -73,6 +75,7 @@ class PeiChartWidget extends StatelessWidget {
                       value:
                           double.parse(countGreaterThan85Percentage.toString()),
                       showTitle: true,
+                      titlePositionPercentageOffset: 0.6,
                       title:
                           "${countGreaterThan85Percentage.toStringAsFixed(2)}% - ${count[4]}",
                       radius: 170,
@@ -82,14 +85,11 @@ class PeiChartWidget extends StatelessWidget {
         ),
         GlobalStyles.sizedBoxHeight_25,
         Text(
-          pieAnouce1,
+          pieAnouce,
           style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.white, fontSize: 16),
-        ),
-        Text(
-          pieAnouce2,
-          style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.white, fontSize: 16),
+              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16),
+          maxLines: 2,
+          textAlign: TextAlign.center,
         ),
         GlobalStyles.sizedBoxHeight_25,
         Column(
@@ -97,37 +97,37 @@ class PeiChartWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Pie chart annotation :",
+              StatisticalString.PEI_ANOUNCE,
               style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
             ),
             GlobalStyles.sizedBoxHeight_10,
             countLessThan4Percentage != 0
                 ? TextWidget(
-                    color: Colors.red, titleStr: "Percentage score less than 4")
+                    color: Colors.red, titleStr: StatisticalString.PEI_GRADE_1)
                 : Container(),
             GlobalStyles.sizedBoxHeight_10,
             countForm4ToLessThan55Percentage != 0
                 ? TextWidget(
                     color: Colors.orange,
-                    titleStr: "Score percentage from 4 to less than 5.5")
+                    titleStr: StatisticalString.PEI_GRADE_2)
                 : Container(),
             GlobalStyles.sizedBoxHeight_10,
             countForm55ToLessThan7Percentage != 0
                 ? TextWidget(
                     color: Colors.yellow,
-                    titleStr: "Score percentage from 5.5 to less than 7")
+                    titleStr: StatisticalString.PEI_GRADE_3)
                 : Container(),
             GlobalStyles.sizedBoxHeight_10,
             countFor7ToLessThan85Percentage != 0
                 ? TextWidget(
                     color: Colors.green,
-                    titleStr: "Score percentage from 7 to less than 8.5")
+                    titleStr: StatisticalString.PEI_GRADE_4)
                 : Container(),
             countGreaterThan85Percentage != 0
                 ? TextWidget(
                     color: Colors.pink.shade300,
-                    titleStr: "Point percentage greater then 8.5")
+                    titleStr: StatisticalString.PEI_GRADE_5)
                 : Container(),
           ],
         ),
@@ -151,7 +151,7 @@ class TextWidget extends StatelessWidget {
         GlobalStyles.sizedBoxWidth,
         Text(
           titleStr,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black),
         ),
       ]),
     );

@@ -1,16 +1,14 @@
-import 'dart:ffi';
-
 class Grade {
-  int? termId;
+  String? termId;
   String? termName;
-  double? attendance;
-  double? coefficient1Exam1;
-  double? coefficient1Exam2;
-  double? coefficient1Exam3;
-  double? coefficient2Exam1;
-  double? coefficient2Exam2;
-  double? exam;
-  double? finalGrade;
+  String? attendance;
+  String? coefficient1Exam1;
+  String? coefficient1Exam2;
+  String? coefficient1Exam3;
+  String? coefficient2Exam1;
+  String? coefficient2Exam2;
+  String? exam;
+  String? finalGrade;
 
   Grade({
     this.termId,
@@ -26,15 +24,15 @@ class Grade {
   });
 
   Grade.fromJson(Map<String, dynamic> json) {
-    termId = int.parse(json["termId"].toString());
+    termId = json["termId"].toString();
     termName = json["termName"].toString();
-    attendance = double.parse(json["attendance"].toString());
-    coefficient1Exam1 = double.parse(json["coefficient1Exam1"].toString());
-    coefficient1Exam2 = double.parse(json["coefficient1Exam2"].toString());
-    coefficient1Exam3 = double.parse(json["coefficient1Exam3"].toString());
-    coefficient2Exam1 = double.parse(json["coefficient2Exam1"].toString());
-    coefficient2Exam2 = double.parse(json["coefficient2Exam2"].toString());
-    exam = double.parse(json["exam"].toString());
-    finalGrade = double.parse(json["final"].toString());
+    attendance = json["attendance"].toString();
+    coefficient1Exam1 = json["coefficient1Exam1"].toString();
+    coefficient1Exam2 = json["coefficient1Exam2"].toString();
+    coefficient1Exam3 = json["coefficient1Exam3"].toString();
+    coefficient2Exam1 = json["coefficient2Exam1"].toString();
+    coefficient2Exam2 = json["coefficient2Exam2"].toString();
+    exam = json["exam"].toString();
+    finalGrade = json["final"].toString();
   }
 }

@@ -160,18 +160,24 @@ abstract class StatisticalString {
   static const String STATISTICAL = "Thống Kê";
   static const String NOTE = "Lưu ý";
   static const String GRADE_EMPTY = "Điểm trong lớp trống";
-  static const String PIE_CHART = "Biểu đồ hình tròn cho thấy tỷ lệ phần trăm";
-  static const String PIE_ANNOUNCE = "điểm thi của học sinh";
-  static const String BAR_CHART = "Biểu đồ thống kê số lượng";
-  static const String BAR_ANNOUNCE = "điểm đạt được";
+  static const String PIE_CHART =
+      "Biểu đồ hình tròn cho thấy tỷ lệ phần trăm điểm thi của học sinh";
+  static const String BAR_CHART = "Biểu đồ thống kê số lượng điểm đạt được";
   static const String BAR_NOTE = "Lưu ý biểu đồ cột:";
-  static const String BAR_NOTE_XAXIS = "Trục X biểu thị số lượng sinh viên.";
-  static const String BAR_NOTE_YAXIS = "Trục Y đại diện cho điểm.";
-  static const String GRADE_F = "F: Điểm dưới 4.0";
-  static const String GRADE_D = "D: Điểm từ 4.0 đến 5.5";
-  static const String GRADE_C = "C: Điểm từ 5.5 đến 7.0";
-  static const String GRADE_B = "B: Điểm từ 7.0 đến 8.5";
-  static const String GRADE_A = "A: Điểm từ 8.5 trở lên";
+  static const String BAR_NOTE_YAXIS = "Trục Y biểu thị số lượng sinh viên.";
+  static const String BAR_NOTE_XAXIS = "Trục X đại diện cho điểm.";
+  static const String GRADE_F = "F: Điểm dưới 4.0.";
+  static const String GRADE_D = "D: Điểm từ 4.0 đến dưới 5.5.";
+  static const String GRADE_C = "C: Điểm từ 5.5 đến dưới 7.0.";
+  static const String GRADE_B = "B: Điểm từ 7.0 đến dưới 8.5.";
+  static const String GRADE_A = "A: Điểm từ 8.5 trở lên.";
+  static const String GRADEFINAL_ERROR = "Chưa có điểm quá trình nào";
+  static const String PEI_ANOUNCE = "Chú thích biểu đồ hình tròn :";
+  static const String PEI_GRADE_1 = "Tỷ lệ phần trăm điểm dưới 4.";
+  static const String PEI_GRADE_2 = "Tỷ lệ phần trăm điểm từ 4 đến dưới 5,5";
+  static const String PEI_GRADE_3 = "Tỷ lệ phần trăm điểm từ 5,5 đến dưới 7.";
+  static const String PEI_GRADE_4 = "Tỷ lệ phần trăm điểm từ 7 đến dưới 8,5";
+  static const String PEI_GRADE_5 = "Điểm từ 8.5 trở lên.";
 }
 
 abstract class HomeString {
@@ -195,8 +201,9 @@ abstract class GradeString {
   static const String C1_GRADE = "Điểm hệ số 1";
   static const String C2_GRADE = "Điểm hệ số 2";
   static const String E_GRADE = "Điểm thi";
-  static const String F_GRADE = "Điểm cuối kỳ";
+  static const String F_GRADE = "Điểm quá trình";
   static const String AV_GRADE = "Điểm trung bình";
+  static const String ERROR_GRADE = "Chưa có điểm quá trình nào";
 }
 
 abstract class QrString {

@@ -1,3 +1,4 @@
+import 'package:check_in/global_styles/global_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -104,6 +105,25 @@ class Alert {
         ],
       ),
       barrierDismissible: false,
+    );
+  }
+
+  static Future<dynamic> showChart({Widget? widget}) async {
+    return showDialog(
+      context: Get.context!,
+      builder: (context) => Dialog(
+        child: Container(
+          height: MediaQuery.of(context).size.height / 1.3,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                widget!,
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 
