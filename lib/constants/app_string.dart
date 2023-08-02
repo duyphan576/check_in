@@ -31,7 +31,7 @@ abstract class AppString {
   static const String NOTI = "Thông báo";
   static const String NOTI_FORGOT =
       "Liên hệ với nhà trường để được cấp lại mật khẩu!";
-  static const String CANCEL = "Cancel";
+  static const String CANCEL = "Quay lại";
   static const String SUCCESS = "Thành công";
   static const String ENTER_TEL = "Nhập số điện thoại *";
   static const String ENTER_EMAIL = "Nhập Email *";
