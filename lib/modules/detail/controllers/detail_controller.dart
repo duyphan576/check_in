@@ -56,9 +56,9 @@ class DetailController extends GetxController
     grade = detail.grade;
     classroom = detail.classroom;
     List<Students>? studentData = detail.studentList;
-    studentsList.assignAll(studentData);
+    studentsList.assignAll(studentData!);
     List<Documents>? docData = detail.documentList;
-    docList.assignAll(docData);
+    docList.assignAll(docData!);
   }
 
   Future<void> downloadDocument(String url, String fileName) async {
@@ -93,7 +93,7 @@ class DetailController extends GetxController
 
   void showInfo(Widget widget) {
     Alert.showInfo(
-      title: classroom!.term.termName,
+      title: classroom!.term!.termName!,
       buttonText: CommonString.OK,
       widget: widget,
     );

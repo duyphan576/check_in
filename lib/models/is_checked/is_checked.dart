@@ -1,8 +1,8 @@
 class IsChecked {
-  final String type;
-  final String checkinTime;
+  String? type;
+  String? checkinTime;
 
-  IsChecked({required this.type, required this.checkinTime});
+  IsChecked({this.type, this.checkinTime});
 
   factory IsChecked.fromJson(Map<String, dynamic> json) {
     return IsChecked(

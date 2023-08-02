@@ -92,7 +92,7 @@ class ClassroomView extends GetView<ClassroomController> {
                                         },
                                         child: ListTile(
                                           title: Text(
-                                            classroom.term.termName,
+                                            classroom.term!.termName!,
                                             style: TextStyle(
                                               color: AppColors.lightWhite,
                                               fontSize: 18,
@@ -100,7 +100,7 @@ class ClassroomView extends GetView<ClassroomController> {
                                             ),
                                           ),
                                           subtitle: Text(
-                                            classroom.lecturer.fullname,
+                                            classroom.lecturer!.fullname!,
                                             style: TextStyle(
                                               color: AppColors.lightWhite,
                                               fontSize: 14,
@@ -108,7 +108,7 @@ class ClassroomView extends GetView<ClassroomController> {
                                             ),
                                           ),
                                           trailing: Text(
-                                            '${ClassroomString.CREDIT}: ${classroom.term.credit}',
+                                            '${ClassroomString.CREDIT}: ${classroom.term!.credit}',
                                             style: TextStyle(
                                               color: AppColors.lightWhite,
                                               fontSize: 14,

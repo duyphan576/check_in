@@ -148,7 +148,7 @@ class CheckinController extends GetxController with CacheManager {
         listCheckHistory.add(history);
         if (listCheckHistory != null && listCheckHistory.isNotEmpty == true) {
           isReady.value = true;
-          getDateCheckin(listCheckHistory[0].classroom.id.toString());
+          getDateCheckin(listCheckHistory[0].classroom!.id.toString());
         }
       }
       isLoading.value = false;
@@ -166,9 +166,9 @@ class CheckinController extends GetxController with CacheManager {
     if (value != null) {
       checkinDate.assignAll(listCheckHistory
           .firstWhere(
-            (element) => element.classroom.id.toString() == value,
+            (element) => element.classroom!.id.toString() == value,
           )
-          .checkinDate);
+          .checkinDate!);
     }
   }
 

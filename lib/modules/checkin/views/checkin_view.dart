@@ -151,27 +151,28 @@ class CheckinView extends GetView<CheckinController> {
                                                   ),
                                                 ),
                                                 subtitle: Text(
-                                                  dates.isChecked.type == "0"
+                                                  dates.isChecked!.type == "0"
                                                       ? ""
                                                       : controller
                                                           .getFormatDateWithTime(
-                                                          dates.isChecked
+                                                          dates.isChecked!
                                                               .checkinTime,
                                                         ),
                                                 ),
                                                 trailing: Icon(
-                                                  dates.isChecked.type == "0"
+                                                  dates.isChecked!.type == "0"
                                                       ? Icons
                                                           .check_circle_outline_rounded
                                                       : Icons
                                                           .check_circle_rounded,
-                                                  color: dates.isChecked.type ==
+                                                  color: dates.isChecked!
+                                                              .type ==
                                                           "1"
                                                       ? AppColors.greenLight
-                                                      : dates.isChecked.type ==
+                                                      : dates.isChecked!.type ==
                                                               "2"
                                                           ? AppColors.red
-                                                          : dates.isChecked
+                                                          : dates.isChecked!
                                                                       .type ==
                                                                   "3"
                                                               ? AppColors

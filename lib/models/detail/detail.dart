@@ -3,16 +3,16 @@ import 'package:check_in/models/documents/documents.dart';
 import 'package:check_in/models/student/students.dart';
 
 class Detail {
-  final String grade;
-  final Classroom classroom;
-  final List<Students> studentList;
-  final List<Documents> documentList;
+  String? grade;
+  Classroom? classroom;
+  List<Students>? studentList;
+  List<Documents>? documentList;
 
   Detail({
-    required this.grade,
-    required this.classroom,
-    required this.studentList,
-    required this.documentList,
+    this.grade,
+    this.classroom,
+    this.studentList,
+    this.documentList,
   });
 
   factory Detail.fromJson(Map<String, dynamic> json) {

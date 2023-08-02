@@ -2,11 +2,11 @@ import 'package:check_in/models/lecturer/lecturer.dart';
 import 'package:check_in/models/term/term.dart';
 
 class Classroom {
-  final int id;
-  final Lecturer lecturer;
-  final Term term;
+  int? id;
+  Lecturer? lecturer;
+  Term? term;
 
-  Classroom({required this.id, required this.lecturer, required this.term});
+  Classroom({this.id, this.lecturer, this.term});
 
   factory Classroom.fromJson(Map<String, dynamic> json) {
     return Classroom(

@@ -41,7 +41,7 @@ class DetailView extends GetView<DetailController> {
                       backgroundColor: Colors.transparent,
                       appBar: AppBar(
                         title: Text(
-                          controller.classroom!.term.termName,
+                          controller.classroom!.term!.termName!,
                           style: TextStyle(
                             color: AppColors.lightBlack,
                             fontSize: 24,

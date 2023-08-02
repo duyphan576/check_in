@@ -12,17 +12,18 @@ class Grade {
   double? exam;
   double? finalGrade;
 
-  Grade(
-      {this.termId,
-      this.termName,
-      this.attendance,
-      this.coefficient1Exam1,
-      this.coefficient1Exam2,
-      this.coefficient1Exam3,
-      this.coefficient2Exam1,
-      this.coefficient2Exam2,
-      this.exam,
-      this.finalGrade});
+  Grade({
+    this.termId,
+    this.termName,
+    this.attendance,
+    this.coefficient1Exam1,
+    this.coefficient1Exam2,
+    this.coefficient1Exam3,
+    this.coefficient2Exam1,
+    this.coefficient2Exam2,
+    this.exam,
+    this.finalGrade,
+  });
 
   Grade.fromJson(Map<String, dynamic> json) {
     termId = int.parse(json["termId"].toString());
