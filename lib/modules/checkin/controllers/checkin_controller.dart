@@ -82,7 +82,9 @@ class CheckinController extends GetxController with CacheManager {
           title: CommonString.SUCCESS,
           buttonText: CommonString.OK,
           message: response!.message.toString(),
-        ).then((value) => getCheckinHistory());
+        ).then(
+          (value) => initData(),
+        );
       } else {
         Alert.closeLoadingIndicator();
         isLoading.value = false;
@@ -141,6 +143,8 @@ class CheckinController extends GetxController with CacheManager {
   }
 
   void getCheckinHistory() async {
+    isLoading.value = true;
+    listCheckHistory.value = [];
     final response = await checkinRepository.history(
       UrlProvider.HANDLES_HISTORY,
       cacheGet(CacheManagerKey.TOKEN),
@@ -186,7 +190,7 @@ class CheckinController extends GetxController with CacheManager {
 
   getFormatDateWithTime(dateString) {
     if (dateString != "null") {
-      DateTime date = DateTime.parse(dateString);
+      DateTime date = DateTime.parse(dateString).toLocal();
       String formattedDate = DateFormat('dd/MM/yyyy HH:mm:ss').format(date);
       return formattedDate;
     }

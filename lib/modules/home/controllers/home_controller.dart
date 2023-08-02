@@ -32,7 +32,7 @@ class HomeController extends GetxController with CacheManager {
   }
 
   logout() async {
-    Alert.showLoadingIndicator(message: "Logout");
+    Alert.showLoadingIndicator(message: HomeString.LOGOUT);
     final response = await homeRepository.home(
       HomeModel(),
       UrlProvider.HANDLES_LOGOUT,

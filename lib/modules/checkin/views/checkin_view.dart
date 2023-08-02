@@ -173,12 +173,11 @@ class CheckinView extends GetView<CheckinController> {
                                                       ? AppColors.greenLight
                                                       : dates.isChecked!.type ==
                                                               "2"
-                                                          ? AppColors.red
+                                                          ? AppColors.accentBlue
                                                           : dates.isChecked!
                                                                       .type ==
                                                                   "3"
-                                                              ? AppColors
-                                                                  .accentBlue
+                                                              ? AppColors.red
                                                               : AppColors.black,
                                                 ),
                                               );
@@ -248,11 +247,11 @@ class CheckinView extends GetView<CheckinController> {
                                             children: [
                                               Icon(
                                                 Icons.check_circle_rounded,
-                                                color: AppColors.red,
+                                                color: AppColors.accentBlue,
                                               ),
                                               GlobalStyles.sizedBoxWidth_5,
                                               Text(
-                                                CheckinString.END_ATTENDANCE,
+                                                CheckinString.MID_ATTENDANCE,
                                                 style: TextStyle(
                                                   color: AppColors.main,
                                                   fontSize: 16,
@@ -266,11 +265,11 @@ class CheckinView extends GetView<CheckinController> {
                                             children: [
                                               Icon(
                                                 Icons.check_circle_rounded,
-                                                color: AppColors.accentBlue,
+                                                color: AppColors.red,
                                               ),
                                               GlobalStyles.sizedBoxWidth_5,
                                               Text(
-                                                CheckinString.MID_ATTENDANCE,
+                                                CheckinString.END_ATTENDANCE,
                                                 style: TextStyle(
                                                   color: AppColors.main,
                                                   fontSize: 16,
