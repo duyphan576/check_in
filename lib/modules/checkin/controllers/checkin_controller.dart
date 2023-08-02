@@ -62,6 +62,7 @@ class CheckinController extends GetxController with CacheManager {
   }
 
   void checkin(String? token) async {
+    Alert.showLoadingIndicator(message: CheckinString.IS_LOADING);
     if (token != null) {
       print(token);
       final submit = {
@@ -75,6 +76,7 @@ class CheckinController extends GetxController with CacheManager {
         cacheGet(CacheManagerKey.TOKEN),
       );
       if (response?.status == 1) {
+        Alert.closeLoadingIndicator();
         isLoading.value = false;
         Alert.showSuccess(
           title: CommonString.SUCCESS,
@@ -82,6 +84,7 @@ class CheckinController extends GetxController with CacheManager {
           message: response!.message.toString(),
         ).then((value) => getCheckinHistory());
       } else {
+        Alert.closeLoadingIndicator();
         isLoading.value = false;
         Alert.showError(
           title: CommonString.ERROR,

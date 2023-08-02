@@ -27,7 +27,9 @@ class GradeView extends GetView<GradeController> {
                     AppImages.bg,
                   ))),
                   child: Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(
+                      color: AppColors.main,
+                    ),
                   ),
                 )
               : Container(

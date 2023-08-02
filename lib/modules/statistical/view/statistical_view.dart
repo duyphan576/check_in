@@ -20,16 +20,21 @@ class StatisticalView extends GetView<StatisticalController> {
         return Obx(() => controller.isLoading.value
             ? Center(
                 child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          AppImages.bg,
-                        ),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        AppImages.bg,
                       ),
                     ),
-                    child: Center(child: CircularProgressIndicator())),
+                  ),
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.main,
+                    ),
+                  ),
+                ),
               )
             : Container(
                 decoration: BoxDecoration(

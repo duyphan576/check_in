@@ -112,13 +112,9 @@ class LoginView extends GetView<LoginController> with CacheManager {
                                         ),
                                       ],
                                       gradient: LinearGradient(
-                                        colors: [
-                                          Color(0xFF41D8D7),
-                                          Color(0xFF21A3C6),
-                                          Color(0xFF285DA2),
-                                          Color(0xFF332F61),
-                                          Color(0xFF452E51),
-                                        ],
+                                        colors: AppColors.listColorGradientMain,
+                                        begin: Alignment.bottomLeft,
+                                        end: Alignment.topRight,
                                       ),
                                     ),
                                     child: Center(

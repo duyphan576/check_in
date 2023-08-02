@@ -4,6 +4,7 @@ abstract class CommonString {
   static const String CANCEL = "Hủy";
   static const String SUCCESS = "Thành công";
   static const String OK = "Ok";
+  static const String LOADING = "Đang tải";
 }
 
 abstract class Init {
@@ -224,6 +225,7 @@ abstract class DetailString {
 
 abstract class CheckinString {
   static const String CHECK_IN = "Điểm Danh";
+  static const String IS_LOADING = "Đang điểm danh";
   static const String CHECKIN_HISTORY = "Lịch sử điểm danh";
   static const String CLASSROOM = "Lớp học";
   static const String DATE = "Ngày";

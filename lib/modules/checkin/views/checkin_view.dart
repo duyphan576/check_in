@@ -63,7 +63,9 @@ class CheckinView extends GetView<CheckinController> {
               ),
               body: Obx(() => controller.isLoading.value == true
                   ? Center(
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator(
+                        color: AppColors.main,
+                      ),
                     )
                   : SingleChildScrollView(
                       child: Padding(

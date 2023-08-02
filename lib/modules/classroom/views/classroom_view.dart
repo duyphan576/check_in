@@ -48,8 +48,11 @@ class ClassroomView extends GetView<ClassroomController> {
                       child: controller.classrooms.isEmpty
                           ? Center(
                               child: Container(
-                                  alignment: Alignment.center,
-                                  child: CircularProgressIndicator()),
+                                alignment: Alignment.center,
+                                child: CircularProgressIndicator(
+                                  color: AppColors.main,
+                                ),
+                              ),
                             )
                           : ListView.builder(
                               padding: GlobalStyles.paddingPageLeftRight_25,
