@@ -1,4 +1,6 @@
 import 'package:check_in/constants/app_string.dart';
+import 'package:check_in/core/alert.dart';
+import 'package:check_in/global_widgets/bar_chart.dart';
 import 'package:check_in/global_widgets/student_data.dart';
 import 'package:check_in/global_widgets/table_custom.dart';
 import 'package:check_in/modules/grade/controllers/grade_controller.dart';
@@ -63,13 +65,19 @@ class GradeView extends GetView<GradeController> {
                             padding: const EdgeInsets.all(8.0),
                             child: IconButton(
                               onPressed: () {
-                                var argumentsList = <String, dynamic>{
-                                  "isClassroom": false,
-                                  "gradeFinalList":
-                                      controller.gradeFinalList.toList(),
-                                };
-                                Get.toNamed(Routes.STATISTICAL,
-                                    arguments: argumentsList);
+                                if (controller.isGradeFinalNull) {
+                                  Alert.showChart(
+                                    widget: BarChartWidget(
+                                        gradesLength:
+                                            controller.count.length.toDouble(),
+                                        barGroupsList: controller.barGroups),
+                                  );
+                                } else {
+                                  Alert.showError(
+                                      title: "Thất bại",
+                                      message: "message",
+                                      buttonText: AppString.CANCEL);
+                                }
                               },
                               icon: Icon(Icons.bar_chart,
                                   color: Colors.grey.shade600),

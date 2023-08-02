@@ -12,8 +12,7 @@ class PeiChartWidget extends StatelessWidget {
     required this.countFor7ToLessThan85Percentage,
     required this.countGreaterThan85Percentage,
     required this.count,
-    required this.pieAnouce1,
-    required this.pieAnouce2,
+    required this.pieAnouce,
   });
   double countLessThan4Percentage;
   double countForm4ToLessThan55Percentage;
@@ -21,8 +20,7 @@ class PeiChartWidget extends StatelessWidget {
   double countFor7ToLessThan85Percentage;
   double countGreaterThan85Percentage;
   List<double> count;
-  String pieAnouce1;
-  String pieAnouce2;
+  String pieAnouce;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -87,14 +85,11 @@ class PeiChartWidget extends StatelessWidget {
         ),
         GlobalStyles.sizedBoxHeight_25,
         Text(
-          pieAnouce1,
+          pieAnouce,
           style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.white, fontSize: 16),
-        ),
-        Text(
-          pieAnouce2,
-          style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.white, fontSize: 16),
+              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16),
+          maxLines: 2,
+          textAlign: TextAlign.center,
         ),
         GlobalStyles.sizedBoxHeight_25,
         Column(
@@ -102,37 +97,37 @@ class PeiChartWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Pie chart annotation :",
+              "Chú thích biểu đồ hình tròn :",
               style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
             ),
             GlobalStyles.sizedBoxHeight_10,
             countLessThan4Percentage != 0
                 ? TextWidget(
-                    color: Colors.red, titleStr: "Percentage score less than 4")
+                    color: Colors.red, titleStr: "Tỷ lệ phần trăm điểm dưới 4")
                 : Container(),
             GlobalStyles.sizedBoxHeight_10,
             countForm4ToLessThan55Percentage != 0
                 ? TextWidget(
                     color: Colors.orange,
-                    titleStr: "Score percentage from 4 to less than 5.5")
+                    titleStr: "Tỷ lệ phần trăm điểm từ 4 đến dưới 5,5")
                 : Container(),
             GlobalStyles.sizedBoxHeight_10,
             countForm55ToLessThan7Percentage != 0
                 ? TextWidget(
                     color: Colors.yellow,
-                    titleStr: "Score percentage from 5.5 to less than 7")
+                    titleStr: "Tỷ lệ phần trăm điểm từ 5,5 đến dưới 7")
                 : Container(),
             GlobalStyles.sizedBoxHeight_10,
             countFor7ToLessThan85Percentage != 0
                 ? TextWidget(
                     color: Colors.green,
-                    titleStr: "Score percentage from 7 to less than 8.5")
+                    titleStr: "Tỷ lệ phần trăm điểm từ 7 đến dưới 8,5")
                 : Container(),
             countGreaterThan85Percentage != 0
                 ? TextWidget(
                     color: Colors.pink.shade300,
-                    titleStr: "Point percentage greater then 8.5")
+                    titleStr: "Tỷ lệ phần trăm điểm lớn hơn 8,5")
                 : Container(),
           ],
         ),
@@ -156,7 +151,7 @@ class TextWidget extends StatelessWidget {
         GlobalStyles.sizedBoxWidth,
         Text(
           titleStr,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black),
         ),
       ]),
     );

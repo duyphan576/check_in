@@ -156,18 +156,18 @@ abstract class StatisticalString {
   static const String STATISTICAL = "Thống Kê";
   static const String NOTE = "Lưu ý";
   static const String GRADE_EMPTY = "Điểm trong lớp trống";
-  static const String PIE_CHART = "Biểu đồ hình tròn cho thấy tỷ lệ phần trăm";
-  static const String PIE_ANNOUNCE = "điểm thi của học sinh";
-  static const String BAR_CHART = "Biểu đồ thống kê số lượng";
-  static const String BAR_ANNOUNCE = "điểm đạt được";
+  static const String PIE_CHART =
+      "Biểu đồ hình tròn cho thấy tỷ lệ phần trăm điểm thi của học sinh";
+  static const String BAR_CHART = "Biểu đồ thống kê số lượng điểm đạt được";
   static const String BAR_NOTE = "Lưu ý biểu đồ cột:";
-  static const String BAR_NOTE_XAXIS = "Trục X biểu thị số lượng sinh viên.";
-  static const String BAR_NOTE_YAXIS = "Trục Y đại diện cho điểm.";
-  static const String GRADE_F = "F: Điểm dưới 4.0";
-  static const String GRADE_D = "D: Điểm từ 4.0 đến 5.5";
-  static const String GRADE_C = "C: Điểm từ 5.5 đến 7.0";
-  static const String GRADE_B = "B: Điểm từ 7.0 đến 8.5";
-  static const String GRADE_A = "A: Điểm từ 8.5 trở lên";
+  static const String BAR_NOTE_YAXIS = "Trục Y biểu thị số lượng sinh viên.";
+  static const String BAR_NOTE_XAXIS = "Trục X đại diện cho điểm.";
+  static const String GRADE_F = "F: Điểm dưới 4.0.";
+  static const String GRADE_D = "D: Điểm từ 4.0 đến dưới 5.5.";
+  static const String GRADE_C = "C: Điểm từ 5.5 đến dưới 7.0.";
+  static const String GRADE_B = "B: Điểm từ 7.0 đến dưới 8.5.";
+  static const String GRADE_A = "A: Điểm từ 8.5 trở lên.";
+  static const String GRADEFINAL_ERROR = "Điểm quá trình rỗng.";
 }
 
 abstract class HomeString {

@@ -124,7 +124,7 @@ class StudentPicture extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "${GradeString.AV_GRADE}: $grade",
+                            "${GradeString.AV_GRADE}: ${grade == "null" ? '' : grade}",
                             style: TextStyle(
                               color: AppColors.lightWhite,
                               fontSize: 14,

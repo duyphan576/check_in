@@ -3,6 +3,8 @@ import 'package:check_in/core/index.dart';
 import 'package:check_in/modules/grade/models/grade_models.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../models/grade/grade.dart';
 import '../repository/grade_repository.dart';
@@ -16,7 +18,15 @@ class GradeController extends GetxController with CacheManager {
   List<double> gradeFinalList = [];
   RxList<Grade> grades = <Grade>[].obs;
   double? gradeFinal;
+  bool isGradeFinalNull = true;
+  List<double> count = [];
+  List<BarChartGroupData> barGroups = [];
   GradeController({required this.gradeRepository});
+  var countLessThan4 = 0.0;
+  var countForm4ToLessThan55 = 0.0;
+  var countForm55ToLessThan7 = 0.0;
+  var countFor7ToLessThan85 = 0.0;
+  var countGreaterThan85 = 0.0;
 
   @override
   void onInit() async {
@@ -46,8 +56,44 @@ class GradeController extends GetxController with CacheManager {
 
       grades.addAll(gradesData);
       for (int i = 0; i < grades.length; i++) {
-        gradeFinal = grades[i].finalGrade;
+        if (grades[i].finalGrade.toString().trim() == "null") {
+          continue;
+        }
+        gradeFinal = double.parse(grades[i].finalGrade.toString().trim());
         gradeFinalList.add(gradeFinal!);
+      }
+      if (gradeFinalList.isEmpty) {
+        isGradeFinalNull = false;
+      }
+      if (isGradeFinalNull) {
+        for (int i = 0; i < gradeFinalList.length; i++) {
+          if (gradeFinalList[i] < 4) {
+            countLessThan4++;
+          } else if (gradeFinalList[i] >= 4 && gradeFinalList[i] < 5.5) {
+            countForm4ToLessThan55++;
+          } else if (gradeFinalList[i] >= 5.5 && gradeFinalList[i] < 7) {
+            countForm55ToLessThan7++;
+          } else if (gradeFinalList[i] >= 7 && gradeFinalList[i] < 8.5) {
+            countFor7ToLessThan85++;
+          } else if (gradeFinalList[i] >= 8.5) {
+            countGreaterThan85++;
+          }
+        }
+        countList();
+        for (int i = 0; i < count.length; i++) {
+          BarChartGroupData barGroup = BarChartGroupData(
+            x: i,
+            barRods: [
+              BarChartRodData(
+                fromY: 0,
+                toY: count[i].toDouble(), // Convert the value to double
+                width: 15,
+                color: Colors.amber,
+              ),
+            ],
+          );
+          barGroups.add(barGroup);
+        }
       }
       update();
       isLoading.value = false;
@@ -57,5 +103,13 @@ class GradeController extends GetxController with CacheManager {
           buttonText: AppString.CANCEL,
           message: response!.message.toString());
     }
+  }
+
+  void countList() {
+    count.add(countLessThan4);
+    count.add(countForm4ToLessThan55);
+    count.add(countForm55ToLessThan7);
+    count.add(countFor7ToLessThan85);
+    count.add(countGreaterThan85);
   }
 }
