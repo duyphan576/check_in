@@ -1,13 +1,9 @@
-import 'package:check_in/constants/app_images.dart';
-import 'package:check_in/constants/app_string.dart';
+import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/global_widgets/pei_chart.dart';
 import 'package:check_in/modules/statistical/controllers/statistical_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../constants/app_colors.dart';
 
 class StatisticalView extends GetView<StatisticalController> {
   const StatisticalView({super.key});

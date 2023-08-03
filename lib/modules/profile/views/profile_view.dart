@@ -8,8 +8,6 @@ import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../global_widgets/password_custom.dart';
-
 class ProfileView extends GetView<ProfileController> {
   ProfileView({super.key});
 

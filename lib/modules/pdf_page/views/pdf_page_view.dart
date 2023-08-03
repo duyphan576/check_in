@@ -1,6 +1,5 @@
 import 'package:check_in/constants/app_colors.dart';
 import 'package:check_in/constants/app_images.dart';
-import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/modules/pdf_page/controllers/pdf_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
