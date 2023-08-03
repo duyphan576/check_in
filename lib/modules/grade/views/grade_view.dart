@@ -1,12 +1,8 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/core/alert.dart';
-<<<<<<< HEAD
-import 'package:check_in/global_widgets/bar_chart.dart';
 import 'package:check_in/global_widgets/dropdown_grade.dart';
-=======
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/global_widgets/custom_barchart.dart';
->>>>>>> a807ebe54024d1a5b31d47bb07840f0f81441fc3
 import 'package:check_in/global_widgets/student_data.dart';
 import 'package:check_in/global_widgets/table_custom.dart';
 import 'package:check_in/modules/grade/controllers/grade_controller.dart';
@@ -116,12 +112,9 @@ class GradeView extends GetView<GradeController> {
                                     ),
                                   ],
                                 ),
-<<<<<<< HEAD
-                                // child: TableWidget(),
-                                child: DropdownGrade(),
-=======
+
+                                // child: DropdownGrade(),
                                 child: TableCustom(),
->>>>>>> a807ebe54024d1a5b31d47bb07840f0f81441fc3
                               ),
                             ],
                           ),
