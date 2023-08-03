@@ -113,7 +113,7 @@ class GradeView extends GetView<GradeController> {
                                     ),
                                   ],
                                 ),
-                                child: TableWidget(grades: controller.grades),
+                                child: TableWidget(),
                               ),
                             ],
                           ),

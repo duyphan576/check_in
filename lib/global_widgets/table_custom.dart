@@ -1,15 +1,14 @@
 import 'package:check_in/constants/app_colors.dart';
 import 'package:check_in/constants/app_string.dart';
 import 'package:check_in/models/grade/grade.dart';
+import 'package:check_in/modules/grade/controllers/grade_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 
-class TableWidget extends StatelessWidget {
-  TableWidget({Key? key, required this.grades}) : super(key: key);
+class TableWidget extends GetView<GradeController> {
+  TableWidget({Key? key}) : super(key: key);
 
-  final List<Grade> grades;
-  late final ScrollController verticalScrollController;
-  late final ScrollController horizontalScrollController;
   TextStyle textStyleBold = TextStyle(
       color: AppColors.black, fontSize: 12, fontWeight: FontWeight.bold);
   TextStyle textStyle = TextStyle(color: AppColors.black, fontSize: 12);
@@ -23,7 +22,7 @@ class TableWidget extends StatelessWidget {
         headerWidgets: _getTitleWidget(),
         leftSideItemBuilder: _generateFirstColumnRow,
         rightSideItemBuilder: _generateRightHandSideColumnRow,
-        itemCount: grades.length,
+        itemCount: controller.grades.length,
         rowSeparatorWidget: const Divider(
           color: Colors.black54,
           height: 1.0,
@@ -32,8 +31,8 @@ class TableWidget extends StatelessWidget {
         leftHandSideColBackgroundColor: const Color(0xFFFFFFFF),
         rightHandSideColBackgroundColor: const Color(0xFFFFFFFF),
         onScrollControllerReady: (vertical, horizontal) {
-          verticalScrollController = vertical;
-          horizontalScrollController = horizontal;
+          controller.verticalScrollController = vertical;
+          controller.horizontalScrollController = horizontal;
         },
         verticalScrollbarStyle: const ScrollbarStyle(
           thumbColor: Colors.grey,
@@ -78,7 +77,7 @@ class TableWidget extends StatelessWidget {
       height: 50,
       padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
       alignment: Alignment.centerLeft,
-      child: Text(grades[index].termName.toString()),
+      child: Text(controller.grades[index].termName.toString()),
     );
   }
 
@@ -90,7 +89,8 @@ class TableWidget extends StatelessWidget {
           height: 50,
           padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
           alignment: Alignment.center,
-          child: Text("${isNull(grades[index].attendance.toString())}"),
+          child:
+              Text("${isNull(controller.grades[index].attendance.toString())}"),
         ),
         Container(
           width: 95,
@@ -98,7 +98,7 @@ class TableWidget extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
           alignment: Alignment.center,
           child: Text(
-              "${isNull(grades[index].coefficient1Exam1.toString())}  ${isNull(grades[index].coefficient1Exam2.toString())}  ${isNull(grades[index].coefficient1Exam3.toString())}"),
+              "${isNull(controller.grades[index].coefficient1Exam1.toString())}  ${isNull(controller.grades[index].coefficient1Exam2.toString())}  ${isNull(controller.grades[index].coefficient1Exam3.toString())}"),
         ),
         Container(
           width: 95,
@@ -106,21 +106,22 @@ class TableWidget extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
           alignment: Alignment.center,
           child: Text(
-              "${isNull(grades[index].coefficient2Exam1.toString())}  ${isNull(grades[index].coefficient2Exam2.toString())}"),
+              "${isNull(controller.grades[index].coefficient2Exam1.toString())}  ${isNull(controller.grades[index].coefficient2Exam2.toString())}"),
         ),
         Container(
           width: 65,
           height: 50,
           padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
           alignment: Alignment.center,
-          child: Text("${isNull(grades[index].exam.toString())}"),
+          child: Text("${isNull(controller.grades[index].exam.toString())}"),
         ),
         Container(
           width: 100,
           height: 50,
           padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
           alignment: Alignment.center,
-          child: Text("${isNull(grades[index].finalGrade.toString())}"),
+          child:
+              Text("${isNull(controller.grades[index].finalGrade.toString())}"),
         ),
       ],
     );
