@@ -1,6 +1,5 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/core/alert.dart';
-import 'package:check_in/global_widgets/dropdown_grade.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/global_widgets/custom_barchart.dart';
 import 'package:check_in/global_widgets/student_data.dart';
@@ -65,8 +64,9 @@ class GradeView extends GetView<GradeController> {
                             child: IconButton(
                               onPressed: () {
                                 if (controller.isGradeFinalNull) {
-                                  Alert.showChart(
-                                    widget: CustomBarChart(
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => CustomBarChart(
                                         gradesLength:
                                             controller.count.length.toDouble(),
                                         barGroupsList: controller.barGroups),
@@ -97,25 +97,7 @@ class GradeView extends GetView<GradeController> {
                                 grade: controller.avgGrade.toString(),
                               ),
                               GlobalStyles.sizedBoxHeight,
-                              Container(
-                                height: MediaQuery.of(context).size.width / 0.8,
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                  color: AppColors.lightWhite.withOpacity(0.9),
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: AppColors.black,
-                                      blurRadius: 2,
-                                      blurStyle: BlurStyle.outer,
-                                      offset: Offset(0, 0),
-                                    ),
-                                  ],
-                                ),
-
-                                // child: DropdownGrade(),
-                                child: TableCustom(),
-                              ),
+                              TableCustom(),
                             ],
                           ),
                         ),

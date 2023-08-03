@@ -16,36 +16,52 @@ class TableCustom extends GetView<GradeController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: HorizontalDataTable(
-        leftHandSideColumnWidth: 120,
-        rightHandSideColumnWidth: 475,
-        isFixedHeader: true,
-        headerWidgets: _getTitleWidget(),
-        leftSideItemBuilder: _generateFirstColumnRow,
-        rightSideItemBuilder: _generateRightHandSideColumnRow,
-        itemCount: controller.grades.length,
-        rowSeparatorWidget: const Divider(
-          color: Colors.black54,
-          height: 1.0,
-          thickness: 0.0,
-        ),
-        leftHandSideColBackgroundColor: const Color(0xFFFFFFFF),
-        rightHandSideColBackgroundColor: const Color(0xFFFFFFFF),
-        onScrollControllerReady: (vertical, horizontal) {
-          controller.verticalScrollController = vertical;
-          controller.horizontalScrollController = horizontal;
-        },
-        verticalScrollbarStyle: const ScrollbarStyle(
-          thumbColor: Colors.grey,
-          isAlwaysShown: true,
-          thickness: 8.0,
-          radius: Radius.circular(5.0),
-        ),
-        horizontalScrollbarStyle: const ScrollbarStyle(
-          thumbColor: Colors.grey,
-          isAlwaysShown: true,
-          thickness: 8.0,
-          radius: Radius.circular(5.0),
+      height: MediaQuery.of(context).size.width / 0.8,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: AppColors.lightWhite.withOpacity(0.9),
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+              color: AppColors.black,
+              blurRadius: 2,
+              blurStyle: BlurStyle.outer,
+              offset: Offset(0, 0)),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: HorizontalDataTable(
+          leftHandSideColumnWidth: 120,
+          rightHandSideColumnWidth: 475,
+          isFixedHeader: true,
+          headerWidgets: _getTitleWidget(),
+          leftSideItemBuilder: _generateFirstColumnRow,
+          rightSideItemBuilder: _generateRightHandSideColumnRow,
+          itemCount: controller.grades.length,
+          rowSeparatorWidget: const Divider(
+            color: Colors.black54,
+            height: 1.0,
+            thickness: 0.0,
+          ),
+          leftHandSideColBackgroundColor: const Color(0xFFFFFFFF),
+          rightHandSideColBackgroundColor: const Color(0xFFFFFFFF),
+          onScrollControllerReady: (vertical, horizontal) {
+            controller.verticalScrollController = vertical;
+            controller.horizontalScrollController = horizontal;
+          },
+          verticalScrollbarStyle: const ScrollbarStyle(
+            thumbColor: Colors.grey,
+            isAlwaysShown: true,
+            thickness: 8.0,
+            radius: Radius.circular(8.0),
+          ),
+          horizontalScrollbarStyle: const ScrollbarStyle(
+            thumbColor: Colors.grey,
+            isAlwaysShown: true,
+            thickness: 8.0,
+            radius: Radius.circular(8.0),
+          ),
         ),
       ),
     );

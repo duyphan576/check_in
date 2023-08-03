@@ -107,25 +107,6 @@ class Alert {
     );
   }
 
-  static Future<dynamic> showChart({Widget? widget}) async {
-    return showDialog(
-      context: Get.context!,
-      builder: (context) => Dialog(
-        child: Container(
-          height: MediaQuery.of(context).size.height / 1.3,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                widget!,
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   static Future<dynamic> selectFile() async {
     return showDialog(
       context: Get.context!,
