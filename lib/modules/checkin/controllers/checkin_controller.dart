@@ -33,6 +33,7 @@ class CheckinController extends GetxController with CacheManager {
     returnImage: false,
     torchEnabled: false,
   );
+
   RxList<Barcode> barcode = RxList<Barcode>();
   RxString wifiName = "".obs;
   RxString wifiBSSID = "".obs;

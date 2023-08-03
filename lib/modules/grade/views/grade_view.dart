@@ -64,8 +64,9 @@ class GradeView extends GetView<GradeController> {
                             child: IconButton(
                               onPressed: () {
                                 if (controller.isGradeFinalNull) {
-                                  Alert.showChart(
-                                    widget: CustomBarChart(
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => CustomBarChart(
                                         gradesLength:
                                             controller.grades.length.toDouble(),
                                         barGroupsList: controller.barGroups),
@@ -96,23 +97,7 @@ class GradeView extends GetView<GradeController> {
                                 grade: controller.avgGrade.toString(),
                               ),
                               GlobalStyles.sizedBoxHeight,
-                              Container(
-                                height: MediaQuery.of(context).size.width / 0.8,
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                  color: AppColors.lightWhite.withOpacity(0.9),
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: AppColors.black,
-                                      blurRadius: 2,
-                                      blurStyle: BlurStyle.outer,
-                                      offset: Offset(0, 0),
-                                    ),
-                                  ],
-                                ),
-                                child: TableCustom(),
-                              ),
+                              TableCustom(),
                             ],
                           ),
                         ),
