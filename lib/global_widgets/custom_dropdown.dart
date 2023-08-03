@@ -121,7 +121,7 @@ class CustomDropdown extends GetView<CheckinController> {
                 item.classroom!.term!.termName!,
                 style: TextStyle(
                   fontSize: 16,
-                  color: isSelected ? AppColors.subMain : AppColors.lightBlack,
+                  color: isSelected ? AppColors.subMain : AppColors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),

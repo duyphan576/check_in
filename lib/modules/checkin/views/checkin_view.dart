@@ -158,7 +158,7 @@ class CheckinView extends GetView<CheckinController> {
                                                   ),
                                                   style: TextStyle(
                                                     fontSize: 16,
-                                                    color: AppColors.lightBlack,
+                                                    color: AppColors.black,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -170,6 +170,10 @@ class CheckinView extends GetView<CheckinController> {
                                                           dates.isChecked!
                                                               .checkinTime,
                                                         ),
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: AppColors.lightBlack,
+                                                  ),
                                                 ),
                                                 trailing: Icon(
                                                   dates.isChecked!.type == "0"
@@ -188,7 +192,8 @@ class CheckinView extends GetView<CheckinController> {
                                                                       .type ==
                                                                   "3"
                                                               ? AppColors.red
-                                                              : AppColors.black,
+                                                              : AppColors
+                                                                  .lightBlack,
                                                 ),
                                               );
                                             },
@@ -214,7 +219,7 @@ class CheckinView extends GetView<CheckinController> {
                                   Text(
                                     CheckinString.NOTES,
                                     style: TextStyle(
-                                      color: AppColors.main,
+                                      color: AppColors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -245,7 +250,7 @@ class CheckinView extends GetView<CheckinController> {
                                               Text(
                                                 CheckinString.IN_ATTENDANCE,
                                                 style: TextStyle(
-                                                  color: AppColors.main,
+                                                  color: AppColors.black,
                                                   fontSize: 16,
                                                   fontStyle: FontStyle.italic,
                                                 ),
@@ -263,7 +268,7 @@ class CheckinView extends GetView<CheckinController> {
                                               Text(
                                                 CheckinString.MID_ATTENDANCE,
                                                 style: TextStyle(
-                                                  color: AppColors.main,
+                                                  color: AppColors.black,
                                                   fontSize: 16,
                                                   fontStyle: FontStyle.italic,
                                                 ),
@@ -281,7 +286,7 @@ class CheckinView extends GetView<CheckinController> {
                                               Text(
                                                 CheckinString.END_ATTENDANCE,
                                                 style: TextStyle(
-                                                  color: AppColors.main,
+                                                  color: AppColors.black,
                                                   fontSize: 16,
                                                   fontStyle: FontStyle.italic,
                                                 ),
@@ -294,13 +299,13 @@ class CheckinView extends GetView<CheckinController> {
                                               Icon(
                                                 Icons
                                                     .check_circle_outline_rounded,
-                                                color: AppColors.black,
+                                                color: AppColors.lightBlack,
                                               ),
                                               GlobalStyles.sizedBoxWidth_5,
                                               Text(
                                                 CheckinString.NO_ATTENDANCE,
                                                 style: TextStyle(
-                                                  color: AppColors.main,
+                                                  color: AppColors.black,
                                                   fontSize: 16,
                                                   fontStyle: FontStyle.italic,
                                                 ),
@@ -326,7 +331,7 @@ class CheckinView extends GetView<CheckinController> {
                                               Text(
                                                 CheckinString.MORNING,
                                                 style: TextStyle(
-                                                  color: AppColors.main,
+                                                  color: AppColors.black,
                                                   fontSize: 16,
                                                   fontStyle: FontStyle.italic,
                                                 ),
@@ -344,7 +349,7 @@ class CheckinView extends GetView<CheckinController> {
                                               Text(
                                                 CheckinString.AFTERNOON,
                                                 style: TextStyle(
-                                                  color: AppColors.main,
+                                                  color: AppColors.black,
                                                   fontSize: 16,
                                                   fontStyle: FontStyle.italic,
                                                 ),

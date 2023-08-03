@@ -18,76 +18,76 @@ class GradeView extends GetView<GradeController> {
     return GetBuilder<GradeController>(
       builder: (controller) {
         return Obx(
-          () => controller.isLoading.value
-              ? Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.lightWhite,
-                  ),
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.main,
+          () => Container(
+            decoration: BoxDecoration(
+              color: AppColors.lightWhite,
+            ),
+            child: SafeArea(
+              child: Scaffold(
+                backgroundColor: Colors.transparent,
+                resizeToAvoidBottomInset: true,
+                appBar: AppBar(
+                  title: Text(
+                    GradeString.GRADE,
+                    style: TextStyle(
+                      color: AppColors.lightWhite,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                )
-              : Container(
-                  decoration: BoxDecoration(
+                  centerTitle: true,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  iconTheme: IconThemeData(
                     color: AppColors.lightWhite,
                   ),
-                  child: SafeArea(
-                    child: Scaffold(
-                      backgroundColor: Colors.transparent,
-                      resizeToAvoidBottomInset: true,
-                      appBar: AppBar(
-                        title: Text(
-                          GradeString.GRADE,
-                          style: TextStyle(
-                            color: AppColors.lightWhite,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
+                  flexibleSpace: Container(
+                    decoration: BoxDecoration(
+                      // color: AppColors.lightWhite,
+                      image: DecorationImage(
+                        image: AssetImage(
+                          AppImages.bg,
                         ),
-                        centerTitle: true,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                        iconTheme: IconThemeData(
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  actions: [
+                    IconButton(
+                      onPressed: () {
+                        if (controller.isGradeFinalNull) {
+                          Alert.showChart(
+                            widget: CustomBarChart(
+                                gradesLength:
+                                    controller.count.length.toDouble(),
+                                barGroupsList: controller.barGroups),
+                          );
+                        } else {
+                          Alert.showError(
+                              title: AppString.ERROR,
+                              message: GradeString.ERROR_GRADE,
+                              buttonText: AppString.CANCEL);
+                        }
+                      },
+                      icon: Icon(
+                        Icons.bar_chart,
+                        color: AppColors.lightWhite,
+                      ),
+                    )
+                  ],
+                ),
+                body: controller.isLoading.value
+                    ? Container(
+                        decoration: BoxDecoration(
                           color: AppColors.lightWhite,
                         ),
-                        flexibleSpace: Container(
-                          decoration: BoxDecoration(
-                            // color: AppColors.lightWhite,
-                            image: DecorationImage(
-                              image: AssetImage(
-                                AppImages.bg,
-                              ),
-                              fit: BoxFit.cover,
-                            ),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.main,
                           ),
                         ),
-                        actions: [
-                          IconButton(
-                            onPressed: () {
-                              if (controller.isGradeFinalNull) {
-                                Alert.showChart(
-                                  widget: CustomBarChart(
-                                      gradesLength:
-                                          controller.count.length.toDouble(),
-                                      barGroupsList: controller.barGroups),
-                                );
-                              } else {
-                                Alert.showError(
-                                    title: AppString.ERROR,
-                                    message: GradeString.ERROR_GRADE,
-                                    buttonText: AppString.CANCEL);
-                              }
-                            },
-                            icon: Icon(
-                              Icons.bar_chart,
-                              color: AppColors.lightWhite,
-                            ),
-                          )
-                        ],
-                      ),
-                      body: SingleChildScrollView(
+                      )
+                    : SingleChildScrollView(
                         child: Padding(
                           padding: GlobalStyles.paddingAll18,
                           child: Column(
@@ -121,9 +121,9 @@ class GradeView extends GetView<GradeController> {
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
+              ),
+            ),
+          ),
         );
       },
     );

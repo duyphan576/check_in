@@ -18,7 +18,7 @@ class ProfileDetailRow extends StatelessWidget {
             title,
             style: TextStyle(
               fontSize: 16,
-              color: AppColors.lightBlack,
+              color: AppColors.subMain,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -27,16 +27,15 @@ class ProfileDetailRow extends StatelessWidget {
             value,
             style: TextStyle(
               fontSize: 14,
-              color: AppColors.lightBlack,
+              color: AppColors.black,
               fontWeight: FontWeight.w500,
-              fontStyle: FontStyle.italic,
             ),
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.35,
             child: Divider(
               thickness: 1.0,
-              color: AppColors.lightBlack,
+              color: AppColors.black,
             ),
           ),
         ],

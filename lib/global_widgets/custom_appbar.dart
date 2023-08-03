@@ -92,7 +92,7 @@ class CustomAppBar extends GetView<DetailController>
             elevation: 0.0,
             title: TabBar(
               labelColor: AppColors.lightWhite,
-              unselectedLabelColor: AppColors.lightBlack,
+              unselectedLabelColor: AppColors.black,
               labelStyle: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),

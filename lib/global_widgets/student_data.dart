@@ -84,7 +84,7 @@ class StudentPicture extends StatelessWidget {
                 Text(
                   name ?? "",
                   style: TextStyle(
-                    color: AppColors.lightBlack,
+                    color: AppColors.black,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -93,13 +93,13 @@ class StudentPicture extends StatelessWidget {
                   width: width * 0.45,
                   child: Divider(
                     thickness: 1.0,
-                    color: AppColors.lightBlack,
+                    color: AppColors.black,
                   ),
                 ),
                 Text(
                   code ?? "",
                   style: TextStyle(
-                    color: AppColors.lightBlack,
+                    color: AppColors.black,
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                     fontStyle: FontStyle.italic,
@@ -115,13 +115,13 @@ class StudentPicture extends StatelessWidget {
                             width: width * 0.35,
                             child: Divider(
                               thickness: 1.0,
-                              color: AppColors.lightBlack,
+                              color: AppColors.black,
                             ),
                           ),
                           Text(
                             "${GradeString.AV_GRADE}: ${grade == "null" ? '' : grade}",
                             style: TextStyle(
-                              color: AppColors.lightBlack,
+                              color: AppColors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                             ),

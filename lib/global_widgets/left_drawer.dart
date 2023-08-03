@@ -76,7 +76,7 @@ class LeftDrawer extends GetView<HomeController> {
                           Text(
                             controller.userData["name"],
                             style: TextStyle(
-                              color: AppColors.lightBlack,
+                              color: AppColors.black,
                               // fontWeight: FontWeight.bold,
                               fontSize: 18,
                             ),
@@ -85,13 +85,13 @@ class LeftDrawer extends GetView<HomeController> {
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: Divider(
                               thickness: 1.0,
-                              color: AppColors.lightBlack,
+                              color: AppColors.black,
                             ),
                           ),
                           Text(
                             controller.userData["code"],
                             style: TextStyle(
-                              color: AppColors.lightBlack,
+                              color: AppColors.black,
                               // fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.italic,
                               fontSize: 16,
@@ -101,19 +101,12 @@ class LeftDrawer extends GetView<HomeController> {
                       ),
                     ],
                   ),
-                  // StudentPicture(
-                  //   code: controller.userData["code"],
-                  //   name: controller.userData["name"],
-                  //   height: MediaQuery.of(context).size.height,
-                  //   width: MediaQuery.of(context).size.width,
-
-                  // ),
                   GlobalStyles.sizedBoxHeight,
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Divider(
                       thickness: 1.0,
-                      color: AppColors.lightBlack,
+                      color: AppColors.black,
                     ),
                   ),
                 ],

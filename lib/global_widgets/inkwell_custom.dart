@@ -65,7 +65,7 @@ class InkWellCustom extends StatelessWidget {
                     text ?? "",
                     style: TextStyle(
                       fontSize: 18,
-                      color: AppColors.lightBlack,
+                      color: AppColors.black,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -74,7 +74,7 @@ class InkWellCustom extends StatelessWidget {
                           subText ?? "",
                           style: TextStyle(
                             fontSize: 12,
-                            color: AppColors.lightBlack,
+                            color: AppColors.black,
                             fontWeight: FontWeight.w500,
                             fontStyle: FontStyle.italic,
                           ),

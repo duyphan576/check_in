@@ -34,7 +34,7 @@ class QrView extends GetView<QrController> {
               QrString.QR,
               style: TextStyle(
                 color: AppColors.lightWhite,
-                fontSize: 18,
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -14,17 +14,11 @@ class ClassroomView extends GetView<ClassroomController> {
       builder: (controller) {
         return Obx(() => Container(
               decoration: BoxDecoration(
-                // image: DecorationImage(
-                //   image: AssetImage(
-                //     AppImages.bg,
-                //   ),
-                // ),
                 color: AppColors.lightWhite,
               ),
               child: SafeArea(
                 child: Scaffold(
                   backgroundColor: Colors.transparent,
-                  // extendBodyBehindAppBar: true,
                   resizeToAvoidBottomInset: true,
                   appBar: AppBar(
                     title: Text(
@@ -103,7 +97,7 @@ class ClassroomView extends GetView<ClassroomController> {
                                           title: Text(
                                             classroom.term!.termName!,
                                             style: TextStyle(
-                                              color: AppColors.lightBlack,
+                                              color: AppColors.black,
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -111,7 +105,7 @@ class ClassroomView extends GetView<ClassroomController> {
                                           subtitle: Text(
                                             classroom.lecturer!.fullname!,
                                             style: TextStyle(
-                                              color: AppColors.lightBlack,
+                                              color: AppColors.black,
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -119,8 +113,8 @@ class ClassroomView extends GetView<ClassroomController> {
                                           trailing: Text(
                                             '${ClassroomString.CREDIT}: ${classroom.term!.credit}',
                                             style: TextStyle(
-                                              color: AppColors.lightBlack,
-                                              fontSize: 14,
+                                              color: AppColors.black,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
