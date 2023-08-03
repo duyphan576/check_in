@@ -173,11 +173,11 @@ abstract class StatisticalString {
   static const String GRADE_A = "A: Điểm từ 8.5 trở lên.";
   static const String GRADEFINAL_ERROR = "Chưa có điểm quá trình nào";
   static const String PEI_ANOUNCE = "Chú thích biểu đồ hình tròn :";
-  static const String PEI_GRADE_1 = "Tỷ lệ phần trăm điểm dưới 4.";
-  static const String PEI_GRADE_2 = "Tỷ lệ phần trăm điểm từ 4 đến dưới 5,5";
-  static const String PEI_GRADE_3 = "Tỷ lệ phần trăm điểm từ 5,5 đến dưới 7.";
-  static const String PEI_GRADE_4 = "Tỷ lệ phần trăm điểm từ 7 đến dưới 8,5";
-  static const String PEI_GRADE_5 = "Điểm từ 8.5 trở lên.";
+  static const String PEI_GRADE_1 = "Tỷ lệ điểm dưới 4.";
+  static const String PEI_GRADE_2 = "Tỷ lệ điểm từ 4 đến dưới 5,5";
+  static const String PEI_GRADE_3 = "Tỷ lệ điểm từ 5,5 đến dưới 7.";
+  static const String PEI_GRADE_4 = "Tỷ lệ điểm từ 7 đến dưới 8,5";
+  static const String PEI_GRADE_5 = "Tỷ lệ điểm từ 8.5 trở lên.";
 }
 
 abstract class HomeString {

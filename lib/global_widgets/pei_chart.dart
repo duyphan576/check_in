@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:check_in/constants/app_string.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -25,6 +27,14 @@ class PeiChartWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Text(
+          pieAnouce,
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16),
+          maxLines: 2,
+          textAlign: TextAlign.center,
+        ),
+        GlobalStyles.sizedBoxHeight_25,
         Container(
           height: MediaQuery.of(context).size.width / 1.1,
           width: MediaQuery.of(context).size.width / 1.1,
@@ -84,14 +94,6 @@ class PeiChartWidget extends StatelessWidget {
           ),
         ),
         GlobalStyles.sizedBoxHeight_25,
-        Text(
-          pieAnouce,
-          style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16),
-          maxLines: 2,
-          textAlign: TextAlign.center,
-        ),
-        GlobalStyles.sizedBoxHeight_25,
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,19 +108,16 @@ class PeiChartWidget extends StatelessWidget {
                 ? TextWidget(
                     color: Colors.red, titleStr: StatisticalString.PEI_GRADE_1)
                 : Container(),
-            GlobalStyles.sizedBoxHeight_10,
             countForm4ToLessThan55Percentage != 0
                 ? TextWidget(
                     color: Colors.orange,
                     titleStr: StatisticalString.PEI_GRADE_2)
                 : Container(),
-            GlobalStyles.sizedBoxHeight_10,
             countForm55ToLessThan7Percentage != 0
                 ? TextWidget(
                     color: Colors.yellow,
                     titleStr: StatisticalString.PEI_GRADE_3)
                 : Container(),
-            GlobalStyles.sizedBoxHeight_10,
             countFor7ToLessThan85Percentage != 0
                 ? TextWidget(
                     color: Colors.green,
@@ -143,17 +142,22 @@ class TextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(children: [
-        Icon(
-          Icons.pie_chart,
-          color: color,
-        ),
-        GlobalStyles.sizedBoxWidth,
-        Text(
-          titleStr,
-          style: TextStyle(color: Colors.black),
-        ),
-      ]),
+      child: Column(
+        children: [
+          Row(children: [
+            Icon(
+              Icons.pie_chart,
+              color: color,
+            ),
+            GlobalStyles.sizedBoxWidth,
+            Text(
+              titleStr,
+              style: TextStyle(color: Colors.black),
+            ),
+          ]),
+          GlobalStyles.sizedBoxHeight_10,
+        ],
+      ),
     );
   }
 }

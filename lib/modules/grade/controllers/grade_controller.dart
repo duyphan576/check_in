@@ -12,6 +12,8 @@ import '../repository/grade_repository.dart';
 class GradeController extends GetxController with CacheManager {
   final GradeRepository gradeRepository;
   final AuthenticationService authenticationService = AuthenticationService();
+  ScrollController? verticalScrollController;
+  ScrollController? horizontalScrollController;
   var userData;
   RxBool isLoading = true.obs;
   var avgGrade;

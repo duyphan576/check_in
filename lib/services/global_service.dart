@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:get/get_state_manager/src/rx_flutter/rx_disposable.dart';
 import 'package:rxdart/rxdart.dart';
 

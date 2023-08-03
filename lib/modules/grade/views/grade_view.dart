@@ -1,14 +1,12 @@
-import 'package:check_in/constants/app_string.dart';
+import 'package:check_in/constants/index.dart';
 import 'package:check_in/core/alert.dart';
-import 'package:check_in/global_widgets/bar_chart.dart';
+import 'package:check_in/global_styles/global_styles.dart';
+import 'package:check_in/global_widgets/custom_barchart.dart';
 import 'package:check_in/global_widgets/student_data.dart';
 import 'package:check_in/global_widgets/table_custom.dart';
 import 'package:check_in/modules/grade/controllers/grade_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../constants/app_colors.dart';
-import '../../../constants/app_images.dart';
-import '../../../global_styles/global_styles.dart';
 
 class GradeView extends GetView<GradeController> {
   GradeView({super.key});
@@ -67,7 +65,7 @@ class GradeView extends GetView<GradeController> {
                               onPressed: () {
                                 if (controller.isGradeFinalNull) {
                                   Alert.showChart(
-                                    widget: BarChartWidget(
+                                    widget: CustomBarChart(
                                         gradesLength:
                                             controller.count.length.toDouble(),
                                         barGroupsList: controller.barGroups),
@@ -113,7 +111,7 @@ class GradeView extends GetView<GradeController> {
                                     ),
                                   ],
                                 ),
-                                child: TableWidget(grades: controller.grades),
+                                child: TableCustom(),
                               ),
                             ],
                           ),

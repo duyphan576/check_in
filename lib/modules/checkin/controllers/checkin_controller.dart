@@ -153,7 +153,7 @@ class CheckinController extends GetxController with CacheManager {
       for (final list in response?.data["checkedInList"]) {
         CheckinHistory history = CheckinHistory.fromJson(list);
         listCheckHistory.add(history);
-        if (listCheckHistory != null && listCheckHistory.isNotEmpty == true) {
+        if (listCheckHistory.isNotEmpty == true) {
           isReady.value = true;
           getDateCheckin(listCheckHistory[0].classroom!.id.toString());
         }

@@ -1,4 +1,3 @@
-import 'package:check_in/modules/detail/controllers/detail_controller.dart';
 import 'package:check_in/modules/statistical/controllers/statistical_controller.dart';
 import 'package:check_in/modules/statistical/provider/statistical_provider.dart';
 import 'package:check_in/modules/statistical/repository/statistical_repository.dart';

@@ -68,6 +68,7 @@ dependencies:
   intl: ^0.18.1
   geolocator: ^9.0.2
   dropdown_search: ^5.0.6
+  horizontal_data_table: ^4.3.1
 
 flutter_icons:
   android: "icon_notification"

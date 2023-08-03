@@ -1,10 +1,13 @@
-import 'package:check_in/models/statistical/statistical.dart';
+import 'package:check_in/modules/changePassword/bindings/change_password_binding.dart';
+import 'package:check_in/modules/changePassword/view/change_password_view.dart';
 import 'package:check_in/modules/checkin/bindings/checkin_binding.dart';
 import 'package:check_in/modules/checkin/views/checkin_view.dart';
 import 'package:check_in/modules/classroom/bindings/classroom_binding.dart';
 import 'package:check_in/modules/classroom/views/classroom_view.dart';
 import 'package:check_in/modules/detail/bindings/detail_binding.dart';
 import 'package:check_in/modules/detail/views/detail_view.dart';
+import 'package:check_in/modules/grade/bindings/grade_binding.dart';
+import 'package:check_in/modules/grade/views/grade_view.dart';
 import 'package:check_in/modules/home/bindings/home_binding.dart';
 import 'package:check_in/modules/home/views/home_view.dart';
 import 'package:check_in/modules/login/bindings/login_binding.dart';
@@ -20,11 +23,6 @@ import 'package:check_in/modules/splash/views/splash_view.dart';
 import 'package:check_in/modules/statistical/bindings/statistical_bindings.dart';
 import 'package:check_in/modules/statistical/view/statistical_view.dart';
 import 'package:get/get.dart';
-
-import '../modules/changePassword/bindings/change_password_binding.dart';
-import '../modules/changePassword/view/change_password_view.dart';
-import '../modules/grade/bindings/grade_binding.dart';
-import '../modules/grade/views/grade_view.dart';
 
 part 'app_routes.dart';
 
