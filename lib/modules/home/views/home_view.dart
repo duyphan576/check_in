@@ -23,11 +23,12 @@ class HomeView extends GetView<HomeController> {
                 )
               : Container(
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        AppImages.bg,
-                      ),
-                    ),
+                    color: AppColors.lightWhite,
+                    // image: DecorationImage(
+                    //   image: AssetImage(
+                    //     AppImages.bg,
+                    //   ),
+                    // ),
                   ),
                   child: SafeArea(
                     child: Scaffold(
@@ -38,22 +39,33 @@ class HomeView extends GetView<HomeController> {
                         title: Text(
                           HomeString.HOME,
                           style: TextStyle(
-                            color: AppColors.lightBlack,
+                            color: AppColors.lightWhite,
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        flexibleSpace: Container(
+                          decoration: BoxDecoration(
+                            // color: AppColors.lightWhite,
+                            image: DecorationImage(
+                              image: AssetImage(
+                                AppImages.bg,
+                              ),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                         centerTitle: true,
                         backgroundColor: Colors.transparent,
                         elevation: 0,
                         iconTheme: IconThemeData(
-                          color: AppColors.main,
+                          color: AppColors.lightWhite,
                         ),
                       ),
                       drawer: LeftDrawer(),
                       body: SingleChildScrollView(
                         child: Padding(
-                          padding: GlobalStyles.paddingPageLeftRight_25,
+                          padding: GlobalStyles.paddingAll18,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,

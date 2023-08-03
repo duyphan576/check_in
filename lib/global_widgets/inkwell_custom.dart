@@ -33,11 +33,11 @@ class InkWellCustom extends StatelessWidget {
             offset: Offset(0, 0), // Shadow position
           ),
         ],
-        gradient: LinearGradient(
-          colors: AppColors.listColorGradientMain,
-          begin: Alignment.bottomLeft,
-          end: Alignment.topRight,
-        ),
+        // gradient: LinearGradient(
+        //   colors: AppColors.listColorGradientMain,
+        //   begin: Alignment.bottomLeft,
+        //   end: Alignment.topRight,
+        // ),
       ),
       child: InkWell(
         onTap: function,
@@ -45,43 +45,45 @@ class InkWellCustom extends StatelessWidget {
           padding: GlobalStyles.paddingPageLeftRight_25,
           height: height * 0.1,
           width: width,
-          child: Row(children: [
-            icon != null
-                ? Icon(
-                    icon,
-                    size: 40,
-                    color: AppColors.lightWhite,
-                  )
-                : SizedBox(
-                    width: 40,
+          child: Row(
+            children: [
+              icon != null
+                  ? Icon(
+                      icon,
+                      size: 40,
+                      color: AppColors.subMain,
+                    )
+                  : SizedBox(
+                      width: 40,
+                    ),
+              GlobalStyles.sizedBoxWidth,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    text ?? "",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: AppColors.lightBlack,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-            GlobalStyles.sizedBoxWidth,
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  text ?? "",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.lightWhite,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                subText != null && subText?.isNotEmpty == true
-                    ? Text(
-                        subText ?? "",
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: AppColors.lightWhite,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.italic,
-                        ),
-                      )
-                    : SizedBox(),
-              ],
-            ),
-          ]),
+                  subText != null && subText?.isNotEmpty == true
+                      ? Text(
+                          subText ?? "",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: AppColors.lightBlack,
+                            fontWeight: FontWeight.w500,
+                            fontStyle: FontStyle.italic,
+                          ),
+                        )
+                      : SizedBox(),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

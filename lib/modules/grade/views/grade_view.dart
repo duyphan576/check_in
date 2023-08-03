@@ -21,10 +21,8 @@ class GradeView extends GetView<GradeController> {
           () => controller.isLoading.value
               ? Container(
                   decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(
-                    AppImages.bg,
-                  ))),
+                    color: AppColors.lightWhite,
+                  ),
                   child: Center(
                     child: CircularProgressIndicator(
                       color: AppColors.main,
@@ -33,11 +31,7 @@ class GradeView extends GetView<GradeController> {
                 )
               : Container(
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        AppImages.bg,
-                      ),
-                    ),
+                    color: AppColors.lightWhite,
                   ),
                   child: SafeArea(
                     child: Scaffold(
@@ -47,7 +41,7 @@ class GradeView extends GetView<GradeController> {
                         title: Text(
                           GradeString.GRADE,
                           style: TextStyle(
-                            color: AppColors.lightBlack,
+                            color: AppColors.lightWhite,
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
@@ -56,36 +50,46 @@ class GradeView extends GetView<GradeController> {
                         backgroundColor: Colors.transparent,
                         elevation: 0,
                         iconTheme: IconThemeData(
-                          color: AppColors.lightBlack,
+                          color: AppColors.lightWhite,
+                        ),
+                        flexibleSpace: Container(
+                          decoration: BoxDecoration(
+                            // color: AppColors.lightWhite,
+                            image: DecorationImage(
+                              image: AssetImage(
+                                AppImages.bg,
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                         actions: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: IconButton(
-                              onPressed: () {
-                                if (controller.isGradeFinalNull) {
-                                  Alert.showChart(
-                                    widget: CustomBarChart(
-                                        gradesLength:
-                                            controller.count.length.toDouble(),
-                                        barGroupsList: controller.barGroups),
-                                  );
-                                } else {
-                                  Alert.showError(
-                                      title: AppString.ERROR,
-                                      message: GradeString.ERROR_GRADE,
-                                      buttonText: AppString.CANCEL);
-                                }
-                              },
-                              icon: Icon(Icons.bar_chart,
-                                  color: Colors.grey.shade600),
+                          IconButton(
+                            onPressed: () {
+                              if (controller.isGradeFinalNull) {
+                                Alert.showChart(
+                                  widget: CustomBarChart(
+                                      gradesLength:
+                                          controller.count.length.toDouble(),
+                                      barGroupsList: controller.barGroups),
+                                );
+                              } else {
+                                Alert.showError(
+                                    title: AppString.ERROR,
+                                    message: GradeString.ERROR_GRADE,
+                                    buttonText: AppString.CANCEL);
+                              }
+                            },
+                            icon: Icon(
+                              Icons.bar_chart,
+                              color: AppColors.lightWhite,
                             ),
                           )
                         ],
                       ),
                       body: SingleChildScrollView(
                         child: Padding(
-                          padding: GlobalStyles.paddingPageLeftRight_25,
+                          padding: GlobalStyles.paddingAll18,
                           child: Column(
                             children: [
                               StudentPicture(

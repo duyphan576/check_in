@@ -37,11 +37,6 @@ class StudentPicture extends StatelessWidget {
             offset: Offset(0, 0), // Shadow position
           ),
         ],
-        gradient: LinearGradient(
-          colors: AppColors.listColorGradientMain,
-          begin: Alignment.bottomLeft,
-          end: Alignment.topRight,
-        ),
       ),
       child: Padding(
         padding: GlobalStyles.paddingPageLeftRight_25,
@@ -66,13 +61,13 @@ class StudentPicture extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: CircleAvatar(
-                    backgroundColor: Colors.transparent,
+                    backgroundColor: AppColors.subMain,
                     child: Text(
                       name != null && name?.isNotEmpty == true
                           ? name!.substring(0, 1)
                           : "",
                       style: TextStyle(
-                        color: AppColors.lightBlack,
+                        color: AppColors.lightWhite,
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
                       ),
@@ -89,22 +84,22 @@ class StudentPicture extends StatelessWidget {
                 Text(
                   name ?? "",
                   style: TextStyle(
-                    color: AppColors.lightWhite,
+                    color: AppColors.lightBlack,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(
-                  width: width * 0.4,
+                  width: width * 0.45,
                   child: Divider(
                     thickness: 1.0,
-                    color: AppColors.lightWhite,
+                    color: AppColors.lightBlack,
                   ),
                 ),
                 Text(
                   code ?? "",
                   style: TextStyle(
-                    color: AppColors.lightWhite,
+                    color: AppColors.lightBlack,
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                     fontStyle: FontStyle.italic,
@@ -120,13 +115,13 @@ class StudentPicture extends StatelessWidget {
                             width: width * 0.35,
                             child: Divider(
                               thickness: 1.0,
-                              color: AppColors.lightWhite,
+                              color: AppColors.lightBlack,
                             ),
                           ),
                           Text(
                             "${GradeString.AV_GRADE}: ${grade == "null" ? '' : grade}",
                             style: TextStyle(
-                              color: AppColors.lightWhite,
+                              color: AppColors.lightBlack,
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                             ),

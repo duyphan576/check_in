@@ -12,11 +12,12 @@ class QrView extends GetView<QrController> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(
-            AppImages.bg,
-          ),
-        ),
+        // image: DecorationImage(
+        //   image: AssetImage(
+        //     AppImages.bg,
+        //   ),
+        // ),
+        color: AppColors.lightWhite,
       ),
       child: SafeArea(
         child: Scaffold(
@@ -27,17 +28,28 @@ class QrView extends GetView<QrController> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             iconTheme: IconThemeData(
-              color: AppColors.main,
+              color: AppColors.lightWhite,
             ),
             title: Text(
               QrString.QR,
               style: TextStyle(
-                color: AppColors.lightBlack,
+                color: AppColors.lightWhite,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
             centerTitle: true,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                // color: AppColors.lightWhite,
+                image: DecorationImage(
+                  image: AssetImage(
+                    AppImages.bg,
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
           ),
           body: GetBuilder<QrController>(
             builder: (controller) =>
@@ -46,7 +58,7 @@ class QrView extends GetView<QrController> {
                         child: CircularProgressIndicator(),
                       )
                     : Padding(
-                        padding: GlobalStyles.paddingPageLeftRight_25,
+                        padding: GlobalStyles.paddingAll18,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -61,10 +73,8 @@ class QrView extends GetView<QrController> {
                                     onDetect: (capture) {
                                       controller.barcode
                                           .assignAll(capture.barcodes);
-                                      //controller.startOrStop();
                                       for (final barcode
                                           in controller.barcode) {
-                                        print(barcode.rawValue);
                                         controller.saveToken(barcode.rawValue);
                                       }
                                     },

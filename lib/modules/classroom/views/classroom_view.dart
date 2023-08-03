@@ -14,11 +14,12 @@ class ClassroomView extends GetView<ClassroomController> {
       builder: (controller) {
         return Obx(() => Container(
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    AppImages.bg,
-                  ),
-                ),
+                // image: DecorationImage(
+                //   image: AssetImage(
+                //     AppImages.bg,
+                //   ),
+                // ),
+                color: AppColors.lightWhite,
               ),
               child: SafeArea(
                 child: Scaffold(
@@ -29,16 +30,27 @@ class ClassroomView extends GetView<ClassroomController> {
                     title: Text(
                       ClassroomString.CLASSROOM,
                       style: TextStyle(
-                        color: AppColors.lightBlack,
+                        color: AppColors.lightWhite,
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     centerTitle: true,
+                    flexibleSpace: Container(
+                      decoration: BoxDecoration(
+                        // color: AppColors.lightWhite,
+                        image: DecorationImage(
+                          image: AssetImage(
+                            AppImages.bg,
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
                     backgroundColor: Colors.transparent,
                     elevation: 0,
                     iconTheme: IconThemeData(
-                      color: AppColors.lightBlack,
+                      color: AppColors.lightWhite,
                     ),
                   ),
                   body: SingleChildScrollView(
@@ -55,7 +67,7 @@ class ClassroomView extends GetView<ClassroomController> {
                               ),
                             )
                           : ListView.builder(
-                              padding: GlobalStyles.paddingPageLeftRight_25,
+                              padding: GlobalStyles.paddingAll18,
                               itemCount: controller.classrooms.length,
                               itemBuilder: (context, index) {
                                 final Classroom classroom =
@@ -80,12 +92,6 @@ class ClassroomView extends GetView<ClassroomController> {
                                                 Offset(0, 0), // Shadow position
                                           ),
                                         ],
-                                        gradient: LinearGradient(
-                                          colors:
-                                              AppColors.listColorGradientMain,
-                                          begin: Alignment.bottomLeft,
-                                          end: Alignment.topRight,
-                                        ),
                                       ),
                                       child: InkWell(
                                         onTap: () {
@@ -97,7 +103,7 @@ class ClassroomView extends GetView<ClassroomController> {
                                           title: Text(
                                             classroom.term!.termName!,
                                             style: TextStyle(
-                                              color: AppColors.lightWhite,
+                                              color: AppColors.lightBlack,
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -105,7 +111,7 @@ class ClassroomView extends GetView<ClassroomController> {
                                           subtitle: Text(
                                             classroom.lecturer!.fullname!,
                                             style: TextStyle(
-                                              color: AppColors.lightWhite,
+                                              color: AppColors.lightBlack,
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -113,7 +119,7 @@ class ClassroomView extends GetView<ClassroomController> {
                                           trailing: Text(
                                             '${ClassroomString.CREDIT}: ${classroom.term!.credit}',
                                             style: TextStyle(
-                                              color: AppColors.lightWhite,
+                                              color: AppColors.lightBlack,
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500,
                                             ),

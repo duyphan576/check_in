@@ -13,19 +13,35 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
     return GetBuilder<ChangePasswordController>(builder: (controller) {
       return Container(
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              AppImages.bg,
-            ),
-          ),
+          color: AppColors.lightWhite,
         ),
         child: SafeArea(
           child: Scaffold(
             appBar: AppBar(
+              title: Text(
+                ChangePasswordString.HINT_CHANGEPASSWORD,
+                style: TextStyle(
+                  color: AppColors.lightWhite,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              centerTitle: true,
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                  // color: AppColors.lightWhite,
+                  image: DecorationImage(
+                    image: AssetImage(
+                      AppImages.bg,
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
               backgroundColor: Colors.transparent,
               elevation: 0,
               iconTheme: IconThemeData(
-                color: AppColors.lightBlack,
+                color: AppColors.lightWhite,
               ),
             ),
             backgroundColor: Colors.transparent,

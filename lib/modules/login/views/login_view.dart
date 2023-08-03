@@ -99,8 +99,9 @@ class LoginView extends GetView<LoginController> with CacheManager {
                                   child: Container(
                                     width:
                                         MediaQuery.of(context).size.width - 100,
-                                    height: 60,
+                                    height: 50,
                                     decoration: BoxDecoration(
+                                      color: AppColors.main,
                                       borderRadius: BorderRadius.circular(8),
                                       boxShadow: [
                                         BoxShadow(
@@ -111,11 +112,6 @@ class LoginView extends GetView<LoginController> with CacheManager {
                                               Offset(0, 0), // Shadow position
                                         ),
                                       ],
-                                      gradient: LinearGradient(
-                                        colors: AppColors.listColorGradientMain,
-                                        begin: Alignment.bottomLeft,
-                                        end: Alignment.topRight,
-                                      ),
                                     ),
                                     child: Center(
                                       child: Obx(
@@ -238,7 +234,7 @@ class RememberPass extends GetView<LoginController> {
                   Text(
                     LoginString.REMEMBER_TEXT,
                     style: TextStyle(
-                      color: AppColors.main,
+                      color: AppColors.lightBlack,
                       fontWeight: FontWeight.bold,
                     ),
                     textScaleFactor: 1.0,
@@ -296,7 +292,7 @@ class _BiometricLogin extends GetView<LoginController> {
                                 LoginString.FACE_ID,
                                 // textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: AppColors.black,
+                                    color: AppColors.lightBlack,
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold),
                                 textScaleFactor: 1.0,
@@ -348,7 +344,7 @@ class _BiometricLogin extends GetView<LoginController> {
                                   child: Text(
                                     LoginString.FINGER_PRINT,
                                     style: TextStyle(
-                                        color: AppColors.main,
+                                        color: AppColors.lightBlack,
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold),
                                     textScaleFactor: 1.0,
@@ -367,7 +363,7 @@ class _BiometricLogin extends GetView<LoginController> {
                             child: Text(
                               LoginString.FORGOT_PASSWORD,
                               style: TextStyle(
-                                color: AppColors.main,
+                                color: AppColors.lightBlack,
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
                               ),

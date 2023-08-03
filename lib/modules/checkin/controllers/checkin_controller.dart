@@ -62,8 +62,9 @@ class CheckinController extends GetxController with CacheManager {
   }
 
   void checkin(String? token) async {
-    Alert.showLoadingIndicator(message: CheckinString.IS_LOADING);
+    print("token $token");
     if (token != null) {
+      Alert.showLoadingIndicator(message: CheckinString.IS_LOADING);
       print(token);
       final submit = {
         "token": token,

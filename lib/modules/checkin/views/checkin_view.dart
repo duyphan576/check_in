@@ -15,11 +15,12 @@ class CheckinView extends GetView<CheckinController> {
         return Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                AppImages.bg,
-              ),
-            ),
+            // image: DecorationImage(
+            //   image: AssetImage(
+            //     AppImages.bg,
+            //   ),
+            // ),
+            color: AppColors.lightWhite,
           ),
           child: SafeArea(
             child: Scaffold(
@@ -30,14 +31,25 @@ class CheckinView extends GetView<CheckinController> {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 iconTheme: IconThemeData(
-                  color: AppColors.main,
+                  color: AppColors.lightWhite,
                 ),
                 title: Text(
                   CheckinString.CHECK_IN,
                   style: TextStyle(
-                    color: AppColors.lightBlack,
+                    color: AppColors.lightWhite,
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
+                  ),
+                ),
+                flexibleSpace: Container(
+                  decoration: BoxDecoration(
+                    // color: AppColors.lightWhite,
+                    image: DecorationImage(
+                      image: AssetImage(
+                        AppImages.bg,
+                      ),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 centerTitle: true,
@@ -52,7 +64,7 @@ class CheckinView extends GetView<CheckinController> {
                               onPressed: () => controller.handleOpenCamera(),
                               icon: Icon(
                                 Icons.qr_code,
-                                color: AppColors.lightBlack,
+                                color: AppColors.lightWhite,
                                 size: 36,
                               ),
                             ),
@@ -69,7 +81,7 @@ class CheckinView extends GetView<CheckinController> {
                     )
                   : SingleChildScrollView(
                       child: Padding(
-                        padding: GlobalStyles.paddingPageLeftRight_25,
+                        padding: GlobalStyles.paddingAll18,
                         child: Column(
                           children: [
                             Align(
@@ -78,7 +90,7 @@ class CheckinView extends GetView<CheckinController> {
                                 CheckinString.CHECKIN_HISTORY,
                                 style: TextStyle(
                                   fontSize: 20,
-                                  color: AppColors.main,
+                                  color: AppColors.black,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),

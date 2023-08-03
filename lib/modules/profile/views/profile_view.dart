@@ -24,11 +24,7 @@ class ProfileView extends GetView<ProfileController> {
                 )
               : Container(
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        AppImages.bg,
-                      ),
-                    ),
+                    color: AppColors.lightWhite,
                   ),
                   child: SafeArea(
                       child: Scaffold(
@@ -39,16 +35,27 @@ class ProfileView extends GetView<ProfileController> {
                       title: Text(
                         ProfileString.PROFILE,
                         style: TextStyle(
-                          color: AppColors.lightBlack,
+                          color: AppColors.lightWhite,
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       centerTitle: true,
+                      flexibleSpace: Container(
+                        decoration: BoxDecoration(
+                          // color: AppColors.lightWhite,
+                          image: DecorationImage(
+                            image: AssetImage(
+                              AppImages.bg,
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
                       backgroundColor: Colors.transparent,
                       elevation: 0,
                       iconTheme: IconThemeData(
-                        color: AppColors.lightBlack,
+                        color: AppColors.lightWhite,
                       ),
                       actions: [
                         Container(
@@ -61,6 +68,7 @@ class ProfileView extends GetView<ProfileController> {
                                   Image.asset(
                                     AppImages.icChangePassword,
                                     fit: BoxFit.cover,
+                                    color: AppColors.lightWhite,
                                   ),
                                 ],
                               )),
@@ -71,7 +79,7 @@ class ProfileView extends GetView<ProfileController> {
                       builder: (context, constraints) {
                         return SingleChildScrollView(
                           child: Padding(
-                            padding: GlobalStyles.paddingPageLeftRight_25,
+                            padding: GlobalStyles.paddingAll18,
                             child: Column(
                               children: [
                                 StudentPicture(
@@ -95,11 +103,6 @@ class ProfileView extends GetView<ProfileController> {
                                         offset: Offset(0, 0), // Shadow position
                                       ),
                                     ],
-                                    gradient: LinearGradient(
-                                      colors: AppColors.listColorGradientMain,
-                                      begin: Alignment.bottomLeft,
-                                      end: Alignment.topRight,
-                                    ),
                                   ),
                                   child: ConstrainedBox(
                                     constraints: BoxConstraints(

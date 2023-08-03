@@ -1,5 +1,6 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
+import 'package:check_in/global_widgets/custom_appbar.dart';
 import 'package:check_in/global_widgets/info_custom.dart';
 import 'package:check_in/models/documents/documents.dart';
 import 'package:check_in/models/student/students.dart';
@@ -18,11 +19,12 @@ class DetailView extends GetView<DetailController> {
           () => controller.isLoading.value
               ? Container(
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        AppImages.bg,
-                      ),
-                    ),
+                    // image: DecorationImage(
+                    //   image: AssetImage(
+                    //     AppImages.bg,
+                    //   ),
+                    // ),
+                    color: AppColors.lightWhite,
                   ),
                   child: Center(
                     child: CircularProgressIndicator(),
@@ -30,109 +32,13 @@ class DetailView extends GetView<DetailController> {
                 )
               : Container(
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        AppImages.bg,
-                      ),
-                    ),
+                    color: AppColors.lightWhite,
                   ),
                   child: SafeArea(
                     child: Scaffold(
                       backgroundColor: Colors.transparent,
-                      appBar: AppBar(
-                        title: Text(
-                          controller.classroom!.term!.termName!,
-                          style: TextStyle(
-                            color: AppColors.lightBlack,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            overflow: TextOverflow.visible,
-                          ),
-                        ),
-                        centerTitle: true,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                        iconTheme: IconThemeData(
-                          color: AppColors.lightBlack,
-                        ),
-                        bottom: TabBar(
-                          labelColor: AppColors.lightWhite,
-                          unselectedLabelColor: AppColors.lightBlack,
-                          labelStyle:
-                              const TextStyle(fontWeight: FontWeight.bold),
-                          unselectedLabelStyle:
-                              const TextStyle(fontStyle: FontStyle.italic),
-                          indicatorWeight: 2,
-                          indicatorColor: AppColors.red,
-                          indicatorSize: TabBarIndicatorSize.label,
-                          indicatorPadding: EdgeInsets.all(4),
-                          indicator: ShapeDecoration(
-                            shape: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 0,
-                                style: BorderStyle.solid,
-                              ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(16),
-                              ),
-                            ),
-                            gradient: LinearGradient(
-                              colors: AppColors.listColorGradientMain,
-                              begin: Alignment.bottomLeft,
-                              end: Alignment.topRight,
-                            ),
-                          ),
-                          enableFeedback: true,
-                          controller: controller.tabController,
-                          tabs: <Widget>[
-                            Tab(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  DetailString.STUDENT,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Tab(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  DetailString.DOCUMENT,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        actions: [
-                          IconButton(
-                            onPressed: () {
-                              controller.goToStatistical(
-                                controller.classroom!.id.toString(),
-                              );
-                            },
-                            icon: Icon(Icons.bar_chart),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              controller.showInfo(
-                                InfoCustom(),
-                              );
-                            },
-                            icon: Icon(
-                              Icons.info_outline_rounded,
-                              size: 28,
-                            ),
-                          )
-                        ],
+                      appBar: CustomAppBar(
+                        height: 120,
                       ),
                       body: SingleChildScrollView(
                         child: Container(
@@ -141,20 +47,6 @@ class DetailView extends GetView<DetailController> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              // DetailCustom(
-                              //   termName: controller.classroom!.term.termName,
-                              //   lecturerFullname:
-                              //       controller.classroom!.lecturer.fullname,
-                              //   lecturerCode:
-                              //       controller.classroom!.lecturer.code,
-                              //   termId:
-                              //       controller.classroom!.term.id.toString(),
-                              //   termCredit: controller.classroom!.term.credit
-                              //       .toString(),
-                              //   classroomId:
-                              //       controller.classroom!.id.toString(),
-                              //   isOnTap: true,
-                              // ),
                               GlobalStyles.sizedBoxHeight,
                               Container(
                                 height:
