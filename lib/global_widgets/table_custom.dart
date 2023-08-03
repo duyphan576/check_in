@@ -2,122 +2,127 @@ import 'package:check_in/constants/app_colors.dart';
 import 'package:check_in/constants/app_string.dart';
 import 'package:check_in/models/grade/grade.dart';
 import 'package:flutter/material.dart';
+import 'package:horizontal_data_table/horizontal_data_table.dart';
 
 class TableWidget extends StatelessWidget {
   TableWidget({Key? key, required this.grades}) : super(key: key);
 
   final List<Grade> grades;
-
+  late final ScrollController verticalScrollController;
+  late final ScrollController horizontalScrollController;
   TextStyle textStyleBold = TextStyle(
       color: AppColors.black, fontSize: 12, fontWeight: FontWeight.bold);
   TextStyle textStyle = TextStyle(color: AppColors.black, fontSize: 12);
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: DataTable(
-        border: TableBorder(
-            verticalInside: BorderSide(color: Colors.grey.shade300),
-            bottom: BorderSide(color: Colors.grey.shade300)),
-        columnSpacing: 30,
-        headingRowHeight: 40,
-        dataRowHeight: 40,
-        horizontalMargin: 10,
-        columns: [
-          DataColumn(
-            label: Container(
-              alignment: Alignment.center,
-              child: Text(GradeString.TERM, style: textStyleBold),
-            ),
-          ),
-          DataColumn(
-            label: Container(
-              alignment: Alignment.center,
-              child: Text(GradeString.A_GRADE, style: textStyleBold),
-            ),
-          ),
-          DataColumn(
-            label: Container(
-              alignment: Alignment.center,
-              child: Text(GradeString.C1_GRADE, style: textStyleBold),
-            ),
-          ),
-          DataColumn(
-            label: Container(
-              alignment: Alignment.center,
-              child: Text(GradeString.C2_GRADE, style: textStyleBold),
-            ),
-          ),
-          DataColumn(
-            label: Container(
-              alignment: Alignment.center,
-              child: Text(GradeString.E_GRADE, style: textStyleBold),
-            ),
-          ),
-          DataColumn(
-            label: Container(
-              alignment: Alignment.center,
-              child: Text(GradeString.F_GRADE, style: textStyleBold),
-            ),
-          ),
-        ],
-        rows: [
-          for (int i = 0; i < grades.length; i++)
-            DataRow(cells: [
-              DataCell(
-                Container(
-                  alignment: Alignment.centerLeft,
-                  child: Text(grades[i].termName.toString(), style: textStyle),
-                ),
-              ),
-              DataCell(
-                Container(
-                  alignment: Alignment.center,
-                  child: Text(isNull(grades[i].attendance.toString()),
-                      style: textStyle),
-                ),
-              ),
-              DataCell(
-                Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    isNull(grades[i].coefficient1Exam1.toString()) +
-                        "   " +
-                        isNull(grades[i].coefficient1Exam2.toString()) +
-                        "   " +
-                        isNull(grades[i].coefficient1Exam3.toString()),
-                    style: textStyle,
-                  ),
-                ),
-              ),
-              DataCell(
-                Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    isNull(grades[i].coefficient2Exam1.toString()) +
-                        "   " +
-                        isNull(grades[i].coefficient2Exam2.toString()),
-                    style: textStyle,
-                  ),
-                ),
-              ),
-              DataCell(
-                Container(
-                  alignment: Alignment.center,
-                  child:
-                      Text(isNull(grades[i].exam.toString()), style: textStyle),
-                ),
-              ),
-              DataCell(
-                Container(
-                  alignment: Alignment.center,
-                  child: Text(isNull(grades[i].finalGrade.toString()),
-                      style: textStyle),
-                ),
-              ),
-            ]),
-        ],
+    return Container(
+      child: HorizontalDataTable(
+        leftHandSideColumnWidth: 120,
+        rightHandSideColumnWidth: 475,
+        isFixedHeader: true,
+        headerWidgets: _getTitleWidget(),
+        leftSideItemBuilder: _generateFirstColumnRow,
+        rightSideItemBuilder: _generateRightHandSideColumnRow,
+        itemCount: grades.length,
+        rowSeparatorWidget: const Divider(
+          color: Colors.black54,
+          height: 1.0,
+          thickness: 0.0,
+        ),
+        leftHandSideColBackgroundColor: const Color(0xFFFFFFFF),
+        rightHandSideColBackgroundColor: const Color(0xFFFFFFFF),
+        onScrollControllerReady: (vertical, horizontal) {
+          verticalScrollController = vertical;
+          horizontalScrollController = horizontal;
+        },
+        verticalScrollbarStyle: const ScrollbarStyle(
+          thumbColor: Colors.grey,
+          isAlwaysShown: true,
+          thickness: 8.0,
+          radius: Radius.circular(5.0),
+        ),
+        horizontalScrollbarStyle: const ScrollbarStyle(
+          thumbColor: Colors.grey,
+          isAlwaysShown: true,
+          thickness: 8.0,
+          radius: Radius.circular(5.0),
+        ),
       ),
+    );
+  }
+
+  List<Widget> _getTitleWidget() {
+    return [
+      _getTitleItemWidget(GradeString.TERM, 120),
+      _getTitleItemWidget(GradeString.A_GRADE, 120),
+      _getTitleItemWidget(GradeString.C1_GRADE, 95),
+      _getTitleItemWidget(GradeString.C2_GRADE, 95),
+      _getTitleItemWidget(GradeString.E_GRADE, 65),
+      _getTitleItemWidget(GradeString.F_GRADE, 100),
+    ];
+  }
+
+  Widget _getTitleItemWidget(String label, double width) {
+    return Container(
+      width: width,
+      height: 50,
+      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+      alignment: Alignment.centerLeft,
+      child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
+    );
+  }
+
+  Widget _generateFirstColumnRow(BuildContext context, int index) {
+    return Container(
+      width: 120,
+      height: 50,
+      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+      alignment: Alignment.centerLeft,
+      child: Text(grades[index].termName.toString()),
+    );
+  }
+
+  Widget _generateRightHandSideColumnRow(BuildContext context, int index) {
+    return Row(
+      children: <Widget>[
+        Container(
+          width: 120,
+          height: 50,
+          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+          alignment: Alignment.center,
+          child: Text("${isNull(grades[index].attendance.toString())}"),
+        ),
+        Container(
+          width: 95,
+          height: 50,
+          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+          alignment: Alignment.center,
+          child: Text(
+              "${isNull(grades[index].coefficient1Exam1.toString())}  ${isNull(grades[index].coefficient1Exam2.toString())}  ${isNull(grades[index].coefficient1Exam3.toString())}"),
+        ),
+        Container(
+          width: 95,
+          height: 50,
+          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+          alignment: Alignment.center,
+          child: Text(
+              "${isNull(grades[index].coefficient2Exam1.toString())}  ${isNull(grades[index].coefficient2Exam2.toString())}"),
+        ),
+        Container(
+          width: 65,
+          height: 50,
+          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+          alignment: Alignment.center,
+          child: Text("${isNull(grades[index].exam.toString())}"),
+        ),
+        Container(
+          width: 100,
+          height: 50,
+          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+          alignment: Alignment.center,
+          child: Text("${isNull(grades[index].finalGrade.toString())}"),
+        ),
+      ],
     );
   }
 }
