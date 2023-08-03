@@ -1,13 +1,14 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:check_in/constants/app_colors.dart';
 import 'package:check_in/constants/app_string.dart';
-import 'package:check_in/models/grade/grade.dart';
 import 'package:check_in/modules/grade/controllers/grade_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 
-class TableWidget extends GetView<GradeController> {
-  TableWidget({Key? key}) : super(key: key);
+class TableCustom extends GetView<GradeController> {
+  TableCustom({Key? key}) : super(key: key);
 
   TextStyle textStyleBold = TextStyle(
       color: AppColors.black, fontSize: 12, fontWeight: FontWeight.bold);

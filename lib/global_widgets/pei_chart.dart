@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:check_in/constants/app_string.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:fl_chart/fl_chart.dart';

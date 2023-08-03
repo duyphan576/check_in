@@ -7,7 +7,6 @@ import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class HomeController extends GetxController with CacheManager {
   final HomeRepository homeRepository;

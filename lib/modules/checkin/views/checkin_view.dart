@@ -84,9 +84,7 @@ class CheckinView extends GetView<CheckinController> {
                               ),
                             ),
                             GlobalStyles.sizedBoxHeight,
-                            controller.listCheckHistory != null &&
-                                    controller.listCheckHistory.isNotEmpty ==
-                                        true
+                            controller.listCheckHistory.isNotEmpty == true
                                 ? Container(
                                     decoration: BoxDecoration(
                                       color:

@@ -1,7 +1,5 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
-import 'package:check_in/models/statistical/statistical.dart';
-import 'package:check_in/modules/statistical/view/statistical_view.dart';
 import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,12 +1,12 @@
 import 'package:check_in/constants/app_string.dart';
+import 'package:check_in/global_styles/global_styles.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../global_styles/global_styles.dart';
-
-class BarChartWidget extends StatelessWidget {
-  BarChartWidget(
+// ignore: must_be_immutable
+class CustomBarChart extends StatelessWidget {
+  CustomBarChart(
       {super.key, required this.gradesLength, required this.barGroupsList});
   double gradesLength;
   List<BarChartGroupData> barGroupsList;
