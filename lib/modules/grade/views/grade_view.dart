@@ -67,7 +67,7 @@ class GradeView extends GetView<GradeController> {
                                   Alert.showChart(
                                     widget: CustomBarChart(
                                         gradesLength:
-                                            controller.count.length.toDouble(),
+                                            controller.grades.length.toDouble(),
                                         barGroupsList: controller.barGroups),
                                   );
                                 } else {
