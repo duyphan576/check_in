@@ -1,5 +1,5 @@
-import 'package:check_in/modules/changePassword/controllers/change_password_controller.dart';
-import 'package:check_in/modules/changePassword/provider/change_password_provider.dart';
+import 'package:check_in/modules/change_password/controllers/change_password_controller.dart';
+import 'package:check_in/modules/change_password/provider/change_password_provider.dart';
 import 'package:check_in/services/http_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';

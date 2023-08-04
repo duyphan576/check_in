@@ -2,16 +2,17 @@ import 'package:check_in/constants/index.dart';
 import 'package:check_in/core/cache_manager.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/global_widgets/index.dart';
-import 'package:check_in/modules/login/controllers/login_controller.dart';
+import 'package:check_in/modules/forgot_password/controllers/forgot_password_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginView extends GetView<LoginController> with CacheManager {
-  LoginView({super.key});
+class ForgotPasswordView extends GetView<ForgotPasswordController>
+    with CacheManager {
+  ForgotPasswordView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LoginController>(
+    return GetBuilder<ForgotPasswordController>(
       builder: (controller) {
         return Container(
           decoration: BoxDecoration(
@@ -76,12 +77,14 @@ class LoginView extends GetView<LoginController> with CacheManager {
                                     ),
                                     GlobalStyles.sizedBoxHeight_25,
                                     _CodeEditText(
-                                        hintText: LoginString.HINT_CODE,
+                                        hintText:
+                                            ForgotPasswordString.HINT_CODE,
                                         userNameController:
                                             controller.codeController),
                                     GlobalStyles.sizedBoxHeight,
                                     _PasswordEditText(
-                                      hintText: LoginString.HINT_PASSWORD,
+                                      hintText:
+                                          ForgotPasswordString.HINT_PASSWORD,
                                       passwordController:
                                           controller.passwordController,
                                     ),
@@ -96,13 +99,13 @@ class LoginView extends GetView<LoginController> with CacheManager {
                                                 BorderRadius.circular(8)),
                                         child: controller.isNewUser.value
                                             ? RememberPass()
-                                            : _BiometricLogin(),
+                                            : _BiometricForgotPassword(),
                                       ),
                                     ),
                                     GlobalStyles.sizedBoxHeight,
                                     InkWell(
                                       onTap: () async {
-                                        controller.onLogin();
+                                        controller.onForgotPassword();
                                       },
                                       child: Container(
                                         width:
@@ -132,7 +135,7 @@ class LoginView extends GetView<LoginController> with CacheManager {
                                                     color: AppColors.lightWhite,
                                                   )
                                                 : Text(
-                                                    LoginString.LOGIN,
+                                                    ForgotPasswordString.LOGIN,
                                                     style: TextStyle(
                                                       color:
                                                           AppColors.lightWhite,
@@ -166,7 +169,7 @@ class LoginView extends GetView<LoginController> with CacheManager {
   }
 }
 
-class _CodeEditText extends GetView<LoginController> {
+class _CodeEditText extends GetView<ForgotPasswordController> {
   const _CodeEditText(
       {Key? key, required this.hintText, required this.userNameController})
       : super(key: key);
@@ -195,7 +198,7 @@ class _CodeEditText extends GetView<LoginController> {
   }
 }
 
-class _PasswordEditText extends GetView<LoginController> {
+class _PasswordEditText extends GetView<ForgotPasswordController> {
   const _PasswordEditText({
     Key? key,
     required this.hintText,
@@ -225,7 +228,7 @@ class _PasswordEditText extends GetView<LoginController> {
   }
 }
 
-class RememberPass extends GetView<LoginController> {
+class RememberPass extends GetView<ForgotPasswordController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Container(
@@ -250,7 +253,7 @@ class RememberPass extends GetView<LoginController> {
                     ),
                   ),
                   Text(
-                    LoginString.REMEMBER_TEXT,
+                    ForgotPasswordString.REMEMBER_TEXT,
                     style: TextStyle(
                       color: AppColors.lightBlack,
                       fontWeight: FontWeight.bold,
@@ -264,7 +267,7 @@ class RememberPass extends GetView<LoginController> {
                 child: InkWell(
                   onTap: () => controller.forgotPassword(),
                   child: Text(
-                    LoginString.FORGOT_PASSWORD,
+                    ForgotPasswordString.FORGOT_PASSWORD,
                     style: TextStyle(
                       color: AppColors.main,
                       fontWeight: FontWeight.bold,
@@ -279,8 +282,8 @@ class RememberPass extends GetView<LoginController> {
   }
 }
 
-class _BiometricLogin extends GetView<LoginController> {
-  const _BiometricLogin({Key? key}) : super(key: key);
+class _BiometricForgotPassword extends GetView<ForgotPasswordController> {
+  const _BiometricForgotPassword({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -293,7 +296,7 @@ class _BiometricLogin extends GetView<LoginController> {
                 children: [
                   Expanded(
                     child: GestureDetector(
-                      onTap: () => controller.biometricLogin(),
+                      onTap: () => controller.biometricForgotPassword(),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -307,7 +310,7 @@ class _BiometricLogin extends GetView<LoginController> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8),
                               child: Text(
-                                LoginString.FACE_ID,
+                                ForgotPasswordString.FACE_ID,
                                 // textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: AppColors.lightBlack,
@@ -327,7 +330,7 @@ class _BiometricLogin extends GetView<LoginController> {
                       child: InkWell(
                         onTap: () => controller.forgotPassword(),
                         child: Text(
-                          LoginString.FORGOT_PASSWORD,
+                          ForgotPasswordString.FORGOT_PASSWORD,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 14,
@@ -347,7 +350,7 @@ class _BiometricLogin extends GetView<LoginController> {
                     children: [
                       Expanded(
                         child: GestureDetector(
-                          onTap: () => controller.biometricLogin(),
+                          onTap: () => controller.biometricForgotPassword(),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -360,7 +363,7 @@ class _BiometricLogin extends GetView<LoginController> {
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 8),
                                   child: Text(
-                                    LoginString.FINGER_PRINT,
+                                    ForgotPasswordString.FINGER_PRINT,
                                     style: TextStyle(
                                         color: AppColors.lightBlack,
                                         fontSize: 14,
@@ -379,7 +382,7 @@ class _BiometricLogin extends GetView<LoginController> {
                           child: InkWell(
                             onTap: () => controller.forgotPassword(),
                             child: Text(
-                              LoginString.FORGOT_PASSWORD,
+                              ForgotPasswordString.FORGOT_PASSWORD,
                               style: TextStyle(
                                 color: AppColors.lightBlack,
                                 fontSize: 14,

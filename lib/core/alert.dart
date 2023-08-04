@@ -1,3 +1,5 @@
+import 'package:check_in/global_styles/global_styles.dart';
+import 'package:check_in/models/classroom/classroom.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -68,14 +70,81 @@ class Alert {
 
   static Future<dynamic> showInfo({
     required String title,
-    Widget? widget,
+    required Classroom classroom,
     required String buttonText,
   }) {
     return showDialog(
       context: Get.context!,
       builder: (BuildContext context) => CupertinoAlertDialog(
         title: Text(title),
-        content: widget,
+        content: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Divider(
+                  thickness: 1.0,
+                  color: AppColors.lightBlack,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${DetailString.LECTURE}: ${classroom.lecturer!.fullname}",
+                        style: TextStyle(
+                          color: AppColors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      GlobalStyles.sizedBoxHeight_10,
+                      Text(
+                        "${DetailString.LECTURE_ID}: ${classroom.lecturer!.code}",
+                        style: TextStyle(
+                          color: AppColors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                  GlobalStyles.sizedBoxWidth,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${DetailString.TERM_ID}: ${classroom.term!.id.toString()}",
+                        style: TextStyle(
+                          color: AppColors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      GlobalStyles.sizedBoxHeight_10,
+                      Text(
+                        "${DetailString.TERM_CREDIT}: ${classroom.term!.credit.toString()}",
+                        style: TextStyle(
+                          color: AppColors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
         actions: <Widget>[
           CupertinoDialogAction(
             child: Text(buttonText),

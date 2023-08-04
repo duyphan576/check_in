@@ -12,125 +12,122 @@ class ClassroomView extends GetView<ClassroomController> {
   Widget build(BuildContext context) {
     return GetBuilder<ClassroomController>(
       builder: (controller) {
-        return Obx(() => Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    AppImages.bg,
+        return Obx(
+          () => Container(
+            decoration: BoxDecoration(
+              color: AppColors.lightWhite,
+            ),
+            child: SafeArea(
+              child: Scaffold(
+                backgroundColor: Colors.transparent,
+                resizeToAvoidBottomInset: true,
+                appBar: AppBar(
+                  title: Text(
+                    ClassroomString.CLASSROOM,
+                    style: TextStyle(
+                      color: AppColors.lightWhite,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ),
-              child: SafeArea(
-                child: Scaffold(
-                  backgroundColor: Colors.transparent,
-                  // extendBodyBehindAppBar: true,
-                  resizeToAvoidBottomInset: true,
-                  appBar: AppBar(
-                    title: Text(
-                      ClassroomString.CLASSROOM,
-                      style: TextStyle(
-                        color: AppColors.lightBlack,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                  centerTitle: true,
+                  flexibleSpace: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(
+                          AppImages.bg,
+                        ),
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    centerTitle: true,
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                    iconTheme: IconThemeData(
-                      color: AppColors.lightBlack,
-                    ),
                   ),
-                  body: SingleChildScrollView(
-                    child: Container(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      child: controller.classrooms.isEmpty
-                          ? Center(
-                              child: Container(
-                                alignment: Alignment.center,
-                                child: CircularProgressIndicator(
-                                  color: AppColors.main,
-                                ),
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  iconTheme: IconThemeData(
+                    color: AppColors.lightWhite,
+                  ),
+                ),
+                body: SingleChildScrollView(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    child: controller.classrooms.isEmpty
+                        ? Center(
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: CircularProgressIndicator(
+                                color: AppColors.main,
                               ),
-                            )
-                          : ListView.builder(
-                              padding: GlobalStyles.paddingPageLeftRight_25,
-                              itemCount: controller.classrooms.length,
-                              itemBuilder: (context, index) {
-                                final Classroom classroom =
-                                    controller.classrooms[index];
-                                return Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      padding:
-                                          GlobalStyles.paddingPageLeftRight_25,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.lightWhite
-                                            .withOpacity(0.75),
-                                        borderRadius: BorderRadius.circular(8),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: AppColors.black,
-                                            blurRadius: 4,
-                                            blurStyle: BlurStyle.outer,
-                                            offset:
-                                                Offset(0, 0), // Shadow position
-                                          ),
-                                        ],
-                                        gradient: LinearGradient(
-                                          colors:
-                                              AppColors.listColorGradientMain,
-                                          begin: Alignment.bottomLeft,
-                                          end: Alignment.topRight,
-                                        ),
+                            ),
+                          )
+                        : ListView.builder(
+                            padding: GlobalStyles.paddingAll18,
+                            itemCount: controller.classrooms.length,
+                            itemBuilder: (context, index) {
+                              final Classroom classroom =
+                                  controller.classrooms[index];
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    padding:
+                                        GlobalStyles.paddingPageLeftRight_25,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.lightWhite
+                                          .withOpacity(0.75),
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                        color: AppColors
+                                            .subMain, // Color of the border
+                                        width: 1.0, // Width of the border
                                       ),
-                                      child: InkWell(
-                                        onTap: () {
-                                          controller.getClassInfo(
-                                            classroom.id.toString(),
-                                          );
-                                        },
-                                        child: ListTile(
-                                          title: Text(
-                                            classroom.term!.termName!,
-                                            style: TextStyle(
-                                              color: AppColors.lightWhite,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                    ),
+                                    child: InkWell(
+                                      onTap: () {
+                                        controller.getClassInfo(
+                                          classroom.id.toString(),
+                                        );
+                                      },
+                                      child: ListTile(
+                                        title: Text(
+                                          classroom.term!.termName!,
+                                          style: TextStyle(
+                                            color: AppColors.black,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
                                           ),
-                                          subtitle: Text(
-                                            classroom.lecturer!.fullname!,
-                                            style: TextStyle(
-                                              color: AppColors.lightWhite,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500,
-                                            ),
+                                        ),
+                                        subtitle: Text(
+                                          classroom.lecturer!.fullname!,
+                                          style: TextStyle(
+                                            color: AppColors.black,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
                                           ),
-                                          trailing: Text(
-                                            '${ClassroomString.CREDIT}: ${classroom.term!.credit}',
-                                            style: TextStyle(
-                                              color: AppColors.lightWhite,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500,
-                                            ),
+                                        ),
+                                        trailing: Text(
+                                          '${ClassroomString.CREDIT}: ${classroom.term!.credit}',
+                                          style: TextStyle(
+                                            color: AppColors.black,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                       ),
                                     ),
-                                    GlobalStyles.sizedBoxHeight,
-                                  ],
-                                );
-                              },
-                            ),
-                    ),
+                                  ),
+                                  GlobalStyles.sizedBoxHeight,
+                                ],
+                              );
+                            },
+                          ),
                   ),
                 ),
               ),
-            ));
+            ),
+          ),
+        );
       },
     );
   }

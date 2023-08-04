@@ -11,24 +11,17 @@ class TableCustom extends GetView<GradeController> {
   TableCustom({Key? key}) : super(key: key);
 
   TextStyle textStyleBold = TextStyle(
-      color: AppColors.black, fontSize: 12, fontWeight: FontWeight.bold);
-  TextStyle textStyle = TextStyle(color: AppColors.black, fontSize: 12);
+    color: AppColors.black,
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
+  );
+  TextStyle textStyle = TextStyle(
+    color: AppColors.black,
+    fontSize: 12,
+  );
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.width / 0.8,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: AppColors.lightWhite.withOpacity(0.9),
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-              color: AppColors.black,
-              blurRadius: 2,
-              blurStyle: BlurStyle.outer,
-              offset: Offset(0, 0)),
-        ],
-      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: HorizontalDataTable(
@@ -39,8 +32,8 @@ class TableCustom extends GetView<GradeController> {
           leftSideItemBuilder: _generateFirstColumnRow,
           rightSideItemBuilder: _generateRightHandSideColumnRow,
           itemCount: controller.grades.length,
-          rowSeparatorWidget: const Divider(
-            color: Colors.black54,
+          rowSeparatorWidget: Divider(
+            color: AppColors.subMain,
             height: 1.0,
             thickness: 0.0,
           ),
@@ -83,7 +76,7 @@ class TableCustom extends GetView<GradeController> {
       width: width,
       height: 50,
       padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-      alignment: Alignment.centerLeft,
+      alignment: Alignment.center,
       child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
     );
   }

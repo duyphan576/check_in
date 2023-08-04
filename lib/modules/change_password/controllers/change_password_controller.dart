@@ -1,6 +1,6 @@
 import 'package:check_in/core/index.dart';
-import 'package:check_in/modules/changePassword/models/change_password_model.dart';
-import 'package:check_in/modules/changePassword/repository/change_password_repository.dart';
+import 'package:check_in/modules/change_password/models/change_password_model.dart';
+import 'package:check_in/modules/change_password/repository/change_password_repository.dart';
 import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +73,9 @@ class ChangePasswordController extends GetxController with CacheManager {
             title: ChangePasswordString.HINT_CHANGEPASSWORD,
             buttonText: CommonString.OK,
             message: response?.message,
-          ).then((value) => logout());
+          ).then(
+            (value) => logout(),
+          );
         } else {
           Alert.showError(
             title: CommonString.ERROR,
@@ -109,10 +111,10 @@ class ChangePasswordController extends GetxController with CacheManager {
       Get.offAllNamed(Routes.LOGIN);
     } else {
       Alert.showError(
-              title: CommonString.ERROR,
-              message: response!.message.toString(),
-              buttonText: CommonString.CANCEL)
-          .then((value) => Alert.closeLoadingIndicator());
+        title: CommonString.ERROR,
+        message: response!.message.toString(),
+        buttonText: CommonString.CANCEL,
+      );
     }
   }
 }

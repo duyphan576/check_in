@@ -1,5 +1,5 @@
-import 'package:check_in/modules/changePassword/bindings/change_password_binding.dart';
-import 'package:check_in/modules/changePassword/view/change_password_view.dart';
+import 'package:check_in/modules/change_password/bindings/change_password_binding.dart';
+import 'package:check_in/modules/change_password/view/change_password_view.dart';
 import 'package:check_in/modules/checkin/bindings/checkin_binding.dart';
 import 'package:check_in/modules/checkin/views/checkin_view.dart';
 import 'package:check_in/modules/classroom/bindings/classroom_binding.dart';
