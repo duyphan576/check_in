@@ -22,34 +22,37 @@ class TableCustom extends GetView<GradeController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: HorizontalDataTable(
-        leftHandSideColumnWidth: 120,
-        rightHandSideColumnWidth: 475,
-        isFixedHeader: true,
-        headerWidgets: _getTitleWidget(),
-        leftSideItemBuilder: _generateFirstColumnRow,
-        rightSideItemBuilder: _generateRightHandSideColumnRow,
-        itemCount: controller.grades.length,
-        rowSeparatorWidget: const Divider(
-          color: Colors.black54,
-          height: 1.0,
-          thickness: 0.0,
-        ),
-        leftHandSideColBackgroundColor: const Color(0xFFFFFFFF),
-        rightHandSideColBackgroundColor: const Color(0xFFFFFFFF),
-        onScrollControllerReady: (vertical, horizontal) {
-          controller.verticalScrollController = vertical;
-          controller.horizontalScrollController = horizontal;
-        },
-        verticalScrollbarStyle: const ScrollbarStyle(
-          thumbColor: Colors.grey,
-          thickness: 1.0,
-          radius: Radius.circular(5.0),
-        ),
-        horizontalScrollbarStyle: const ScrollbarStyle(
-          thumbColor: Colors.grey,
-          thickness: 1.0,
-          radius: Radius.circular(5.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: HorizontalDataTable(
+          leftHandSideColumnWidth: 120,
+          rightHandSideColumnWidth: 475,
+          isFixedHeader: true,
+          headerWidgets: _getTitleWidget(),
+          leftSideItemBuilder: _generateFirstColumnRow,
+          rightSideItemBuilder: _generateRightHandSideColumnRow,
+          itemCount: controller.grades.length,
+          rowSeparatorWidget: const Divider(
+            color: Colors.black54,
+            height: 1.0,
+            thickness: 0.0,
+          ),
+          leftHandSideColBackgroundColor: const Color(0xFFFFFFFF),
+          rightHandSideColBackgroundColor: const Color(0xFFFFFFFF),
+          onScrollControllerReady: (vertical, horizontal) {
+            controller.verticalScrollController = vertical;
+            controller.horizontalScrollController = horizontal;
+          },
+          verticalScrollbarStyle: const ScrollbarStyle(
+            thumbColor: Colors.grey,
+            thickness: 1.0,
+            radius: Radius.circular(5.0),
+          ),
+          horizontalScrollbarStyle: const ScrollbarStyle(
+            thumbColor: Colors.grey,
+            thickness: 1.0,
+            radius: Radius.circular(5.0),
+          ),
         ),
       ),
     );
