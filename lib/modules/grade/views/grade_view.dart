@@ -62,19 +62,7 @@ class GradeView extends GetView<GradeController> {
                             padding: const EdgeInsets.all(8.0),
                             child: IconButton(
                               onPressed: () {
-                                if (controller.isGradeFinalNull) {
-                                  Alert.showBarChart(
-                                      title: StatisticalString.BAR_CHART,
-                                      buttonText: CommonString.CANCEL,
-                                      gradesLength:
-                                          controller.count.length.toDouble(),
-                                      barGroupsList: controller.barGroups);
-                                } else {
-                                  Alert.showError(
-                                      title: AppString.ERROR,
-                                      message: GradeString.ERROR_GRADE,
-                                      buttonText: AppString.CANCEL);
-                                }
+                                controller.getStatistical();
                               },
                               icon: Icon(Icons.bar_chart,
                                   color: Colors.grey.shade600),

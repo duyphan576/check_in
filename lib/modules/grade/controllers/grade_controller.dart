@@ -120,11 +120,18 @@ class GradeController extends GetxController with CacheManager {
     count.add(countGreaterThan85);
   }
 
-  // void getGradeSelected(String? value) {
-  //   if (value != null) {
-  //     gradeSelected = grades.firstWhere(
-  //       (element) => element.termId.toString() == value,
-  //     );
-  //   }
-  // }
+  void getStatistical() {
+    if (isGradeFinalNull) {
+      Alert.showBarChart(
+          title: StatisticalString.BAR_CHART,
+          buttonText: CommonString.CANCEL,
+          gradesLength: count.length.toDouble(),
+          barGroupsList: barGroups);
+    } else {
+      Alert.showError(
+          title: AppString.ERROR,
+          message: GradeString.ERROR_GRADE,
+          buttonText: AppString.CANCEL);
+    }
+  }
 }
