@@ -20,15 +20,15 @@ class GradeController extends GetxController with CacheManager {
   List<double> gradeFinalList = [];
   RxList<Grade> grades = <Grade>[].obs;
   double? gradeFinal;
-  bool isGradeFinalNull = true;
-  List<double> count = [];
+  bool isGradeFinalNull = false;
+  List<int> count = [];
   List<BarChartGroupData> barGroups = [];
   GradeController({required this.gradeRepository});
-  var countLessThan4 = 0.0;
-  var countForm4ToLessThan55 = 0.0;
-  var countForm55ToLessThan7 = 0.0;
-  var countFor7ToLessThan85 = 0.0;
-  var countGreaterThan85 = 0.0;
+  int countLessThan4 = 0;
+  int countForm4ToLessThan55 = 0;
+  int countForm55ToLessThan7 = 0;
+  int countFor7ToLessThan85 = 0;
+  int countGreaterThan85 = 0;
 
   @override
   void onInit() async {
@@ -61,38 +61,41 @@ class GradeController extends GetxController with CacheManager {
         if (grades[i].finalGrade.toString().trim() == "null") {
           continue;
         }
+      }
+
+      for (int i = 0; i < grades.length; i++) {
+        if (grades[i].finalGrade.toString().trim() == "null") {
+          continue;
+        }
         gradeFinal = double.parse(grades[i].finalGrade.toString().trim());
+        if (gradeFinal! < 4) {
+          countLessThan4++;
+        } else if (gradeFinal! >= 4 && gradeFinal! < 5.5) {
+          countForm4ToLessThan55++;
+        } else if (gradeFinal! >= 5.5 && gradeFinal! < 7) {
+          countForm55ToLessThan7++;
+        } else if (gradeFinal! >= 7 && gradeFinal! < 8.5) {
+          countFor7ToLessThan85++;
+        } else if (gradeFinal! >= 8.5) {
+          countGreaterThan85++;
+        }
         gradeFinalList.add(gradeFinal!);
       }
-      if (gradeFinalList.isEmpty) {
-        isGradeFinalNull = false;
-      }
-      if (isGradeFinalNull) {
-        for (int i = 0; i < gradeFinalList.length; i++) {
-          if (gradeFinalList[i] < 4) {
-            countLessThan4++;
-          } else if (gradeFinalList[i] >= 4 && gradeFinalList[i] < 5.5) {
-            countForm4ToLessThan55++;
-          } else if (gradeFinalList[i] >= 5.5 && gradeFinalList[i] < 7) {
-            countForm55ToLessThan7++;
-          } else if (gradeFinalList[i] >= 7 && gradeFinalList[i] < 8.5) {
-            countFor7ToLessThan85++;
-          } else if (gradeFinalList[i] >= 8.5) {
-            countGreaterThan85++;
-          }
-        }
+      if (gradeFinalList.isNotEmpty) {
+        isGradeFinalNull = true;
         countList();
         for (int i = 0; i < count.length; i++) {
           BarChartGroupData barGroup = BarChartGroupData(
             x: i,
             barRods: [
               BarChartRodData(
-                fromY: 0,
-                toY: count[i].toDouble(),
-                width: 15,
-                color: Colors.amber,
-              ),
+                  fromY: 0,
+                  toY: count[i].toDouble(),
+                  width: 15,
+                  color: Colors.amber,
+                  borderRadius: BorderRadius.all(Radius.zero)),
             ],
+            showingTooltipIndicators: [0],
           );
           barGroups.add(barGroup);
         }
