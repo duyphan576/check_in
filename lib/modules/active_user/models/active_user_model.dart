@@ -1,16 +1,16 @@
 import 'package:check_in/core/base_api_model.dart';
 
-class ForgotPasswordModel extends BaseApiModel {
-  ForgotPasswordModel({required this.code, required this.email, act, plus})
+class ActiveUserModel extends BaseApiModel {
+  ActiveUserModel({required this.code, required this.password, act, plus})
       : super(act: act, plus: plus);
 
   String code;
-  String email;
+  String password;
 
-  factory ForgotPasswordModel.initial() {
-    return ForgotPasswordModel(
+  factory ActiveUserModel.initial() {
+    return ActiveUserModel(
       code: '',
-      email: '',
+      password: '',
       act: '',
       plus: '',
     );
@@ -19,7 +19,7 @@ class ForgotPasswordModel extends BaseApiModel {
   Map<String, dynamic> toMap() {
     return {
       "code": code,
-      "email": email,
+      "password": password,
       "act": act,
       "plus": plus,
     };

@@ -8,6 +8,7 @@ class Students {
   String? birthdate;
   int? phone;
   String? email;
+  int? isActived;
 
   Students({
     this.id,
@@ -19,6 +20,7 @@ class Students {
     this.birthdate,
     this.phone,
     this.email,
+    this.isActived,
   });
 
   Students.fromJson(Map<String, dynamic> json) {
@@ -31,5 +33,6 @@ class Students {
     birthdate = json["birthdate"];
     phone = int.parse(json["phone"].toString());
     email = json["email"];
+    isActived = int.parse(json["isActived"]);
   }
 }

@@ -1,7 +1,7 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/core/index.dart';
-import 'package:check_in/modules/login/models/login_model.dart';
-import 'package:check_in/modules/login/repository/login_repository.dart';
+import 'package:check_in/modules/active_user/models/active_user_model.dart';
+import 'package:check_in/modules/active_user/repository/active_user_repository.dart';
 import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
@@ -13,8 +13,8 @@ import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:local_auth/local_auth.dart';
 
-class LoginController extends GetxController with CacheManager {
-  final LoginRepository loginRepository;
+class ActiveUserController extends GetxController with CacheManager {
+  final ActiveUserRepository activeUserRepository;
   final TextEditingController codeController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final AuthenticationService authenticationService = AuthenticationService();
@@ -30,7 +30,7 @@ class LoginController extends GetxController with CacheManager {
 
   final LocalAuthentication auth = LocalAuthentication();
 
-  LoginController({required this.loginRepository});
+  ActiveUserController({required this.activeUserRepository});
 
   @override
   void onInit() {
@@ -67,10 +67,10 @@ class LoginController extends GetxController with CacheManager {
     }
   }
 
-  biometricLogin() async {
+  biometricActiveUser() async {
     try {
       final isAuthenticated = await auth.authenticate(
-          localizedReason: LoginString.FINGER_DESCRIPTION,
+          localizedReason: ActiveUserString.FINGER_DESCRIPTION,
           options: AuthenticationOptions(
             useErrorDialogs: true,
             biometricOnly: true,
@@ -80,7 +80,7 @@ class LoginController extends GetxController with CacheManager {
         final result = await authenticationService.read('pin');
         if (result.isNotEmpty) {
           passwordController.text = result;
-          onLogin();
+          onActiveUser();
         }
       }
     } on PlatformException {
@@ -88,9 +88,9 @@ class LoginController extends GetxController with CacheManager {
     }
   }
 
-  onLogin() async {
+  onActiveUser() async {
     resetError();
-    Alert.showLoadingIndicator(message: LoginString.LOGIN);
+    Alert.showLoadingIndicator(message: ActiveUserString.LOGIN);
     validateGroup = [
       Validator().validateRequireAllField(
         {'code': codeController.text, 'password': passwordController.text},
@@ -102,8 +102,8 @@ class LoginController extends GetxController with CacheManager {
     if (this.errorMessage.value == "") {
       String code = codeController.text;
       String password = passwordController.text;
-      final response = await loginRepository.login(
-          LoginModel(
+      final response = await activeUserRepository.activeUser(
+          ActiveUserModel(
             code: code,
             password: password,
           ),
@@ -133,8 +133,12 @@ class LoginController extends GetxController with CacheManager {
     }
   }
 
-  void forgotPassword() {
-    Get.toNamed(Routes.FORGOT_PASSWORD);
+  void activeUser() {
+    Alert.showSuccess(
+      title: AppString.NOTI,
+      buttonText: CommonString.OK,
+      message: AppString.NOTI_FORGOT,
+    );
   }
 
   resetError() {

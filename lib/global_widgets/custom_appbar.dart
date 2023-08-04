@@ -1,5 +1,4 @@
 import 'package:check_in/constants/index.dart';
-import 'package:check_in/global_widgets/info_custom.dart';
 import 'package:check_in/modules/detail/controllers/detail_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -16,17 +16,38 @@ class ForgotPasswordView extends GetView<ForgotPasswordController>
       builder: (controller) {
         return Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              // opacity: 0.97,
-              image: AssetImage(
-                AppImages.bg,
-              ),
-            ),
+            color: AppColors.lightWhite,
           ),
           child: SafeArea(
             child: Scaffold(
+              appBar: AppBar(
+                title: Text(
+                  ForgotPasswordString.FORGOT_PASSWORD,
+                  style: TextStyle(
+                    color: AppColors.lightWhite,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                flexibleSpace: Container(
+                  decoration: BoxDecoration(
+                    // color: AppColors.lightWhite,
+                    image: DecorationImage(
+                      image: AssetImage(
+                        AppImages.bg,
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                centerTitle: true,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                iconTheme: IconThemeData(
+                  color: AppColors.lightWhite,
+                ),
+              ),
               backgroundColor: Colors.transparent,
-              extendBodyBehindAppBar: true,
               resizeToAvoidBottomInset: true,
               body: LayoutBuilder(
                 builder: (context, constraints) {
@@ -77,30 +98,15 @@ class ForgotPasswordView extends GetView<ForgotPasswordController>
                                     ),
                                     GlobalStyles.sizedBoxHeight_25,
                                     _CodeEditText(
-                                        hintText:
-                                            ForgotPasswordString.HINT_CODE,
-                                        userNameController:
-                                            controller.codeController),
-                                    GlobalStyles.sizedBoxHeight,
-                                    _PasswordEditText(
-                                      hintText:
-                                          ForgotPasswordString.HINT_PASSWORD,
-                                      passwordController:
-                                          controller.passwordController,
+                                      hintText: ForgotPasswordString.HINT_CODE,
+                                      userNameController:
+                                          controller.codeController,
                                     ),
                                     GlobalStyles.sizedBoxHeight,
-                                    Obx(
-                                      () => Container(
-                                        padding:
-                                            GlobalStyles.paddingPageLeftRight,
-                                        decoration: BoxDecoration(
-                                            // color: AppColors.lightWhite,
-                                            borderRadius:
-                                                BorderRadius.circular(8)),
-                                        child: controller.isNewUser.value
-                                            ? RememberPass()
-                                            : _BiometricForgotPassword(),
-                                      ),
+                                    _EmailEditText(
+                                      hintText: ForgotPasswordString.HINT_EMAIL,
+                                      userNameController:
+                                          controller.emailController,
                                     ),
                                     GlobalStyles.sizedBoxHeight,
                                     InkWell(
@@ -135,7 +141,8 @@ class ForgotPasswordView extends GetView<ForgotPasswordController>
                                                     color: AppColors.lightWhite,
                                                   )
                                                 : Text(
-                                                    ForgotPasswordString.LOGIN,
+                                                    ForgotPasswordString
+                                                        .FORGOT_PASSWORD,
                                                     style: TextStyle(
                                                       color:
                                                           AppColors.lightWhite,
@@ -198,206 +205,31 @@ class _CodeEditText extends GetView<ForgotPasswordController> {
   }
 }
 
-class _PasswordEditText extends GetView<ForgotPasswordController> {
-  const _PasswordEditText({
-    Key? key,
-    required this.hintText,
-    required this.passwordController,
-  }) : super(key: key);
+class _EmailEditText extends GetView<ForgotPasswordController> {
+  const _EmailEditText(
+      {Key? key, required this.hintText, required this.userNameController})
+      : super(key: key);
   final hintText;
-  final passwordController;
+  final userNameController;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
-          child: PasswordCustom(
+          child: TextFieldLogin(
             hintText: hintText,
-            controller: passwordController,
-            inputType: TextInputType.visiblePassword,
-            inputAction: TextInputAction.done,
+            controller: userNameController,
+            inputAction: TextInputAction.next,
             onChangeFunction: (val) {
               controller.resetError();
             },
-            prefixIcon: Icon(Icons.password),
+            prefixIcon: Icon(
+              Icons.email,
+            ),
           ),
         ),
       ],
-    );
-  }
-}
-
-class RememberPass extends GetView<ForgotPasswordController> {
-  @override
-  Widget build(BuildContext context) {
-    return Obx(() => Container(
-          width: double.infinity,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      controller.onTapIcon.value = !controller.onTapIcon.value;
-                    },
-                    child: AnimatedCrossFade(
-                      duration: Duration(milliseconds: 300),
-                      firstChild: Icon(Icons.check_box),
-                      secondChild: Icon(Icons.check_box_outline_blank),
-                      crossFadeState: controller.onTapIcon.value
-                          ? CrossFadeState.showFirst
-                          : CrossFadeState.showSecond,
-                    ),
-                  ),
-                  Text(
-                    ForgotPasswordString.REMEMBER_TEXT,
-                    style: TextStyle(
-                      color: AppColors.lightBlack,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textScaleFactor: 1.0,
-                  ),
-                ],
-              ),
-              Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () => controller.forgotPassword(),
-                  child: Text(
-                    ForgotPasswordString.FORGOT_PASSWORD,
-                    style: TextStyle(
-                      color: AppColors.main,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textScaleFactor: 1.0,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ));
-  }
-}
-
-class _BiometricForgotPassword extends GetView<ForgotPasswordController> {
-  const _BiometricForgotPassword({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 3),
-      child: Obx(
-        () => controller.bioType.value == 1
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => controller.biometricForgotPassword(),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            AppImages.icFaceId,
-                            width: 25,
-                            height: 25,
-                          ),
-                          Flexible(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
-                              child: Text(
-                                ForgotPasswordString.FACE_ID,
-                                // textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: AppColors.lightBlack,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold),
-                                textScaleFactor: 1.0,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () => controller.forgotPassword(),
-                        child: Text(
-                          ForgotPasswordString.FORGOT_PASSWORD,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.end,
-                          textScaleFactor: 1.0,
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              )
-            : controller.bioType.value == 2
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () => controller.biometricForgotPassword(),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.fingerprint,
-                                size: 25,
-                              ),
-                              Flexible(
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: Text(
-                                    ForgotPasswordString.FINGER_PRINT,
-                                    style: TextStyle(
-                                        color: AppColors.lightBlack,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold),
-                                    textScaleFactor: 1.0,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap: () => controller.forgotPassword(),
-                            child: Text(
-                              ForgotPasswordString.FORGOT_PASSWORD,
-                              style: TextStyle(
-                                color: AppColors.lightBlack,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textScaleFactor: 1.0,
-                              textAlign: TextAlign.end,
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  )
-                : SizedBox(),
-      ),
     );
   }
 }

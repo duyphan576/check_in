@@ -16,7 +16,7 @@ import 'package:local_auth/local_auth.dart';
 class ForgotPasswordController extends GetxController with CacheManager {
   final ForgotPasswordRepository forgotPasswordRepository;
   final TextEditingController codeController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final AuthenticationService authenticationService = AuthenticationService();
   GetStorage data = GetStorage();
   RxBool isLoading = false.obs;
@@ -79,7 +79,7 @@ class ForgotPasswordController extends GetxController with CacheManager {
       if (isAuthenticated) {
         final result = await authenticationService.read('pin');
         if (result.isNotEmpty) {
-          passwordController.text = result;
+          emailController.text = result;
           onForgotPassword();
         }
       }
@@ -90,31 +90,40 @@ class ForgotPasswordController extends GetxController with CacheManager {
 
   onForgotPassword() async {
     resetError();
-    Alert.showLoadingIndicator(message: ForgotPasswordString.LOGIN);
+    Alert.showLoadingIndicator(message: AppString.SENDING_REQUEST);
     validateGroup = [
       Validator().validateRequireAllField(
-        {'code': codeController.text, 'password': passwordController.text},
+        {
+          'code': codeController.text,
+          'email': emailController.text,
+        },
         AppString.EMPTY,
+      ),
+      Validator().email(
+        emailController.text,
+        AppString.VALID_EMAIL,
+        Message.REQUIRE_EMAIL,
       ),
     ];
     this.errorMessage.value = Validator().validateForm(validateGroup)!;
 
     if (this.errorMessage.value == "") {
       String code = codeController.text;
-      String password = passwordController.text;
+      String email = emailController.text;
       final response = await forgotPasswordRepository.forgotPassword(
-          ForgotPasswordModel(
-            code: code,
-            password: password,
-          ),
-          UrlProvider.HANDLES_LOGIN);
+        ForgotPasswordModel(
+          code: code,
+          email: email,
+        ),
+        UrlProvider.HANDLES_FORGOT_PASSWORD,
+      );
       if (response?.statusCode == HttpStatus.ok) {
-        Alert.closeLoadingIndicator();
         if (response?.status == 1) {
-          cacheSave(CacheManagerKey.TOKEN, response?.data["access_token"]);
-          cacheSave(CacheManagerKey.CUSTOMER_INFO, response?.data["user"]);
-          authenticationService.write("pin", password);
-          Get.offAndToNamed(Routes.HOME);
+          Alert.showSuccess(
+            title: CommonString.SUCCESS,
+            message: response!.message.toString(),
+            buttonText: CommonString.OK,
+          ).then((value) => Alert.closeLoadingIndicator());
         } else if (response?.status == 0) {
           isLoading.value = false;
           Alert.showError(
@@ -131,14 +140,6 @@ class ForgotPasswordController extends GetxController with CacheManager {
         buttonText: CommonString.CANCEL,
       ).then((value) => Alert.closeLoadingIndicator());
     }
-  }
-
-  void forgotPassword() {
-    Alert.showSuccess(
-      title: AppString.NOTI,
-      buttonText: CommonString.OK,
-      message: AppString.NOTI_FORGOT,
-    );
   }
 
   resetError() {

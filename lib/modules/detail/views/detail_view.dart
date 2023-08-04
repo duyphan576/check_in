@@ -1,7 +1,6 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/global_widgets/custom_appbar.dart';
-import 'package:check_in/global_widgets/info_custom.dart';
 import 'package:check_in/models/documents/documents.dart';
 import 'package:check_in/models/student/students.dart';
 import 'package:check_in/modules/detail/controllers/detail_controller.dart';

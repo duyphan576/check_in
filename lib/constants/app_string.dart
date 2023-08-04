@@ -133,6 +133,7 @@ abstract class Message {
       "Mật khẩu có tối thiểu 8 ký tự gồm chữ hoa, chữ thường và ký tự đặc biệt";
   static const String REQUIRE_PASSWORD = "Vui lòng nhập mật khẩu";
   static const String REQUIRE_USERNAME = "Vui lòng nhập ID Sinh Viên";
+  static const String REQUIRE_EMAIL = "Vui lòng nhập email";
   static const String EMPTY_PASSWORD = "Vui lòng nhập mật khẩu mới";
   static const String EMPTY_CPASSWORD = "Vui lòng xác nhận mật khẩu";
 }
@@ -157,6 +158,18 @@ abstract class ChangePasswordString {
 }
 
 abstract class ForgotPasswordString {
+  static const String HINT_CODE = "ID Sinh Viên";
+  static const String HINT_EMAIL = "Email";
+  static const String REMEMBER_TEXT = "Ghi nhớ";
+  static const String FORGOT_PASSWORD = "Quên mật khẩu";
+  static const String FACE_ID = "Face Id";
+  static const String FINGER_PRINT = "Vân tay";
+  static const String LOGIN = "Đăng nhập";
+  static const String FINGER_DESCRIPTION =
+      "Quét vân tay hoặc khuôn mặt của bạn để đăng nhập";
+}
+
+abstract class ActiveUserString {
   static const String HINT_CODE = "ID Sinh Viên";
   static const String HINT_PASSWORD = "Mật khẩu";
   static const String REMEMBER_TEXT = "Ghi nhớ";

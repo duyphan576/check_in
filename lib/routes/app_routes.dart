@@ -11,6 +11,7 @@ abstract class Routes {
   static const CHECKIN = _Paths.CHECKIN;
   static const CLASSROOM = _Paths.CLASSROOM;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
+  static const ACTIVE_USER = _Paths.ACTIVE_USER;
   static const DETAIL = _Paths.DETAIL;
   static const STATISTICAL = _Paths.STATISTICAL;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
@@ -23,6 +24,7 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const SPLASH = '/splash';
   static const FORGOT_PASSWORD = '/forgot_password';
+  static const ACTIVE_USER = '/active_user';
   static const GRADE = '/grade';
   static const DOCUMENT = '/document';
   static const PROFILE = '/profile';
@@ -30,7 +32,7 @@ abstract class _Paths {
   static const CLASSROOM = '/classroom';
   static const DETAIL = '/detail';
   static const STATISTICAL = '/satistical';
-  static const CHANGE_PASSWORD = '/change-password';
+  static const CHANGE_PASSWORD = '/change_password';
   static const PDF = '/pdf_page';
   static const QR = '/qr';
 }

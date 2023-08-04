@@ -1,6 +1,5 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
-import 'package:check_in/global_widgets/student_data.dart';
 import 'package:check_in/modules/home/controllers/home_controller.dart';
 import 'package:check_in/routes/app_pages.dart';
 import 'package:flutter/material.dart';
