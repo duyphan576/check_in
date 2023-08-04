@@ -21,6 +21,7 @@ class GradeController extends GetxController with CacheManager {
   List<double> gradeFinalList = [];
   RxList<Grade> grades = <Grade>[].obs;
   double? gradeFinal;
+  int countGradeFinal = 0;
   bool isGradeFinalNull = false;
   List<int> count = [];
   List<BarChartGroupData> barGroups = [];
@@ -80,6 +81,7 @@ class GradeController extends GetxController with CacheManager {
         } else if (gradeFinal! >= 8.5) {
           countGreaterThan85++;
         }
+        countGradeFinal++;
         gradeFinalList.add(gradeFinal!);
       }
       if (gradeFinalList.isNotEmpty) {
@@ -93,7 +95,7 @@ class GradeController extends GetxController with CacheManager {
                   fromY: 0,
                   toY: count[i].toDouble(),
                   width: 15,
-                  color: Colors.amber,
+                  color: Colors.blue,
                   borderRadius: BorderRadius.all(Radius.zero)),
             ],
             showingTooltipIndicators: [0],
@@ -122,10 +124,11 @@ class GradeController extends GetxController with CacheManager {
 
   void getStatistical() {
     if (isGradeFinalNull) {
+      print(countGradeFinal.toDouble());
       Alert.showBarChart(
           title: StatisticalString.BAR_CHART,
           buttonText: CommonString.CANCEL,
-          gradesLength: count.length.toDouble(),
+          gradesLength: countGradeFinal.toDouble(),
           barGroupsList: barGroups);
     } else {
       Alert.showError(

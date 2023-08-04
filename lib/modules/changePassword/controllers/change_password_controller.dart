@@ -79,7 +79,7 @@ class ChangePasswordController extends GetxController with CacheManager {
             title: CommonString.ERROR,
             message: response!.message.toString(),
             buttonText: CommonString.CANCEL,
-          ).then((value) => Alert.closeLoadingIndicator());
+          );
         }
       }
     } else {
@@ -87,7 +87,7 @@ class ChangePasswordController extends GetxController with CacheManager {
         title: CommonString.ERROR,
         message: this.errorMessage.value,
         buttonText: CommonString.CANCEL,
-      ).then((value) => Alert.closeLoadingIndicator());
+      );
     }
   }
 
