@@ -21,7 +21,7 @@ class PeiChartWidget extends StatelessWidget {
   double countForm55ToLessThan7Percentage;
   double countFor7ToLessThan85Percentage;
   double countGreaterThan85Percentage;
-  List<double> count;
+  List<int> count;
   String pieAnouce;
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class PeiChartWidget extends StatelessWidget {
             PieChartData(
                 centerSpaceRadius: 5,
                 borderData: FlBorderData(
-                  show: false,
+                  show: true,
                 ),
                 sectionsSpace: 2,
                 sections: [

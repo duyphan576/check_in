@@ -14,18 +14,18 @@ RxBool isLoading = true.obs;
 class StatisticalController extends GetxController with CacheManager {
   final StatisticalRepository statisticalRepository;
   final AuthenticationService authenticationService = AuthenticationService();
-  var countLessThan4 = 0.0;
-  var countForm4ToLessThan55 = 0.0;
-  var countForm55ToLessThan7 = 0.0;
-  var countFor7ToLessThan85 = 0.0;
-  var countGreaterThan85 = 0.0;
+  var countLessThan4 = 0;
+  var countForm4ToLessThan55 = 0;
+  var countForm55ToLessThan7 = 0;
+  var countFor7ToLessThan85 = 0;
+  var countGreaterThan85 = 0;
   var countLessThan4Percentage = 0.0;
   var countForm4ToLessThan55Percentage = 0.0;
   var countForm55ToLessThan7Percentage = 0.0;
   var countFor7ToLessThan85Percentage = 0.0;
   var countGreaterThan85Percentage = 0.0;
   List<double?> grades = [];
-  List<double> count = [];
+  List<int> count = [];
   RxBool isLoading = true.obs;
 
   StatisticalController({required this.statisticalRepository});
@@ -110,7 +110,7 @@ class StatisticalController extends GetxController with CacheManager {
     count.add(countGreaterThan85);
   }
 
-  double calculatePercent(double count, double all) {
+  double calculatePercent(int count, double all) {
     return ((count / all) * 100);
   }
 }
