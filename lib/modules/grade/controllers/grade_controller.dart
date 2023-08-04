@@ -3,7 +3,6 @@ import 'package:check_in/core/index.dart';
 import 'package:check_in/modules/grade/models/grade_models.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,10 +14,8 @@ class GradeController extends GetxController with CacheManager {
   final AuthenticationService authenticationService = AuthenticationService();
   ScrollController? verticalScrollController;
   ScrollController? horizontalScrollController;
-  final keyGradeClass = GlobalKey<DropdownSearchState<Grade>>(); //thêm
   var userData;
   RxBool isLoading = true.obs;
-  RxBool isReady = false.obs; //thêm
   var avgGrade;
   List<double> gradeFinalList = [];
   RxList<Grade> grades = <Grade>[].obs;
@@ -121,12 +118,4 @@ class GradeController extends GetxController with CacheManager {
     count.add(countFor7ToLessThan85);
     count.add(countGreaterThan85);
   }
-
-  // void getGradeSelected(String? value) {
-  //   if (value != null) {
-  //     gradeSelected = grades.firstWhere(
-  //       (element) => element.termId.toString() == value,
-  //     );
-  //   }
-  // }
 }
