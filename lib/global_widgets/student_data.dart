@@ -29,14 +29,10 @@ class StudentPicture extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.lightWhite.withOpacity(0.75),
         borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black,
-            blurRadius: 4,
-            blurStyle: BlurStyle.outer,
-            offset: Offset(0, 0), // Shadow position
-          ),
-        ],
+        border: Border.all(
+          color: AppColors.subMain, // Color of the border
+          width: 1.0, // Width of the border
+        ),
       ),
       child: Padding(
         padding: GlobalStyles.paddingPageLeftRight_25,
@@ -50,14 +46,10 @@ class StudentPicture extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: AppColors.lightWhite,
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.lightWhite,
-                        blurRadius: 4,
-                        blurStyle: BlurStyle.outer,
-                        offset: Offset(0, 0), // Shadow position
-                      ),
-                    ],
+                    border: Border.all(
+                      color: AppColors.subMain, // Color of the border
+                      width: 1.0, // Width of the border
+                    ),
                     shape: BoxShape.circle,
                   ),
                   child: CircleAvatar(
@@ -93,7 +85,7 @@ class StudentPicture extends StatelessWidget {
                   width: width * 0.45,
                   child: Divider(
                     thickness: 1.0,
-                    color: AppColors.black,
+                    color: AppColors.subMain,
                   ),
                 ),
                 Text(
@@ -115,7 +107,7 @@ class StudentPicture extends StatelessWidget {
                             width: width * 0.35,
                             child: Divider(
                               thickness: 1.0,
-                              color: AppColors.black,
+                              color: AppColors.subMain,
                             ),
                           ),
                           Text(

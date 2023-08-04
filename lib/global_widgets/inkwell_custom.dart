@@ -25,14 +25,10 @@ class InkWellCustom extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.lightWhite.withOpacity(0.75),
         borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black,
-            blurRadius: 4,
-            blurStyle: BlurStyle.outer,
-            offset: Offset(0, 0), // Shadow position
-          ),
-        ],
+        border: Border.all(
+          color: AppColors.subMain, // Color of the border
+          width: 1.0, // Width of the border
+        ),
         // gradient: LinearGradient(
         //   colors: AppColors.listColorGradientMain,
         //   begin: Alignment.bottomLeft,

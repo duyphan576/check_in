@@ -55,19 +55,7 @@ class GradeView extends GetView<GradeController> {
                   actions: [
                     IconButton(
                       onPressed: () {
-                        if (controller.isGradeFinalNull) {
-                          Alert.showChart(
-                            widget: CustomBarChart(
-                                gradesLength:
-                                    controller.count.length.toDouble(),
-                                barGroupsList: controller.barGroups),
-                          );
-                        } else {
-                          Alert.showError(
-                              title: AppString.ERROR,
-                              message: GradeString.ERROR_GRADE,
-                              buttonText: AppString.CANCEL);
-                        }
+                        controller.showChart();
                       },
                       icon: Icon(
                         Icons.bar_chart,
@@ -106,14 +94,11 @@ class GradeView extends GetView<GradeController> {
                                 decoration: BoxDecoration(
                                   color: AppColors.lightWhite.withOpacity(0.9),
                                   borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: AppColors.black,
-                                      blurRadius: 2,
-                                      blurStyle: BlurStyle.outer,
-                                      offset: Offset(0, 0),
-                                    ),
-                                  ],
+                                  border: Border.all(
+                                    color: AppColors
+                                        .subMain, // Color of the border
+                                    width: 1.0, // Width of the border
+                                  ),
                                 ),
                                 child: TableCustom(),
                               ),

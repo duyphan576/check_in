@@ -35,7 +35,7 @@ class ProfileDetailRow extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.35,
             child: Divider(
               thickness: 1.0,
-              color: AppColors.black,
+              color: AppColors.subMain,
             ),
           ),
         ],

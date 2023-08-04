@@ -1,4 +1,4 @@
-import 'package:check_in/modules/changePassword/models/change_password_model.dart';
+import 'package:check_in/modules/change_password/models/change_password_model.dart';
 import 'package:check_in/services/http_provider.dart';
 import 'package:get/get.dart';
 

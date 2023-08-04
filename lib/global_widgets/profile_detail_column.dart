@@ -33,7 +33,7 @@ class ProfileDetailColumn extends StatelessWidget {
           ),
           Divider(
             thickness: 1.0,
-            color: AppColors.black,
+            color: AppColors.subMain,
           ),
         ],
       ),

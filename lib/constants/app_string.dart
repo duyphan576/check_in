@@ -156,6 +156,18 @@ abstract class ChangePasswordString {
   static const String HINT_CHANGEPASSWORD = "Đổi Mật Khẩu";
 }
 
+abstract class ForgotPasswordString {
+  static const String HINT_CODE = "ID Sinh Viên";
+  static const String HINT_PASSWORD = "Mật khẩu";
+  static const String REMEMBER_TEXT = "Ghi nhớ";
+  static const String FORGOT_PASSWORD = "Quên mật khẩu";
+  static const String FACE_ID = "Face Id";
+  static const String FINGER_PRINT = "Vân tay";
+  static const String LOGIN = "Đăng nhập";
+  static const String FINGER_DESCRIPTION =
+      "Quét vân tay hoặc khuôn mặt của bạn để đăng nhập";
+}
+
 abstract class StatisticalString {
   static const String STATISTICAL = "Thống Kê";
   static const String NOTE = "Lưu ý";

@@ -44,14 +44,10 @@ class LeftDrawer extends GetView<HomeController> {
                           child: Container(
                             decoration: BoxDecoration(
                               color: AppColors.lightWhite,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColors.lightWhite,
-                                  blurRadius: 4,
-                                  blurStyle: BlurStyle.outer,
-                                  offset: Offset(0, 0), // Shadow position
-                                ),
-                              ],
+                              border: Border.all(
+                                color: AppColors.subMain, // Color of the border
+                                width: 2.0, // Width of the border
+                              ),
                               shape: BoxShape.circle,
                             ),
                             child: CircleAvatar(
@@ -85,7 +81,7 @@ class LeftDrawer extends GetView<HomeController> {
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: Divider(
                               thickness: 1.0,
-                              color: AppColors.black,
+                              color: AppColors.subMain,
                             ),
                           ),
                           Text(
@@ -106,7 +102,7 @@ class LeftDrawer extends GetView<HomeController> {
                     width: MediaQuery.of(context).size.width,
                     child: Divider(
                       thickness: 1.0,
-                      color: AppColors.black,
+                      color: AppColors.subMain,
                     ),
                   ),
                 ],

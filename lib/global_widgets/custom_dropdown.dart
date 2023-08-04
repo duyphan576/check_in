@@ -29,17 +29,30 @@ class CustomDropdown extends GetView<CheckinController> {
           filled: true,
           contentPadding: EdgeInsets.fromLTRB(10, 5, 0, 5),
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.gray),
-              borderRadius: BorderRadius.circular(8)),
+            borderSide: BorderSide(
+              color: AppColors.subMain,
+              width: 1.0,
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
           focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.main),
-              borderRadius: BorderRadius.circular(8)),
+            borderSide: BorderSide(
+              color: AppColors.subMain,
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
           errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red),
-              borderRadius: BorderRadius.circular(8)),
+            borderSide: BorderSide(
+              color: Colors.red,
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
           focusedErrorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red),
-              borderRadius: BorderRadius.circular(8)),
+            borderSide: BorderSide(
+              color: Colors.red,
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
         ),
       ),
       dropdownBuilder: (context, item) {
@@ -70,7 +83,10 @@ class CustomDropdown extends GetView<CheckinController> {
         );
       },
       dropdownButtonProps: DropdownButtonProps(
-        icon: Icon(Icons.arrow_drop_down_sharp),
+        icon: Icon(
+          Icons.arrow_drop_down_sharp,
+          color: AppColors.subMain,
+        ),
       ),
       popupProps: PopupProps.modalBottomSheet(
         title: Container(
@@ -79,7 +95,7 @@ class CustomDropdown extends GetView<CheckinController> {
             CheckinString.CHOOSE_CLASSROOM,
             style: TextStyle(
               fontSize: 20,
-              color: AppColors.main,
+              color: AppColors.subMain,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -102,7 +118,7 @@ class CustomDropdown extends GetView<CheckinController> {
               borderSide: BorderSide(color: AppColors.gray),
               borderRadius: BorderRadius.circular(8)),
           focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.main),
+              borderSide: BorderSide(color: AppColors.subMain),
               borderRadius: BorderRadius.circular(8)),
         )),
         itemBuilder: (context, item, isSelected) {

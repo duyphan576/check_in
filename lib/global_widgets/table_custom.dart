@@ -32,8 +32,8 @@ class TableCustom extends GetView<GradeController> {
           leftSideItemBuilder: _generateFirstColumnRow,
           rightSideItemBuilder: _generateRightHandSideColumnRow,
           itemCount: controller.grades.length,
-          rowSeparatorWidget: const Divider(
-            color: Colors.black54,
+          rowSeparatorWidget: Divider(
+            color: AppColors.subMain,
             height: 1.0,
             thickness: 0.0,
           ),

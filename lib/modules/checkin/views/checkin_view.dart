@@ -15,11 +15,6 @@ class CheckinView extends GetView<CheckinController> {
         return Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            // image: DecorationImage(
-            //   image: AssetImage(
-            //     AppImages.bg,
-            //   ),
-            // ),
             color: AppColors.lightWhite,
           ),
           child: SafeArea(
@@ -97,21 +92,7 @@ class CheckinView extends GetView<CheckinController> {
                             ),
                             GlobalStyles.sizedBoxHeight,
                             controller.listCheckHistory.isNotEmpty == true
-                                ? Container(
-                                    decoration: BoxDecoration(
-                                      color:
-                                          AppColors.lightWhite.withOpacity(0.9),
-                                      borderRadius: BorderRadius.circular(8),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: AppColors.black,
-                                          blurRadius: 4,
-                                          blurStyle: BlurStyle.outer,
-                                        ),
-                                      ],
-                                    ),
-                                    child: CustomDropdown(),
-                                  )
+                                ? CustomDropdown()
                                 : SizedBox(),
                             GlobalStyles.sizedBoxHeight,
                             controller.isReady.value
@@ -123,13 +104,11 @@ class CheckinView extends GetView<CheckinController> {
                                       color:
                                           AppColors.lightWhite.withOpacity(0.9),
                                       borderRadius: BorderRadius.circular(8),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: AppColors.black,
-                                          blurRadius: 4,
-                                          blurStyle: BlurStyle.outer,
-                                        ),
-                                      ],
+                                      border: Border.all(
+                                        color: AppColors
+                                            .subMain, // Color of the border
+                                        width: 1.0, // Width of the border
+                                      ),
                                     ),
                                     child: controller.checkinDate.isEmpty
                                         ? Center(
@@ -206,13 +185,11 @@ class CheckinView extends GetView<CheckinController> {
                               decoration: BoxDecoration(
                                 color: AppColors.lightWhite.withOpacity(0.9),
                                 borderRadius: BorderRadius.circular(8),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.black,
-                                    blurRadius: 4,
-                                    blurStyle: BlurStyle.outer,
-                                  ),
-                                ],
+                                border: Border.all(
+                                  color:
+                                      AppColors.subMain, // Color of the border
+                                  width: 1.0, // Width of the border
+                                ),
                               ),
                               child: Column(
                                 children: [

@@ -115,4 +115,20 @@ class GradeController extends GetxController with CacheManager {
     count.add(countFor7ToLessThan85);
     count.add(countGreaterThan85);
   }
+
+  showChart() {
+    if (isGradeFinalNull) {
+      Alert.showBarChart(
+          title: StatisticalString.BAR_CHART,
+          gradesLength: count.length.toDouble(),
+          barGroupsList: barGroups,
+          buttonText: CommonString.CANCEL);
+    } else {
+      Alert.showError(
+        title: AppString.ERROR,
+        message: GradeString.ERROR_GRADE,
+        buttonText: AppString.CANCEL,
+      );
+    }
+  }
 }
