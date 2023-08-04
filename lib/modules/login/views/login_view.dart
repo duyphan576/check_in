@@ -11,142 +11,157 @@ class LoginView extends GetView<LoginController> with CacheManager {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LoginController>(builder: (controller) {
-      return Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            // opacity: 0.97,
-            image: AssetImage(
-              AppImages.bg,
+    return GetBuilder<LoginController>(
+      builder: (controller) {
+        return Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              // opacity: 0.97,
+              image: AssetImage(
+                AppImages.bg,
+              ),
             ),
           ),
-        ),
-        child: SafeArea(
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            extendBodyBehindAppBar: true,
-            resizeToAvoidBottomInset: true,
-            body: LayoutBuilder(
-              builder: (context, constraints) {
-                return SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints:
-                        BoxConstraints(minHeight: constraints.maxHeight),
-                    child: Padding(
-                      padding: GlobalStyles.paddingPageLeftRight_45,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          GlobalStyles.sizedBoxHeight_125,
-                          Container(
-                            // padding: GlobalStyles.paddingAll,
-                            decoration: BoxDecoration(
-                              color: AppColors.lightWhite.withOpacity(0.9),
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColors.black,
-                                  blurRadius: 4,
-                                  blurStyle: BlurStyle.outer,
-                                  offset: Offset(0, 0), // Shadow position
-                                ),
-                              ],
-                            ),
-                            child: Padding(
-                              padding: GlobalStyles.paddingAll,
-                              child: Column(children: [
-                                GlobalStyles.sizedBoxHeight,
-                                Center(
-                                  child: Image.asset(
-                                    AppImages.icLogo,
-                                    fit: BoxFit.cover,
-                                    width: GetPlatform.isAndroid
-                                        ? MediaQuery.of(context).size.width / 3
-                                        : MediaQuery.of(context).size.width /
-                                            3.1,
+          child: SafeArea(
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              extendBodyBehindAppBar: true,
+              resizeToAvoidBottomInset: true,
+              body: LayoutBuilder(
+                builder: (context, constraints) {
+                  return SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints:
+                          BoxConstraints(minHeight: constraints.maxHeight),
+                      child: Padding(
+                        padding: GlobalStyles.paddingPageLeftRight_45,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            GlobalStyles.sizedBoxHeight_125,
+                            Container(
+                              // padding: GlobalStyles.paddingAll,
+                              decoration: BoxDecoration(
+                                color: AppColors.lightWhite.withOpacity(0.9),
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.black,
+                                    blurRadius: 4,
+                                    blurStyle: BlurStyle.outer,
+                                    offset: Offset(0, 0), // Shadow position
                                   ),
-                                ),
-                                GlobalStyles.sizedBoxHeight_25,
-                                _CodeEditText(
-                                    hintText: LoginString.HINT_CODE,
-                                    userNameController:
-                                        controller.codeController),
-                                GlobalStyles.sizedBoxHeight,
-                                _PasswordEditText(
-                                  hintText: LoginString.HINT_PASSWORD,
-                                  passwordController:
-                                      controller.passwordController,
-                                ),
-                                GlobalStyles.sizedBoxHeight,
-                                Obx(
-                                  () => Container(
-                                    padding: GlobalStyles.paddingPageLeftRight,
-                                    decoration: BoxDecoration(
-                                        // color: AppColors.lightWhite,
-                                        borderRadius: BorderRadius.circular(8)),
-                                    child: controller.isNewUser.value
-                                        ? RememberPass()
-                                        : _BiometricLogin(),
-                                  ),
-                                ),
-                                GlobalStyles.sizedBoxHeight,
-                                InkWell(
-                                  onTap: () async {
-                                    // await login(controller, _connect, context);
-                                    controller.onLogin();
-                                  },
-                                  child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width - 100,
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                      color: AppColors.main,
-                                      borderRadius: BorderRadius.circular(8),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: AppColors.black,
-                                          blurRadius: 4,
-                                          blurStyle: BlurStyle.outer,
-                                          offset:
-                                              Offset(0, 0), // Shadow position
-                                        ),
-                                      ],
-                                    ),
-                                    child: Center(
-                                      child: Obx(
-                                        () => controller.isLoading.value
-                                            ? CircularProgressIndicator(
-                                                color: AppColors.lightWhite,
-                                              )
-                                            : Text(
-                                                LoginString.LOGIN,
-                                                style: TextStyle(
-                                                  color: AppColors.lightWhite,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                                textScaleFactor: 1.0,
-                                              ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: GlobalStyles.paddingAll,
+                                child: Column(
+                                  children: [
+                                    GlobalStyles.sizedBoxHeight,
+                                    Center(
+                                      child: Image.asset(
+                                        AppImages.icLogo,
+                                        fit: BoxFit.cover,
+                                        width: GetPlatform.isAndroid
+                                            ? MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                3
+                                            : MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                3.1,
                                       ),
                                     ),
-                                  ),
+                                    GlobalStyles.sizedBoxHeight_25,
+                                    _CodeEditText(
+                                        hintText: LoginString.HINT_CODE,
+                                        userNameController:
+                                            controller.codeController),
+                                    GlobalStyles.sizedBoxHeight,
+                                    _PasswordEditText(
+                                      hintText: LoginString.HINT_PASSWORD,
+                                      passwordController:
+                                          controller.passwordController,
+                                    ),
+                                    GlobalStyles.sizedBoxHeight,
+                                    Obx(
+                                      () => Container(
+                                        padding:
+                                            GlobalStyles.paddingPageLeftRight,
+                                        decoration: BoxDecoration(
+                                            // color: AppColors.lightWhite,
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
+                                        child: controller.isNewUser.value
+                                            ? RememberPass()
+                                            : _BiometricLogin(),
+                                      ),
+                                    ),
+                                    GlobalStyles.sizedBoxHeight,
+                                    InkWell(
+                                      onTap: () async {
+                                        // await login(controller, _connect, context);
+                                        controller.onLogin();
+                                      },
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                100,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.main,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: AppColors.black,
+                                              blurRadius: 4,
+                                              blurStyle: BlurStyle.outer,
+                                              offset: Offset(
+                                                  0, 0), // Shadow position
+                                            ),
+                                          ],
+                                        ),
+                                        child: Center(
+                                          child: Obx(
+                                            () => controller.isLoading.value
+                                                ? CircularProgressIndicator(
+                                                    color: AppColors.lightWhite,
+                                                  )
+                                                : Text(
+                                                    LoginString.LOGIN,
+                                                    style: TextStyle(
+                                                      color:
+                                                          AppColors.lightWhite,
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                    textScaleFactor: 1.0,
+                                                  ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    GlobalStyles.sizedBoxHeight,
+                                  ],
                                 ),
-                                GlobalStyles.sizedBoxHeight,
-                              ]),
-                            ),
-                          )
-                        ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }
 
@@ -169,7 +184,9 @@ class _CodeEditText extends GetView<LoginController> {
             onChangeFunction: (val) {
               controller.resetError();
             },
-            prefixIcon: Icon(Icons.person),
+            prefixIcon: Icon(
+              Icons.person,
+            ),
           ),
         ),
       ],
@@ -224,8 +241,8 @@ class RememberPass extends GetView<LoginController> {
                     },
                     child: AnimatedCrossFade(
                       duration: Duration(milliseconds: 300),
-                      firstChild: Icon(Icons.check_box_outline_blank),
-                      secondChild: Icon(Icons.check_box),
+                      firstChild: Icon(Icons.check_box),
+                      secondChild: Icon(Icons.check_box_outline_blank),
                       crossFadeState: controller.onTapIcon.value
                           ? CrossFadeState.showFirst
                           : CrossFadeState.showSecond,
