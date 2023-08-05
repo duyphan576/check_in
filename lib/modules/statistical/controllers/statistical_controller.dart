@@ -14,11 +14,11 @@ RxBool isLoading = true.obs;
 class StatisticalController extends GetxController with CacheManager {
   final StatisticalRepository statisticalRepository;
   final AuthenticationService authenticationService = AuthenticationService();
-  var countLessThan4 = 0;
-  var countForm4ToLessThan55 = 0;
-  var countForm55ToLessThan7 = 0;
-  var countFor7ToLessThan85 = 0;
-  var countGreaterThan85 = 0;
+  int countLessThan4 = 0;
+  int countForm4ToLessThan55 = 0;
+  int countForm55ToLessThan7 = 0;
+  int countFor7ToLessThan85 = 0;
+  int countGreaterThan85 = 0;
   var countLessThan4Percentage = 0.0;
   var countForm4ToLessThan55Percentage = 0.0;
   var countForm55ToLessThan7Percentage = 0.0;
