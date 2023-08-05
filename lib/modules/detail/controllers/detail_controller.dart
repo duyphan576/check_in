@@ -57,38 +57,11 @@ class DetailController extends GetxController
     classroom = detail.classroom;
     List<Students>? studentData = detail.studentList;
     studentsList.assignAll(studentData!);
+    studentsList.forEach((element) {
+      print(element);
+    });
     List<Documents>? docData = detail.documentList;
     docList.assignAll(docData!);
-  }
-
-  Future<void> downloadDocument(String url, String fileName) async {
-    var status = await Permission.storage.request();
-    if (status.isGranted) {
-      FileDownloader.downloadFile(
-          url: url,
-          name: fileName,
-          onProgress: (name, progress) {
-            _progress = progress;
-            _status = 'Progress: $progress%';
-          },
-          onDownloadCompleted: (path) {
-            _progress = null;
-            _status = 'File downloaded to: $path';
-          },
-          onDownloadError: (error) {
-            _progress = null;
-            _status = 'Download error: $error';
-            Alert.showError(
-                title: "title", message: "message", buttonText: "buttonText");
-          }).then((file) {
-        OpenFile.open(file!.path);
-      });
-    } else {
-      Alert.showError(
-          title: "Fail",
-          message: "Chưa cấp quyền cho ứng dụng",
-          buttonText: "Xác nhận");
-    }
   }
 
   void showInfo(Classroom classroom) {
@@ -111,4 +84,34 @@ class DetailController extends GetxController
     storage.write("url", url);
     Get.toNamed(Routes.PDF);
   }
+
+  //   Future<void> downloadDocument(String url, String fileName) async {
+  //   var status = await Permission.storage.request();
+  //   if (status.isGranted) {
+  //     FileDownloader.downloadFile(
+  //         url: url,
+  //         name: fileName,
+  //         onProgress: (name, progress) {
+  //           _progress = progress;
+  //           _status = 'Progress: $progress%';
+  //         },
+  //         onDownloadCompleted: (path) {
+  //           _progress = null;
+  //           _status = 'File downloaded to: $path';
+  //         },
+  //         onDownloadError: (error) {
+  //           _progress = null;
+  //           _status = 'Download error: $error';
+  //           Alert.showError(
+  //               title: "title", message: "message", buttonText: "buttonText");
+  //         }).then((file) {
+  //       OpenFile.open(file!.path);
+  //     });
+  //   } else {
+  //     Alert.showError(
+  //         title: "Fail",
+  //         message: "Chưa cấp quyền cho ứng dụng",
+  //         buttonText: "Xác nhận");
+  //   }
+  // }
 }

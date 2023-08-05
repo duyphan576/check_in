@@ -153,7 +153,6 @@ class Alert {
           )
         ],
       ),
-      barrierDismissible: false,
     );
   }
 
@@ -777,7 +776,6 @@ class Alert {
           )
         ],
       ),
-      barrierDismissible: false,
     );
   }
 }

@@ -74,7 +74,11 @@ class ProfileController extends GetxController with CacheManager {
         if (response?.status == 1) {
           Alert.closeLoadingIndicator();
           cacheSave(CacheManagerKey.CUSTOMER_INFO, response?.data["student"]);
-          Get.offAndToNamed(Routes.HOME);
+          Alert.showError(
+            title: CommonString.SUCCESS,
+            message: response!.message.toString(),
+            buttonText: CommonString.OK,
+          ).then((value) => Get.offAllNamed(Routes.HOME));
         } else if (response?.status == 0) {
           isLoading.value = false;
           Alert.showError(
