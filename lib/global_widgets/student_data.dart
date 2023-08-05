@@ -29,18 +29,9 @@ class StudentPicture extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.lightWhite.withOpacity(0.75),
         borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black,
-            blurRadius: 4,
-            blurStyle: BlurStyle.outer,
-            offset: Offset(0, 0), // Shadow position
-          ),
-        ],
-        gradient: LinearGradient(
-          colors: AppColors.listColorGradientMain,
-          begin: Alignment.bottomLeft,
-          end: Alignment.topRight,
+        border: Border.all(
+          color: AppColors.subMain, // Color of the border
+          width: 1.0, // Width of the border
         ),
       ),
       child: Padding(
@@ -55,24 +46,20 @@ class StudentPicture extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: AppColors.lightWhite,
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.lightWhite,
-                        blurRadius: 4,
-                        blurStyle: BlurStyle.outer,
-                        offset: Offset(0, 0), // Shadow position
-                      ),
-                    ],
+                    border: Border.all(
+                      color: AppColors.subMain, // Color of the border
+                      width: 1.0, // Width of the border
+                    ),
                     shape: BoxShape.circle,
                   ),
                   child: CircleAvatar(
-                    backgroundColor: Colors.transparent,
+                    backgroundColor: AppColors.subMain,
                     child: Text(
                       name != null && name?.isNotEmpty == true
                           ? name!.substring(0, 1)
                           : "",
                       style: TextStyle(
-                        color: AppColors.lightBlack,
+                        color: AppColors.lightWhite,
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
                       ),
@@ -89,22 +76,22 @@ class StudentPicture extends StatelessWidget {
                 Text(
                   name ?? "",
                   style: TextStyle(
-                    color: AppColors.lightWhite,
+                    color: AppColors.black,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(
-                  width: width * 0.4,
+                  width: width * 0.45,
                   child: Divider(
                     thickness: 1.0,
-                    color: AppColors.lightWhite,
+                    color: AppColors.subMain,
                   ),
                 ),
                 Text(
                   code ?? "",
                   style: TextStyle(
-                    color: AppColors.lightWhite,
+                    color: AppColors.black,
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                     fontStyle: FontStyle.italic,
@@ -120,13 +107,13 @@ class StudentPicture extends StatelessWidget {
                             width: width * 0.35,
                             child: Divider(
                               thickness: 1.0,
-                              color: AppColors.lightWhite,
+                              color: AppColors.subMain,
                             ),
                           ),
                           Text(
                             "${GradeString.AV_GRADE}: ${grade == "null" ? '' : grade}",
                             style: TextStyle(
-                              color: AppColors.lightWhite,
+                              color: AppColors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                             ),

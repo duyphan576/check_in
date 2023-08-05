@@ -1,15 +1,19 @@
-import 'package:check_in/core/base_response.dart';
-import 'package:check_in/modules/profile/models/profile_model.dart';
+import 'package:check_in/modules/forgot_password/models/forgot_password_model.dart';
 import 'package:check_in/services/http_provider.dart';
 import 'package:get/get.dart';
 
-class ProfileProvider extends GetConnect {
-  ProfileProvider({required this.http});
+import '../../../core/base_response.dart';
+
+class ForgotPasswordProvider extends GetConnect {
+  ForgotPasswordProvider({required this.http});
 
   final HttpProvider http;
 
-  Future<BaseResponse?> profile(Map<String, dynamic> data, url, token) async {
-    return await http.doPostWithToken(url, token, data).then((response) {
+  Future<BaseResponse?> forgotPassword(
+      ForgotPasswordModel forgotPasswordModel, url) async {
+    Map<String, dynamic> submit = Map<String, dynamic>();
+    submit.addAll(forgotPasswordModel.toMap());
+    return await http.doPost(url, submit).then((response) {
       return BaseResponse(
           statusCode: response.statusCode,
           statusText: response.statusMessage,

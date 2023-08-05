@@ -1,5 +1,4 @@
 import 'package:check_in/constants/index.dart';
-import 'package:check_in/core/alert.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/global_widgets/student_data.dart';
 import 'package:check_in/global_widgets/table_custom.dart';
@@ -17,74 +16,66 @@ class GradeView extends GetView<GradeController> {
     return GetBuilder<GradeController>(
       builder: (controller) {
         return Obx(
-          () => controller.isLoading.value
-              ? Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(
-                    AppImages.bg,
-                  ))),
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.main,
+          () => Container(
+            decoration: BoxDecoration(
+              color: AppColors.lightWhite,
+            ),
+            child: SafeArea(
+              child: Scaffold(
+                backgroundColor: Colors.transparent,
+                resizeToAvoidBottomInset: true,
+                appBar: AppBar(
+                  title: Text(
+                    GradeString.GRADE,
+                    style: TextStyle(
+                      color: AppColors.lightWhite,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                )
-              : Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        AppImages.bg,
+                  centerTitle: true,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  iconTheme: IconThemeData(
+                    color: AppColors.lightWhite,
+                  ),
+                  flexibleSpace: Container(
+                    decoration: BoxDecoration(
+                      // color: AppColors.lightWhite,
+                      image: DecorationImage(
+                        image: AssetImage(
+                          AppImages.bg,
+                        ),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  child: SafeArea(
-                    child: Scaffold(
-                      backgroundColor: Colors.transparent,
-                      resizeToAvoidBottomInset: true,
-                      appBar: AppBar(
-                        title: Text(
-                          GradeString.GRADE,
-                          style: TextStyle(
-                            color: AppColors.lightBlack,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
+                  actions: [
+                    IconButton(
+                      onPressed: () {
+                        controller.showChart();
+                      },
+                      icon: Icon(
+                        Icons.bar_chart,
+                        color: AppColors.lightWhite,
+                      ),
+                    )
+                  ],
+                ),
+                body: controller.isLoading.value
+                    ? Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.lightWhite,
+                        ),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.main,
                           ),
                         ),
-                        centerTitle: true,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                        iconTheme: IconThemeData(
-                          color: AppColors.lightBlack,
-                        ),
-                        actions: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: IconButton(
-                              onPressed: () {
-                                if (controller.isGradeFinalNull) {
-                                  Alert.showBarChart(
-                                      title: StatisticalString.BAR_CHART,
-                                      buttonText: CommonString.CANCEL,
-                                      gradesLength:
-                                          controller.count.length.toDouble(),
-                                      barGroupsList: controller.barGroups);
-                                } else {
-                                  Alert.showError(
-                                      title: AppString.ERROR,
-                                      message: GradeString.ERROR_GRADE,
-                                      buttonText: AppString.CANCEL);
-                                }
-                              },
-                              icon: Icon(Icons.bar_chart,
-                                  color: Colors.grey.shade600),
-                            ),
-                          )
-                        ],
-                      ),
-                      body: SingleChildScrollView(
+                      )
+                    : SingleChildScrollView(
                         child: Padding(
-                          padding: GlobalStyles.paddingPageLeftRight_25,
+                          padding: GlobalStyles.paddingAll18,
                           child: Column(
                             children: [
                               StudentPicture(
@@ -95,14 +86,30 @@ class GradeView extends GetView<GradeController> {
                                 grade: controller.avgGrade.toString(),
                               ),
                               GlobalStyles.sizedBoxHeight,
-                              TableCustom(),
+                              Container(
+                                height: MediaQuery.of(context).size.width / 0.8,
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  color: AppColors.lightWhite.withOpacity(0.9),
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.black,
+                                      blurRadius: 2,
+                                      blurStyle: BlurStyle.outer,
+                                      offset: Offset(0, 0),
+                                    ),
+                                  ],
+                                ),
+                                child: TableCustom(),
+                              ),
                             ],
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
+              ),
+            ),
+          ),
         );
       },
     );

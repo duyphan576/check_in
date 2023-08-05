@@ -25,19 +25,15 @@ class InkWellCustom extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.lightWhite.withOpacity(0.75),
         borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black,
-            blurRadius: 4,
-            blurStyle: BlurStyle.outer,
-            offset: Offset(0, 0), // Shadow position
-          ),
-        ],
-        gradient: LinearGradient(
-          colors: AppColors.listColorGradientMain,
-          begin: Alignment.bottomLeft,
-          end: Alignment.topRight,
+        border: Border.all(
+          color: AppColors.subMain, // Color of the border
+          width: 1.0, // Width of the border
         ),
+        // gradient: LinearGradient(
+        //   colors: AppColors.listColorGradientMain,
+        //   begin: Alignment.bottomLeft,
+        //   end: Alignment.topRight,
+        // ),
       ),
       child: InkWell(
         onTap: function,
@@ -45,43 +41,45 @@ class InkWellCustom extends StatelessWidget {
           padding: GlobalStyles.paddingPageLeftRight_25,
           height: height * 0.1,
           width: width,
-          child: Row(children: [
-            icon != null
-                ? Icon(
-                    icon,
-                    size: 40,
-                    color: AppColors.lightWhite,
-                  )
-                : SizedBox(
-                    width: 40,
+          child: Row(
+            children: [
+              icon != null
+                  ? Icon(
+                      icon,
+                      size: 40,
+                      color: AppColors.subMain,
+                    )
+                  : SizedBox(
+                      width: 40,
+                    ),
+              GlobalStyles.sizedBoxWidth,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    text ?? "",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: AppColors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-            GlobalStyles.sizedBoxWidth,
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  text ?? "",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.lightWhite,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                subText != null && subText?.isNotEmpty == true
-                    ? Text(
-                        subText ?? "",
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: AppColors.lightWhite,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.italic,
-                        ),
-                      )
-                    : SizedBox(),
-              ],
-            ),
-          ]),
+                  subText != null && subText?.isNotEmpty == true
+                      ? Text(
+                          subText ?? "",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: AppColors.black,
+                            fontWeight: FontWeight.w500,
+                            fontStyle: FontStyle.italic,
+                          ),
+                        )
+                      : SizedBox(),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

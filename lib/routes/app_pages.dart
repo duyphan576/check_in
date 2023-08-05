@@ -1,11 +1,13 @@
-import 'package:check_in/modules/changePassword/bindings/change_password_binding.dart';
-import 'package:check_in/modules/changePassword/view/change_password_view.dart';
+import 'package:check_in/modules/change_password/bindings/change_password_binding.dart';
+import 'package:check_in/modules/change_password/view/change_password_view.dart';
 import 'package:check_in/modules/checkin/bindings/checkin_binding.dart';
 import 'package:check_in/modules/checkin/views/checkin_view.dart';
 import 'package:check_in/modules/classroom/bindings/classroom_binding.dart';
 import 'package:check_in/modules/classroom/views/classroom_view.dart';
 import 'package:check_in/modules/detail/bindings/detail_binding.dart';
 import 'package:check_in/modules/detail/views/detail_view.dart';
+import 'package:check_in/modules/forgot_password/bindings/forgot_password_binding.dart';
+import 'package:check_in/modules/forgot_password/views/forgot_password_view.dart';
 import 'package:check_in/modules/grade/bindings/grade_binding.dart';
 import 'package:check_in/modules/grade/views/grade_view.dart';
 import 'package:check_in/modules/home/bindings/home_binding.dart';
@@ -79,6 +81,11 @@ class AppPages {
       name: _Paths.CHANGE_PASSWORD,
       page: () => ChangePasswordView(),
       binding: ChangePasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORGOT_PASSWORD,
+      page: () => ForgotPasswordView(),
+      binding: ForgotPasswordBinding(),
     ),
     GetPage(
       name: _Paths.PDF,

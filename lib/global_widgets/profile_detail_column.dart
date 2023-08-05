@@ -18,7 +18,7 @@ class ProfileDetailColumn extends StatelessWidget {
             title,
             style: TextStyle(
               fontSize: 16,
-              color: AppColors.lightWhite,
+              color: AppColors.subMain,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -27,14 +27,13 @@ class ProfileDetailColumn extends StatelessWidget {
             value,
             style: TextStyle(
               fontSize: 14,
-              color: AppColors.lightWhite,
+              color: AppColors.black,
               fontWeight: FontWeight.w500,
-              fontStyle: FontStyle.italic,
             ),
           ),
           Divider(
             thickness: 1.0,
-            color: AppColors.lightWhite,
+            color: AppColors.subMain,
           ),
         ],
       ),
