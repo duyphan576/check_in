@@ -1,7 +1,6 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/core/alert.dart';
 import 'package:check_in/global_styles/global_styles.dart';
-import 'package:check_in/global_widgets/custom_barchart.dart';
 import 'package:check_in/global_widgets/student_data.dart';
 import 'package:check_in/global_widgets/table_custom.dart';
 import 'package:check_in/modules/grade/controllers/grade_controller.dart';
@@ -55,7 +54,7 @@ class GradeView extends GetView<GradeController> {
                   actions: [
                     IconButton(
                       onPressed: () {
-                        controller.showChart();
+                        controller.getStatistical();
                       },
                       icon: Icon(
                         Icons.bar_chart,

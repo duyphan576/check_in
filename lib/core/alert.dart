@@ -658,7 +658,7 @@ class Alert {
                                     left: BorderSide.none,
                                     bottom: BorderSide(
                                       width: 1,
-                                      color: Colors.black,
+                                      color: Colors.grey,
                                     )),
                               ),
                               barTouchData: BarTouchData(
