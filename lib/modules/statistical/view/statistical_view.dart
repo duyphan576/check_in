@@ -66,7 +66,7 @@ class StatisticalView extends GetView<StatisticalController> {
                                 Container(
                                   width: MediaQuery.of(context).size.width,
                                   height:
-                                      MediaQuery.of(context).size.height * 0.7,
+                                      MediaQuery.of(context).size.height * 0.78,
                                   padding: GlobalStyles.paddingAll,
                                   decoration: BoxDecoration(
                                     color: AppColors.lightWhite.withOpacity(1),
