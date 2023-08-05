@@ -114,7 +114,12 @@ class LoginController extends GetxController with CacheManager {
           cacheSave(CacheManagerKey.TOKEN, response?.data["access_token"]);
           cacheSave(CacheManagerKey.CUSTOMER_INFO, response?.data["user"]);
           authenticationService.write("pin", password);
-          Get.offAndToNamed(Routes.HOME);
+          if (cacheGet(CacheManagerKey.CUSTOMER_INFO)["phone"] != null &&
+              cacheGet(CacheManagerKey.CUSTOMER_INFO)["email"] != null) {
+            Get.offAndToNamed(Routes.HOME);
+          } else {
+            Get.offAllNamed(Routes.PROFILE);
+          }
         } else if (response?.status == 0) {
           isLoading.value = false;
           Alert.showError(

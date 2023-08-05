@@ -32,6 +32,7 @@ class ChangePasswordController extends GetxController with CacheManager {
 
   onChangePassword() async {
     resetError();
+    Alert.showLoadingIndicator(message: AppString.SENDING_REQUEST);
     validateGroup = [
       Validator().validateRequireAllField(
         {

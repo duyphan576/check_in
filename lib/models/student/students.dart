@@ -31,7 +31,9 @@ class Students {
     fullname = json["fullname"];
     gender = json["gender"];
     birthdate = json["birthdate"];
-    phone = int.parse(json["phone"].toString());
+    phone = int.parse(json["phone"].toString()) == null
+        ? int.parse(json["phone"].toString())
+        : int.parse("");
     email = json["email"];
     isActived = int.parse(json["isActived"]);
   }

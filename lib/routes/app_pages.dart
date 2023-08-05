@@ -1,5 +1,3 @@
-import 'package:check_in/modules/active_user/bindings/active_user_binding.dart';
-import 'package:check_in/modules/active_user/views/active_user_view.dart';
 import 'package:check_in/modules/change_password/bindings/change_password_binding.dart';
 import 'package:check_in/modules/change_password/view/change_password_view.dart';
 import 'package:check_in/modules/checkin/bindings/checkin_binding.dart';
@@ -83,11 +81,6 @@ class AppPages {
       name: _Paths.CHANGE_PASSWORD,
       page: () => ChangePasswordView(),
       binding: ChangePasswordBinding(),
-    ),
-    GetPage(
-      name: _Paths.ACTIVE_USER,
-      page: () => ActiveUserView(),
-      binding: ActiveUserBinding(),
     ),
     GetPage(
       name: _Paths.FORGOT_PASSWORD,

@@ -123,7 +123,7 @@ class ForgotPasswordController extends GetxController with CacheManager {
             title: CommonString.SUCCESS,
             message: response!.message.toString(),
             buttonText: CommonString.OK,
-          ).then((value) => Alert.closeLoadingIndicator());
+          ).then((value) => Get.offAllNamed(Routes.LOGIN));
         } else if (response?.status == 0) {
           isLoading.value = false;
           Alert.showError(

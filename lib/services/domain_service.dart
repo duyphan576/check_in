@@ -67,7 +67,7 @@ abstract class UrlProvider {
   static const String HANDLES_GRADE = "student/grade";
   static const String HANDLES_PASSWORD = "student/password";
   static const String HANDLES_FORGOT_PASSWORD = "student/forgot-password";
-  static const String HANDLES_ACTIVE_USER = "student/";
+  static const String HANDLES_ACTIVE = "student/active";
   static const String HANDLES_HISTORY = "student/checkin-history";
   static const String HANDLES_SATISTICAL = "student/grade-list";
 }

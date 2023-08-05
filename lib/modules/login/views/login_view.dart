@@ -242,8 +242,14 @@ class RememberPass extends GetView<LoginController> {
                     },
                     child: AnimatedCrossFade(
                       duration: Duration(milliseconds: 300),
-                      firstChild: Icon(Icons.check_box),
-                      secondChild: Icon(Icons.check_box_outline_blank),
+                      firstChild: Icon(
+                        Icons.check_box,
+                        color: AppColors.subMain,
+                      ),
+                      secondChild: Icon(
+                        Icons.check_box_outline_blank,
+                        color: AppColors.subMain,
+                      ),
                       crossFadeState: controller.onTapIcon.value
                           ? CrossFadeState.showFirst
                           : CrossFadeState.showSecond,
@@ -252,7 +258,7 @@ class RememberPass extends GetView<LoginController> {
                   Text(
                     LoginString.REMEMBER_TEXT,
                     style: TextStyle(
-                      color: AppColors.lightBlack,
+                      color: AppColors.main,
                       fontWeight: FontWeight.bold,
                     ),
                     textScaleFactor: 1.0,
@@ -301,6 +307,7 @@ class _BiometricLogin extends GetView<LoginController> {
                             AppImages.icFaceId,
                             width: 25,
                             height: 25,
+                            color: AppColors.subMain,
                           ),
                           Flexible(
                             child: Padding(
@@ -329,7 +336,7 @@ class _BiometricLogin extends GetView<LoginController> {
                         child: Text(
                           LoginString.FORGOT_PASSWORD,
                           style: TextStyle(
-                            color: Colors.black,
+                            color: AppColors.lightBlack,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
