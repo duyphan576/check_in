@@ -6,7 +6,7 @@ class Students {
   String? fullname;
   String? gender;
   String? birthdate;
-  int? phone;
+  String? phone;
   String? email;
 
   Students({
@@ -29,7 +29,7 @@ class Students {
     fullname = json["fullname"];
     gender = json["gender"];
     birthdate = json["birthdate"];
-    phone = int.parse(json["phone"].toString());
-    email = json["email"];
+    phone = json["phone"].toString();
+    email = json["email"].toString();
   }
 }

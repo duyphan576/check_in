@@ -133,6 +133,10 @@ abstract class Message {
       "Mật khẩu có tối thiểu 8 ký tự gồm chữ hoa, chữ thường và ký tự đặc biệt";
   static const String REQUIRE_PASSWORD = "Vui lòng nhập mật khẩu";
   static const String REQUIRE_USERNAME = "Vui lòng nhập ID Sinh Viên";
+  static const String REQUIRE_EMAIL = "Vui lòng nhập email";
+  static const String VALID_EMAIL = "Email không đúng định dạng";
+  static const String REQUIRE_PHONE = "Vui lòng nhập số điện thoại";
+  static const String VALID_PHONE = "Số điện thoại không hợp lệ";
   static const String EMPTY_PASSWORD = "Vui lòng nhập mật khẩu mới";
   static const String EMPTY_CPASSWORD = "Vui lòng xác nhận mật khẩu";
 }
@@ -154,6 +158,18 @@ abstract class ChangePasswordString {
   static const String HINT_NEWPASSWORD = "Mật khẩu mới";
   static const String HINT_CONFIRMPASSWORD = "Xác nhận mật khẩu";
   static const String HINT_CHANGEPASSWORD = "Đổi Mật Khẩu";
+}
+
+abstract class ForgotPasswordString {
+  static const String HINT_CODE = "ID Sinh Viên";
+  static const String HINT_EMAIL = "Email";
+  static const String REMEMBER_TEXT = "Ghi nhớ";
+  static const String FORGOT_PASSWORD = "Quên mật khẩu";
+  static const String FACE_ID = "Face Id";
+  static const String FINGER_PRINT = "Vân tay";
+  static const String LOGIN = "Đăng nhập";
+  static const String FINGER_DESCRIPTION =
+      "Quét vân tay hoặc khuôn mặt của bạn để đăng nhập";
 }
 
 abstract class StatisticalString {
@@ -217,6 +233,10 @@ abstract class ProfileString {
   static const String BIRTHDATE = "Ngày sinh";
   static const String EMAIL = "Email";
   static const String PHONE_NUMBER = "Số điện thoại";
+  static const String ACTIVE = "Kích hoạt";
+  static const String NOTE = "Lưu ý";
+  static const String MESSAGE =
+      "\nNhững thông tin này bạn chỉ được nhập một lần duy nhất và sau đó không thể thay đổi. \nHãy kiểm tra kỹ thông tin trước khi xác nhận!!";
 }
 
 abstract class DetailString {

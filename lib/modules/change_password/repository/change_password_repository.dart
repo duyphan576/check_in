@@ -1,4 +1,4 @@
-import 'package:check_in/modules/changePassword/models/change_password_model.dart';
+import 'package:check_in/modules/change_password/models/change_password_model.dart';
 
 import '../../../core/base_response.dart';
 import '../provider/change_password_provider.dart';

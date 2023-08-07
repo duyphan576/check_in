@@ -3,7 +3,6 @@ import 'package:check_in/core/index.dart';
 import 'package:check_in/modules/grade/models/grade_models.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -80,7 +79,6 @@ class GradeController extends GetxController with CacheManager {
         } else if (gradeFinal! >= 8.5) {
           countGreaterThan85++;
         }
-
         gradeFinalList.add(gradeFinal!);
       }
       if (gradeFinalList.isNotEmpty) {
@@ -94,7 +92,7 @@ class GradeController extends GetxController with CacheManager {
                   fromY: 0,
                   toY: count[i].toDouble(),
                   width: 15,
-                  color: Colors.blue,
+                  color: Colors.amber,
                   borderRadius: BorderRadius.all(Radius.zero)),
             ],
             showingTooltipIndicators: [0],
@@ -121,18 +119,19 @@ class GradeController extends GetxController with CacheManager {
     count.add(countGreaterThan85);
   }
 
-  void getStatistical() {
+  showChart() {
     if (isGradeFinalNull) {
       Alert.showBarChart(
           title: StatisticalString.BAR_CHART,
-          buttonText: CommonString.CANCEL,
-          gradesLength: gradeFinalList.length.toDouble(),
-          barGroupsList: barGroups);
+          gradesLength: count.length.toDouble(),
+          barGroupsList: barGroups,
+          buttonText: CommonString.CANCEL);
     } else {
       Alert.showError(
-          title: AppString.ERROR,
-          message: GradeString.ERROR_GRADE,
-          buttonText: AppString.CANCEL);
+        title: AppString.ERROR,
+        message: GradeString.ERROR_GRADE,
+        buttonText: AppString.CANCEL,
+      );
     }
   }
 }

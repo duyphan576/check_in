@@ -11,8 +11,14 @@ class TableCustom extends GetView<GradeController> {
   TableCustom({Key? key}) : super(key: key);
 
   TextStyle textStyleBold = TextStyle(
-      color: AppColors.black, fontSize: 12, fontWeight: FontWeight.bold);
-  TextStyle textStyle = TextStyle(color: AppColors.black, fontSize: 12);
+    color: AppColors.black,
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
+  );
+  TextStyle textStyle = TextStyle(
+    color: AppColors.black,
+    fontSize: 12,
+  );
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,8 +45,8 @@ class TableCustom extends GetView<GradeController> {
           leftSideItemBuilder: _generateFirstColumnRow,
           rightSideItemBuilder: _generateRightHandSideColumnRow,
           itemCount: controller.grades.length,
-          rowSeparatorWidget: const Divider(
-            color: Colors.black54,
+          rowSeparatorWidget: Divider(
+            color: AppColors.subMain,
             height: 1.0,
             thickness: 0.0,
           ),
@@ -52,15 +58,13 @@ class TableCustom extends GetView<GradeController> {
           },
           verticalScrollbarStyle: const ScrollbarStyle(
             thumbColor: Colors.grey,
-            isAlwaysShown: true,
-            thickness: 8.0,
-            radius: Radius.circular(8.0),
+            thickness: 1.0,
+            radius: Radius.circular(5.0),
           ),
           horizontalScrollbarStyle: const ScrollbarStyle(
             thumbColor: Colors.grey,
-            isAlwaysShown: true,
-            thickness: 8.0,
-            radius: Radius.circular(8.0),
+            thickness: 1.0,
+            radius: Radius.circular(5.0),
           ),
         ),
       ),
@@ -83,7 +87,7 @@ class TableCustom extends GetView<GradeController> {
       width: width,
       height: 50,
       padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-      alignment: Alignment.centerLeft,
+      alignment: Alignment.center,
       child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
     );
   }
