@@ -25,15 +25,12 @@ class TableCustom extends GetView<GradeController> {
       height: MediaQuery.of(context).size.width / 0.8,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: AppColors.lightWhite.withOpacity(0.9),
+        color: AppColors.lightWhite.withOpacity(0.75),
         borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-              color: AppColors.black,
-              blurRadius: 2,
-              blurStyle: BlurStyle.outer,
-              offset: Offset(0, 0)),
-        ],
+        border: Border.all(
+          color: AppColors.subMain, // Color of the border
+          width: 1.0, // Width of the border
+        ),
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),

@@ -179,8 +179,16 @@ abstract class StatisticalString {
   static const String PIE_CHART =
       "Biểu đồ hình tròn cho thấy tỷ lệ phần trăm điểm thi của học sinh";
   static const String BAR_CHART =
+<<<<<<< Updated upstream
       "Biểu đồ thống kê tổng số lượng điểm đạt được của sinh viên";
   static const String BAR_NOTE = "Lưu ý biểu đồ cột:";
+=======
+      "Biểu đồ thống kê số lượng điểm đạt được của sinh viên";
+  static const String BAR_NOTE = "Lưu ý biểu đồ cột:";
+  static const String BAR_NOTE_YAXIS =
+      "Biểu thị số lượng điểm của sinh viên đạt được.";
+  static const String BAR_NOTE_XAXIS = "Biểu thị cho điểm.";
+>>>>>>> Stashed changes
   static const String GRADE_F = "F: Điểm dưới 4.0.";
   static const String GRADE_D = "D: Điểm từ 4.0 đến dưới 5.5.";
   static const String GRADE_C = "C: Điểm từ 5.5 đến dưới 7.0.";

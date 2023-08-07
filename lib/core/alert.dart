@@ -697,29 +697,82 @@ class Alert {
                                 color: Colors.black,
                                 fontSize: 16)),
                         GlobalStyles.sizedBoxHeight_10,
+<<<<<<< Updated upstream
+=======
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(Icons.arrow_forward, size: 14),
+                            Expanded(
+                              child: Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  StatisticalString.BAR_NOTE_XAXIS,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        GlobalStyles.sizedBoxHeight_10,
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(Icons.arrow_upward_outlined, size: 14),
+                            Expanded(
+                              child: Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  StatisticalString.BAR_NOTE_YAXIS,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 200,
+                          child: Divider(
+                            height: 20,
+                            color: Colors.grey.shade400,
+                          ),
+                        ),
+>>>>>>> Stashed changes
                         Text(
                           StatisticalString.GRADE_F,
-                          style: TextStyle(fontSize: 11.5),
+                          style: TextStyle(fontSize: 12),
                         ),
                         GlobalStyles.sizedBoxHeight_10,
                         Text(
                           StatisticalString.GRADE_D,
-                          style: TextStyle(fontSize: 11.5),
+                          style: TextStyle(fontSize: 12),
                         ),
                         GlobalStyles.sizedBoxHeight_10,
                         Text(
                           StatisticalString.GRADE_C,
-                          style: TextStyle(fontSize: 11.5),
+                          style: TextStyle(fontSize: 12),
                         ),
                         GlobalStyles.sizedBoxHeight_10,
                         Text(
                           StatisticalString.GRADE_B,
-                          style: TextStyle(fontSize: 11.5),
+                          style: TextStyle(fontSize: 12),
                         ),
                         GlobalStyles.sizedBoxHeight_10,
                         Text(
                           StatisticalString.GRADE_A,
-                          style: TextStyle(fontSize: 11.5),
+                          style: TextStyle(fontSize: 12),
                         ),
                       ],
                     )

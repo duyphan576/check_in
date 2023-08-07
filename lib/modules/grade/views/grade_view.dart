@@ -92,14 +92,6 @@ class GradeView extends GetView<GradeController> {
                                 decoration: BoxDecoration(
                                   color: AppColors.lightWhite.withOpacity(0.9),
                                   borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: AppColors.black,
-                                      blurRadius: 2,
-                                      blurStyle: BlurStyle.outer,
-                                      offset: Offset(0, 0),
-                                    ),
-                                  ],
                                 ),
                                 child: TableCustom(),
                               ),

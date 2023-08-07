@@ -21,7 +21,7 @@ class GradeController extends GetxController with CacheManager {
   RxList<Grade> grades = <Grade>[].obs;
   double? gradeFinal;
   bool isGradeFinalNull = false;
-  List<int> count = [];
+  Map<String, int> count = {};
   List<BarChartGroupData> barGroups = [];
   GradeController({required this.gradeRepository});
   int countLessThan4 = 0;
@@ -61,12 +61,6 @@ class GradeController extends GetxController with CacheManager {
         if (grades[i].finalGrade.toString().trim() == "null") {
           continue;
         }
-      }
-
-      for (int i = 0; i < grades.length; i++) {
-        if (grades[i].finalGrade.toString().trim() == "null") {
-          continue;
-        }
         gradeFinal = double.parse(grades[i].finalGrade.toString().trim());
         if (gradeFinal! < 4) {
           countLessThan4++;
@@ -84,21 +78,22 @@ class GradeController extends GetxController with CacheManager {
       if (gradeFinalList.isNotEmpty) {
         isGradeFinalNull = true;
         countList();
-        for (int i = 0; i < count.length; i++) {
+        count.entries.forEach((entry) {
           BarChartGroupData barGroup = BarChartGroupData(
-            x: i,
+            x: barGroups.length,
             barRods: [
               BarChartRodData(
-                  fromY: 0,
-                  toY: count[i].toDouble(),
-                  width: 15,
-                  color: Colors.amber,
-                  borderRadius: BorderRadius.all(Radius.zero)),
+                fromY: 0,
+                toY: entry.value.toDouble(),
+                width: 15,
+                color: AppColors.subMain,
+                borderRadius: BorderRadius.zero,
+              ),
             ],
             showingTooltipIndicators: [0],
           );
           barGroups.add(barGroup);
-        }
+        });
       }
       update();
       isLoading.value = false;
@@ -112,11 +107,11 @@ class GradeController extends GetxController with CacheManager {
   }
 
   void countList() {
-    count.add(countLessThan4);
-    count.add(countForm4ToLessThan55);
-    count.add(countForm55ToLessThan7);
-    count.add(countFor7ToLessThan85);
-    count.add(countGreaterThan85);
+    count["countLessThan4"] = countLessThan4;
+    count["countForm4ToLessThan55"] = countForm4ToLessThan55;
+    count["countForm55ToLessThan7"] = countForm55ToLessThan7;
+    count["countFor7ToLessThan85"] = countFor7ToLessThan85;
+    count["countGreaterThan85"] = countGreaterThan85;
   }
 
   showChart() {

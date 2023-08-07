@@ -14,21 +14,24 @@ class PeiChartWidget extends StatelessWidget {
     required this.countFor7ToLessThan85Percentage,
     required this.countGreaterThan85Percentage,
     required this.count,
-    required this.pieAnouce,
   });
   double countLessThan4Percentage;
   double countForm4ToLessThan55Percentage;
   double countForm55ToLessThan7Percentage;
   double countFor7ToLessThan85Percentage;
   double countGreaterThan85Percentage;
+<<<<<<< Updated upstream
   List<int> count;
   String pieAnouce;
+=======
+  Map<String, int> count;
+>>>>>>> Stashed changes
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Text(
-          pieAnouce,
+          StatisticalString.PIE_CHART,
           style: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16),
           maxLines: 2,
@@ -47,47 +50,43 @@ class PeiChartWidget extends StatelessWidget {
                 sectionsSpace: 2,
                 sections: [
                   PieChartSectionData(
-                      value: double.parse(countLessThan4Percentage.toString()),
+                      value: countLessThan4Percentage,
                       showTitle: true,
                       title:
-                          "${countLessThan4Percentage.toStringAsFixed(2)}% - ${count[0]}",
+                          "${countLessThan4Percentage.toStringAsFixed(2)}% - ${count['countLessThan4']}",
                       radius: 170,
                       titlePositionPercentageOffset: 0.6,
                       color: Colors.red),
                   PieChartSectionData(
-                      value: double.parse(
-                          countForm4ToLessThan55Percentage.toString()),
+                      value: countForm4ToLessThan55Percentage,
                       showTitle: true,
                       title:
-                          "${countForm4ToLessThan55Percentage.toStringAsFixed(2)}% - ${count[1]}",
+                          "${countForm4ToLessThan55Percentage.toStringAsFixed(2)}% - ${count['countForm4ToLessThan55']}",
                       radius: 170,
                       titlePositionPercentageOffset: 0.6,
                       color: Colors.orange),
                   PieChartSectionData(
-                      value: double.parse(
-                          countForm55ToLessThan7Percentage.toString()),
+                      value: countForm55ToLessThan7Percentage,
                       showTitle: true,
                       title:
-                          "${countForm55ToLessThan7Percentage.toStringAsFixed(2)}% - ${count[2]}",
+                          "${countForm55ToLessThan7Percentage.toStringAsFixed(2)}% - ${count['countForm55ToLessThan7']}",
                       titlePositionPercentageOffset: 0.6,
                       radius: 170,
                       color: Colors.yellow),
                   PieChartSectionData(
-                      value: double.parse(
-                          countFor7ToLessThan85Percentage.toString()),
+                      value: countFor7ToLessThan85Percentage,
                       showTitle: true,
                       titlePositionPercentageOffset: 0.6,
                       title:
-                          "${countFor7ToLessThan85Percentage.toStringAsFixed(2)}% - ${count[3]}",
+                          "${countFor7ToLessThan85Percentage.toStringAsFixed(2)}% - ${count['countFor7ToLessThan85']}",
                       radius: 170,
                       color: Colors.green),
                   PieChartSectionData(
-                      value:
-                          double.parse(countGreaterThan85Percentage.toString()),
+                      value: countGreaterThan85Percentage,
                       showTitle: true,
                       titlePositionPercentageOffset: 0.6,
                       title:
-                          "${countGreaterThan85Percentage.toStringAsFixed(2)}% - ${count[4]}",
+                          "${countGreaterThan85Percentage.toStringAsFixed(2)}% - ${count['countGreaterThan85']}",
                       radius: 170,
                       color: Colors.pink.shade300),
                 ]),
