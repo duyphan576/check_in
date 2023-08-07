@@ -20,12 +20,7 @@ class PeiChartWidget extends StatelessWidget {
   double countForm55ToLessThan7Percentage;
   double countFor7ToLessThan85Percentage;
   double countGreaterThan85Percentage;
-<<<<<<< Updated upstream
-  List<int> count;
-  String pieAnouce;
-=======
   Map<String, int> count;
->>>>>>> Stashed changes
   @override
   Widget build(BuildContext context) {
     return Column(

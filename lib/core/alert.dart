@@ -697,13 +697,12 @@ class Alert {
                                 color: Colors.black,
                                 fontSize: 16)),
                         GlobalStyles.sizedBoxHeight_10,
-<<<<<<< Updated upstream
-=======
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Icon(Icons.arrow_forward, size: 14),
+                            GlobalStyles.sizedBoxWidth_5,
                             Expanded(
                               child: Container(
                                 alignment: Alignment.topLeft,
@@ -749,7 +748,6 @@ class Alert {
                             color: Colors.grey.shade400,
                           ),
                         ),
->>>>>>> Stashed changes
                         Text(
                           StatisticalString.GRADE_F,
                           style: TextStyle(fontSize: 12),

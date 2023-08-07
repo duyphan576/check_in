@@ -19,15 +19,6 @@ class StatisticalController extends GetxController with CacheManager {
   int countForm55ToLessThan7 = 0;
   int countFor7ToLessThan85 = 0;
   int countGreaterThan85 = 0;
-<<<<<<< Updated upstream
-  var countLessThan4Percentage = 0.0;
-  var countForm4ToLessThan55Percentage = 0.0;
-  var countForm55ToLessThan7Percentage = 0.0;
-  var countFor7ToLessThan85Percentage = 0.0;
-  var countGreaterThan85Percentage = 0.0;
-  List<double?> grades = [];
-  List<int> count = [];
-=======
   double countLessThan4Percentage = 0.0;
   double countForm4ToLessThan55Percentage = 0.0;
   double countForm55ToLessThan7Percentage = 0.0;
@@ -35,7 +26,6 @@ class StatisticalController extends GetxController with CacheManager {
   double countGreaterThan85Percentage = 0.0;
   List<double?> grades = [];
   Map<String, int> count = {};
->>>>>>> Stashed changes
   RxBool isLoading = true.obs;
 
   StatisticalController({required this.statisticalRepository});
@@ -119,11 +109,7 @@ class StatisticalController extends GetxController with CacheManager {
     count["countGreaterThan85"] = countGreaterThan85;
   }
 
-<<<<<<< Updated upstream
-  double calculatePercent(int count, double all) {
-=======
   double calculatePercent(int count, int all) {
->>>>>>> Stashed changes
     return ((count / all) * 100);
   }
 }
