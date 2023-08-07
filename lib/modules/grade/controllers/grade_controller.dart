@@ -473,8 +473,7 @@ class GradeController extends GetxController with CacheManager {
   var json = [
     {
       "idSemester": "1",
-      "nameSemester":
-          "Học kỳ 1(NH: 2020 -2021) Học kỳ 1(NH: 2020 -2021) Học kỳ 1(NH: 2020 -2021) Học kỳ 1(NH: 2020 -2021) Học kỳ 1(NH: 2020 -2021)",
+      "nameSemester": "Học kỳ 1(NH: 2020 -2021)",
       "semesterGPA10": "8.6",
       "semesterGPA4": "3.7",
       "cumulativeGPA10": "8.2",
