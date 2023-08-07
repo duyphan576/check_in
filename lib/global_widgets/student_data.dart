@@ -1,5 +1,4 @@
 import 'package:check_in/constants/app_colors.dart';
-import 'package:check_in/constants/app_string.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -10,19 +9,16 @@ class StudentPicture extends StatelessWidget {
     this.code,
     this.height,
     this.width,
-    this.grade,
     this.onTap,
   }) : super(key: key);
   final String? name;
   final String? code;
   final height;
   final width;
-  final String? grade;
   final onTap;
 
   @override
   Widget build(BuildContext context) {
-    bool isGrade = grade == null;
     return Container(
       height: height * 0.15,
       width: width,
@@ -97,29 +93,6 @@ class StudentPicture extends StatelessWidget {
                     fontStyle: FontStyle.italic,
                   ),
                 ),
-                // GlobalStyles.sizedBoxHeight_25,
-                isGrade
-                    ? Container()
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: width * 0.35,
-                            child: Divider(
-                              thickness: 1.0,
-                              color: AppColors.subMain,
-                            ),
-                          ),
-                          Text(
-                            "${GradeString.AV_GRADE}: ${grade == "null" ? '' : grade}",
-                            style: TextStyle(
-                              color: AppColors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      )
               ],
             )
           ],

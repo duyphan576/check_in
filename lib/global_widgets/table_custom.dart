@@ -1,154 +1,174 @@
-// ignore_for_file: must_be_immutable
-
-import 'package:check_in/constants/app_colors.dart';
-import 'package:check_in/constants/app_string.dart';
+import 'package:check_in/constants/index.dart';
+import 'package:check_in/global_styles/global_styles.dart';
+import 'package:check_in/models/grade/grade_detail_model.dart';
 import 'package:check_in/modules/grade/controllers/grade_controller.dart';
+import 'package:check_in/modules/grade/models/grade_models.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 
 class TableCustom extends GetView<GradeController> {
-  TableCustom({Key? key}) : super(key: key);
+  TableCustom({
+    Key? key,
+    required this.gradeModel,
+  }) : super(key: key);
 
-  TextStyle textStyleBold = TextStyle(
-    color: AppColors.black,
-    fontSize: 12,
-    fontWeight: FontWeight.bold,
-  );
-  TextStyle textStyle = TextStyle(
-    color: AppColors.black,
-    fontSize: 12,
-  );
+  final GradeModel gradeModel;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.width / 0.8,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: AppColors.lightWhite.withOpacity(0.75),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: AppColors.subMain, // Color of the border
-          width: 1.0, // Width of the border
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width,
+          padding: GlobalStyles.paddingAll_8,
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 1,
+              color: AppColors.main,
+            ),
+            borderRadius: BorderRadius.circular(8),
+            color: AppColors.gray,
+          ),
+          child: Text(gradeModel.nameSemester ?? ""),
         ),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: HorizontalDataTable(
-          leftHandSideColumnWidth: 120,
-          rightHandSideColumnWidth: 475,
-          isFixedHeader: true,
-          headerWidgets: _getTitleWidget(),
-          leftSideItemBuilder: _generateFirstColumnRow,
-          rightSideItemBuilder: _generateRightHandSideColumnRow,
-          itemCount: controller.grades.length,
-          rowSeparatorWidget: Divider(
-            color: AppColors.subMain,
-            height: 1.0,
-            thickness: 0.0,
-          ),
-          leftHandSideColBackgroundColor: const Color(0xFFFFFFFF),
-          rightHandSideColBackgroundColor: const Color(0xFFFFFFFF),
-          onScrollControllerReady: (vertical, horizontal) {
-            controller.verticalScrollController = vertical;
-            controller.horizontalScrollController = horizontal;
-          },
-          verticalScrollbarStyle: const ScrollbarStyle(
-            thumbColor: Colors.grey,
-            thickness: 1.0,
-            radius: Radius.circular(5.0),
-          ),
-          horizontalScrollbarStyle: const ScrollbarStyle(
-            thumbColor: Colors.grey,
-            thickness: 1.0,
-            radius: Radius.circular(5.0),
+        GlobalStyles.sizedBoxHeight_10,
+        Container(
+          height: 80 + gradeModel.listGradeDetail!.length * 56,
+          child: TableGradeDetailView(
+            listGradeDetail: gradeModel.listGradeDetail,
           ),
         ),
-      ),
+        GlobalStyles.sizedBoxHeight,
+        buildRow(
+            title: GradeString.SEMESTER_GPA_10,
+            detail: gradeModel.semesterGPA10),
+        Divider(),
+        buildRow(
+            title: GradeString.SEMESTER_GPA_4, detail: gradeModel.semesterGPA4),
+        Divider(),
+        buildRow(
+            title: GradeString.CUMULATIVE_GPA_10,
+            detail: gradeModel.cumulativeGPA10),
+        Divider(),
+        buildRow(
+            title: GradeString.CUMULATIVE_GPA_4,
+            detail: gradeModel.cumulativeGPA4),
+        Divider(),
+        buildRow(
+            title: GradeString.COURSE_CREDIT_ACHIEVE,
+            detail: gradeModel.courseCreditsAchieve),
+        Divider(),
+        buildRow(
+            title: GradeString.COURSE_CREDIT_ALL,
+            detail: gradeModel.courseCreditsAll),
+        GlobalStyles.sizedBoxHeight,
+      ],
     );
   }
 
-  List<Widget> _getTitleWidget() {
-    return [
-      _getTitleItemWidget(GradeString.TERM, 120),
-      _getTitleItemWidget(GradeString.A_GRADE, 120),
-      _getTitleItemWidget(GradeString.C1_GRADE, 95),
-      _getTitleItemWidget(GradeString.C2_GRADE, 95),
-      _getTitleItemWidget(GradeString.E_GRADE, 65),
-      _getTitleItemWidget(GradeString.F_GRADE, 100),
-    ];
-  }
-
-  Widget _getTitleItemWidget(String label, double width) {
-    return Container(
-      width: width,
-      height: 50,
-      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-      alignment: Alignment.center,
-      child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
-    );
-  }
-
-  Widget _generateFirstColumnRow(BuildContext context, int index) {
-    return Container(
-      width: 120,
-      height: 50,
-      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-      alignment: Alignment.centerLeft,
-      child: Text(controller.grades[index].termName.toString()),
-    );
-  }
-
-  Widget _generateRightHandSideColumnRow(BuildContext context, int index) {
+  Widget buildRow({title, detail}) {
     return Row(
-      children: <Widget>[
-        Container(
-          width: 120,
-          height: 50,
-          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-          alignment: Alignment.center,
-          child:
-              Text("${isNull(controller.grades[index].attendance.toString())}"),
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title ?? "",
+          style: TextStyle(
+            fontSize: 16.0,
+            fontStyle: FontStyle.italic,
+            color: Colors.black,
+          ),
+          textScaleFactor: 1.0,
         ),
-        Container(
-          width: 95,
-          height: 50,
-          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-          alignment: Alignment.center,
-          child: Text(
-              "${isNull(controller.grades[index].coefficient1Exam1.toString())}  ${isNull(controller.grades[index].coefficient1Exam2.toString())}  ${isNull(controller.grades[index].coefficient1Exam3.toString())}"),
-        ),
-        Container(
-          width: 95,
-          height: 50,
-          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-          alignment: Alignment.center,
-          child: Text(
-              "${isNull(controller.grades[index].coefficient2Exam1.toString())}  ${isNull(controller.grades[index].coefficient2Exam2.toString())}"),
-        ),
-        Container(
-          width: 65,
-          height: 50,
-          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-          alignment: Alignment.center,
-          child: Text("${isNull(controller.grades[index].exam.toString())}"),
-        ),
-        Container(
-          width: 100,
-          height: 50,
-          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-          alignment: Alignment.center,
-          child:
-              Text("${isNull(controller.grades[index].finalGrade.toString())}"),
-        ),
+        Text(
+          detail ?? "",
+          style: TextStyle(
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+          textScaleFactor: 1.0,
+        )
       ],
     );
   }
 }
 
-String isNull(String grade) {
-  if (grade == "null") {
-    return '';
+class TableGradeDetailView extends GetView<GradeController> {
+  List<GradeDetailModel>? listGradeDetail;
+  TableGradeDetailView({
+    Key? key,
+    required this.listGradeDetail,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return listGradeDetail?.isNotEmpty == false
+        ? Center(
+            child: Text("Không có dữ liệu để xem"),
+          )
+        : HorizontalDataTable(
+            scrollPhysics: NeverScrollableScrollPhysics(),
+            leftHandSideColumnWidth: 150,
+            rightHandSideColumnWidth: 650,
+            isFixedHeader: true,
+            headerWidgets: controller.getListHeaderTitle(context),
+            leftSideItemBuilder: _generateFirstColumnRow,
+            rightSideItemBuilder: _generateRightHandSideColumnRow,
+            itemCount: listGradeDetail?.length ?? 0,
+            rowSeparatorWidget: const Divider(
+              color: Colors.black54,
+              height: 1.0,
+              thickness: 0.0,
+            ),
+            leftHandSideColBackgroundColor: Color(0xFFFFFFFF),
+            rightHandSideColBackgroundColor: Color(0xFFFFFFFF),
+            horizontalScrollbarStyle: const ScrollbarStyle(
+              thumbColor: Colors.red,
+              isAlwaysShown: true,
+              thickness: 4.0,
+              radius: Radius.circular(5.0),
+            ));
   }
-  return grade;
+
+  Widget _generateFirstColumnRow(BuildContext context, int index) {
+    GradeDetailModel item = listGradeDetail![index];
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+              flex: 7,
+              child: InkWell(
+                onTap: () {},
+                child: Text(
+                  "${(index + 1).toString()}. ${item.nameTerm ?? ""}",
+                  style: TextStyle(
+                      fontSize: 15.0,
+                      // color: _colorStatus,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline),
+                  maxLines: 4,
+                  textScaleFactor: 1.0,
+                ),
+              )),
+        ],
+      ),
+      width: 150,
+      height: 56,
+      padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+      decoration: BoxDecoration(
+          border: Border(
+        left: BorderSide(color: Colors.grey.shade200),
+      )),
+    );
+  }
+
+  Widget _generateRightHandSideColumnRow(BuildContext context, int index) {
+    GradeDetailModel item = listGradeDetail![index];
+    return Row(
+      children: controller.generateRightHandSideColumnRow(item),
+    );
+  }
 }
