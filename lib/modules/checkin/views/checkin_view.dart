@@ -92,7 +92,7 @@ class CheckinView extends GetView<CheckinController> {
                             ),
                             GlobalStyles.sizedBoxHeight,
                             controller.listCheckHistory.isNotEmpty == true
-                                ? CustomDropdown()
+                                ? CustomCheckinHistory()
                                 : SizedBox(),
                             GlobalStyles.sizedBoxHeight,
                             controller.isReady.value

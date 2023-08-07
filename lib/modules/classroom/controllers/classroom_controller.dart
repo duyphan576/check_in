@@ -1,6 +1,7 @@
 import 'package:check_in/constants/app_string.dart';
 import 'package:check_in/core/alert.dart';
 import 'package:check_in/core/cache_manager.dart';
+import 'package:check_in/models/class_by_semester/class_by_semester.dart';
 import 'package:check_in/models/classroom/classroom.dart';
 import 'package:check_in/modules/classroom/models/classroom_model.dart';
 import 'package:check_in/modules/classroom/repository/classroom_repository.dart';
@@ -16,13 +17,13 @@ class ClassroomController extends GetxController with CacheManager {
   var userData;
   final RxList<Classroom> classrooms = RxList<Classroom>();
   RxBool isLoading = true.obs;
+  final RxList<ClassBySemester> classBySemesterList = RxList<ClassBySemester>();
 
   ClassroomController({required this.classroomRepository});
 
   @override
   void onInit() {
     super.onInit();
-    fetchData();
     initData();
   }
 
@@ -33,7 +34,9 @@ class ClassroomController extends GetxController with CacheManager {
     }
   }
 
-  Stream<List<Classroom>> getStreamOfData() async* {
+  void getClass() async {
+    isLoading.value = true;
+    classBySemesterList.value = [];
     final response = await classroomRepository.classroom(
       ClassroomModel(),
       UrlProvider.HANDLES_CLASSROOM,
@@ -41,30 +44,60 @@ class ClassroomController extends GetxController with CacheManager {
     );
     if (response?.statusCode == HttpStatus.ok) {
       if (response?.status == 1) {
-        // Parse the JSON data into Dart objects
-        final List<dynamic> classroomList = response?.data['classrooms'];
-        // Convert the JSON objects to Classroom objects
-        final List<Classroom> classroomData =
-            classroomList.map((json) => Classroom.fromJson(json)).toList();
-        yield classroomData;
-      } else {
-        Alert.showError(
-          title: CommonString.ERROR,
-          message: "You don't have data in any classroom",
-          buttonText: CommonString.OK,
-        ).then(
-          (value) => Get.back(),
-        );
+        for (final list in response?.data) {
+          ClassBySemester classBySemester = ClassBySemester.fromJson(list);
+          classBySemesterList.add(classBySemester);
+          if (classBySemesterList.isNotEmpty == true) {
+            getClassBySemester(classBySemesterList[0].idSemester);
+          }
+        }
       }
     }
   }
 
-  void fetchData() {
-    // Assuming `getStreamOfData()` returns the stream you want to listen to
-    getStreamOfData().listen((List<Classroom>? data) {
-      classrooms.assignAll(data ?? []);
-    });
+  void getClassBySemester(String? value) async {
+    if (value != null) {
+      classrooms.assignAll(
+        classBySemesterList
+            .firstWhere(
+              (element) => element.idSemester == value,
+            )
+            .classroomList!,
+      );
+    }
   }
+  // Stream<List<Classroom>> getStreamOfData() async* {
+  //   final response = await classroomRepository.classroom(
+  //     ClassroomModel(),
+  //     UrlProvider.HANDLES_CLASSROOM,
+  //     cacheGet(CacheManagerKey.TOKEN),
+  //   );
+  //   if (response?.statusCode == HttpStatus.ok) {
+  //     if (response?.status == 1) {
+  //       // Parse the JSON data into Dart objects
+  //       final List<dynamic> classroomList = response?.data['classrooms'];
+  //       // Convert the JSON objects to Classroom objects
+  //       final List<Classroom> classroomData =
+  //           classroomList.map((json) => Classroom.fromJson(json)).toList();
+  //       yield classroomData;
+  //     } else {
+  //       Alert.showError(
+  //         title: CommonString.ERROR,
+  //         message: "You don't have data in any classroom",
+  //         buttonText: CommonString.OK,
+  //       ).then(
+  //         (value) => Get.back(),
+  //       );
+  //     }
+  //   }
+  // }
+
+  // void fetchData() {
+  //   // Assuming `getStreamOfData()` returns the stream you want to listen to
+  //   getStreamOfData().listen((List<Classroom>? data) {
+  //     classrooms.assignAll(data ?? []);
+  //   });
+  // }
 
   getClassInfo(String classroomId) async {
     Alert.showLoadingIndicator(message: CommonString.LOADING);

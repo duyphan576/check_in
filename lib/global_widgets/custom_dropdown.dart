@@ -6,8 +6,8 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CustomDropdown extends GetView<CheckinController> {
-  const CustomDropdown({
+class CustomCheckinHistory extends GetView<CheckinController> {
+  const CustomCheckinHistory({
     super.key,
   });
 
