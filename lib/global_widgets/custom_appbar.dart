@@ -59,7 +59,7 @@ class CustomAppBar extends GetView<DetailController>
                     );
                   },
                   icon: Icon(
-                    Icons.bar_chart,
+                    Icons.pie_chart,
                     size: 28,
                     color: AppColors.lightWhite,
                   ),

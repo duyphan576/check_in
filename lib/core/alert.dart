@@ -599,100 +599,90 @@ class Alert {
                         aspectRatio: 1,
                         child: BarChart(
                           BarChartData(
-                            minY: 0,
-                            maxY: gradesLength < 7 ? 7 : gradesLength,
-                            titlesData: FlTitlesData(
-                                bottomTitles: AxisTitles(
-                                    sideTitles: SideTitles(
-                                  showTitles: true,
-                                  getTitlesWidget: (value, meta) {
-                                    int xvalue = value.toInt();
+                              minY: 0,
+                              maxY: gradesLength,
+                              titlesData: FlTitlesData(
+                                  bottomTitles: AxisTitles(
+                                      sideTitles: SideTitles(
+                                    showTitles: true,
+                                    getTitlesWidget: (value, meta) {
+                                      int xvalue = value.toInt();
 
-                                    if (xvalue == 0) {
+                                      if (xvalue == 0) {
+                                        return Text(
+                                          "F",
+                                          style: TextStyle(color: Colors.black),
+                                        );
+                                      } else if (xvalue == 1) {
+                                        return Text(
+                                          "D",
+                                          style: TextStyle(color: Colors.black),
+                                        );
+                                      } else if (xvalue == 2) {
+                                        return Text(
+                                          "C",
+                                          style: TextStyle(color: Colors.black),
+                                        );
+                                      } else if (xvalue == 3) {
+                                        return Text(
+                                          "B",
+                                          style: TextStyle(color: Colors.black),
+                                        );
+                                      } else if (xvalue == 4) {
+                                        return Text(
+                                          "A",
+                                          style: TextStyle(color: Colors.black),
+                                        );
+                                      }
                                       return Text(
-                                        "F",
+                                        xvalue.toInt().toString(),
                                         style: TextStyle(color: Colors.black),
                                       );
-                                    } else if (xvalue == 1) {
-                                      return Text(
-                                        "D",
-                                        style: TextStyle(color: Colors.black),
-                                      );
-                                    } else if (xvalue == 2) {
-                                      return Text(
-                                        "C",
-                                        style: TextStyle(color: Colors.black),
-                                      );
-                                    } else if (xvalue == 3) {
-                                      return Text(
-                                        "B",
-                                        style: TextStyle(color: Colors.black),
-                                      );
-                                    } else if (xvalue == 4) {
-                                      return Text(
-                                        "A",
-                                        style: TextStyle(color: Colors.black),
-                                      );
-                                    }
-                                    return Text(
-                                      xvalue.toInt().toString(),
-                                      style: TextStyle(color: Colors.black),
-                                    );
-                                  },
-                                )),
-                                leftTitles: AxisTitles(
-                                    sideTitles: SideTitles(
-                                  showTitles: true,
-                                  getTitlesWidget: (value, meta) {
-                                    return Text(
-                                      value.toInt().toString(),
-                                      style: TextStyle(color: Colors.black),
-                                    );
-                                  },
-                                )),
-                                topTitles: AxisTitles(
-                                    sideTitles: SideTitles(showTitles: false)),
-                                rightTitles: AxisTitles(
-                                    sideTitles: SideTitles(showTitles: false))),
-                            borderData: FlBorderData(
-                              border: Border(
-                                  top: BorderSide.none,
-                                  right: BorderSide.none,
-                                  left: BorderSide(
-                                    width: 1,
-                                    color: Colors.black,
-                                  ),
-                                  bottom: BorderSide(
-                                    width: 1,
-                                    color: Colors.black,
+                                    },
                                   )),
-                            ),
-                            barTouchData: BarTouchData(
-                              enabled: false,
-                              touchTooltipData: BarTouchTooltipData(
-                                tooltipBgColor: Colors.transparent,
-                                tooltipPadding: EdgeInsets.zero,
-                                tooltipMargin: 8,
-                                getTooltipItem: (
-                                  BarChartGroupData group,
-                                  int groupIndex,
-                                  BarChartRodData rod,
-                                  int rodIndex,
-                                ) {
-                                  return BarTooltipItem(
-                                    rod.toY.round().toString() == "0"
-                                        ? ""
-                                        : rod.toY.round().toString(),
-                                    const TextStyle(
-                                      color: Colors.black54,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  );
-                                },
+                                  leftTitles: AxisTitles(
+                                      sideTitles:
+                                          SideTitles(showTitles: false)),
+                                  topTitles: AxisTitles(
+                                      sideTitles:
+                                          SideTitles(showTitles: false)),
+                                  rightTitles: AxisTitles(
+                                      sideTitles:
+                                          SideTitles(showTitles: false))),
+                              borderData: FlBorderData(
+                                border: Border(
+                                    top: BorderSide.none,
+                                    right: BorderSide.none,
+                                    left: BorderSide.none,
+                                    bottom: BorderSide(
+                                      width: 1,
+                                      color: Colors.black,
+                                    )),
                               ),
-                            ),
-                            barGroups: barGroupsList,
-                          ),
+                              barTouchData: BarTouchData(
+                                enabled: false,
+                                touchTooltipData: BarTouchTooltipData(
+                                  tooltipBgColor: Colors.transparent,
+                                  tooltipPadding: EdgeInsets.zero,
+                                  tooltipMargin: 8,
+                                  getTooltipItem: (
+                                    BarChartGroupData group,
+                                    int groupIndex,
+                                    BarChartRodData rod,
+                                    int rodIndex,
+                                  ) {
+                                    return BarTooltipItem(
+                                      rod.toY.round().toString(),
+                                      const TextStyle(
+                                        color: Colors.black54,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              barGroups: barGroupsList,
+                              gridData: FlGridData(show: false)),
                         ),
                       ),
                     ),
@@ -708,23 +698,46 @@ class Alert {
                                 fontSize: 16)),
                         GlobalStyles.sizedBoxHeight_10,
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Icon(Icons.arrow_forward, size: 14),
-                            Text(
-                              StatisticalString.BAR_NOTE_XAXIS,
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 11.5),
+                            GlobalStyles.sizedBoxWidth_5,
+                            Expanded(
+                              child: Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  StatisticalString.BAR_NOTE_XAXIS,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
+                              ),
                             ),
                           ],
                         ),
                         GlobalStyles.sizedBoxHeight_10,
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Icon(Icons.arrow_upward_outlined, size: 14),
-                            Text(
-                              StatisticalString.BAR_NOTE_YAXIS,
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 11.5),
+                            Expanded(
+                              child: Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  StatisticalString.BAR_NOTE_YAXIS,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -737,27 +750,27 @@ class Alert {
                         ),
                         Text(
                           StatisticalString.GRADE_F,
-                          style: TextStyle(fontSize: 11.5),
+                          style: TextStyle(fontSize: 12),
                         ),
                         GlobalStyles.sizedBoxHeight_10,
                         Text(
                           StatisticalString.GRADE_D,
-                          style: TextStyle(fontSize: 11.5),
+                          style: TextStyle(fontSize: 12),
                         ),
                         GlobalStyles.sizedBoxHeight_10,
                         Text(
                           StatisticalString.GRADE_C,
-                          style: TextStyle(fontSize: 11.5),
+                          style: TextStyle(fontSize: 12),
                         ),
                         GlobalStyles.sizedBoxHeight_10,
                         Text(
                           StatisticalString.GRADE_B,
-                          style: TextStyle(fontSize: 11.5),
+                          style: TextStyle(fontSize: 12),
                         ),
                         GlobalStyles.sizedBoxHeight_10,
                         Text(
                           StatisticalString.GRADE_A,
-                          style: TextStyle(fontSize: 11.5),
+                          style: TextStyle(fontSize: 12),
                         ),
                       ],
                     )

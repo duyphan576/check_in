@@ -95,7 +95,6 @@ class StatisticalView extends GetView<StatisticalController> {
                                         count: controller.count,
                                         countGreaterThan85Percentage: controller
                                             .countGreaterThan85Percentage,
-                                        pieAnouce: StatisticalString.PIE_CHART,
                                       )
                                     ],
                                   ),

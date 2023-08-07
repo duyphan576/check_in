@@ -14,18 +14,18 @@ RxBool isLoading = true.obs;
 class StatisticalController extends GetxController with CacheManager {
   final StatisticalRepository statisticalRepository;
   final AuthenticationService authenticationService = AuthenticationService();
-  var countLessThan4 = 0.0;
-  var countForm4ToLessThan55 = 0.0;
-  var countForm55ToLessThan7 = 0.0;
-  var countFor7ToLessThan85 = 0.0;
-  var countGreaterThan85 = 0.0;
-  var countLessThan4Percentage = 0.0;
-  var countForm4ToLessThan55Percentage = 0.0;
-  var countForm55ToLessThan7Percentage = 0.0;
-  var countFor7ToLessThan85Percentage = 0.0;
-  var countGreaterThan85Percentage = 0.0;
+  int countLessThan4 = 0;
+  int countForm4ToLessThan55 = 0;
+  int countForm55ToLessThan7 = 0;
+  int countFor7ToLessThan85 = 0;
+  int countGreaterThan85 = 0;
+  double countLessThan4Percentage = 0.0;
+  double countForm4ToLessThan55Percentage = 0.0;
+  double countForm55ToLessThan7Percentage = 0.0;
+  double countFor7ToLessThan85Percentage = 0.0;
+  double countGreaterThan85Percentage = 0.0;
   List<double?> grades = [];
-  List<double> count = [];
+  Map<String, int> count = {};
   RxBool isLoading = true.obs;
 
   StatisticalController({required this.statisticalRepository});
@@ -78,19 +78,18 @@ class StatisticalController extends GetxController with CacheManager {
         }
 
         countList();
-        countLessThan4Percentage = calculatePercent(
-            countLessThan4, double.parse(grades.length.toString()));
-        countForm4ToLessThan55Percentage = calculatePercent(
-            countForm4ToLessThan55, double.parse(grades.length.toString()));
-        countForm55ToLessThan7Percentage = calculatePercent(
-            countForm55ToLessThan7, double.parse(grades.length.toString()));
-        countFor7ToLessThan85Percentage = calculatePercent(
-            countFor7ToLessThan85, double.parse(grades.length.toString()));
-        countGreaterThan85Percentage = calculatePercent(
-            countGreaterThan85, double.parse(grades.length.toString()));
+        countLessThan4Percentage =
+            calculatePercent(countLessThan4, grades.length);
+        countForm4ToLessThan55Percentage =
+            calculatePercent(countForm4ToLessThan55, grades.length);
+        countForm55ToLessThan7Percentage =
+            calculatePercent(countForm55ToLessThan7, grades.length);
+        countFor7ToLessThan85Percentage =
+            calculatePercent(countFor7ToLessThan85, grades.length);
+        countGreaterThan85Percentage =
+            calculatePercent(countGreaterThan85, grades.length);
         update();
         isLoading.value = false;
-        // }
       }
     } else {
       Alert.closeLoadingIndicator();
@@ -103,14 +102,14 @@ class StatisticalController extends GetxController with CacheManager {
   }
 
   void countList() {
-    count.add(countLessThan4);
-    count.add(countForm4ToLessThan55);
-    count.add(countForm55ToLessThan7);
-    count.add(countFor7ToLessThan85);
-    count.add(countGreaterThan85);
+    count["countLessThan4"] = countLessThan4;
+    count["countForm4ToLessThan55"] = countForm4ToLessThan55;
+    count["countForm55ToLessThan7"] = countForm55ToLessThan7;
+    count["countFor7ToLessThan85"] = countFor7ToLessThan85;
+    count["countGreaterThan85"] = countGreaterThan85;
   }
 
-  double calculatePercent(double count, double all) {
+  double calculatePercent(int count, int all) {
     return ((count / all) * 100);
   }
 }
