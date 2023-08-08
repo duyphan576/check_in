@@ -3,6 +3,7 @@ import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/global_widgets/student_data.dart';
 import 'package:check_in/global_widgets/table_custom.dart';
 import 'package:check_in/modules/grade/controllers/grade_controller.dart';
+import 'package:check_in/modules/grade/models/grade_models.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -50,27 +51,11 @@ class GradeView extends GetView<GradeController> {
                       ),
                     ),
                   ),
-                  actions: [
-                    IconButton(
-                      onPressed: () {
-                        controller.showChart();
-                      },
-                      icon: Icon(
-                        Icons.bar_chart,
-                        color: AppColors.lightWhite,
-                      ),
-                    )
-                  ],
                 ),
-                body: controller.isLoading.value
-                    ? Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.lightWhite,
-                        ),
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            color: AppColors.main,
-                          ),
+                body: controller.isLoading.value == true
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.main,
                         ),
                       )
                     : SingleChildScrollView(
@@ -83,17 +68,40 @@ class GradeView extends GetView<GradeController> {
                                 code: controller.userData!["code"].toString(),
                                 height: height,
                                 width: width,
-                                grade: controller.avgGrade.toString(),
                               ),
                               GlobalStyles.sizedBoxHeight,
                               Container(
-                                height: MediaQuery.of(context).size.width / 0.8,
+                                height:
+                                    MediaQuery.of(context).size.width / 0.75,
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                   color: AppColors.lightWhite.withOpacity(0.9),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                child: TableCustom(),
+                                child: Padding(
+                                  padding: GlobalStyles.paddingAll_8,
+                                  child: controller.listGrade.isNotEmpty
+                                      ? ListView.builder(
+                                          itemCount:
+                                              controller.listGrade.length,
+                                          itemBuilder: (context, index) {
+                                            GradeModel item =
+                                                controller.listGrade[index];
+                                            return TableCustom(
+                                              gradeModel: item,
+                                            );
+                                          },
+                                        )
+                                      : Center(
+                                          child: Text(
+                                            GradeString.EMPTY_GRADE,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: AppColors.main,
+                                                fontSize: 18),
+                                          ),
+                                        ),
+                                ),
                               ),
                             ],
                           ),

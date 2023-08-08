@@ -202,7 +202,7 @@ abstract class HomeString {
   static const String HOME = "Trang Chủ";
   static const String CHECK_IN = "Điểm Danh";
   static const String CLASSROOM = "Lớp Học";
-  static const String GRADE = "Điểm";
+  static const String GRADE = "Xem Điểm";
   static const String PROFILE = "Hồ Sơ";
   static const String LOGOUT = "Đăng xuất";
 }
@@ -214,14 +214,27 @@ abstract class ClassroomString {
 
 abstract class GradeString {
   static const String GRADE = "Điểm";
-  static const String TERM = "Môn học";
-  static const String A_GRADE = "Điểm chuyên cần";
-  static const String C1_GRADE = "Điểm hệ số 1";
-  static const String C2_GRADE = "Điểm hệ số 2";
-  static const String E_GRADE = "Điểm thi";
-  static const String F_GRADE = "Điểm quá trình";
-  static const String AV_GRADE = "Điểm trung bình";
-  static const String ERROR_GRADE = "Chưa có điểm quá trình nào";
+  static const String NAME_TERM = "Môn học";
+  static const String ATTENDANCE = "CC";
+  static const String COEFFICIENT_1 = "HS1";
+  static const String COEFFICIENT_2 = "HS2";
+  static const String EXAM = "CK";
+  static const String FINAL = "ĐTB";
+  static const String GPA_10 = "ĐTB (10)";
+  static const String GPA_4 = "ĐTB (4)";
+  static const String GPA_CH = "ĐTB (CH)";
+  static const String RESULT = "KQ";
+  static const String EMPTY_GRADE = "Bảng điểm của sinh viên trống";
+  static const String NO = "STT";
+  static const String ONE = "1";
+  static const String TWO = "2";
+  static const String THREE = "3";
+  static const String SEMESTER_GPA_10 = "ĐTB học kỳ hệ 10: ";
+  static const String CUMULATIVE_GPA_10 = "ĐTB tích luỹ hệ 10:";
+  static const String SEMESTER_GPA_4 = "ĐTB học kỳ hệ 4: ";
+  static const String CUMULATIVE_GPA_4 = "ĐTB tích luỹ hệ 4: ";
+  static const String COURSE_CREDIT_ACHIEVE = "Tổng số tín chỉ đạt được: ";
+  static const String COURSE_CREDIT_ALL = "Tổng số tín chỉ tích lũy được: ";
 }
 
 abstract class QrString {
