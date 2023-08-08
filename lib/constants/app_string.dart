@@ -235,6 +235,7 @@ abstract class GradeString {
   static const String CUMULATIVE_GPA_4 = "ĐTB tích luỹ hệ 4: ";
   static const String COURSE_CREDIT_ACHIEVE = "Tổng số tín chỉ đạt được: ";
   static const String COURSE_CREDIT_ALL = "Tổng số tín chỉ tích lũy được: ";
+  static const String NO_DATA = "Không có dữ liệu để xem";
 }
 
 abstract class QrString {

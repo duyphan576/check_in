@@ -29,9 +29,16 @@ class TableCustom extends GetView<GradeController> {
               color: AppColors.main,
             ),
             borderRadius: BorderRadius.circular(8),
-            color: AppColors.gray,
+            color: AppColors.lightWhite,
           ),
-          child: Text(gradeModel.nameSemester ?? ""),
+          child: Text(
+            gradeModel.nameSemester ?? "",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: AppColors.black,
+              fontSize: 16.0,
+            ),
+          ),
         ),
         GlobalStyles.sizedBoxHeight_10,
         Container(
@@ -42,27 +49,34 @@ class TableCustom extends GetView<GradeController> {
         ),
         GlobalStyles.sizedBoxHeight,
         buildRow(
-            title: GradeString.SEMESTER_GPA_10,
-            detail: gradeModel.semesterGPA10),
+          title: GradeString.SEMESTER_GPA_10,
+          detail: gradeModel.semesterGPA10,
+        ),
         Divider(),
         buildRow(
-            title: GradeString.SEMESTER_GPA_4, detail: gradeModel.semesterGPA4),
+          title: GradeString.SEMESTER_GPA_4,
+          detail: gradeModel.semesterGPA4,
+        ),
         Divider(),
         buildRow(
-            title: GradeString.CUMULATIVE_GPA_10,
-            detail: gradeModel.cumulativeGPA10),
+          title: GradeString.CUMULATIVE_GPA_10,
+          detail: gradeModel.cumulativeGPA10,
+        ),
         Divider(),
         buildRow(
-            title: GradeString.CUMULATIVE_GPA_4,
-            detail: gradeModel.cumulativeGPA4),
+          title: GradeString.CUMULATIVE_GPA_4,
+          detail: gradeModel.cumulativeGPA4,
+        ),
         Divider(),
         buildRow(
-            title: GradeString.COURSE_CREDIT_ACHIEVE,
-            detail: gradeModel.courseCreditsAchieve),
+          title: GradeString.COURSE_CREDIT_ACHIEVE,
+          detail: gradeModel.courseCreditsAchieve,
+        ),
         Divider(),
         buildRow(
-            title: GradeString.COURSE_CREDIT_ALL,
-            detail: gradeModel.courseCreditsAll),
+          title: GradeString.COURSE_CREDIT_ALL,
+          detail: gradeModel.courseCreditsAll,
+        ),
         GlobalStyles.sizedBoxHeight,
       ],
     );
@@ -75,18 +89,19 @@ class TableCustom extends GetView<GradeController> {
         Text(
           title ?? "",
           style: TextStyle(
-            fontSize: 16.0,
-            fontStyle: FontStyle.italic,
-            color: Colors.black,
+            fontSize: 14.0,
+            fontWeight: FontWeight.bold,
+            color: AppColors.black,
           ),
           textScaleFactor: 1.0,
         ),
         Text(
           detail ?? "",
           style: TextStyle(
-            fontSize: 16.0,
+            fontSize: 14.0,
+            fontStyle: FontStyle.italic,
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: AppColors.black,
           ),
           textScaleFactor: 1.0,
         )
@@ -96,17 +111,17 @@ class TableCustom extends GetView<GradeController> {
 }
 
 class TableGradeDetailView extends GetView<GradeController> {
-  List<GradeDetailModel>? listGradeDetail;
   TableGradeDetailView({
     Key? key,
     required this.listGradeDetail,
   }) : super(key: key);
+  final List<GradeDetailModel>? listGradeDetail;
 
   @override
   Widget build(BuildContext context) {
     return listGradeDetail?.isNotEmpty == false
         ? Center(
-            child: Text("Không có dữ liệu để xem"),
+            child: Text(GradeString.NO_DATA),
           )
         : HorizontalDataTable(
             scrollPhysics: NeverScrollableScrollPhysics(),
@@ -124,8 +139,8 @@ class TableGradeDetailView extends GetView<GradeController> {
             ),
             leftHandSideColBackgroundColor: Color(0xFFFFFFFF),
             rightHandSideColBackgroundColor: Color(0xFFFFFFFF),
-            horizontalScrollbarStyle: const ScrollbarStyle(
-              thumbColor: Colors.red,
+            horizontalScrollbarStyle: ScrollbarStyle(
+              thumbColor: AppColors.gray,
               isAlwaysShown: true,
               thickness: 4.0,
               radius: Radius.circular(5.0),
@@ -145,10 +160,9 @@ class TableGradeDetailView extends GetView<GradeController> {
                 child: Text(
                   "${(index + 1).toString()}. ${item.nameTerm ?? ""}",
                   style: TextStyle(
-                      fontSize: 15.0,
-                      // color: _colorStatus,
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline),
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                   maxLines: 4,
                   textScaleFactor: 1.0,
                 ),

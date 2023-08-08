@@ -50,7 +50,7 @@ class GradeModel extends BaseApiModel {
     }
 
     return GradeModel(
-      idSemester: json["idSemester"] ?? "", //id Học kỳ
+      idSemester: json["idSemester"].toString() ?? "", //id Học kỳ
       nameSemester: json["nameSemester"] ?? "", //tên học kỳ
       semesterGPA10: json["semesterGPA10"] ?? "", //ĐTB học kỳ hệ 10
       semesterGPA4: json["semesterGPA4"] ?? "", //ĐTB học kỳ hệ 4
