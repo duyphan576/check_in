@@ -223,7 +223,7 @@ class CustomClassList extends GetView<ClassroomController> {
         title: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Text(
-            CheckinString.CHOOSE_CLASSROOM,
+            ClassroomString.CHOOSE_SEMESTER,
             style: TextStyle(
               fontSize: 20,
               color: AppColors.subMain,
@@ -244,7 +244,9 @@ class CustomClassList extends GetView<ClassroomController> {
         searchFieldProps: TextFieldProps(
             decoration: InputDecoration(
           contentPadding: GlobalStyles.paddingPageLeftRight,
-          label: Text(CheckinString.ENTER_CLASSROOM),
+          label: Text(
+            ClassroomString.ENTER,
+          ),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.gray),
               borderRadius: BorderRadius.circular(8)),

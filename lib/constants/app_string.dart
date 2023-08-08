@@ -210,6 +210,8 @@ abstract class HomeString {
 abstract class ClassroomString {
   static const String CLASSROOM = "Lớp Học";
   static const String CREDIT = "Tín chỉ";
+  static const String CHOOSE_SEMESTER = "Chọn học kỳ";
+  static const String ENTER = "Hãy nhập học kỳ";
 }
 
 abstract class GradeString {
