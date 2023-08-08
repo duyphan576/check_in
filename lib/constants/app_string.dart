@@ -275,7 +275,7 @@ abstract class CheckinString {
   static const String CLASSROOM = "Lớp học";
   static const String DATE = "Ngày";
   static const String NOTES = "Lưu ý";
-  static const String ATTENDANCE = "Lớp của bạn chưa bao giờ điểm danh";
+  static const String NOT_ATTENDANCE = "Lớp của bạn chưa bao giờ điểm danh";
   static const String CHOOSE_CLASSROOM = "Chọn lớp";
   static const String ENTER_CLASSROOM = "Hãy nhập tên lớp";
   static const String IN_ATTENDANCE = "Điểm danh đầu giờ";

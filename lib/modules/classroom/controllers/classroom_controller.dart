@@ -8,6 +8,8 @@ import 'package:check_in/modules/classroom/repository/classroom_repository.dart'
 import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
+import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 
@@ -17,7 +19,10 @@ class ClassroomController extends GetxController with CacheManager {
   var userData;
   final RxList<Classroom> classrooms = RxList<Classroom>();
   RxBool isLoading = true.obs;
+  RxBool isReady = false.obs;
+
   final RxList<ClassBySemester> classBySemesterList = RxList<ClassBySemester>();
+  final keyClassBySemester = GlobalKey<DropdownSearchState<ClassBySemester>>();
 
   ClassroomController({required this.classroomRepository});
 
@@ -29,9 +34,7 @@ class ClassroomController extends GetxController with CacheManager {
 
   initData() async {
     userData = await cacheGet(CacheManagerKey.CUSTOMER_INFO);
-    if (userData != null) {
-      isLoading.value = false;
-    }
+    getClass();
   }
 
   void getClass() async {
@@ -44,6 +47,7 @@ class ClassroomController extends GetxController with CacheManager {
     );
     if (response?.statusCode == HttpStatus.ok) {
       if (response?.status == 1) {
+        isLoading.value = false;
         for (final list in response?.data) {
           ClassBySemester classBySemester = ClassBySemester.fromJson(list);
           classBySemesterList.add(classBySemester);
@@ -51,7 +55,23 @@ class ClassroomController extends GetxController with CacheManager {
             getClassBySemester(classBySemesterList[0].idSemester);
           }
         }
+      } else {
+        isLoading.value = false;
+        Alert.showError(
+          title: CommonString.ERROR,
+          buttonText: CommonString.OK,
+          message: response!.message.toString(),
+        );
       }
+    } else {
+      isLoading.value = false;
+      Alert.showError(
+        title: CommonString.ERROR,
+        buttonText: CommonString.OK,
+        message: response!.message.toString(),
+      ).then(
+        (value) => Get.back(),
+      );
     }
   }
 
@@ -66,38 +86,6 @@ class ClassroomController extends GetxController with CacheManager {
       );
     }
   }
-  // Stream<List<Classroom>> getStreamOfData() async* {
-  //   final response = await classroomRepository.classroom(
-  //     ClassroomModel(),
-  //     UrlProvider.HANDLES_CLASSROOM,
-  //     cacheGet(CacheManagerKey.TOKEN),
-  //   );
-  //   if (response?.statusCode == HttpStatus.ok) {
-  //     if (response?.status == 1) {
-  //       // Parse the JSON data into Dart objects
-  //       final List<dynamic> classroomList = response?.data['classrooms'];
-  //       // Convert the JSON objects to Classroom objects
-  //       final List<Classroom> classroomData =
-  //           classroomList.map((json) => Classroom.fromJson(json)).toList();
-  //       yield classroomData;
-  //     } else {
-  //       Alert.showError(
-  //         title: CommonString.ERROR,
-  //         message: "You don't have data in any classroom",
-  //         buttonText: CommonString.OK,
-  //       ).then(
-  //         (value) => Get.back(),
-  //       );
-  //     }
-  //   }
-  // }
-
-  // void fetchData() {
-  //   // Assuming `getStreamOfData()` returns the stream you want to listen to
-  //   getStreamOfData().listen((List<Classroom>? data) {
-  //     classrooms.assignAll(data ?? []);
-  //   });
-  // }
 
   getClassInfo(String classroomId) async {
     Alert.showLoadingIndicator(message: CommonString.LOADING);

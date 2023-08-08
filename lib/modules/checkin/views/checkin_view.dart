@@ -113,7 +113,7 @@ class CheckinView extends GetView<CheckinController> {
                                     child: controller.checkinDate.isEmpty
                                         ? Center(
                                             child: Text(
-                                              CheckinString.ATTENDANCE,
+                                              CheckinString.NOT_ATTENDANCE,
                                             ),
                                           )
                                         : ListView.builder(

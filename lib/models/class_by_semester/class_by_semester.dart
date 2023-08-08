@@ -9,7 +9,7 @@ class ClassBySemester {
 
   factory ClassBySemester.fromJson(Map<String, dynamic> json) {
     return ClassBySemester(
-      idSemester: json['idSemester'],
+      idSemester: json['idSemester'].toString(),
       nameSemester: json['nameSemester'],
       classroomList: List.from(json['list_classroom'])
           .map(
