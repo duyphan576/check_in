@@ -78,30 +78,26 @@ class GradeView extends GetView<GradeController> {
                                   color: AppColors.lightWhite.withOpacity(0.9),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                child: Padding(
-                                  padding: GlobalStyles.paddingAll_8,
-                                  child: controller.listGrade.isNotEmpty
-                                      ? ListView.builder(
-                                          itemCount:
-                                              controller.listGrade.length,
-                                          itemBuilder: (context, index) {
-                                            GradeModel item =
-                                                controller.listGrade[index];
-                                            return TableCustom(
-                                              gradeModel: item,
-                                            );
-                                          },
-                                        )
-                                      : Center(
-                                          child: Text(
-                                            GradeString.EMPTY_GRADE,
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                color: AppColors.main,
-                                                fontSize: 18),
-                                          ),
+                                child: controller.listGrade.isNotEmpty
+                                    ? ListView.builder(
+                                        itemCount: controller.listGrade.length,
+                                        itemBuilder: (context, index) {
+                                          GradeModel item =
+                                              controller.listGrade[index];
+                                          return TableCustom(
+                                            gradeModel: item,
+                                          );
+                                        },
+                                      )
+                                    : Center(
+                                        child: Text(
+                                          GradeString.EMPTY_GRADE,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: AppColors.main,
+                                              fontSize: 18),
                                         ),
-                                ),
+                                      ),
                               ),
                             ],
                           ),

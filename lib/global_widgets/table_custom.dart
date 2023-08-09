@@ -26,7 +26,7 @@ class TableCustom extends GetView<GradeController> {
           decoration: BoxDecoration(
             border: Border.all(
               width: 1,
-              color: AppColors.main,
+              color: AppColors.subMain,
             ),
             borderRadius: BorderRadius.circular(8),
             color: AppColors.lightWhite,
