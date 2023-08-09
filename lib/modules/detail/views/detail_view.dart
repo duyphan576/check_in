@@ -18,11 +18,6 @@ class DetailView extends GetView<DetailController> {
           () => controller.isLoading.value
               ? Container(
                   decoration: BoxDecoration(
-                    // image: DecorationImage(
-                    //   image: AssetImage(
-                    //     AppImages.bg,
-                    //   ),
-                    // ),
                     color: AppColors.lightWhite,
                   ),
                   child: Center(
@@ -69,6 +64,142 @@ class DetailView extends GetView<DetailController> {
                                               child: Text(
                                                   DetailString.EMPTY_STUDENT),
                                             )
+                                          : Container(
+                                              padding:
+                                                  GlobalStyles.paddingAll18,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: Text(
+                                                          "${DetailString.LECTURE}: ",
+                                                          style: TextStyle(
+                                                            color:
+                                                                AppColors.black,
+                                                            fontSize: 16,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      GlobalStyles
+                                                          .sizedBoxWidth,
+                                                      Expanded(
+                                                        child: Text(
+                                                          controller
+                                                              .classroom!
+                                                              .lecturer!
+                                                              .fullname
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                            color:
+                                                                AppColors.black,
+                                                            fontSize: 16,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  GlobalStyles.sizedBoxHeight,
+                                                  Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: Text(
+                                                          "${DetailString.LECTURE_ID}: ",
+                                                          style: TextStyle(
+                                                            color:
+                                                                AppColors.black,
+                                                            fontSize: 16,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      GlobalStyles
+                                                          .sizedBoxWidth,
+                                                      Expanded(
+                                                        child: Text(
+                                                          controller.classroom!
+                                                              .lecturer!.code
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                            color:
+                                                                AppColors.black,
+                                                            fontSize: 16,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  GlobalStyles.sizedBoxHeight,
+                                                  Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: Text(
+                                                          "${DetailString.TERM_ID}: ",
+                                                          style: TextStyle(
+                                                            color:
+                                                                AppColors.black,
+                                                            fontSize: 16,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      GlobalStyles
+                                                          .sizedBoxWidth,
+                                                      Expanded(
+                                                        child: Text(
+                                                          controller.classroom!
+                                                              .term!.id
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                            color:
+                                                                AppColors.black,
+                                                            fontSize: 16,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  GlobalStyles.sizedBoxHeight,
+                                                  Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: Text(
+                                                          "${DetailString.TERM_CREDIT}: ",
+                                                          style: TextStyle(
+                                                            color:
+                                                                AppColors.black,
+                                                            fontSize: 16,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      GlobalStyles
+                                                          .sizedBoxWidth,
+                                                      Expanded(
+                                                        child: Text(
+                                                          controller.classroom!
+                                                              .term!.credit
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                            color:
+                                                                AppColors.black,
+                                                            fontSize: 16,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                    ),
+                                    Container(
+                                      child: controller.studentsList.isEmpty
+                                          ? Center(
+                                              child: Text(
+                                                  DetailString.EMPTY_STUDENT),
+                                            )
                                           : ListView.builder(
                                               padding: GlobalStyles
                                                   .paddingPageLeftRight_15,
@@ -98,7 +229,7 @@ class DetailView extends GetView<DetailController> {
                                             )
                                           : ListView.builder(
                                               padding: GlobalStyles
-                                                  .paddingPageLeftRight_25,
+                                                  .paddingPageLeftRight_15,
                                               itemCount:
                                                   controller.docList.length,
                                               itemBuilder: (context, index) {
