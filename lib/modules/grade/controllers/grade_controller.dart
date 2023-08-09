@@ -226,7 +226,7 @@ class GradeController extends GetxController with CacheManager {
     headerList.add(
       HeaderContainer(
         text: GradeString.RESULT,
-        width: 50,
+        width: 100,
         height: 80,
       ),
     );
