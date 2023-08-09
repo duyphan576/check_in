@@ -78,7 +78,7 @@ class DetailView extends GetView<DetailController> {
                                                   Align(
                                                     alignment: Alignment.center,
                                                     child: Text(
-                                                      "Học kỳ",
+                                                      controller.semester!,
                                                       style: TextStyle(
                                                         color: AppColors.black,
                                                         fontWeight:
@@ -86,6 +86,10 @@ class DetailView extends GetView<DetailController> {
                                                         fontSize: 16,
                                                       ),
                                                     ),
+                                                  ),
+                                                  GlobalStyles.sizedBoxHeight,
+                                                  Divider(
+                                                    color: AppColors.black,
                                                   ),
                                                   ListTile(
                                                     title: Text(

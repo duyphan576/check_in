@@ -12,11 +12,8 @@ import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:open_file/open_file.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class DetailController extends GetxController
     with CacheManager, GetSingleTickerProviderStateMixin {
@@ -31,6 +28,7 @@ class DetailController extends GetxController
   RxBool isDocClick = false.obs;
   final classroomId = Get.arguments;
   String? grade;
+  String? semester;
   Classroom? classroom;
   final RxList<Students> studentsList = RxList<Students>();
   final RxList<Documents> docList = RxList<Documents>();
@@ -73,6 +71,7 @@ class DetailController extends GetxController
   void getDetails() {
     Detail? detail = Detail.fromJson(classData);
     grade = detail.grade;
+    semester = detail.semester;
     classroom = detail.classroom;
     List<Students>? studentData = detail.studentList;
     studentsList.assignAll(studentData!);

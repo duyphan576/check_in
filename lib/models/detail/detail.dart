@@ -5,12 +5,15 @@ import 'package:check_in/models/student/students.dart';
 class Detail {
   String? grade;
   Classroom? classroom;
+  String? semester;
+
   List<Students>? studentList;
   List<Documents>? documentList;
 
   Detail({
     this.grade,
     this.classroom,
+    this.semester,
     this.studentList,
     this.documentList,
   });
@@ -19,6 +22,7 @@ class Detail {
     return Detail(
       grade: json['grade'].toString(),
       classroom: Classroom.fromJson(json['classroom']),
+      semester: json['semester'],
       studentList: List.from(json['studentList'])
           .map(
             (studentData) => Students.fromJson(studentData),
