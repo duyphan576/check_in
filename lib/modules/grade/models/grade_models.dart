@@ -48,7 +48,6 @@ class GradeModel extends BaseApiModel {
         listGradeDetail.add(GradeDetailModel.fromJson(item));
       });
     }
-
     return GradeModel(
       idSemester: json["idSemester"].toString() ?? "", //id Học kỳ
       nameSemester: json["nameSemester"] ?? "", //tên học kỳ

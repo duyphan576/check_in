@@ -29,4 +29,15 @@ abstract class AppColors {
     Color(0xFF332F61),
     Color(0xFF452E51),
   ];
+
+  static final List<Color> listColorStatistical = [
+    Color(0xFF41D8D7),
+    Color(0xFF095BF3),
+    Color(0xFF9506F5),
+    Color(0xFFFA030D),
+    Color(0xFFF6EA06),
+    Color(0xFF81F506),
+    Color(0xFFFA8703),
+    Color(0xFF03124F),
+  ];
 }

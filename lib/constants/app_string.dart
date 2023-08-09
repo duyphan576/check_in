@@ -174,10 +174,12 @@ abstract class ForgotPasswordString {
 
 abstract class StatisticalString {
   static const String STATISTICAL = "Thống Kê";
-  static const String NOTE = "Lưu ý";
+  static const String NOTE = "Ghi chú";
   static const String GRADE_EMPTY = "Điểm trong lớp trống";
-  static const String PIE_CHART =
-      "Biểu đồ hình tròn cho thấy tỷ lệ phần trăm điểm thi của học sinh";
+  static const String PIE_CHART_EXAM =
+      "Biểu đồ tròn thể hiện tỷ lệ điểm thi của học sinh";
+  static const String PIE_CHART_FINAL =
+      "Biểu đồ tròn thể hiện tỷ lệ điểm trung bình môn của học sinh";
   static const String BAR_CHART =
       "Biểu đồ thống kê số lượng điểm đạt được của sinh viên";
   static const String BAR_NOTE = "Lưu ý biểu đồ cột:";

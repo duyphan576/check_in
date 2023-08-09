@@ -1,41 +1,35 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:check_in/constants/app_string.dart';
+import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
+import 'package:check_in/modules/statistical/models/statistical_model.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PeiChartWidget extends StatelessWidget {
   PeiChartWidget({
     super.key,
-    required this.countLessThan4Percentage,
-    required this.countForm4ToLessThan55Percentage,
-    required this.countForm55ToLessThan7Percentage,
-    required this.countFor7ToLessThan85Percentage,
-    required this.countGreaterThan85Percentage,
-    required this.count,
+    required this.listStatisticalModel,
+    required this.title,
   });
-  double countLessThan4Percentage;
-  double countForm4ToLessThan55Percentage;
-  double countForm55ToLessThan7Percentage;
-  double countFor7ToLessThan85Percentage;
-  double countGreaterThan85Percentage;
-  Map<String, int> count;
+  RxList<StatisticalModel> listStatisticalModel = <StatisticalModel>[].obs;
+  final title;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Text(
-          StatisticalString.PIE_CHART,
+          title,
           style: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16),
           maxLines: 2,
           textAlign: TextAlign.center,
         ),
-        GlobalStyles.sizedBoxHeight_25,
+        GlobalStyles.sizedBoxHeight,
         Container(
-          height: MediaQuery.of(context).size.width / 1.1,
-          width: MediaQuery.of(context).size.width / 1.1,
+          height: MediaQuery.of(context).size.width / 1.5,
+          width: MediaQuery.of(context).size.width / 1.5,
           child: PieChart(
             PieChartData(
                 centerSpaceRadius: 5,
@@ -43,115 +37,89 @@ class PeiChartWidget extends StatelessWidget {
                   show: true,
                 ),
                 sectionsSpace: 2,
-                sections: [
-                  PieChartSectionData(
-                      value: countLessThan4Percentage,
+                sections: listStatisticalModel
+                    .map((StatisticalModel statisticalModel) {
+                  var index = listStatisticalModel.indexOf(statisticalModel);
+                  return PieChartSectionData(
+                      value: double.parse(statisticalModel.percentages!),
                       showTitle: true,
-                      title:
-                          "${countLessThan4Percentage.toStringAsFixed(2)}% - ${count['countLessThan4']}",
-                      radius: 170,
-                      titlePositionPercentageOffset: 0.6,
-                      color: Colors.red),
-                  PieChartSectionData(
-                      value: countForm4ToLessThan55Percentage,
-                      showTitle: true,
-                      title:
-                          "${countForm4ToLessThan55Percentage.toStringAsFixed(2)}% - ${count['countForm4ToLessThan55']}",
-                      radius: 170,
-                      titlePositionPercentageOffset: 0.6,
-                      color: Colors.orange),
-                  PieChartSectionData(
-                      value: countForm55ToLessThan7Percentage,
-                      showTitle: true,
-                      title:
-                          "${countForm55ToLessThan7Percentage.toStringAsFixed(2)}% - ${count['countForm55ToLessThan7']}",
-                      titlePositionPercentageOffset: 0.6,
-                      radius: 170,
-                      color: Colors.yellow),
-                  PieChartSectionData(
-                      value: countFor7ToLessThan85Percentage,
-                      showTitle: true,
-                      titlePositionPercentageOffset: 0.6,
-                      title:
-                          "${countFor7ToLessThan85Percentage.toStringAsFixed(2)}% - ${count['countFor7ToLessThan85']}",
-                      radius: 170,
-                      color: Colors.green),
-                  PieChartSectionData(
-                      value: countGreaterThan85Percentage,
-                      showTitle: true,
-                      titlePositionPercentageOffset: 0.6,
-                      title:
-                          "${countGreaterThan85Percentage.toStringAsFixed(2)}% - ${count['countGreaterThan85']}",
-                      radius: 170,
-                      color: Colors.pink.shade300),
-                ]),
+                      title: statisticalModel.nameAmountPercentages,
+                      radius: 120,
+                      titlePositionPercentageOffset: 0.5,
+                      color: AppColors.listColorStatistical[index]);
+                }).toList()),
           ),
         ),
-        GlobalStyles.sizedBoxHeight_25,
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              StatisticalString.PEI_ANOUNCE,
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        GlobalStyles.sizedBoxHeight,
+        Container(
+          height: 62,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: AppColors.gray,
+              width: 1,
             ),
-            GlobalStyles.sizedBoxHeight_10,
-            countLessThan4Percentage != 0
-                ? TextWidget(
-                    color: Colors.red, titleStr: StatisticalString.PEI_GRADE_1)
-                : Container(),
-            countForm4ToLessThan55Percentage != 0
-                ? TextWidget(
-                    color: Colors.orange,
-                    titleStr: StatisticalString.PEI_GRADE_2)
-                : Container(),
-            countForm55ToLessThan7Percentage != 0
-                ? TextWidget(
-                    color: Colors.yellow,
-                    titleStr: StatisticalString.PEI_GRADE_3)
-                : Container(),
-            countFor7ToLessThan85Percentage != 0
-                ? TextWidget(
-                    color: Colors.green,
-                    titleStr: StatisticalString.PEI_GRADE_4)
-                : Container(),
-            countGreaterThan85Percentage != 0
-                ? TextWidget(
-                    color: Colors.pink.shade300,
-                    titleStr: StatisticalString.PEI_GRADE_5)
-                : Container(),
-          ],
+          ),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: listStatisticalModel.length,
+                  itemBuilder: (context, index) {
+                    final item = listStatisticalModel[index];
+                    return Container(
+                      height: 60,
+                      child: Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.gray,
+                                width: 1,
+                              ),
+                            ),
+                            child: Center(
+                                child: Text(
+                              item.subName ?? "",
+                              style: TextStyle(fontSize: 14),
+                              textAlign: TextAlign.center,
+                              textScaleFactor: 1.0,
+                            )),
+                            height: 30,
+                            width: 100,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.gray,
+                                width: 1,
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                item.nameAmountPercentages ?? "",
+                                style: TextStyle(fontSize: 14),
+                                textAlign: TextAlign.center,
+                                textScaleFactor: 1.0,
+                              ),
+                            ),
+                            height: 30,
+                            width: 100,
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                )
+              ],
+            ),
+          ),
         ),
       ],
-    );
-  }
-}
-
-class TextWidget extends StatelessWidget {
-  const TextWidget({super.key, required this.color, required this.titleStr});
-  final Color color;
-  final String titleStr;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Row(children: [
-            Icon(
-              Icons.pie_chart,
-              color: color,
-            ),
-            GlobalStyles.sizedBoxWidth,
-            Text(
-              titleStr,
-              style: TextStyle(color: Colors.black),
-            ),
-          ]),
-          GlobalStyles.sizedBoxHeight_10,
-        ],
-      ),
     );
   }
 }
