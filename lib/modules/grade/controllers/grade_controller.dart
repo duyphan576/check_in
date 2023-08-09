@@ -40,14 +40,10 @@ class GradeController extends GetxController with CacheManager {
       cacheGet(CacheManagerKey.TOKEN),
     );
     if (response?.status == 1) {
-      print(response!.data[1]);
-      final List _listRequest = response.data;
+      final List _listRequest = response?.data;
       if (_listRequest.isNotEmpty) {
-        listGrade.value = _listRequest
-            .map(
-              (value) => GradeModel.fromJson(value),
-            )
-            .toList();
+        listGrade.value =
+            _listRequest.map((value) => GradeModel.fromJson(value)).toList();
       }
       update();
       isLoading.value = false;
@@ -226,7 +222,7 @@ class GradeController extends GetxController with CacheManager {
     headerList.add(
       HeaderContainer(
         text: GradeString.RESULT,
-        width: 50,
+        width: 100,
         height: 80,
       ),
     );

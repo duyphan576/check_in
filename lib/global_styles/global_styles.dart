@@ -16,6 +16,8 @@ class GlobalStyles {
 
   static final EdgeInsets paddingPageLeftRight =
       EdgeInsets.symmetric(horizontal: 12);
+  static final EdgeInsets paddingPageLeftRight_4 =
+      EdgeInsets.symmetric(horizontal: 4);
   static final EdgeInsets paddingPageLeftRight_15 =
       EdgeInsets.symmetric(horizontal: 15);
   static final EdgeInsets paddingPageLeftRight_25 =

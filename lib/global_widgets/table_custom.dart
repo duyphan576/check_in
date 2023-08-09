@@ -29,7 +29,7 @@ class TableCustom extends GetView<GradeController> {
               color: AppColors.main,
             ),
             borderRadius: BorderRadius.circular(8),
-            color: AppColors.lightWhite,
+            color: AppColors.gray,
           ),
           child: Text(
             gradeModel.nameSemester ?? "",
@@ -42,6 +42,7 @@ class TableCustom extends GetView<GradeController> {
         ),
         GlobalStyles.sizedBoxHeight_10,
         Container(
+          padding: GlobalStyles.paddingPageLeftRight_4,
           height: 80 + gradeModel.listGradeDetail!.length * 56,
           child: TableGradeDetailView(
             listGradeDetail: gradeModel.listGradeDetail,
@@ -83,29 +84,32 @@ class TableCustom extends GetView<GradeController> {
   }
 
   Widget buildRow({title, detail}) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title ?? "",
-          style: TextStyle(
-            fontSize: 14.0,
-            fontWeight: FontWeight.bold,
-            color: AppColors.black,
+    return Padding(
+      padding: GlobalStyles.paddingPageLeftRight_4,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title ?? "",
+            style: TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.bold,
+              color: AppColors.black,
+            ),
+            textScaleFactor: 1.0,
           ),
-          textScaleFactor: 1.0,
-        ),
-        Text(
-          detail ?? "",
-          style: TextStyle(
-            fontSize: 14.0,
-            fontStyle: FontStyle.italic,
-            fontWeight: FontWeight.bold,
-            color: AppColors.black,
-          ),
-          textScaleFactor: 1.0,
-        )
-      ],
+          Text(
+            detail ?? "",
+            style: TextStyle(
+              fontSize: 14.0,
+              fontStyle: FontStyle.italic,
+              fontWeight: FontWeight.bold,
+              color: AppColors.black,
+            ),
+            textScaleFactor: 1.0,
+          )
+        ],
+      ),
     );
   }
 }
