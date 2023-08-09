@@ -21,7 +21,9 @@ class DetailView extends GetView<DetailController> {
                     color: AppColors.lightWhite,
                   ),
                   child: Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(
+                      color: AppColors.main,
+                    ),
                   ),
                 )
               : Container(
