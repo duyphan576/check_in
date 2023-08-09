@@ -59,136 +59,92 @@ class DetailView extends GetView<DetailController> {
                                   controller: controller.tabController,
                                   children: <Widget>[
                                     Container(
-                                      child: controller.studentsList.isEmpty
+                                      child: controller.classData.isEmpty
                                           ? Center(
                                               child: Text(
-                                                  DetailString.EMPTY_STUDENT),
+                                                DetailString.EMPTY_INFO,
+                                              ),
                                             )
                                           : Container(
-                                              padding:
-                                                  GlobalStyles.paddingAll18,
+                                              padding: GlobalStyles
+                                                  .paddingPageLeftRight_15,
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Text(
-                                                          "${DetailString.LECTURE}: ",
-                                                          style: TextStyle(
-                                                            color:
-                                                                AppColors.black,
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
+                                                  ListTile(
+                                                    title: Text(
+                                                      "${DetailString.LECTURE}: ",
+                                                      style: TextStyle(
+                                                        color: AppColors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
-                                                      GlobalStyles
-                                                          .sizedBoxWidth,
-                                                      Expanded(
-                                                        child: Text(
-                                                          controller
-                                                              .classroom!
-                                                              .lecturer!
-                                                              .fullname
-                                                              .toString(),
-                                                          style: TextStyle(
-                                                            color:
-                                                                AppColors.black,
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
+                                                    ),
+                                                    trailing: Text(
+                                                      controller.classroom!
+                                                          .lecturer!.fullname
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                        color: AppColors.black,
                                                       ),
-                                                    ],
+                                                    ),
                                                   ),
-                                                  GlobalStyles.sizedBoxHeight,
-                                                  Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Text(
-                                                          "${DetailString.LECTURE_ID}: ",
-                                                          style: TextStyle(
-                                                            color:
-                                                                AppColors.black,
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
+                                                  ListTile(
+                                                    title: Text(
+                                                      "${DetailString.LECTURE_ID}: ",
+                                                      style: TextStyle(
+                                                        color: AppColors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
-                                                      GlobalStyles
-                                                          .sizedBoxWidth,
-                                                      Expanded(
-                                                        child: Text(
-                                                          controller.classroom!
-                                                              .lecturer!.code
-                                                              .toString(),
-                                                          style: TextStyle(
-                                                            color:
-                                                                AppColors.black,
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
+                                                    ),
+                                                    trailing: Text(
+                                                      controller.classroom!
+                                                          .lecturer!.code
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                        color: AppColors.black,
                                                       ),
-                                                    ],
+                                                    ),
                                                   ),
-                                                  GlobalStyles.sizedBoxHeight,
-                                                  Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Text(
-                                                          "${DetailString.TERM_ID}: ",
-                                                          style: TextStyle(
-                                                            color:
-                                                                AppColors.black,
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
+                                                  ListTile(
+                                                    title: Text(
+                                                      "${DetailString.TERM_ID}: ",
+                                                      style: TextStyle(
+                                                        color: AppColors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
-                                                      GlobalStyles
-                                                          .sizedBoxWidth,
-                                                      Expanded(
-                                                        child: Text(
-                                                          controller.classroom!
-                                                              .term!.id
-                                                              .toString(),
-                                                          style: TextStyle(
-                                                            color:
-                                                                AppColors.black,
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
+                                                    ),
+                                                    trailing: Text(
+                                                      controller
+                                                          .classroom!.term!.id
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                        color: AppColors.black,
                                                       ),
-                                                    ],
+                                                    ),
                                                   ),
-                                                  GlobalStyles.sizedBoxHeight,
-                                                  Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Text(
-                                                          "${DetailString.TERM_CREDIT}: ",
-                                                          style: TextStyle(
-                                                            color:
-                                                                AppColors.black,
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
+                                                  ListTile(
+                                                    title: Text(
+                                                      "${DetailString.TERM_CREDIT}: ",
+                                                      style: TextStyle(
+                                                        color: AppColors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
-                                                      GlobalStyles
-                                                          .sizedBoxWidth,
-                                                      Expanded(
-                                                        child: Text(
-                                                          controller.classroom!
-                                                              .term!.credit
-                                                              .toString(),
-                                                          style: TextStyle(
-                                                            color:
-                                                                AppColors.black,
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
+                                                    ),
+                                                    trailing: Text(
+                                                      controller.classroom!
+                                                          .term!.credit
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                        color: AppColors.black,
                                                       ),
-                                                    ],
+                                                    ),
                                                   ),
                                                 ],
                                               ),

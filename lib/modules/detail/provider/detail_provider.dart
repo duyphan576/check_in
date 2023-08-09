@@ -8,11 +8,9 @@ class DetailProvider extends GetConnect {
 
   final HttpProvider http;
 
-  Future<BaseResponse?> detail(DetailModel detailModel, url, token) async {
-    Map<String, dynamic> submit = Map<String, dynamic>();
-    submit.addAll(detailModel.toMap());
-
-    return await http.doGetWithToken(url, token).then((response) {
+  Future<BaseResponse?> detail(
+      Map<String, dynamic> classroomId, url, token) async {
+    return await http.doPostWithToken(url, token, classroomId).then((response) {
       return BaseResponse(
           statusCode: response.statusCode,
           statusText: response.statusMessage,
