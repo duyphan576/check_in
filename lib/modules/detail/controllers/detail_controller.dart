@@ -10,12 +10,10 @@ import 'package:check_in/models/student/students.dart';
 import 'package:check_in/modules/detail/repository/detail_repository.dart';
 import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/authenticationService.dart';
+import 'package:check_in/services/domain_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:open_file/open_file.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class DetailController extends GetxController
     with CacheManager, GetSingleTickerProviderStateMixin {
@@ -28,7 +26,9 @@ class DetailController extends GetxController
   RxBool isLoading = true.obs;
   RxBool isStuClick = false.obs;
   RxBool isDocClick = false.obs;
+  final classroomId = Get.arguments;
   String? grade;
+  String? semester;
   Classroom? classroom;
   final RxList<Students> studentsList = RxList<Students>();
   final RxList<Documents> docList = RxList<Documents>();
@@ -38,38 +38,46 @@ class DetailController extends GetxController
   @override
   void onInit() {
     // TODO: implement onInit
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
     super.onInit();
     initData();
   }
 
   initData() async {
-    classData = await cacheGet(CacheManagerKey.CLASS_DATA);
-    if (classData != null) {
-      isLoading.value = false;
+    loadDetails();
+  }
+
+  void loadDetails() async {
+    final response = await detailRepository.detail(
+      {
+        "classroomId": classroomId,
+      },
+      UrlProvider.HANDLES_DETAIL,
+      cacheGet(CacheManagerKey.TOKEN),
+    );
+    if (response!.status == 1) {
+      classData = response.data;
       getDetails();
+      isLoading.value = false;
+    } else {
+      Alert.showError(
+        title: AppString.ERROR,
+        buttonText: CommonString.OK,
+        message: response.message!,
+      );
     }
   }
 
   void getDetails() {
     Detail? detail = Detail.fromJson(classData);
     grade = detail.grade;
+    semester = detail.semester;
     classroom = detail.classroom;
     List<Students>? studentData = detail.studentList;
     studentsList.assignAll(studentData!);
-    studentsList.forEach((element) {
-      print(element);
-    });
+
     List<Documents>? docData = detail.documentList;
     docList.assignAll(docData!);
-  }
-
-  void showInfo(Classroom classroom) {
-    Alert.showInfo(
-      title: classroom.term!.termName!,
-      buttonText: CommonString.OK,
-      classroom: classroom,
-    );
   }
 
   void goToStatistical(String classroomId) {
@@ -84,34 +92,4 @@ class DetailController extends GetxController
     storage.write("url", url);
     Get.toNamed(Routes.PDF);
   }
-
-  //   Future<void> downloadDocument(String url, String fileName) async {
-  //   var status = await Permission.storage.request();
-  //   if (status.isGranted) {
-  //     FileDownloader.downloadFile(
-  //         url: url,
-  //         name: fileName,
-  //         onProgress: (name, progress) {
-  //           _progress = progress;
-  //           _status = 'Progress: $progress%';
-  //         },
-  //         onDownloadCompleted: (path) {
-  //           _progress = null;
-  //           _status = 'File downloaded to: $path';
-  //         },
-  //         onDownloadError: (error) {
-  //           _progress = null;
-  //           _status = 'Download error: $error';
-  //           Alert.showError(
-  //               title: "title", message: "message", buttonText: "buttonText");
-  //         }).then((file) {
-  //       OpenFile.open(file!.path);
-  //     });
-  //   } else {
-  //     Alert.showError(
-  //         title: "Fail",
-  //         message: "Chưa cấp quyền cho ứng dụng",
-  //         buttonText: "Xác nhận");
-  //   }
-  // }
 }

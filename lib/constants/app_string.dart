@@ -268,6 +268,7 @@ abstract class DetailString {
   static const String DOCUMENT = "Tài liệu";
   static const String CLASS_INFO = "Thông tin";
   static const String EMPTY_STUDENT = "Lớp không có sinh viên";
+  static const String EMPTY_INFO = "Lớp không có thông tin";
   static const String EMPTY_DOC = "Lớp không có tài liệu";
 }
 

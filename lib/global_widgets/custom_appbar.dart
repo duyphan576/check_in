@@ -29,7 +29,6 @@ class CustomAppBar extends GetView<DetailController>
               fit: BoxFit.cover,
             ),
           ),
-          alignment: Alignment.center,
           child: ListTile(
             leading: IconButton(
               icon: Icon(
@@ -64,18 +63,18 @@ class CustomAppBar extends GetView<DetailController>
                     color: AppColors.lightWhite,
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    controller.showInfo(
-                      controller.classroom!,
-                    );
-                  },
-                  icon: Icon(
-                    Icons.info_outline_rounded,
-                    size: 28,
-                    color: AppColors.lightWhite,
-                  ),
-                ),
+                // IconButton(
+                //   onPressed: () {
+                //     controller.showInfo(
+                //       controller.classroom!,
+                //     );
+                //   },
+                //   icon: Icon(
+                //     Icons.info_outline_rounded,
+                //     size: 28,
+                //     color: AppColors.lightWhite,
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -118,6 +117,18 @@ class CustomAppBar extends GetView<DetailController>
               enableFeedback: true,
               controller: controller.tabController,
               tabs: <Widget>[
+                Tab(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      DetailString.CLASS_INFO,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
                 Tab(
                   child: Align(
                     alignment: Alignment.center,

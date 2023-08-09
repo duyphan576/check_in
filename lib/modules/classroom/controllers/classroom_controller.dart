@@ -88,18 +88,19 @@ class ClassroomController extends GetxController with CacheManager {
   }
 
   getClassInfo(String classroomId) async {
-    Alert.showLoadingIndicator(message: CommonString.LOADING);
-    final response = await classroomRepository.detail(
-      {
-        "classroomId": classroomId,
-      },
-      UrlProvider.HANDLES_DETAIL,
-      cacheGet(CacheManagerKey.TOKEN),
-    );
-    if (response?.status == 1) {
-      Alert.closeLoadingIndicator();
-      cacheSave(CacheManagerKey.CLASS_DATA, response?.data);
-      Get.toNamed(Routes.DETAIL);
-    }
+    // Alert.showLoadingIndicator(message: CommonString.LOADING);
+    // final response = await classroomRepository.detail(
+    //   {
+    //     "classroomId": classroomId,
+    //   },
+    //   UrlProvider.HANDLES_DETAIL,
+    //   cacheGet(CacheManagerKey.TOKEN),
+    // );
+    // if (response?.status == 1) {
+    //   Alert.closeLoadingIndicator();
+    //   cacheSave(CacheManagerKey.CLASS_DATA, response?.data);
+    //   Get.toNamed(Routes.DETAIL, arguments: classroomId);
+    // }
+    Get.toNamed(Routes.DETAIL, arguments: classroomId);
   }
 }
