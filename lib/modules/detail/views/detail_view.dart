@@ -74,6 +74,19 @@ class DetailView extends GetView<DetailController> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
+                                                  GlobalStyles.sizedBoxHeight,
+                                                  Align(
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      "Học kỳ",
+                                                      style: TextStyle(
+                                                        color: AppColors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16,
+                                                      ),
+                                                    ),
+                                                  ),
                                                   ListTile(
                                                     title: Text(
                                                       "${DetailString.LECTURE}: ",
