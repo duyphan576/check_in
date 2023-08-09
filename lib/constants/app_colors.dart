@@ -22,22 +22,12 @@ abstract class AppColors {
   static final Color white = Color(0xF1F1F1F1);
   static final Color blacks = Color(0xFF303030);
   static final Color accentBlue = Color(0xFF009DFF);
-  static final List<Color> listColorGradientMain = [
-    Color(0xFF41D8D7),
-    Color(0xFF21A3C6),
-    Color(0xFF285DA2),
-    Color(0xFF332F61),
-    Color(0xFF452E51),
-  ];
 
-  static final List<Color> listColorStatistical = [
-    Color(0xFF41D8D7),
-    Color(0xFF095BF3),
-    Color(0xFF9506F5),
-    Color(0xFFFA030D),
-    Color(0xFFF6EA06),
-    Color(0xFF81F506),
-    Color(0xFFFA8703),
-    Color(0xFF03124F),
+  static final List<Color> customColors = [
+    Colors.blue,
+    Colors.green,
+    Colors.orange,
+    Colors.cyan,
+    Colors.red,
   ];
 }

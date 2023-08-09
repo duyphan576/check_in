@@ -44,7 +44,6 @@ class StatisticalController extends GetxController with CacheManager {
       UrlProvider.HANDLES_SATISTICAL,
       cacheGet(CacheManagerKey.TOKEN),
     );
-    print(response?.data);
     if (response?.status == 1) {
       final List? _listRequestExam = response?.data["exam"];
       if (_listRequestExam != null && _listRequestExam.isNotEmpty) {
@@ -63,10 +62,10 @@ class StatisticalController extends GetxController with CacheManager {
     } else {
       Alert.closeLoadingIndicator();
       Alert.showError(
-              title: AppString.ERROR,
-              message: response!.message.toString(),
-              buttonText: AppString.CANCEL)
-          .then((value) => Alert.closeLoadingIndicator());
+        title: AppString.ERROR,
+        message: response!.message.toString(),
+        buttonText: AppString.CANCEL,
+      ).then((value) => Alert.closeLoadingIndicator());
     }
   }
 }

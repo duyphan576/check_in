@@ -39,11 +39,6 @@ class DetailCustom extends StatelessWidget {
             offset: Offset(0, 0), // Shadow position
           ),
         ],
-        gradient: LinearGradient(
-          colors: AppColors.listColorGradientMain,
-          begin: Alignment.bottomLeft,
-          end: Alignment.topRight,
-        ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -22,7 +22,10 @@ class PeiChartWidget extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16),
+            fontWeight: FontWeight.bold,
+            color: AppColors.black,
+            fontSize: 16,
+          ),
           maxLines: 2,
           textAlign: TextAlign.center,
         ),
@@ -32,22 +35,33 @@ class PeiChartWidget extends StatelessWidget {
           width: MediaQuery.of(context).size.width / 1.5,
           child: PieChart(
             PieChartData(
-                centerSpaceRadius: 5,
-                borderData: FlBorderData(
-                  show: true,
-                ),
-                sectionsSpace: 2,
-                sections: listStatisticalModel
-                    .map((StatisticalModel statisticalModel) {
+              centerSpaceRadius: 5,
+              borderData: FlBorderData(
+                show: true,
+              ),
+              sectionsSpace: 2,
+              sections: listStatisticalModel.map(
+                (StatisticalModel statisticalModel) {
                   var index = listStatisticalModel.indexOf(statisticalModel);
+                  List<Color> customColors = AppColors.customColors;
+
+                  // Get the color index based on the section index
+                  int colorIndex = index % customColors.length;
                   return PieChartSectionData(
-                      value: double.parse(statisticalModel.percentages!),
-                      showTitle: true,
-                      title: statisticalModel.nameAmountPercentages,
-                      radius: 120,
-                      titlePositionPercentageOffset: 0.5,
-                      color: AppColors.listColorStatistical[index]);
-                }).toList()),
+                    value: double.parse(statisticalModel.percentages!),
+                    showTitle: true,
+                    title: statisticalModel.nameAmountPercentages,
+                    titleStyle: TextStyle(
+                      color: AppColors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    radius: 120,
+                    titlePositionPercentageOffset: 0.6,
+                    color: customColors[colorIndex],
+                  );
+                },
+              ).toList(),
+            ),
           ),
         ),
         GlobalStyles.sizedBoxHeight,

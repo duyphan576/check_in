@@ -60,114 +60,126 @@ class DetailView extends GetView<DetailController> {
                                 child: TabBarView(
                                   controller: controller.tabController,
                                   children: <Widget>[
-                                    Container(
-                                      child: controller.classData.isEmpty
-                                          ? Center(
-                                              child: Text(
-                                                DetailString.EMPTY_INFO,
+                                    SingleChildScrollView(
+                                      child: Container(
+                                        child: controller.classData.isEmpty
+                                            ? Center(
+                                                child: Text(
+                                                  DetailString.EMPTY_INFO,
+                                                ),
+                                              )
+                                            : Container(
+                                                padding: GlobalStyles
+                                                    .paddingPageLeftRight_15,
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    GlobalStyles.sizedBoxHeight,
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Text(
+                                                        controller.semester!,
+                                                        style: TextStyle(
+                                                          color:
+                                                              AppColors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    GlobalStyles.sizedBoxHeight,
+                                                    Divider(
+                                                      color: AppColors.black,
+                                                    ),
+                                                    ListTile(
+                                                      title: Text(
+                                                        "${DetailString.LECTURE}: ",
+                                                        style: TextStyle(
+                                                          color:
+                                                              AppColors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                      trailing: Text(
+                                                        controller.classroom!
+                                                            .lecturer!.fullname
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                          color:
+                                                              AppColors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    ListTile(
+                                                      title: Text(
+                                                        "${DetailString.LECTURE_ID}: ",
+                                                        style: TextStyle(
+                                                          color:
+                                                              AppColors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                      trailing: Text(
+                                                        controller.classroom!
+                                                            .lecturer!.code
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                          color:
+                                                              AppColors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    ListTile(
+                                                      title: Text(
+                                                        "${DetailString.TERM_ID}: ",
+                                                        style: TextStyle(
+                                                          color:
+                                                              AppColors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                      trailing: Text(
+                                                        controller
+                                                            .classroom!.term!.id
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                          color:
+                                                              AppColors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    ListTile(
+                                                      title: Text(
+                                                        "${DetailString.TERM_CREDIT}: ",
+                                                        style: TextStyle(
+                                                          color:
+                                                              AppColors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                      trailing: Text(
+                                                        controller.classroom!
+                                                            .term!.credit
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                          color:
+                                                              AppColors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            )
-                                          : Container(
-                                              padding: GlobalStyles
-                                                  .paddingPageLeftRight_15,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  GlobalStyles.sizedBoxHeight,
-                                                  Align(
-                                                    alignment: Alignment.center,
-                                                    child: Text(
-                                                      controller.semester!,
-                                                      style: TextStyle(
-                                                        color: AppColors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  GlobalStyles.sizedBoxHeight,
-                                                  Divider(
-                                                    color: AppColors.black,
-                                                  ),
-                                                  ListTile(
-                                                    title: Text(
-                                                      "${DetailString.LECTURE}: ",
-                                                      style: TextStyle(
-                                                        color: AppColors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                    trailing: Text(
-                                                      controller.classroom!
-                                                          .lecturer!.fullname
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                        color: AppColors.black,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  ListTile(
-                                                    title: Text(
-                                                      "${DetailString.LECTURE_ID}: ",
-                                                      style: TextStyle(
-                                                        color: AppColors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                    trailing: Text(
-                                                      controller.classroom!
-                                                          .lecturer!.code
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                        color: AppColors.black,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  ListTile(
-                                                    title: Text(
-                                                      "${DetailString.TERM_ID}: ",
-                                                      style: TextStyle(
-                                                        color: AppColors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                    trailing: Text(
-                                                      controller
-                                                          .classroom!.term!.id
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                        color: AppColors.black,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  ListTile(
-                                                    title: Text(
-                                                      "${DetailString.TERM_CREDIT}: ",
-                                                      style: TextStyle(
-                                                        color: AppColors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                    trailing: Text(
-                                                      controller.classroom!
-                                                          .term!.credit
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                        color: AppColors.black,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
+                                      ),
                                     ),
                                     Container(
                                       child: controller.studentsList.isEmpty
