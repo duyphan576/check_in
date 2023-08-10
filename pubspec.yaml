@@ -69,6 +69,8 @@ dependencies:
   geolocator: ^9.0.2
   dropdown_search: ^5.0.6
   horizontal_data_table: ^4.3.1
+  firebase_messaging: ^14.6.5
+  flutter_local_notifications: ^15.1.0+1
 
 flutter_icons:
   android: "icon_notification"

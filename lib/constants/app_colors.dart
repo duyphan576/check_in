@@ -29,5 +29,9 @@ abstract class AppColors {
     Colors.orange,
     Colors.cyan,
     Colors.red,
+    Colors.amber,
+    Colors.lightBlue,
+    Colors.teal,
+    Colors.yellow,
   ];
 }

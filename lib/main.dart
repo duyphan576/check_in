@@ -3,12 +3,14 @@ import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/global_service.dart';
 import 'package:check_in/utils/dismiss_keyboard.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -27,35 +29,59 @@ Future<void> main() async {
   FirebaseApp app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseMessaging.instance.setAutoInitEnabled(true);
   String initialRoute = AppPages.INITIAL;
   await GetStorage.init();
   await Get.putAsync(() => GlobalService().init());
   print('Initialized default app $app');
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+  print("fcmToken: " + fcmToken.toString());
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent, // transparent status bar
   ));
+  const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', // id
+    'High Importance Notifications', // title
+    importance: Importance.max,
+  );
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    RemoteNotification? notification = message.notification;
+    AndroidNotification? android = message.notification?.android;
+
+    // If `onMessage` is triggered with a notification, construct our own
+    // local notification to show to users using the created channel.
+    if (notification != null && android != null) {
+      flutterLocalNotificationsPlugin.show(
+          notification.hashCode,
+          notification.title,
+          notification.body,
+          NotificationDetails(
+            android: AndroidNotificationDetails(
+              channel.id,
+              channel.name,
+              icon: android.smallIcon,
+              // other properties...
+            ),
+          ));
+    }
+  });
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(
     DismissKeyboard(
       child: GetMaterialApp(
         localizationsDelegates: [
-          // FlutterI18nDelegate(
-          //   translationLoader: NetworkFileTranslationLoader(
-          //     baseUri: Uri.https(
-          //         dotenv.env['HOMEPAGE'] ?? "", DomainProvider.LANG_NETWORK),
-          //     fallbackFile: DomainProvider.LANG_INITIAL,
-          //     forcedLocale: Locale("vi"),
-          //   ),
-          //   missingTranslationHandler: (key, locale) {
-          //     debugPrint(
-          //       '--- Missing Key: $key, languageCode: ${locale?.languageCode}, ${dotenv.env['HOMEPAGE']}, ${DomainProvider.LANG_NETWORK}',
-          //     );
-          //   },
-          // ),
           GlobalCupertinoLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
@@ -76,31 +102,11 @@ Future<void> main() async {
   );
 }
 
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Sizer(builder: (context, orientation, device) {
-//       return GetMaterialApp(
-//         debugShowCheckedModeBanner: false,
-//         title: 'Student Checkin App',
-//         theme: ThemeData(
-//           primarySwatch: Colors.blue,
-//         ),
-//         home: const MyHomePage(title: 'Login Page'),
-//       );
-//     });
-//   }
-// }
-//
-// class MyHomePage extends StatelessWidget {
-//   const MyHomePage({Key? key, required this.title}) : super(key: key);
-//
-//   final String title;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return SplashView();
-//   }
-// }
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+
+  print("Handling a background message: ${message.messageId}");
+}

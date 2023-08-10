@@ -6,6 +6,7 @@ import 'package:check_in/modules/home/repository/home_repository.dart';
 import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController with CacheManager {
@@ -21,6 +22,7 @@ class HomeController extends GetxController with CacheManager {
     // TODO: implement onInit
     super.onInit();
     initData();
+    setupInteractedMessage();
   }
 
   initData() async {
@@ -50,5 +52,21 @@ class HomeController extends GetxController with CacheManager {
         Get.offAllNamed(Routes.LOGIN);
       });
     }
+  }
+
+  Future<void> setupInteractedMessage() async {
+    // Get any messages which caused the application to open from
+    // a terminated state.
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+
+    // If the message also contains a data property with a "type" of "chat",
+    // navigate to a chat screen
+    if (initialMessage != null) {
+      print(initialMessage);
+    }
+
+    // Also handle any interaction when the app is in the background via a
+    // Stream listener
   }
 }
