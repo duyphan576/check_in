@@ -69,11 +69,15 @@ dependencies:
   geolocator: ^9.0.2
   dropdown_search: ^5.0.6
   horizontal_data_table: ^4.3.1
+  firebase_messaging: ^14.6.1
+  flutter_local_notifications: ^9.1.4
 
 flutter_icons:
-  android: "icon_notification"
+  android: "app_icon"
   ios: true
-  image_path: "assets/images/OIG.png"
+  image_path: "assets/images/app_icon.png"
+
+
 
 dependency_overrides:
   intl: any

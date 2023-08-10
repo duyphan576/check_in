@@ -25,4 +25,22 @@ class HomeProvider extends GetConnect {
       return BaseResponse(statusText: onError.toString(), statusCode: 400);
     });
   }
+
+  Future<BaseResponse?> getUnreadMessage(HomeModel homeModel) async {
+    Map<String, dynamic> submit = Map<String, dynamic>();
+    // submit.addAll(_defaultBody);
+    submit.addAll(homeModel.toMap());
+
+    return await http.doPost("", submit).then((response) {
+      return BaseResponse(
+          statusCode: response.statusCode,
+          statusText: response.statusMessage,
+          status: response.data['error'],
+          data: response.data['data'] ?? {},
+          message:
+              response.data['message'] != null ? response.data['message'] : "");
+    }).catchError((onError) {
+      return BaseResponse(statusText: onError.toString(), statusCode: 400);
+    });
+  }
 }

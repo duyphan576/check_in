@@ -5,11 +5,31 @@
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <queries>
+        <!-- If your app opens https URLs -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <!-- If your app makes calls -->
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+            <data android:scheme="tel" />
+        </intent>
+        <!-- If your app emails -->
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="*/*" />
+        </intent>
+    </queries>
    <application
         android:label="SGU Connect"
-        android:icon="@mipmap/icon_notification">
+        android:icon="@mipmap/app_icon">
+       <meta-data
+           android:name="com.google.firebase.messaging.default_notification_icon"
+           android:resource="@drawable/app_icon" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -17,6 +37,8 @@
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
+            android:requestLegacyExternalStorage="true"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
             <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user
@@ -24,7 +46,7 @@
                  to determine the Window background behind the Flutter UI. -->
             <meta-data
               android:name="io.flutter.embedding.android.NormalTheme"
-              android:resource="@style/NormalTheme"
+              android:resource="@drawable/icon_notification"
               />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -39,5 +61,8 @@
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="barcode" />
+       <meta-data
+           android:name="com.google.firebase.messaging.default_notification_channel_id"
+           android:value="high_importance_channel" />
     </application>
 </manifest>
