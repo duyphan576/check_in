@@ -72,6 +72,14 @@ dependencies:
   firebase_messaging: ^14.6.1
   flutter_local_notifications: ^9.1.4
 
+
+
+
+
+
+
+  flutter_html: ^3.0.0-alpha.6
+
 flutter_icons:
   android: "app_icon"
   ios: true
