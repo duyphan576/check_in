@@ -291,3 +291,7 @@ abstract class CheckinString {
   static const String MORNING = "Buổi sáng";
   static const String AFTERNOON = "Buổi chiều";
 }
+
+abstract class NotificationString {
+  static const String TITLE_NOTIFICATION_DETAIL = "Chi tiết thông báo";
+}

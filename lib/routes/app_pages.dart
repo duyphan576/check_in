@@ -14,6 +14,8 @@ import 'package:check_in/modules/home/bindings/home_binding.dart';
 import 'package:check_in/modules/home/views/home_view.dart';
 import 'package:check_in/modules/login/bindings/login_binding.dart';
 import 'package:check_in/modules/login/views/login_view.dart';
+import 'package:check_in/modules/notification_detail/bindings/notification_detail_binding.dart';
+import 'package:check_in/modules/notification_detail/views/notification_detail_view.dart';
 import 'package:check_in/modules/pdf_page/bindings/pdf_page_binding.dart';
 import 'package:check_in/modules/pdf_page/views/pdf_page_view.dart';
 import 'package:check_in/modules/profile/bindings/profile_binding.dart';
@@ -96,6 +98,11 @@ class AppPages {
       name: _Paths.QR,
       page: () => QrView(),
       binding: QrBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIFICATION_DETAIL,
+      page: () => NotificationDetailView(),
+      binding: NotificationDetailBinding(),
     ),
   ];
 }
