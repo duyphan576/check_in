@@ -70,6 +70,14 @@ dependencies:
   dropdown_search: ^5.0.6
   horizontal_data_table: ^4.3.1
 
+
+
+
+
+
+
+  flutter_html: ^3.0.0-alpha.6
+
 flutter_icons:
   android: "icon_notification"
   ios: true

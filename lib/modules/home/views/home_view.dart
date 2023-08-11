@@ -109,6 +109,15 @@ class HomeView extends GetView<HomeController> {
                                     height: height,
                                     width: width,
                                   ),
+                                  InkWellCustom(
+                                    function: () {
+                                      Get.toNamed(Routes.NOTIFICATION_DETAIL);
+                                    },
+                                    text: HomeString.GRADE,
+                                    icon: Icons.grade,
+                                    height: height,
+                                    width: width,
+                                  ),
                                 ],
                               ),
                             ],
