@@ -24,128 +24,6 @@ final BehaviorSubject<String?> notificationData = BehaviorSubject<String?>();
 AndroidNotificationChannel? channel;
 FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage? message) async {
-  // If you're going to use other Firebase services in the background, such as Firestore,
-  // make sure you call `initializeApp` before using other Firebase services.
-  await Firebase.initializeApp();
-
-  // print('Handling a background message ${message.messageId}');
-}
-
-_setToken(String token) {
-  print("tokentokentokentokentoken");
-  print(token);
-  final globalService = Get.find<GlobalService>();
-  globalService.token = token;
-}
-
-//received notification ios from foreground
-Future onDidReceiveLocalNotification(
-    int id, String? title, String? body, String? payload) async {
-  if (payload != null) {
-    Map<String, dynamic>? result = json.decode(payload);
-
-    if (result != null && result['id'] != null) {
-      final globalService = Get.find<GlobalService>();
-      final storage = GetStorage();
-      globalService.notificationData.add(payload);
-
-      //id: id của request
-      //idNotification: id của Notification
-      //isApproval: 1: detail Need Approval, 2: detail My Request., 4: confirm, 5: bổ sung hồ sơ
-      // if (result['isApproval'] != null && result['isApproval'] == "1") {
-      //   var summitData = {
-      //     "id": result['id'],
-      //     "idNotification": result['idNotification'],
-      //     "isApproval": result['isApproval']
-      //   };
-      //   Get.toNamed(Routes.REQUEST_DETAIL, arguments: summitData);
-      // } else if (result['isApproval'] != null && result['isApproval'] == "2") {
-      //   var summitData = {
-      //     "id": result['id'],
-      //     "idNotification": result['idNotification'],
-      //     "isApproval": result['isApproval']
-      //   };
-      //   Get.toNamed(Routes.REQUEST_DETAIL, arguments: summitData);
-      // } else if (result['isApproval'] != null && result['isApproval'] == "4") {
-      //   var summitData = {
-      //     "id": result['id'],
-      //     "idNotification": result['idNotification'],
-      //     "isApproval": result['isApproval']
-      //   };
-      //   Get.toNamed(Routes.RP_CONFIRMATION_DETAIL, arguments: summitData);
-      // } else if (result['isApproval'] != null && result['isApproval'] == "5") {
-      //   var summitData = {
-      //     "id": result['id'],
-      //     "idNotification": result['idNotification'],
-      //     "isApproval": result['isApproval']
-      //   };
-      //   Get.toNamed(Routes.PAY_VOTES_DETAIL, arguments: summitData);
-      // } else if (result['isApproval'] != null && result['isApproval'] == "6") {
-      //   var summitData = {
-      //     "id": result['id'],
-      //     "idNotification": result['idNotification'],
-      //     "isApproval": result['isApproval']
-      //   };
-      //   Get.toNamed(Routes.INTERNAL_MONEY_TRANSFER_DETAIL,
-      //       arguments: summitData);
-      // }
-    }
-  }
-}
-
-Future<dynamic> onSelectNotification(String? payload) async {
-  if (payload != null) {
-    Map<String, dynamic>? result = json.decode(payload);
-    if (result != null && result['id'] != null) {
-      final globalService = Get.find<GlobalService>();
-      final storage = GetStorage();
-      globalService.notificationData.add(payload);
-      //id: id của request
-      //idNotification: id của Notification
-      //isApproval: 1: detail Need Approval, 2: detail My Request.
-
-      // if (result['isApproval'] != null && result['isApproval'] == "1") {
-      //   var summitData = {
-      //     "id": result['id'],
-      //     "idNotification": result['idNotification'],
-      //     "isApproval": result['isApproval']
-      //   };
-      //   Get.toNamed(Routes.REQUEST_DETAIL, arguments: summitData);
-      // } else if (result['isApproval'] != null && result['isApproval'] == "2") {
-      //   var summitData = {
-      //     "id": result['id'],
-      //     "idNotification": result['idNotification'],
-      //     "isApproval": result['isApproval']
-      //   };
-      //   Get.toNamed(Routes.REQUEST_DETAIL, arguments: summitData);
-      // } else if (result['isApproval'] != null && result['isApproval'] == "4") {
-      //   var summitData = {
-      //     "id": result['id'],
-      //     "idNotification": result['idNotification'],
-      //     "isApproval": result['isApproval']
-      //   };
-      //   Get.toNamed(Routes.RP_CONFIRMATION_DETAIL, arguments: summitData);
-      // } else if (result['isApproval'] != null && result['isApproval'] == "5") {
-      //   var summitData = {
-      //     "id": result['id'],
-      //     "idNotification": result['idNotification'],
-      //     "isApproval": result['isApproval']
-      //   };
-      //   Get.toNamed(Routes.PAY_VOTES_DETAIL, arguments: summitData);
-      // } else if (result['isApproval'] != null && result['isApproval'] == "6") {
-      //   var summitData = {
-      //     "id": result['id'],
-      //     "idNotification": result['idNotification'],
-      //     "isApproval": result['isApproval']
-      //   };
-      //   Get.toNamed(Routes.INTERNAL_MONEY_TRANSFER_DETAIL,
-      //       arguments: summitData);
-      // }
-    }
-  }
-}
-
 Future<void> main() async {
   if (kReleaseMode) {
     await dotenv.load(fileName: '.env.prod');
@@ -187,18 +65,33 @@ Future<void> main() async {
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel!);
+
+  // Định nghĩa cài đặt khởi tạo cho Android và iOS cho thông báo nội bộ.
+  // Đối với Android, nó xác định biểu tượng ứng dụng sẽ được sử dụng trong các thông báo.
+  // Đối với iOS, nó yêu cầu quyền cho cảnh báo (alerts), biểu tượng (badges) và âm thanh (sound),
+  // và xác định một hàm gọi lại (callback) khi nhận thông báo nội bộ.
   var androidInitSettings = AndroidInitializationSettings("app_icon");
   var iosInitSettings = IOSInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
       onDidReceiveLocalNotification: onDidReceiveLocalNotification);
+
+  // Kết hợp cài đặt khởi tạo cho Android và iOS thành một đối tượng InitializationSettings duy nhất.
   var initSettings = InitializationSettings(
-      android: androidInitSettings, iOS: iosInitSettings);
+    android: androidInitSettings,
+    iOS: iosInitSettings,
+  );
 
-  flutterLocalNotificationsPlugin!
-      .initialize(initSettings, onSelectNotification: onSelectNotification);
+// Khởi tạo plugin Flutter Local Notifications với cài đặt khởi tạo kết hợp.
+// onSelectNotification được xác định là callback sẽ được kích hoạt khi người dùng chạm vào thông báo.
+  flutterLocalNotificationsPlugin!.initialize(
+    initSettings,
+    onSelectNotification: onSelectNotification,
+  );
 
+// Lấy mã FCM và set bằng cách sử dụng hàm _setToken.
+// Nếu xảy ra ngoại lệ (exception) trong quá trình lấy mã, nó bắt lỗi và đặt một mã trống.
   try {
     var fcmToken = await FirebaseMessaging.instance.getToken();
     if (fcmToken != null) {
@@ -209,93 +102,90 @@ Future<void> main() async {
     _setToken("");
   }
 
-  FirebaseMessaging.instance
-      .getInitialMessage()
-      .then((RemoteMessage? message) async {
-    if (message != null && (await Utils.getFcmId(message.messageId!)) == null) {
-      Utils.setFcmId(message.messageId!);
-      final globalService = Get.find<GlobalService>();
-      globalService.navigateNotification.add(json.encode(message.data));
-    }
-  });
+// Lắng nghe các tin nhắn FCM được sử dụng để mở ứng dụng (khi ứng dụng đang ở chế độ background hoặc đã bị tắt).
+  FirebaseMessaging.instance.getInitialMessage().then(
+    (RemoteMessage? message) async {
+      if (message != null &&
+          (await Utils.getFcmId(message.messageId!)) == null) {
+        Utils.setFcmId(message.messageId!);
+        final globalService = Get.find<GlobalService>();
+        globalService.navigateNotification.add(
+          json.encode(message.data),
+        );
+      }
+    },
+  );
 
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    RemoteNotification? notification = message.notification;
-    Map<String, dynamic> data = message.data;
-    AndroidNotification? android = message.notification!.android;
-    if (GetPlatform.isIOS) {
-      final homeController = Get.find<HomeController>();
+// Xử lý dữ liệu thông báo và thực hiện các hành động cụ thể dựa trên loại thông báo.
+  FirebaseMessaging.onMessage.listen(
+    (RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      Map<String, dynamic> data = message.data;
+      print(data);
+      AndroidNotification? android = message.notification!.android;
+      if (GetPlatform.isIOS) {
+        final homeController = Get.find<HomeController>();
 
-      homeController.initListMessage();
-    }
-    if (notification != null && android != null && !kIsWeb) {
-      final globalService = Get.find<GlobalService>();
-      globalService.notificationData.add(json.encode(data));
-      flutterLocalNotificationsPlugin!.show(
+        homeController.initListMessage();
+      }
+      if (notification != null && android != null && !kIsWeb) {
+        final globalService = Get.find<GlobalService>();
+        globalService.notificationData.add(json.encode(data));
+        flutterLocalNotificationsPlugin!.show(
           notification.hashCode,
           notification.title,
           notification.body,
           NotificationDetails(
-            android: AndroidNotificationDetails(channel!.id, channel!.name,
-                // TODO add a proper drawable resource to android, for now using
-                //      one that already exists in example app.
-                icon: 'app_icon',
-                importance: Importance.high),
+            android: AndroidNotificationDetails(
+              channel!.id, channel!.name,
+              // TODO add a proper drawable resource to android, for now using
+              //      one that already exists in example app.
+              icon: 'app_icon',
+              importance: Importance.high,
+            ),
           ),
-          payload: json.encode(data));
-    }
-  });
+          payload: json.encode(data),
+        );
+      }
+    },
+  );
 
-  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage? message) {
-    if (message != null) {
-      final globalService = Get.find<GlobalService>();
-      globalService.notificationData.add(json.encode(message.data));
+// Lắng nghe các tin nhắn FCM được sử dụng để mở ứng dụng (khi ứng dụng đang ở chế độ background hoặc đã bị tắt).
+  FirebaseMessaging.onMessageOpenedApp.listen(
+    (RemoteMessage? message) {
+      if (message != null) {
+        final globalService = Get.find<GlobalService>();
+        globalService.notificationData.add(json.encode(message.data));
 
-      // if (message.data['isApproval'] != null &&
-      //     message.data['isApproval'] == "1") {
-      //   var summitData = {
-      //     "id": message.data['id'],
-      //     "idNotification": message.data['idNotification'],
-      //     "isApproval": message.data['isApproval']
-      //   };
-      //   Get.toNamed(Routes.REQUEST_DETAIL, arguments: summitData);
-      // } else if (message.data['isApproval'] != null &&
-      //     message.data['isApproval'] == "2") {
-      //   var summitData = {
-      //     "id": message.data['id'],
-      //     "idNotification": message.data['idNotification'],
-      //     "isApproval": message.data['isApproval']
-      //   };
-      //   Get.toNamed(Routes.REQUEST_DETAIL, arguments: summitData);
-      // } else if (message.data['isApproval'] != null &&
-      //     message.data['isApproval'] == "4") {
-      //   var summitData = {
-      //     "id": message.data['id'],
-      //     "idNotification": message.data['idNotification'],
-      //     "isApproval": message.data['isApproval']
-      //   };
-      //   Get.toNamed(Routes.RP_CONFIRMATION_DETAIL, arguments: summitData);
-      // } else if (message.data['isApproval'] != null &&
-      //     message.data['isApproval'] == "5") {
-      //   var summitData = {
-      //     "id": message.data['id'],
-      //     "idNotification": message.data['idNotification'],
-      //     "isApproval": message.data['isApproval']
-      //   };
-      //   Get.toNamed(Routes.PAY_VOTES_DETAIL, arguments: summitData);
-      // } else if (message.data['isApproval'] != null &&
-      //     message.data['isApproval'] == "6") {
-      //   var summitData = {
-      //     "id": message.data['id'],
-      //     "idNotification": message.data['idNotification'],
-      //     "isApproval": message.data['isApproval']
-      //   };
-      //   Get.toNamed(Routes.INTERNAL_MONEY_TRANSFER_DETAIL,
-      //       arguments: summitData);
-      // }
-      debugPrint('A new onMessageOpenedApp event was published!');
-    }
-  });
+        if (message.data['type'] != null && message.data['type'] == "1") {
+          var summitData = {
+            "id": message.data['id'],
+            "idNotification": message.data['idNotification'],
+            "type": message.data['type']
+          };
+          Get.toNamed(Routes.CHECKIN, arguments: summitData);
+        } else if (message.data['type'] != null &&
+            message.data['type'] == "2") {
+          var summitData = {
+            "id": message.data['id'],
+            "idNotification": message.data['idNotification'],
+            "type": message.data['type']
+          };
+          Get.toNamed(Routes.GRADE, arguments: summitData);
+        } else if (message.data['type'] != null &&
+            message.data['type'] == "3") {
+          var summitData = {
+            "id": message.data['id'],
+            "idNotification": message.data['idNotification'],
+            "type": message.data['type']
+          };
+          Get.toNamed(Routes.NOTIFICATION_DETAIL, arguments: summitData);
+        }
+        debugPrint('A new onMessageOpenedApp event was published!');
+      }
+    },
+  );
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
@@ -340,4 +230,89 @@ Future<void> main() async {
       ),
     ),
   );
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage? message) async {
+  await Firebase.initializeApp();
+}
+
+_setToken(String token) {
+  print(token);
+  final globalService = Get.find<GlobalService>();
+  globalService.token = token;
+}
+
+//received notification ios from foreground
+Future onDidReceiveLocalNotification(
+    int id, String? title, String? body, String? payload) async {
+  if (payload != null) {
+    Map<String, dynamic>? result = json.decode(payload);
+
+    if (result != null && result['id'] != null) {
+      final globalService = Get.find<GlobalService>();
+      globalService.notificationData.add(payload);
+
+      //id: id của request
+      //idNotification: id của Notification
+      //type: 1: detail Need Approval, 2: detail My Request., 4: confirm, 5: bổ sung hồ sơ
+      if (result['type'] != null && result['type'] == "1") {
+        var summitData = {
+          "id": result['id'],
+          "idNotification": result['idNotification'],
+          "type": result['type']
+        };
+        Get.toNamed(Routes.CHECKIN, arguments: summitData);
+      } else if (result['type'] != null && result['type'] == "2") {
+        var summitData = {
+          "id": result['id'],
+          "idNotification": result['idNotification'],
+          "type": result['type']
+        };
+        Get.toNamed(Routes.GRADE, arguments: summitData);
+      } else if (result['type'] != null && result['type'] == "3") {
+        var summitData = {
+          "id": result['id'],
+          "idNotification": result['idNotification'],
+          "type": result['type']
+        };
+        Get.toNamed(Routes.NOTIFICATION_DETAIL, arguments: summitData);
+      }
+    }
+  }
+}
+
+Future<dynamic> onSelectNotification(String? payload) async {
+  if (payload != null) {
+    Map<String, dynamic>? result = json.decode(payload);
+    if (result != null && result['id'] != null) {
+      final globalService = Get.find<GlobalService>();
+      globalService.notificationData.add(payload);
+      //id: id của request
+      //idNotification: id của Notification
+      //type: 1: detail Need Approval, 2: detail My Request.
+
+      if (result['type'] != null && result['type'] == "1") {
+        var summitData = {
+          "id": result['id'],
+          "idNotification": result['idNotification'],
+          "type": result['type']
+        };
+        Get.toNamed(Routes.CHECKIN, arguments: summitData);
+      } else if (result['type'] != null && result['type'] == "2") {
+        var summitData = {
+          "id": result['id'],
+          "idNotification": result['idNotification'],
+          "type": result['type']
+        };
+        Get.toNamed(Routes.GRADE, arguments: summitData);
+      } else if (result['type'] != null && result['type'] == "3") {
+        var summitData = {
+          "id": result['id'],
+          "idNotification": result['idNotification'],
+          "type": result['type']
+        };
+        Get.toNamed(Routes.NOTIFICATION_DETAIL, arguments: summitData);
+      }
+    }
+  }
 }

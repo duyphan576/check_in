@@ -34,6 +34,7 @@ class LoginController extends GetxController with CacheManager {
 
   @override
   void onInit() {
+    print(cacheGet(CacheManagerKey.TOKEN));
     super.onInit();
     initData();
   }

@@ -11,6 +11,6 @@ class HomeRepository {
   Future<BaseResponse?> home(HomeModel homeModel, url, token) =>
       homeProvider.home(homeModel, url, token);
 
-  Future<BaseResponse?> getUnreadMessage(HomeModel homeModel) =>
-      homeProvider.getUnreadMessage(homeModel);
+  Future<BaseResponse?> getUnreadMessage(HomeModel homeModel, url, token) =>
+      homeProvider.getUnreadMessage(homeModel, url, token);
 }

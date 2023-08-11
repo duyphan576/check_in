@@ -1,14 +1,13 @@
-import 'package:check_in/core/base_response.dart';
+import 'package:check_in/core/index.dart';
 import 'package:check_in/services/http_provider.dart';
 import 'package:get/get.dart';
 
-class ProfileProvider extends GetConnect {
-  ProfileProvider({required this.http});
+class NotificationProvider extends GetConnect {
+  NotificationProvider({required this.http});
 
   final HttpProvider http;
-
-  Future<BaseResponse?> profile(Map<String, dynamic> data, url, token) async {
-    return await http.doPostWithToken(url, token, data).then((response) {
+  Future<BaseResponse?> notification(url, token) async {
+    return await http.doGetWithToken(url, token).then((response) {
       return BaseResponse(
           statusCode: response.statusCode,
           statusText: response.statusMessage,

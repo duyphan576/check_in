@@ -1,10 +1,10 @@
 import 'package:check_in/constants/index.dart';
-import 'package:check_in/core/alert.dart';
-import 'package:check_in/core/cache_manager.dart';
 import 'package:check_in/modules/notification_detail/models/notification_detail_model.dart';
 import 'package:check_in/modules/notification_detail/repository/notification_detail_repository.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
+
+import 'package:check_in/core/index.dart';
 import 'package:get/get.dart';
 
 class NotificationDetailController extends GetxController with CacheManager {
@@ -45,4 +45,12 @@ class NotificationDetailController extends GetxController with CacheManager {
       ).then((value) => Alert.closeLoadingIndicator());
     }
   }
+
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
+  @override
+  void onClose() {}
 }

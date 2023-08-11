@@ -13,7 +13,7 @@ class GradeController extends GetxController with CacheManager {
   final GradeRepository gradeRepository;
   var userData;
   RxBool isLoading = true.obs;
-
+  var param;
   GradeController({required this.gradeRepository});
 
   RxList<GradeModel> listGrade = <GradeModel>[].obs;
@@ -30,6 +30,8 @@ class GradeController extends GetxController with CacheManager {
     if (userData != null) {
       isLoading.value = true;
     }
+    param = Get.arguments;
+    if (param != null) {}
     getGradesData();
   }
 

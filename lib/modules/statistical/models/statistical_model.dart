@@ -33,7 +33,7 @@ class StatisticalModel extends BaseApiModel {
 
   factory StatisticalModel.fromJson(Map<String, dynamic> json) {
     return StatisticalModel(
-      percentages: json["percentages"].toString() ?? "", //giá trị phần %
+      percentages: json["percentages"].toString(), //giá trị phần %
       nameAmountPercentages:
           json["nameAmountPercentages"] ?? "", //tên hiển thị trên biểu đồ
       name: json["name"] ?? "", //têm loại thống kê

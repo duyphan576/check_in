@@ -1,12 +1,10 @@
 import 'package:check_in/constants/index.dart';
 import 'package:check_in/core/index.dart';
-import 'package:check_in/modules/profile/models/profile_model.dart';
 import 'package:check_in/modules/profile/repository/profile_repository.dart';
 import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/domain_service.dart';
 import 'package:check_in/utils/validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:intl/intl.dart';

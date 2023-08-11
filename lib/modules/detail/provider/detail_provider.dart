@@ -1,5 +1,4 @@
 import 'package:check_in/core/base_response.dart';
-import 'package:check_in/modules/detail/models/detail_model.dart';
 import 'package:check_in/services/http_provider.dart';
 import 'package:get/get.dart';
 

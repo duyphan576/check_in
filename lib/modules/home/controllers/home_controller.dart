@@ -8,6 +8,7 @@ import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
 import 'package:check_in/services/global_service.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class HomeController extends GetxController with CacheManager {
   final HomeRepository homeRepository;
@@ -15,6 +16,8 @@ class HomeController extends GetxController with CacheManager {
   var userData;
   RxBool isLoading = true.obs;
   var params;
+  RxInt countUnreadMessage = 0.obs;
+
   final globalService = Get.find<GlobalService>();
 
   HomeController({required this.homeRepository});
@@ -44,7 +47,9 @@ class HomeController extends GetxController with CacheManager {
     final response = await homeRepository.home(
       HomeModel(),
       UrlProvider.HANDLES_LOGOUT,
-      cacheGet(CacheManagerKey.TOKEN),
+      cacheGet(
+        CacheManagerKey.TOKEN,
+      ),
     );
     if (response?.status == 1) {
       Alert.closeLoadingIndicator();
@@ -63,43 +68,40 @@ class HomeController extends GetxController with CacheManager {
 
   initListMessage() async {
     isLoading.value = true;
-    // final response = await homeRepository.getUnreadMessage(HomeModel(
-    //     act: DomainProvider.NOTIFICATION,
-    //     plus: PlusProvider.TOTAL_NOTIFICATION,
-    //     userId: userId));
-    // if (response?.statusCode == HttpStatus.ok) {
-    //   isLoading.value = false;
-    //   if (response?.status == 0) {
-    //     homeModel = HomeModel.fromJson(response?.data);
-    //     countUnreadMessage.value = homeModel?.total ?? 0;
-    //   } else {
-    //     countUnreadMessage.value = 0;
-    //   }
-    // } else {
-    //   isLoading.value = false;
-    //   countUnreadMessage.value = 0;
-    // }
+    final response = await homeRepository.getUnreadMessage(
+      HomeModel(),
+      // UrlProvider.HANDLES_LOGOUT,
+      "",
+      cacheGet(
+        CacheManagerKey.TOKEN,
+      ),
+    );
+    if (response?.statusCode == HttpStatus.ok) {
+      isLoading.value = false;
+      if (response?.status == 0) {
+        countUnreadMessage.value = response?.data["total"] ?? 0;
+      } else {
+        countUnreadMessage.value = 0;
+      }
+    } else {
+      isLoading.value = false;
+      countUnreadMessage.value = 0;
+    }
   }
 
   @override
   void onReady() {
-    // if (params != null &&
-    //     params['id'] != null &&
-    //     (params['isApproval'] == "1" || params['isApproval'] == "2")) {
-    //   Get.toNamed(Routes.REQUEST_DETAIL, arguments: params);
-    // } else if (params != null &&
-    //     params['id'] != null &&
-    //     params['isApproval'] == "4") {
-    //   Get.toNamed(Routes.RP_CONFIRMATION_DETAIL, arguments: params);
-    // } else if (params != null &&
-    //     params['id'] != null &&
-    //     params['isApproval'] == "5") {
-    //   Get.toNamed(Routes.PAY_VOTES_DETAIL, arguments: params);
-    // } else if (params != null &&
-    //     params['id'] != null &&
-    //     params['isApproval'] == "6") {
-    //   Get.toNamed(Routes.INTERNAL_MONEY_TRANSFER_DETAIL, arguments: params);
-    // }
+    if (params != null && params['id'] != null && (params['type'] == "1")) {
+      Get.toNamed(Routes.CHECKIN, arguments: params);
+    } else if (params != null &&
+        params['id'] != null &&
+        params['type'] == "2") {
+      Get.toNamed(Routes.GRADE, arguments: params);
+    } else if (params != null &&
+        params['id'] != null &&
+        params['type'] == "3") {
+      Get.toNamed(Routes.NOTIFICATION_DETAIL, arguments: params);
+    }
     super.onReady();
   }
 }

@@ -216,6 +216,11 @@ abstract class ClassroomString {
   static const String ENTER = "Hãy nhập học kỳ";
 }
 
+abstract class NotificationString {
+  static const String NOTIFICATION = "Thông báo";
+  static const String EMPTY_NOTIFICATION = "Không có thông báo";
+}
+
 abstract class GradeString {
   static const String GRADE = "Điểm";
   static const String NAME_TERM = "Môn học";
@@ -292,6 +297,6 @@ abstract class CheckinString {
   static const String AFTERNOON = "Buổi chiều";
 }
 
-abstract class NotificationString {
+abstract class NotificationDetailString {
   static const String TITLE_NOTIFICATION_DETAIL = "Chi tiết thông báo";
 }

@@ -15,7 +15,7 @@ class NotificationDetailModel extends BaseApiModel {
       userId: '',
       detail: '',
       act: '',
-      plus: '',
+      plus: "",
     );
   }
 

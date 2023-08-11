@@ -26,7 +26,8 @@ class HomeProvider extends GetConnect {
     });
   }
 
-  Future<BaseResponse?> getUnreadMessage(HomeModel homeModel) async {
+  Future<BaseResponse?> getUnreadMessage(
+      HomeModel homeModel, url, token) async {
     Map<String, dynamic> submit = Map<String, dynamic>();
     // submit.addAll(_defaultBody);
     submit.addAll(homeModel.toMap());

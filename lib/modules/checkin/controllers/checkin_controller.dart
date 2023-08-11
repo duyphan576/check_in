@@ -42,6 +42,7 @@ class CheckinController extends GetxController with CacheManager {
   RxList<Classroom> classroom = RxList<Classroom>();
   RxList<CheckinDate> checkinDate = RxList<CheckinDate>();
   final RxList<CheckinHistory> listCheckHistory = RxList<CheckinHistory>();
+  var param;
 
   CheckinController({required this.checkinRepository});
 
@@ -49,7 +50,12 @@ class CheckinController extends GetxController with CacheManager {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    initData();
+    param = Get.arguments;
+    if (param != null && param != "") {
+      print(cacheGet(CacheManagerKey.TOKEN));
+      getCheckinHistory();
+    } else
+      initData();
   }
 
   initData() async {
@@ -147,6 +153,7 @@ class CheckinController extends GetxController with CacheManager {
     isLoading.value = true;
     listCheckHistory.value = [];
     final response = await checkinRepository.history(
+      // {id: ""},
       UrlProvider.HANDLES_HISTORY,
       cacheGet(CacheManagerKey.TOKEN),
     );

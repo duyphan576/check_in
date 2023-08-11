@@ -2,6 +2,7 @@ import 'package:check_in/constants/index.dart';
 import 'package:check_in/global_styles/global_styles.dart';
 import 'package:check_in/global_widgets/inkwell_custom.dart';
 import 'package:check_in/global_widgets/left_drawer.dart';
+import 'package:check_in/global_widgets/notification_widget.dart';
 import 'package:check_in/global_widgets/student_data.dart';
 import 'package:check_in/modules/home/controllers/home_controller.dart';
 import 'package:check_in/routes/app_pages.dart';
@@ -18,17 +19,17 @@ class HomeView extends GetView<HomeController> {
       builder: (controller) {
         return Obx(
           () => controller.isLoading.value
-              ? Center(
-                  child: CircularProgressIndicator(),
+              ? Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.lightWhite,
+                  ),
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 )
               : Container(
                   decoration: BoxDecoration(
                     color: AppColors.lightWhite,
-                    // image: DecorationImage(
-                    //   image: AssetImage(
-                    //     AppImages.bg,
-                    //   ),
-                    // ),
                   ),
                   child: SafeArea(
                     child: Scaffold(
@@ -61,7 +62,14 @@ class HomeView extends GetView<HomeController> {
                         iconTheme: IconThemeData(
                           color: AppColors.lightWhite,
                         ),
+                        actions: [
+                          Padding(
+                            padding: GlobalStyles.paddingAll_8,
+                            child: NotificationWidget(),
+                          )
+                        ],
                       ),
+
                       drawer: LeftDrawer(),
                       body: SingleChildScrollView(
                         child: Padding(
@@ -103,15 +111,6 @@ class HomeView extends GetView<HomeController> {
                                   InkWellCustom(
                                     function: () {
                                       Get.toNamed(Routes.GRADE);
-                                    },
-                                    text: HomeString.GRADE,
-                                    icon: Icons.grade,
-                                    height: height,
-                                    width: width,
-                                  ),
-                                  InkWellCustom(
-                                    function: () {
-                                      Get.toNamed(Routes.NOTIFICATION_DETAIL);
                                     },
                                     text: HomeString.GRADE,
                                     icon: Icons.grade,

@@ -8,4 +8,6 @@ class GradeRepository {
   final GradeProvider gradeProvider;
   Future<BaseResponse?> grade(GradeModel gradeModel, url, token) =>
       gradeProvider.grade(gradeModel, url, token);
+  Future<BaseResponse?> seen(Map<String, dynamic> id, url, token) =>
+      gradeProvider.seen(id, url, token);
 }

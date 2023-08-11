@@ -15,7 +15,7 @@ class NotificationDetailView extends GetView<NotificationDetailController> {
         return Obx(() => Scaffold(
               appBar: AppBar(
                 title: Text(
-                  NotificationString.TITLE_NOTIFICATION_DETAIL,
+                  NotificationDetailString.TITLE_NOTIFICATION_DETAIL,
                   style: TextStyle(
                     color: AppColors.lightWhite,
                     fontSize: 24,
