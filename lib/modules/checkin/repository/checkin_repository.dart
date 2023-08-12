@@ -7,8 +7,8 @@ class CheckinRepository {
 
   final CheckinProvider checkinProvider;
 
-  Future<BaseResponse?> checkin(Map<String, dynamic> wifi, url, token) =>
-      checkinProvider.checkin(wifi, url, token);
+  Future<BaseResponse?> doPost(Map<String, dynamic> data, url, token) =>
+      checkinProvider.doPost(data, url, token);
   Future<BaseResponse?> history(url, token) =>
       checkinProvider.history(url, token);
 }

@@ -13,36 +13,39 @@ class NotificationDetailController extends GetxController with CacheManager {
   RxBool isLoading = false.obs;
   Rx<NotificationDetailModel> notificationDetail =
       NotificationDetailModel().obs;
+  var param;
+  RxString content = "".obs;
 
   NotificationDetailController({required this.notificationDetailRepository});
 
   @override
   void onInit() {
     super.onInit();
-    //loadData();
+    setSeen();
   }
 
-  void loadData() async {
+  Future<void> setSeen() async {
     isLoading.value = true;
-    final response = await notificationDetailRepository.loadData(
-      NotificationDetailModel(),
-      UrlProvider.HANDLES_SATISTICAL,
-      cacheGet(CacheManagerKey.TOKEN),
-    );
-    if (response?.status == 1) {
-      final _request = response?.data;
-      if (_request != null && _request.isNotEmpty) {
-        notificationDetail.value = NotificationDetailModel.fromJson(_request);
+    param = Get.arguments;
+    if (param != null) {
+      final response = await notificationDetailRepository.seen(
+        {
+          "id": param.toString(),
+        },
+        UrlProvider.HANDLES_SEEN_NOTIFICATION,
+        cacheGet(CacheManagerKey.TOKEN),
+      );
+      if (response!.status == 1) {
+        content.value = response.data;
+        isLoading.value = false;
+        update();
+      } else {
+        Alert.showError(
+          title: AppString.ERROR,
+          message: response.message.toString(),
+          buttonText: AppString.CANCEL,
+        ).then((value) => Get.back());
       }
-      update();
-      isLoading.value = false;
-    } else {
-      Alert.closeLoadingIndicator();
-      Alert.showError(
-        title: AppString.ERROR,
-        message: response!.message.toString(),
-        buttonText: AppString.CANCEL,
-      ).then((value) => Alert.closeLoadingIndicator());
     }
   }
 

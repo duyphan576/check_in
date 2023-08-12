@@ -37,6 +37,7 @@ class HomeController extends GetxController with CacheManager {
 
   initData() async {
     userData = await cacheGet(CacheManagerKey.CUSTOMER_INFO);
+    initListMessage();
     if (userData != null) {
       isLoading.value = false;
     }
@@ -44,7 +45,7 @@ class HomeController extends GetxController with CacheManager {
 
   logout() async {
     Alert.showLoadingIndicator(message: HomeString.LOGOUT);
-    final response = await homeRepository.home(
+    final response = await homeRepository.doGet(
       HomeModel(),
       UrlProvider.HANDLES_LOGOUT,
       cacheGet(
@@ -68,18 +69,17 @@ class HomeController extends GetxController with CacheManager {
 
   initListMessage() async {
     isLoading.value = true;
-    final response = await homeRepository.getUnreadMessage(
+    final response = await homeRepository.doGet(
       HomeModel(),
-      // UrlProvider.HANDLES_LOGOUT,
-      "",
+      UrlProvider.HANDLES_COUNT_NOTIFICATION,
       cacheGet(
         CacheManagerKey.TOKEN,
       ),
     );
     if (response?.statusCode == HttpStatus.ok) {
       isLoading.value = false;
-      if (response?.status == 0) {
-        countUnreadMessage.value = response?.data["total"] ?? 0;
+      if (response?.status == 1) {
+        countUnreadMessage.value = response?.data ?? 0;
       } else {
         countUnreadMessage.value = 0;
       }

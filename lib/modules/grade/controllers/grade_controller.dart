@@ -20,9 +20,23 @@ class GradeController extends GetxController with CacheManager {
   RxList<GradeDetailModel> listGradeDetail = <GradeDetailModel>[].obs;
 
   @override
-  void onInit() async {
+  void onInit() {
     super.onInit();
+    setSeen();
     initData();
+  }
+
+  Future<void> setSeen() async {
+    param = Get.arguments;
+    if (param != null) {
+      await gradeRepository.seen(
+        {
+          "id": param.toString(),
+        },
+        UrlProvider.HANDLES_SEEN_NOTIFICATION,
+        cacheGet(CacheManagerKey.TOKEN),
+      );
+    }
   }
 
   initData() async {
@@ -30,8 +44,7 @@ class GradeController extends GetxController with CacheManager {
     if (userData != null) {
       isLoading.value = true;
     }
-    param = Get.arguments;
-    if (param != null) {}
+
     getGradesData();
   }
 
@@ -58,6 +71,9 @@ class GradeController extends GetxController with CacheManager {
       );
     }
   }
+
+  @override
+  void onClose() {}
 
   getListHeaderTitle(context) {
     List<Widget> headerList = [];

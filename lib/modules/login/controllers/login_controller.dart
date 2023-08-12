@@ -5,6 +5,7 @@ import 'package:check_in/modules/login/repository/login_repository.dart';
 import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/authenticationService.dart';
 import 'package:check_in/services/domain_service.dart';
+import 'package:check_in/services/global_service.dart';
 import 'package:check_in/utils/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,6 +28,7 @@ class LoginController extends GetxController with CacheManager {
   RxBool isNewUser = true.obs;
   RxBool onTapIcon = true.obs;
   RxInt bioType = 0.obs;
+  final globalService = Get.find<GlobalService>();
 
   final LocalAuthentication auth = LocalAuthentication();
 
@@ -34,7 +36,6 @@ class LoginController extends GetxController with CacheManager {
 
   @override
   void onInit() {
-    print(cacheGet(CacheManagerKey.TOKEN));
     super.onInit();
     initData();
   }
@@ -107,6 +108,7 @@ class LoginController extends GetxController with CacheManager {
           LoginModel(
             code: code,
             password: password,
+            notifyToken: globalService.token,
           ),
           UrlProvider.HANDLES_LOGIN);
       if (response?.statusCode == HttpStatus.ok) {

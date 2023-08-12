@@ -12,4 +12,5 @@ abstract class UrlProvider {
   static const String HANDLES_SATISTICAL = "student/grade-list";
   static const String HANDLES_NOTIFICATION = "student/notification";
   static const String HANDLES_SEEN_NOTIFICATION = "student/seen-notification";
+  static const String HANDLES_COUNT_NOTIFICATION = "student/count-notification";
 }

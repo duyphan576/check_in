@@ -7,8 +7,8 @@ class CheckinProvider extends GetConnect {
 
   final HttpProvider http;
 
-  Future<BaseResponse?> checkin(Map<String, dynamic> wifi, url, token) async {
-    return await http.doPostWithToken(url, token, wifi).then((response) {
+  Future<BaseResponse?> doPost(Map<String, dynamic> data, url, token) async {
+    return await http.doPostWithToken(url, token, data).then((response) {
       return BaseResponse(
           statusCode: response.statusCode,
           statusText: response.statusMessage,

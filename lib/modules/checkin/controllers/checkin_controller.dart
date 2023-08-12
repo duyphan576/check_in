@@ -52,7 +52,7 @@ class CheckinController extends GetxController with CacheManager {
     super.onInit();
     param = Get.arguments;
     if (param != null && param != "") {
-      print(cacheGet(CacheManagerKey.TOKEN));
+      setSeen();
       getCheckinHistory();
     } else
       initData();
@@ -77,7 +77,7 @@ class CheckinController extends GetxController with CacheManager {
         "wifiName": wifiName.value,
         "wifiBSSID": wifiBSSID.value,
       };
-      final response = await checkinRepository.checkin(
+      final response = await checkinRepository.doPost(
         submit,
         UrlProvider.HANDLES_CHECKIN,
         cacheGet(CacheManagerKey.TOKEN),
@@ -203,5 +203,18 @@ class CheckinController extends GetxController with CacheManager {
       return formattedDate;
     }
     return "";
+  }
+
+  Future<void> setSeen() async {
+    param = Get.arguments;
+    if (param != null) {
+      await checkinRepository.doPost(
+        {
+          "id": param.toString(),
+        },
+        UrlProvider.HANDLES_SEEN_NOTIFICATION,
+        cacheGet(CacheManagerKey.TOKEN),
+      );
+    }
   }
 }

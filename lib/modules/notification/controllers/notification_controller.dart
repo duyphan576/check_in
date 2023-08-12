@@ -2,6 +2,7 @@ import 'package:check_in/constants/index.dart';
 import 'package:check_in/core/index.dart';
 import 'package:check_in/models/notification/notification.dart';
 import 'package:check_in/modules/notification/repository/notification_repository.dart';
+import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/domain_service.dart';
 import 'package:check_in/services/global_service.dart';
 import 'package:get/get.dart';
@@ -14,39 +15,51 @@ class NotificationController extends GetxController with CacheManager {
   RxBool isLoading = true.obs;
   RxList<NotificationModel> notificationList = RxList<NotificationModel>();
 
-  var arguments;
-
   NotificationController({required this.notificationRepository});
 
   @override
   void onInit() async {
+    notificationList.value = [];
+    if (notificationList.isEmpty != true) {
+      initData();
+    }
+    globalService.notificationData.stream.listen((String? payload) {
+      if (payload == null) return;
+      notificationList.value = [];
+      initData();
+    });
+
     super.onInit();
-    initData();
   }
 
   void initData() async {
-    final response = await notificationRepository.notification(
-      UrlProvider.HANDLES_NOTIFICATION,
-      cacheGet(CacheManagerKey.TOKEN),
-    );
-    print(response?.status);
-    if (response!.status == 1) {
-      for (final list in response.data) {
-        NotificationModel notification = NotificationModel.fromJson(list);
-        notificationList.add(notification);
+    isLoading.value = true;
+    notificationList.value = [];
+    if (notificationList.isEmpty == true) {
+      final response = await notificationRepository.notification(
+        UrlProvider.HANDLES_NOTIFICATION,
+        cacheGet(CacheManagerKey.TOKEN),
+      );
+      if (response!.status == 1) {
+        for (final list in response.data) {
+          NotificationModel notification = NotificationModel.fromJson(list);
+          notificationList.add(notification);
+        }
+        isLoading.value = false;
+        update();
+      } else {
+        notificationList.value = [];
+        Alert.showError(
+          title: AppString.ERROR,
+          message: response.message.toString(),
+          buttonText: AppString.CANCEL,
+        ).then((value) => Get.back());
       }
-      isLoading.value = false;
-    } else {
-      Alert.showError(
-        title: AppString.ERROR,
-        message: response.message.toString(),
-        buttonText: AppString.CANCEL,
-      ).then((value) => Get.back());
     }
   }
 
   @override
-  void onReady() {
+  void onReady() async {
     super.onReady();
   }
 
@@ -81,64 +94,35 @@ class NotificationController extends GetxController with CacheManager {
     }
   }
 
-  var json = {
-    "success": 1,
-    "message": "Get notification in list successfully",
-    "data": [
-      {
-        "id": "1",
-        "type": "3",
-        "idNotification": "1",
-        "title": "Test",
-        "body": "Test Notification",
-        "time": "2023-08-02T02:14:39.000000Z",
-        "status": "0"
-      },
-      {
-        "id": "2",
-        "type": "1",
-        "idNotification": "",
-        "title": "Test",
-        "body": "Test Notification",
-        "time": "2023-08-02T02:14:39.000000Z",
-        "status": "0"
-      },
-      {
-        "id": "3",
-        "type": "1",
-        "idNotification": "3",
-        "title": "Test",
-        "body": "Test Notification",
-        "time": "2023-08-02T02:14:39.000000Z",
-        "status": "1"
-      },
-      {
-        "id": "4",
-        "type": "3",
-        "idNotification": "4",
-        "title": "Test",
-        "body": "Test Notification",
-        "time": "2023-08-02T02:14:39.000000Z",
-        "status": "1"
-      },
-      {
-        "id": "5",
-        "type": "2",
-        "idNotification": "5",
-        "title": "Test",
-        "body": "Test Notification",
-        "time": "2023-08-02T02:14:39.000000Z",
-        "status": "1"
-      },
-      {
-        "id": "6",
-        "type": "3",
-        "idNotification": "6",
-        "title": "Test",
-        "body": "Test Notification",
-        "time": "2023-08-02T02:14:39.000000Z",
-        "status": "1"
-      }
-    ]
-  };
+  routesPage(NotificationModel notify) {
+    final type = notify.type;
+    switch (type) {
+      case "1":
+        Get.toNamed(
+          Routes.CHECKIN,
+          arguments: notify.id,
+        )!
+            .then(
+          (value) => initData(),
+        );
+        break;
+      case "2":
+        Get.toNamed(
+          Routes.GRADE,
+          arguments: notify.id,
+        )!
+            .then(
+          (value) => initData(),
+        );
+        break;
+      case "3":
+        Get.toNamed(
+          Routes.NOTIFICATION_DETAIL,
+          arguments: notify.id,
+        )!
+            .then(
+          (value) => initData(),
+        );
+    }
+  }
 }

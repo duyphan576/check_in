@@ -56,7 +56,7 @@ class NotificationView extends GetView<NotificationController> {
                     )
                   ],
                 ),
-                body: !controller.isLoading.value
+                body: controller.isLoading.value == false
                     ? Container(
                         padding: GlobalStyles.paddingAll18,
                         child: controller.notificationList.isNotEmpty
@@ -88,35 +88,8 @@ class NotificationView extends GetView<NotificationController> {
                                               ),
                                               child: InkWell(
                                                 onTap: () {
-                                                  final type =
-                                                      notification.type;
-                                                  switch (type) {
-                                                    case "1":
-                                                      Get.toNamed(
-                                                        Routes.CHECKIN,
-                                                        arguments:
-                                                            notification.id,
-                                                      );
-                                                      break;
-                                                    case "2":
-                                                      Get.toNamed(
-                                                        Routes.GRADE,
-                                                        arguments:
-                                                            notification.id,
-                                                      );
-                                                      break;
-                                                    case "3":
-                                                      Get.toNamed(
-                                                        Routes
-                                                            .NOTIFICATION_DETAIL,
-                                                        arguments: {
-                                                          "id": notification.id,
-                                                          "idNotification":
-                                                              notification
-                                                                  .idNotification,
-                                                        },
-                                                      );
-                                                  }
+                                                  controller
+                                                      .routesPage(notification);
                                                 },
                                                 child: ListTile(
                                                   title: Padding(
@@ -172,36 +145,8 @@ class NotificationView extends GetView<NotificationController> {
                                               ),
                                               child: InkWell(
                                                 onTap: () {
-                                                  final type =
-                                                      notification.type;
-                                                  print(type);
-                                                  switch (type) {
-                                                    case "1":
-                                                      Get.toNamed(
-                                                        Routes.CHECKIN,
-                                                        arguments:
-                                                            notification.id,
-                                                      );
-                                                      break;
-                                                    case "2":
-                                                      Get.toNamed(
-                                                        Routes.GRADE,
-                                                        arguments:
-                                                            notification.id,
-                                                      );
-                                                      break;
-                                                    case "3":
-                                                      Get.toNamed(
-                                                        Routes
-                                                            .NOTIFICATION_DETAIL,
-                                                        arguments: {
-                                                          "id": notification.id,
-                                                          "idNotification":
-                                                              notification
-                                                                  .idNotification,
-                                                        },
-                                                      );
-                                                  }
+                                                  controller
+                                                      .routesPage(notification);
                                                 },
                                                 child: ListTile(
                                                   title: Padding(
@@ -251,7 +196,10 @@ class NotificationView extends GetView<NotificationController> {
                                 ),
                               ),
                       )
-                    : SizedBox(),
+                    : Center(
+                        child: CircularProgressIndicator(
+                        color: AppColors.main,
+                      )),
               ),
             ),
           ),

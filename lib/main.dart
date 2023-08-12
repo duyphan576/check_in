@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:check_in/global_binding/app_bindings.dart';
 import 'package:check_in/modules/home/controllers/home_controller.dart';
+import 'package:check_in/modules/notification/controllers/notification_controller.dart';
 import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/global_service.dart';
 import 'package:check_in/utils/dismiss_keyboard.dart';
@@ -121,12 +122,13 @@ Future<void> main() async {
     (RemoteMessage message) {
       RemoteNotification? notification = message.notification;
       Map<String, dynamic> data = message.data;
-      print(data);
       AndroidNotification? android = message.notification!.android;
       if (GetPlatform.isIOS) {
         final homeController = Get.find<HomeController>();
+        final notificationController = Get.find<NotificationController>();
 
         homeController.initListMessage();
+        notificationController.initData();
       }
       if (notification != null && android != null && !kIsWeb) {
         final globalService = Get.find<GlobalService>();
@@ -237,7 +239,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage? message) async {
 }
 
 _setToken(String token) {
-  print(token);
   final globalService = Get.find<GlobalService>();
   globalService.token = token;
 }

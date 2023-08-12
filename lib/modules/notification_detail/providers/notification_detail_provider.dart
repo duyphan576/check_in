@@ -8,12 +8,8 @@ class NotificationDetailProvider extends GetConnect {
 
   final HttpProvider http;
 
-  Future<BaseResponse?> loadData(
-      NotificationDetailModel notificationDetailModel, url, token) async {
-    Map<String, dynamic> submit = Map<String, dynamic>();
-    submit.addAll(notificationDetailModel.toMap());
-
-    return await http.doPostWithToken(url, token, submit).then((response) {
+  Future<BaseResponse?> seen(Map<String, dynamic> id, url, token) async {
+    return await http.doPostWithToken(url, token, id).then((response) {
       return BaseResponse(
           statusCode: response.statusCode,
           statusText: response.statusMessage,
