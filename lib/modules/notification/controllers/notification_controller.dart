@@ -6,6 +6,7 @@ import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/domain_service.dart';
 import 'package:check_in/services/global_service.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class NotificationController extends GetxController with CacheManager {
   final NotificationRepository notificationRepository;
@@ -20,7 +21,7 @@ class NotificationController extends GetxController with CacheManager {
   @override
   void onInit() async {
     notificationList.value = [];
-    if (notificationList.isEmpty != true) {
+    if (notificationList.isEmpty == true) {
       initData();
     }
     globalService.notificationData.stream.listen((String? payload) {
@@ -56,6 +57,20 @@ class NotificationController extends GetxController with CacheManager {
         ).then((value) => Get.back());
       }
     }
+  }
+
+  showConfirm() {
+    Alert.showConfirmDialog(detail: "Bạn có muốn đánh dấu đã đọc tất cả không?")
+        .then((value) {
+      if (value == true) {
+        seenAllNotification();
+        update();
+      }
+    });
+  }
+
+  seenAllNotification() async {
+    isLoading.value = true;
   }
 
   @override

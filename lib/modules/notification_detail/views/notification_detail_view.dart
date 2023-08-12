@@ -66,11 +66,14 @@ class NotificationDetailView extends GetView<NotificationDetailController> {
                             children: [
                               Html(
                                 data: controller.content.value,
-                                // "<p><strong>Thông báo Nghỉ Lễ Quốc Khánh 2/9/2023.</strong></p><p>Thực hiện theo Nghi định của Chính Phủ và Kế hoạch hoạt động của Nhà trường, Ban Giám hiệu thông báo đến tất cả giảng viên và sinh viên toàn trường lịch nghỉ lễ cụ thể như sau:</p><p>Thời gian nghỉ lễ: từ 01/9 đến 04/9 (do ngày 02/9 nhầm ngày nghỉ hàng tuần nên được nghỉ bù vào ngày 04/9).</p><p>Thời gian làm việc trở lại: 05/9.</p><p>Ban Quản trị SGU Conect.</p><p><a href=\"https://www.sgu.edu.vn/\">Trường Đại học Sài Gòn</a></p>",
                                 onLinkTap: (url, attributes, element) async {
                                   await launchUrlString(url!);
                                 },
                                 style: {
+                                  "img": Style(
+                                    height: Height(200),
+                                    width: Width(200),
+                                  ),
                                   "table": Style(
                                     backgroundColor:
                                         Color.fromARGB(0x50, 0xee, 0xee, 0xee),
