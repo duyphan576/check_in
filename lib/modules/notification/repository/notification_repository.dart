@@ -7,4 +7,6 @@ class NotificationRepository {
   final NotificationProvider notificationProvider;
   Future<BaseResponse?> notification(url, token) =>
       notificationProvider.notification(url, token);
+  Future<BaseResponse?> doGet(url, token) =>
+      notificationProvider.doGet(url, token);
 }

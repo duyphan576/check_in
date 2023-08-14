@@ -70,10 +70,7 @@ class NotificationDetailView extends GetView<NotificationDetailController> {
                                   await launchUrlString(url!);
                                 },
                                 style: {
-                                  "img": Style(
-                                    height: Height(200),
-                                    width: Width(200),
-                                  ),
+                                  "img": Style(),
                                   "table": Style(
                                     backgroundColor:
                                         Color.fromARGB(0x50, 0xee, 0xee, 0xee),

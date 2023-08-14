@@ -54,11 +54,13 @@ class LoginController extends GetxController with CacheManager {
         availableBiometrics.contains(BiometricType.strong)) {
       // Face ID.
       bioType.value = 1;
+      biometricLogin();
     }
     if (availableBiometrics.contains(BiometricType.fingerprint) ||
         availableBiometrics.contains(BiometricType.weak)) {
       // Touch ID.
       bioType.value = 2;
+      biometricLogin();
     }
   }
 

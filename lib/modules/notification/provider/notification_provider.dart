@@ -19,4 +19,18 @@ class NotificationProvider extends GetConnect {
       return BaseResponse(statusText: onError.toString(), statusCode: 400);
     });
   }
+
+  Future<BaseResponse?> doGet(url, token) async {
+    return await http.doGetWithToken(url, token).then((response) {
+      return BaseResponse(
+          statusCode: response.statusCode,
+          statusText: response.statusMessage,
+          status: response.data['success'],
+          data: response.data['data'] ?? {},
+          message:
+              response.data['message'] != null ? response.data['message'] : "");
+    }).catchError((onError) {
+      return BaseResponse(statusText: onError.toString(), statusCode: 400);
+    });
+  }
 }

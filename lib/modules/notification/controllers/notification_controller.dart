@@ -6,7 +6,6 @@ import 'package:check_in/routes/app_pages.dart';
 import 'package:check_in/services/domain_service.dart';
 import 'package:check_in/services/global_service.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class NotificationController extends GetxController with CacheManager {
   final NotificationRepository notificationRepository;
@@ -20,10 +19,7 @@ class NotificationController extends GetxController with CacheManager {
 
   @override
   void onInit() async {
-    notificationList.value = [];
-    if (notificationList.isEmpty == true) {
-      initData();
-    }
+    initData();
     globalService.notificationData.stream.listen((String? payload) {
       if (payload == null) return;
       notificationList.value = [];
@@ -35,27 +31,25 @@ class NotificationController extends GetxController with CacheManager {
 
   void initData() async {
     isLoading.value = true;
-    notificationList.value = [];
-    if (notificationList.isEmpty == true) {
-      final response = await notificationRepository.notification(
-        UrlProvider.HANDLES_NOTIFICATION,
-        cacheGet(CacheManagerKey.TOKEN),
-      );
-      if (response!.status == 1) {
-        for (final list in response.data) {
-          NotificationModel notification = NotificationModel.fromJson(list);
-          notificationList.add(notification);
-        }
-        isLoading.value = false;
-        update();
-      } else {
-        notificationList.value = [];
-        Alert.showError(
-          title: AppString.ERROR,
-          message: response.message.toString(),
-          buttonText: AppString.CANCEL,
-        ).then((value) => Get.back());
+    final response = await notificationRepository.notification(
+      UrlProvider.HANDLES_NOTIFICATION,
+      cacheGet(CacheManagerKey.TOKEN),
+    );
+    if (response!.status == 1) {
+      notificationList.clear();
+      for (final list in response.data) {
+        NotificationModel notification = NotificationModel.fromJson(list);
+        notificationList.add(notification);
       }
+      isLoading.value = false;
+      update();
+    } else {
+      notificationList.value = [];
+      Alert.showError(
+        title: AppString.ERROR,
+        message: response.message.toString(),
+        buttonText: AppString.CANCEL,
+      ).then((value) => Get.back());
     }
   }
 
@@ -71,6 +65,22 @@ class NotificationController extends GetxController with CacheManager {
 
   seenAllNotification() async {
     isLoading.value = true;
+    final response = await notificationRepository.doGet(
+      UrlProvider.HANDLES_SEEN_ALL_NOTIFICATION,
+      cacheGet(CacheManagerKey.TOKEN),
+    );
+    if (response!.status == 1) {
+      isLoading.value = false;
+      initData();
+    } else {
+      isLoading.value = false;
+
+      Alert.showError(
+        title: AppString.ERROR,
+        message: response.message.toString(),
+        buttonText: AppString.CANCEL,
+      ).then((value) => Get.back());
+    }
   }
 
   @override

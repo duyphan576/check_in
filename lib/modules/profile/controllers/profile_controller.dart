@@ -101,6 +101,15 @@ class ProfileController extends GetxController with CacheManager {
     }
   }
 
+  showConfirm() {
+    Alert.showConfirmDialog(detail: "Xác nhận gửi").then((value) {
+      if (value == true) {
+        active();
+        update();
+      }
+    });
+  }
+
   getFormatedDate(date) {
     var inputFormat = DateFormat('yyyy-MM-dd');
     var inputDate = inputFormat.parse(date);

@@ -283,15 +283,15 @@ class Alert {
     return showDialog(
       context: Get.context!,
       builder: (BuildContext context) => CupertinoAlertDialog(
-        title: Text(FlutterI18n.translate(context, "COMMON.confirm")),
+        title: Text(AppString.CONFIRM),
         content: Text(detail ?? ""),
         actions: <Widget>[
           CupertinoDialogAction(
-            child: Text(FlutterI18n.translate(context, "COMMON.ok")),
+            child: Text(AppString.OK),
             onPressed: () => Get.back(result: true),
           ),
           CupertinoDialogAction(
-            child: Text(FlutterI18n.translate(context, "COMMON.cancel")),
+            child: Text(AppString.CANCEL),
             onPressed: () => Get.back(result: false),
           )
         ],

@@ -49,7 +49,9 @@ class NotificationView extends GetView<NotificationController> {
                   ),
                   actions: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.showConfirm();
+                      },
                       icon: Icon(
                         Icons.done_all,
                       ),

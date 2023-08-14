@@ -45,14 +45,19 @@ class LoginView extends GetView<LoginController> with CacheManager {
                               decoration: BoxDecoration(
                                 color: AppColors.lightWhite.withOpacity(0.9),
                                 borderRadius: BorderRadius.circular(8),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.black,
-                                    blurRadius: 4,
-                                    blurStyle: BlurStyle.outer,
-                                    offset: Offset(0, 0), // Shadow position
-                                  ),
-                                ],
+                                // boxShadow: [
+                                //   BoxShadow(
+                                //     color: AppColors.black,
+                                //     blurRadius: 4,
+                                //     blurStyle: BlurStyle.outer,
+                                //     offset: Offset(0, 0), // Shadow position
+                                //   ),
+                                // ],
+                                border: Border.all(
+                                  color:
+                                      AppColors.subMain, // Color of the border
+                                  width: 1.0, // Width of the border
+                                ),
                               ),
                               child: Padding(
                                 padding: GlobalStyles.paddingAll,
@@ -113,17 +118,11 @@ class LoginView extends GetView<LoginController> with CacheManager {
                                           color: AppColors.main,
                                           borderRadius:
                                               BorderRadius.circular(8),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: AppColors.black,
-                                              blurRadius: 4,
-                                              blurStyle: BlurStyle.outer,
-                                              offset: Offset(
-                                                0,
-                                                0,
-                                              ), // Shadow position
-                                            ),
-                                          ],
+                                          border: Border.all(
+                                            color: AppColors
+                                                .subMain, // Color of the border
+                                            width: 1.0, // Width of the border
+                                          ),
                                         ),
                                         child: Center(
                                           child: Obx(
@@ -292,116 +291,87 @@ class _BiometricLogin extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 3),
-      child: Obx(
-        () => controller.bioType.value == 1
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => controller.biometricLogin(),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            AppImages.icFaceId,
-                            width: 25,
-                            height: 25,
-                            color: AppColors.subMain,
-                          ),
-                          Flexible(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
-                              child: Text(
-                                LoginString.FACE_ID,
-                                // textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: AppColors.lightBlack,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold),
-                                textScaleFactor: 1.0,
-                              ),
+      child: Obx(() => Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: controller.bioType.value == 1
+                    ? GestureDetector(
+                        onTap: () => controller.biometricLogin(),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.face,
+                              size: 25,
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () => controller.forgotPassword(),
-                        child: Text(
-                          LoginString.FORGOT_PASSWORD,
-                          style: TextStyle(
-                            color: AppColors.lightBlack,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.end,
-                          textScaleFactor: 1.0,
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              )
-            : controller.bioType.value == 2
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () => controller.biometricLogin(),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.fingerprint,
-                                size: 25,
-                              ),
-                              Flexible(
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: Text(
-                                    LoginString.FINGER_PRINT,
-                                    style: TextStyle(
-                                        color: AppColors.lightBlack,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold),
-                                    textScaleFactor: 1.0,
-                                  ),
+                            Flexible(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                child: Text(
+                                  LoginString.FACE_ID,
+                                  // textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: AppColors.lightBlack,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                  textScaleFactor: 1.0,
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap: () => controller.forgotPassword(),
-                            child: Text(
-                              LoginString.FORGOT_PASSWORD,
-                              style: TextStyle(
-                                color: AppColors.lightBlack,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textScaleFactor: 1.0,
-                              textAlign: TextAlign.end,
                             ),
-                          ),
+                          ],
                         ),
                       )
-                    ],
-                  )
-                : SizedBox(),
-      ),
+                    : controller.bioType.value == 2
+                        ? GestureDetector(
+                            onTap: () => controller.biometricLogin(),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.fingerprint,
+                                  size: 25,
+                                ),
+                                Flexible(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8),
+                                    child: Text(
+                                      LoginString.FINGER_PRINT,
+                                      style: TextStyle(
+                                          color: AppColors.lightBlack,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold),
+                                      textScaleFactor: 1.0,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        : SizedBox(),
+              ),
+              Expanded(
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () => controller.forgotPassword(),
+                    child: Text(
+                      LoginString.FORGOT_PASSWORD,
+                      style: TextStyle(
+                        color: AppColors.lightBlack,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.end,
+                      textScaleFactor: 1.0,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          )),
     );
   }
 }

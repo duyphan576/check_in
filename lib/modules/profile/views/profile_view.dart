@@ -244,7 +244,7 @@ class ProfileView extends GetView<ProfileController> {
                                                       .sizedBoxHeight_25,
                                                   InkWell(
                                                     onTap: () async {
-                                                      controller.active();
+                                                      controller.showConfirm();
                                                     },
                                                     child: Container(
                                                       width:
@@ -258,19 +258,12 @@ class ProfileView extends GetView<ProfileController> {
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(8),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                AppColors.black,
-                                                            blurRadius: 4,
-                                                            blurStyle:
-                                                                BlurStyle.outer,
-                                                            offset: Offset(
-                                                              0,
-                                                              0,
-                                                            ), // Shadow position
-                                                          ),
-                                                        ],
+                                                        border: Border.all(
+                                                          color: AppColors
+                                                              .subMain, // Color of the border
+                                                          width:
+                                                              1.0, // Width of the border
+                                                        ),
                                                       ),
                                                       child: Center(
                                                         child: Obx(

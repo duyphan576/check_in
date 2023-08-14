@@ -142,11 +142,11 @@ abstract class Message {
 }
 
 abstract class LoginString {
-  static const String HINT_CODE = "ID Sinh Viên";
+  static const String HINT_CODE = "ID sinh viên";
   static const String HINT_PASSWORD = "Mật khẩu";
   static const String REMEMBER_TEXT = "Ghi nhớ";
   static const String FORGOT_PASSWORD = "Quên mật khẩu";
-  static const String FACE_ID = "Face Id";
+  static const String FACE_ID = "Face ID";
   static const String FINGER_PRINT = "Vân tay";
   static const String LOGIN = "Đăng nhập";
   static const String FINGER_DESCRIPTION =

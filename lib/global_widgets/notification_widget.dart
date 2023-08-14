@@ -14,7 +14,8 @@ class NotificationWidget extends GetView<HomeController> {
     return Obx(
       () => InkWell(
         onTap: () {
-          Get.toNamed(Routes.NOTIFICATION)!;
+          Get.toNamed(Routes.NOTIFICATION)!
+              .then((value) => controller.countUnreadMessage());
         },
         borderRadius: BorderRadius.circular(25),
         child: Stack(
