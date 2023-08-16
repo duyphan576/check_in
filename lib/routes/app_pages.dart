@@ -12,6 +12,8 @@ import 'package:check_in/modules/grade/bindings/grade_binding.dart';
 import 'package:check_in/modules/grade/views/grade_view.dart';
 import 'package:check_in/modules/home/bindings/home_binding.dart';
 import 'package:check_in/modules/home/views/home_view.dart';
+import 'package:check_in/modules/introduce/bindings/introduce_binding.dart';
+import 'package:check_in/modules/introduce/view/introduce_view.dart';
 import 'package:check_in/modules/login/bindings/login_binding.dart';
 import 'package:check_in/modules/login/views/login_view.dart';
 import 'package:check_in/modules/notification/bindings/notification_binding.dart';
@@ -110,6 +112,11 @@ class AppPages {
       name: _Paths.NOTIFICATION,
       page: () => NotificationView(),
       binding: NotificationBinding(),
+    ),
+    GetPage(
+      name: _Paths.INTRODUCE,
+      page: () => IntroduceView(),
+      binding: IntroduceBinding(),
     ),
   ];
 }

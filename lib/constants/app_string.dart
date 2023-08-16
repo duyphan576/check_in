@@ -160,6 +160,12 @@ abstract class ChangePasswordString {
   static const String HINT_CHANGEPASSWORD = "Đổi Mật Khẩu";
 }
 
+abstract class IntroduceString {
+  static const String ABOUT_US = "Về ứng dụng";
+  static const String INTRODUCE =
+      "Một ứng dụng giúp nhà trường kết nối đến sinh viên.";
+}
+
 abstract class ForgotPasswordString {
   static const String HINT_CODE = "ID Sinh Viên";
   static const String HINT_EMAIL = "Email";
@@ -177,9 +183,9 @@ abstract class StatisticalString {
   static const String NOTE = "Ghi chú";
   static const String GRADE_EMPTY = "Điểm trong lớp trống";
   static const String PIE_CHART_EXAM =
-      "Biểu đồ tròn thể hiện tỷ lệ điểm thi của học sinh";
+      "Biểu đồ tròn thể hiện tỷ lệ điểm thi của sinh viên";
   static const String PIE_CHART_FINAL =
-      "Biểu đồ tròn thể hiện tỷ lệ điểm trung bình môn của học sinh";
+      "Biểu đồ tròn thể hiện tỷ lệ điểm trung bình môn của sinh viên";
   static const String BAR_CHART =
       "Biểu đồ thống kê số lượng điểm đạt được của sinh viên";
   static const String BAR_NOTE = "Lưu ý biểu đồ cột:";
@@ -207,6 +213,7 @@ abstract class HomeString {
   static const String GRADE = "Xem Điểm";
   static const String PROFILE = "Hồ Sơ";
   static const String LOGOUT = "Đăng xuất";
+  static const String ABOUT_US = "Giới thiệu";
 }
 
 abstract class ClassroomString {

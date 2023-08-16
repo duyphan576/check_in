@@ -18,12 +18,12 @@ class NotificationModel {
   });
 
   NotificationModel.fromJson(Map<String, dynamic> json) {
-    id = json["id"].toString();
-    type = json["type_notification"].toString();
-    idNotification = json["idNotification"].toString();
-    title = json["title"].toString();
-    body = json["body"].toString();
-    time = json["time"].toString();
-    status = json["status"].toString();
+    id = json["id"].toString() ?? "";
+    type = json["type_notification"].toString() ?? "";
+    idNotification = json["idNotification"].toString() ?? "";
+    title = json["title"].toString() ?? "";
+    body = json["body"].toString() ?? "";
+    time = json["time"].toString() ?? "";
+    status = json["status"].toString() ?? "";
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:check_in/global_binding/app_bindings.dart';
+import 'package:check_in/models/notification/notification.dart';
 import 'package:check_in/modules/home/controllers/home_controller.dart';
 import 'package:check_in/modules/notification/controllers/notification_controller.dart';
 import 'package:check_in/routes/app_pages.dart';
@@ -160,28 +161,16 @@ Future<void> main() async {
         globalService.notificationData.add(json.encode(message.data));
 
         if (message.data['type'] != null && message.data['type'] == "1") {
-          var summitData = {
-            "id": message.data['id'],
-            "idNotification": message.data['idNotification'],
-            "type": message.data['type']
-          };
-          Get.toNamed(Routes.CHECKIN, arguments: summitData);
+          NotificationModel notify = NotificationModel.fromJson(message.data);
+          Get.toNamed(Routes.CHECKIN, arguments: notify.id);
         } else if (message.data['type'] != null &&
             message.data['type'] == "2") {
-          var summitData = {
-            "id": message.data['id'],
-            "idNotification": message.data['idNotification'],
-            "type": message.data['type']
-          };
-          Get.toNamed(Routes.GRADE, arguments: summitData);
+          NotificationModel notify = NotificationModel.fromJson(message.data);
+          Get.toNamed(Routes.GRADE, arguments: notify.id);
         } else if (message.data['type'] != null &&
             message.data['type'] == "3") {
-          var summitData = {
-            "id": message.data['id'],
-            "idNotification": message.data['idNotification'],
-            "type": message.data['type']
-          };
-          Get.toNamed(Routes.NOTIFICATION_DETAIL, arguments: summitData);
+          NotificationModel notify = NotificationModel.fromJson(message.data);
+          Get.toNamed(Routes.NOTIFICATION_DETAIL, arguments: notify.id);
         }
         debugPrint('A new onMessageOpenedApp event was published!');
       }
@@ -257,26 +246,14 @@ Future onDidReceiveLocalNotification(
       //idNotification: id của Notification
       //type: 1: detail Need Approval, 2: detail My Request., 4: confirm, 5: bổ sung hồ sơ
       if (result['type'] != null && result['type'] == "1") {
-        var summitData = {
-          "id": result['id'],
-          "idNotification": result['idNotification'],
-          "type": result['type']
-        };
-        Get.toNamed(Routes.CHECKIN, arguments: summitData);
+        NotificationModel notify = NotificationModel.fromJson(result);
+        Get.toNamed(Routes.CHECKIN, arguments: notify.id);
       } else if (result['type'] != null && result['type'] == "2") {
-        var summitData = {
-          "id": result['id'],
-          "idNotification": result['idNotification'],
-          "type": result['type']
-        };
-        Get.toNamed(Routes.GRADE, arguments: summitData);
+        NotificationModel notify = NotificationModel.fromJson(result);
+        Get.toNamed(Routes.GRADE, arguments: notify.id);
       } else if (result['type'] != null && result['type'] == "3") {
-        var summitData = {
-          "id": result['id'],
-          "idNotification": result['idNotification'],
-          "type": result['type']
-        };
-        Get.toNamed(Routes.NOTIFICATION_DETAIL, arguments: summitData);
+        NotificationModel notify = NotificationModel.fromJson(result);
+        Get.toNamed(Routes.NOTIFICATION_DETAIL, arguments: notify.id);
       }
     }
   }
@@ -293,26 +270,14 @@ Future<dynamic> onSelectNotification(String? payload) async {
       //type: 1: detail Need Approval, 2: detail My Request.
 
       if (result['type'] != null && result['type'] == "1") {
-        var summitData = {
-          "id": result['id'],
-          "idNotification": result['idNotification'],
-          "type": result['type']
-        };
-        Get.toNamed(Routes.CHECKIN, arguments: summitData);
+        NotificationModel notify = NotificationModel.fromJson(result);
+        Get.toNamed(Routes.CHECKIN, arguments: notify.id);
       } else if (result['type'] != null && result['type'] == "2") {
-        var summitData = {
-          "id": result['id'],
-          "idNotification": result['idNotification'],
-          "type": result['type']
-        };
-        Get.toNamed(Routes.GRADE, arguments: summitData);
+        NotificationModel notify = NotificationModel.fromJson(result);
+        Get.toNamed(Routes.GRADE, arguments: notify.id);
       } else if (result['type'] != null && result['type'] == "3") {
-        var summitData = {
-          "id": result['id'],
-          "idNotification": result['idNotification'],
-          "type": result['type']
-        };
-        Get.toNamed(Routes.NOTIFICATION_DETAIL, arguments: summitData);
+        NotificationModel notify = NotificationModel.fromJson(result);
+        Get.toNamed(Routes.NOTIFICATION_DETAIL, arguments: notify.id);
       }
     }
   }

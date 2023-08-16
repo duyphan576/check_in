@@ -24,11 +24,6 @@ class LeftDrawer extends GetView<HomeController> {
                     color: AppColors.lightWhite.withOpacity(0.5),
                   )
                 ],
-                // gradient: LinearGradient(
-                //   colors: AppColors.listColorGradientMain,
-                //   begin: Alignment.bottomLeft,
-                //   end: Alignment.topRight,
-                // ),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -109,28 +104,14 @@ class LeftDrawer extends GetView<HomeController> {
             ),
           ),
           _ListTileCustom(
-            text: HomeString.CHECK_IN,
-            function: () {
-              Get.toNamed(Routes.CHECKIN);
-            },
-            icon: Icons.check,
-          ),
-          _ListTileCustom(
-            icon: Icons.class_,
-            text: HomeString.CLASSROOM,
-            function: () {
-              Get.toNamed(Routes.CLASSROOM);
-            },
-          ),
-          _ListTileCustom(
             icon: Icons.grade,
-            text: HomeString.GRADE,
+            text: HomeString.ABOUT_US,
             function: () {
-              Get.toNamed(Routes.GRADE);
+              Get.toNamed(Routes.INTRODUCE);
             },
           ),
           _ListTileCustom(
-            icon: Icons.person,
+            icon: Icons.info,
             text: HomeString.PROFILE,
             function: () {
               Get.toNamed(Routes.PROFILE);
@@ -169,7 +150,6 @@ class _ListTileCustom extends StatelessWidget {
         text,
         style: TextStyle(
           color: AppColors.black,
-          // fontWeight: FontWeight.bold,
           fontSize: 16,
         ),
       ),

@@ -14,34 +14,38 @@ class PdfPageView extends GetView<PdfPageController> {
       builder: (controller) {
         return Obx(
           () => controller.isLoading.value
-              ? Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        AppImages.bg,
-                      ),
-                    ),
-                  ),
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
+              ? Center(
+                  child: CircularProgressIndicator(),
                 )
               : Container(
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        AppImages.bg,
-                      ),
+                    color: AppColors.lightWhite,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: AppColors.subMain, // Color of the border
+                      width: 1.0, // Width of the border
                     ),
                   ),
                   child: SafeArea(
                     child: Scaffold(
                       backgroundColor: Colors.transparent,
                       appBar: AppBar(
+                        centerTitle: true,
+                        flexibleSpace: Container(
+                          decoration: BoxDecoration(
+                            // color: AppColors.lightWhite,
+                            image: DecorationImage(
+                              image: AssetImage(
+                                AppImages.bg,
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                         backgroundColor: Colors.transparent,
                         elevation: 0,
                         iconTheme: IconThemeData(
-                          color: AppColors.lightBlack,
+                          color: AppColors.lightWhite,
                         ),
                         actions: <Widget>[
                           IconButton(
@@ -62,7 +66,7 @@ class PdfPageView extends GetView<PdfPageController> {
                                 '$page/${pagesCount ?? 0}',
                                 style: TextStyle(
                                   fontSize: 18,
-                                  color: AppColors.lightBlack,
+                                  color: AppColors.lightWhite,
                                 ),
                               ),
                             ),
