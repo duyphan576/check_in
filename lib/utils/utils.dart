@@ -36,16 +36,16 @@ class Utils {
       serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
         Alert.showErrorGeolocator(
-          title: "Lỗi",
-          message: "Thiết bị không cho phép truy cập vị trí.",
-          buttonTextOK: "Đi tới cài đặt",
-          buttonTextCancel: "Cancel",
+          title: CommonString.ERROR,
+          message: AppString.GEO_ERROR,
+          buttonTextOK: AppString.GO_TO_SETTINGS,
+          buttonTextCancel: CommonString.CANCEL,
           onPressed: () async {
             await Geolocator.openLocationSettings();
             Get.back();
           },
         );
-        return Future.error('Location services are disabled.');
+        return Future.error(AppString.LOCATION_DISALBE);
       }
 
       PermissionStatus status = await Permission.location.status;

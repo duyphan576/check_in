@@ -124,6 +124,7 @@ abstract class AppString {
 
   static const String CAMERA_ERROR = "Ứng dụng không cho phép truy cập Camera.";
   static const String GEO_ERROR = "Ứng dụng không cho phép truy cập vị trí.";
+  static const String LOCATION_DISALBE = "Dịch vụ vị trí bị tắt";
   static const String GO_TO_SETTINGS = "Mở cài đặt ứng dụng";
 }
 
