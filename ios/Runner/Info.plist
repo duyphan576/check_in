@@ -30,6 +30,16 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+    <string>Ứng dụng cần truy cập Mảy ảnh để quét mã QR</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This app requires access to photo library so user can upload their bill and their ID Card to get the ticket number</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Chúng tôi cần sử dụng dữ liệu vị trí và điểm truy cập WIFI để phát hiện lớp học mà người sinh viên đang học.</string>
+    <key>NSLocationUsageDescription</key>
+    <string>Chúng tôi cần sử dụng dữ liệu vị trí và điểm truy cập WIFI để phát hiện lớp học mà người sinh viên đang học.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Chúng tôi cần sử dụng dữ liệu vị trí và điểm truy cập WIFI để phát hiện lớp học mà người sinh viên đang học.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
