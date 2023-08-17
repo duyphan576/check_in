@@ -22,6 +22,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
+import 'firebase_options.dart';
+
 final BehaviorSubject<String?> notificationData = BehaviorSubject<String?>();
 AndroidNotificationChannel? channel;
 FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
@@ -36,7 +38,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   String initialRoute = AppPages.INITIAL;
   await GetStorage.init();
-  FirebaseApp app = await Firebase.initializeApp();
+
+  FirebaseApp app = await Firebase.initializeApp(name: "check_in",options: DefaultFirebaseOptions.currentPlatform);
   await Get.putAsync(() => GlobalService().init());
   print('Initialized default app $app');
 
@@ -224,7 +227,7 @@ Future<void> main() async {
 }
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage? message) async {
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(name: "check_in",options: DefaultFirebaseOptions.currentPlatform);
 }
 
 _setToken(String token) {

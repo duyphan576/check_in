@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "590519900133",
+    "firebase_url": "https://check-in-d72d2-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "check-in-d72d2",
     "storage_bucket": "check-in-d72d2.appspot.com"
   },
@@ -14,7 +15,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "590519900133-1o835q8lj5rg73hmrdlf2ssnig3cisq9.apps.googleusercontent.com",
+          "client_id": "590519900133-0l0523vfdn9bs0b1325lajdlbmime0l0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.check_in",
+            "certificate_hash": "58ffe646266e3cfba917cffb06b2e1d51a37d0fb"
+          }
+        },
+        {
+          "client_id": "590519900133-dp9421kc9sd6k5e23f98dnm619o30tsp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -29,6 +38,13 @@
             {
               "client_id": "590519900133-1o835q8lj5rg73hmrdlf2ssnig3cisq9.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "590519900133-50qt2plggfaid41d98s8fljncat7ru3a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nuskin.tr90.my"
+              }
             }
           ]
         }
