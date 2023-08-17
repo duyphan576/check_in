@@ -39,7 +39,8 @@ Future<void> main() async {
   String initialRoute = AppPages.INITIAL;
   await GetStorage.init();
 
-  FirebaseApp app = await Firebase.initializeApp(name: "check_in",options: DefaultFirebaseOptions.currentPlatform);
+  FirebaseApp app = await Firebase.initializeApp(
+      name: "check_in", options: DefaultFirebaseOptions.currentPlatform);
   await Get.putAsync(() => GlobalService().init());
   print('Initialized default app $app');
 
@@ -227,7 +228,8 @@ Future<void> main() async {
 }
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage? message) async {
-  await Firebase.initializeApp(name: "check_in",options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(
+      name: "check_in", options: DefaultFirebaseOptions.currentPlatform);
 }
 
 _setToken(String token) {

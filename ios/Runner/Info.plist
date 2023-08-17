@@ -30,6 +30,7 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+
 	<key>NSCameraUsageDescription</key>
     <string>Ứng dụng cần truy cập Mảy ảnh để quét mã QR</string>
     <key>NSPhotoLibraryUsageDescription</key>

@@ -32,8 +32,8 @@ class LeftDrawer extends GetView<HomeController> {
                   Row(
                     children: [
                       Container(
-                        height: MediaQuery.of(context).size.width / 4,
-                        width: MediaQuery.of(context).size.width / 4,
+                        height: MediaQuery.of(context).size.width / 6,
+                        width: MediaQuery.of(context).size.width / 6,
                         child: GestureDetector(
                           child: Container(
                             decoration: BoxDecoration(
